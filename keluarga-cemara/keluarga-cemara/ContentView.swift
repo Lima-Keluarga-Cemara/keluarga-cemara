@@ -9,8 +9,20 @@ import SwiftUI
 import RealityKit
 
 struct ContentView : View {
+    @EnvironmentObject private var pathStore: PathStore
+    
     var body: some View {
-        ARViewContainer().edgesIgnoringSafeArea(.all)
+        ZStack{
+            ARViewContainer().edgesIgnoringSafeArea(.all)
+            
+            VStack{
+                Spacer()
+                Button("Example view") {
+                    pathStore.navigateToView(.exampleWithParam("data"))
+                }
+            }
+        }
+        
     }
 }
 
