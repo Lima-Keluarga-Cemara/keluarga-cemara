@@ -18,11 +18,6 @@ struct ExampleRouteView: View {
                 goToARView()
             }
         }
-        .navigationDestination(for: ViewPath.self) { viewPath in
-            withAnimation {
-                viewPath.view
-            }.transition(.slide)
-        }
     }
     
     func goToARView(){
