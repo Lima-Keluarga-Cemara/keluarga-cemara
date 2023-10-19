@@ -12,6 +12,7 @@ enum ViewPath: Hashable{
     //create your screen in here using enum
     case example
     case exampleWithParam(String)
+    case arview
     
     
     @ViewBuilder
@@ -21,6 +22,8 @@ enum ViewPath: Hashable{
             ExampleRouteView()
         case .exampleWithParam(_):
             ExampleRouteView()
+        case.arview:
+            ContentView()
         }
     }
 }

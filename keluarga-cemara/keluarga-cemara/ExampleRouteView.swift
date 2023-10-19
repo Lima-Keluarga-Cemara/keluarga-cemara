@@ -8,10 +8,26 @@
 import SwiftUI
 
 struct ExampleRouteView: View {
+    @EnvironmentObject private var pathStore: PathStore
     var data: String?
     
     var body: some View {
-        Text("Hello, \(data ?? "World")")
+        VStack{
+            Text("Hello, \(data ?? "World")")
+            Button("Ar Mode") {
+                goToARView()
+            }
+        }
+        .navigationDestination(for: ViewPath.self) { viewPath in
+            withAnimation {
+                viewPath.view
+            }.transition(.slide)
+        }
+    }
+    
+    func goToARView(){
+        pathStore.navigateToView(.arview)
+        print(pathStore.path.count)
     }
 }
 
