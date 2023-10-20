@@ -75,7 +75,7 @@ struct CareInfoView: View {
     var body: some View {
         HStack{
             RoundedRectangle(cornerRadius: 8)
-                .foregroundStyle(.iconTile)
+                .foregroundStyle(Color(.iconTile))
                 .frame(width: 37, height: 32)
                 .overlay {
                     Image(systemName: "drop.fill")
@@ -89,7 +89,7 @@ struct CareInfoView: View {
         .frame(width: 320, height: 46)
         .padding(.horizontal, 10)
         .background(RoundedRectangle(cornerRadius: 16)
-            .foregroundStyle(.backgroundTile))
+            .foregroundStyle(Color(.backgroundTile)))
         .padding(.bottom, 12)
     }
 }
@@ -135,7 +135,7 @@ struct PlantInfoView: View {
         }
         .foregroundStyle(.white)
         .frame(width: 79, height: 75)
-        .background(.bacgroundTilePrimary)
+        .background(Color(.bacgroundTilePrimary))
         .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
         .padding(.trailing, 15)
     }

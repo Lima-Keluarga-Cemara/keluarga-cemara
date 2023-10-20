@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct RoomView: View {
+    @EnvironmentObject private var pathStore: PathStore
     @StateObject private var roomController = RoomController.instance
     @Environment(\.dismiss) private var dismiss
 
@@ -23,7 +24,7 @@ struct RoomView: View {
                 VStack{
                     ZStack{
                         Rectangle()
-                            .fill(Color.blackCameraColor)
+                            .fill(Color(.blackCamera))
                             .frame(height: 150)
                         HStack{
             //                MARK: Button back
@@ -42,15 +43,12 @@ struct RoomView: View {
                             Button(action: {
                             print("done")
                             roomController.stopSession()
-                            roomController.nextScreen = true
+                            pathStore.navigateToView(.roomscanresult)
                             }, label: {
                                 Text("Done")
                                     .font(.system(size: 16, weight: .medium, design: .rounded))
                             })
                             .buttonStyle(ButtonStyleRoomPlan())
-                            .navigationDestination(isPresented: $roomController.nextScreen) {
-                                ResultScan()
-                            }
                         }
                         .padding(.horizontal, 16)
                         .padding(.top, 60)
@@ -59,7 +57,7 @@ struct RoomView: View {
                     Spacer()
                     
                     Rectangle()
-                        .fill(Color.blackCameraColor)
+                        .fill(Color(.blackCamera))
                         .frame(height: 220)
                     
                 }
