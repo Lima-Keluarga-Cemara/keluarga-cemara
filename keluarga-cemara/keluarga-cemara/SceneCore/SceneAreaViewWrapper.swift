@@ -28,8 +28,8 @@ struct SceneAreaViewWrapper: UIViewRepresentable {
         cameraNode.position = SCNVector3(-2.0, 4.0, 4.0)
         
         // setup camera light
-        let ambientLight = setupCameraLight()
-        cameraNode.light = ambientLight
+//        let ambientLight = setupCameraLight()
+//        cameraNode.light = ambientLight
         
         // setup all
         let lightNode = setupLightCore()
@@ -58,12 +58,13 @@ struct SceneAreaViewWrapper: UIViewRepresentable {
     func setupLightCore() -> SCNNode {
         //setup light
         let light = SCNLight()
-        light.type = SCNLight.LightType.omni
+        light.type = SCNLight.LightType.directional
         light.castsShadow = true
+        light.shadowMode = .deferred
         
         let lightNode = SCNNode()
         lightNode.light = light
-        lightNode.position = SCNVector3(1.5, 1.5, 1.5)
+        lightNode.position = SCNVector3(10.5, 10.5, 10.5)
         
         return lightNode
     }
