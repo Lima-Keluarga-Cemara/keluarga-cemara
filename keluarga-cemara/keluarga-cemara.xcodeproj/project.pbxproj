@@ -22,6 +22,11 @@
 		57023B592AE0241C0035ADAD /* scan.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 57023B582AE0241C0035ADAD /* scan.usdz */; };
 		57023B5B2AE026870035ADAD /* GeneralCostumButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57023B5A2AE026870035ADAD /* GeneralCostumButton.swift */; };
 		57640CE22AE2A409007CE40D /* CustomSceneViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57640CE12AE2A409007CE40D /* CustomSceneViewRepresentable.swift */; };
+		2345AE9C2AE0DE5800AA9F89 /* PathStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2345AE9B2AE0DE5800AA9F89 /* PathStore.swift */; };
+		2345AE9E2AE0DEAA00AA9F89 /* ViewPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2345AE9D2AE0DEAA00AA9F89 /* ViewPath.swift */; };
+		2345AEA02AE0DEDD00AA9F89 /* ExampleRouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2345AE9F2AE0DEDD00AA9F89 /* ExampleRouteView.swift */; };
+		2345AEA22AE0E3E600AA9F89 /* KeluargaCemara.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2345AEA12AE0E3E600AA9F89 /* KeluargaCemara.swift */; };
+		2345AEA52AE0E4CD00AA9F89 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2345AEA42AE0E4CD00AA9F89 /* MainView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +47,11 @@
 		57023B5A2AE026870035ADAD /* GeneralCostumButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralCostumButton.swift; sourceTree = "<group>"; };
 		57640CE02AE2229A007CE40D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		57640CE12AE2A409007CE40D /* CustomSceneViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSceneViewRepresentable.swift; sourceTree = "<group>"; };
+		2345AE9B2AE0DE5800AA9F89 /* PathStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathStore.swift; sourceTree = "<group>"; };
+		2345AE9D2AE0DEAA00AA9F89 /* ViewPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPath.swift; sourceTree = "<group>"; };
+		2345AE9F2AE0DEDD00AA9F89 /* ExampleRouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleRouteView.swift; sourceTree = "<group>"; };
+		2345AEA12AE0E3E600AA9F89 /* KeluargaCemara.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeluargaCemara.swift; sourceTree = "<group>"; };
+		2345AEA42AE0E4CD00AA9F89 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +91,10 @@
 				57023B4A2ADFEE490035ADAD /* Extensions */,
 				57023B422ADFE39A0035ADAD /* ARFeature */,
 				57023B392ADF96D20035ADAD /* RoomPlanFeature */,
+				2345AEA32AE0E3EB00AA9F89 /* Core */,
+				2345AE9A2AE0DE4800AA9F89 /* Routings */,
+				230B43EF2ADE36A1002E3A56 /* ContentView.swift */,
+				2345AE9F2AE0DEDD00AA9F89 /* ExampleRouteView.swift */,
 				230B43F12ADE36A3002E3A56 /* Assets.xcassets */,
 				230B43F32ADE36A3002E3A56 /* Preview Content */,
 			);
@@ -140,6 +154,22 @@
 				57023B5A2AE026870035ADAD /* GeneralCostumButton.swift */,
 			);
 			path = Extensions;
+		2345AE9A2AE0DE4800AA9F89 /* Routings */ = {
+			isa = PBXGroup;
+			children = (
+				2345AE9B2AE0DE5800AA9F89 /* PathStore.swift */,
+				2345AE9D2AE0DEAA00AA9F89 /* ViewPath.swift */,
+			);
+			path = Routings;
+			sourceTree = "<group>";
+		};
+		2345AEA32AE0E3EB00AA9F89 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				2345AEA42AE0E4CD00AA9F89 /* MainView.swift */,
+				2345AEA12AE0E3E600AA9F89 /* KeluargaCemara.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -225,6 +255,12 @@
 				57023B502AE0143F0035ADAD /* ResultScan.swift in Sources */,
 				57023B492ADFE4610035ADAD /* IntroductionView.swift in Sources */,
 				57023B442ADFE3AA0035ADAD /* ARViewContainer.swift in Sources */,
+				2345AE9C2AE0DE5800AA9F89 /* PathStore.swift in Sources */,
+				2345AEA52AE0E4CD00AA9F89 /* MainView.swift in Sources */,
+				2345AE9E2AE0DEAA00AA9F89 /* ViewPath.swift in Sources */,
+				2345AEA22AE0E3E600AA9F89 /* KeluargaCemara.swift in Sources */,
+				230B43F02ADE36A1002E3A56 /* ContentView.swift in Sources */,
+				2345AEA02AE0DEDD00AA9F89 /* ExampleRouteView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

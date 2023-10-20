@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView : View {
+    @EnvironmentObject private var pathStore: PathStore
+    
     var body: some View {
         IntroductionView()
     }
