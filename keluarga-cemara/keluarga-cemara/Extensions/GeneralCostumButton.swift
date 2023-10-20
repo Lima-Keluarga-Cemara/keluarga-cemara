@@ -8,11 +8,29 @@
 import SwiftUI
 
 struct GeneralCostumButton: View {
+    var title : String
+    let action : () -> Void
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button(action: {
+            action()
+        }, label: {
+            HStack{
+                Spacer()
+                Text(title)
+                    .font(.system(size: 16, weight: .semibold, design: .rounded))
+                Spacer()
+                Image(systemName: "chevron.forward.circle.fill")
+                    .padding(.trailing,20)
+            }
+        })
+        .frame(width: 320, height: 56)
+        .foregroundColor(.white)
+        .background(Color.greenColor)
+        .cornerRadius(16)
     }
 }
 
 #Preview {
-    GeneralCostumButton()
+    GeneralCostumButton(title: "See shade result", action: {})
 }

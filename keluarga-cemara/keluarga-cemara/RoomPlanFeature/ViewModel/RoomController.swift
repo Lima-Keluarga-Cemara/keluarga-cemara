@@ -24,7 +24,7 @@ class RoomController : ObservableObject,RoomCaptureViewDelegate, RoomCaptureSess
 //    MARK: Making properties
     static var instance = RoomController()
     @Published var roomCaptureView : RoomCaptureView
-    @Published var exportURL : URL?
+    @Published var nextScreen : Bool = false
     var sessionConfig : RoomCaptureSession.Configuration
     var finalResults : CapturedRoom?
     
@@ -58,9 +58,31 @@ class RoomController : ObservableObject,RoomCaptureViewDelegate, RoomCaptureSess
         if let error {
             print("Error when capture room \(error.localizedDescription)")
         }
-        
         finalResults = processedResult
+        export()
     }
+    
+    //    MARK: func for export file
+        
+        func export(){
+            if let finalResults {
+                let fm = FileManager.default
+                var path = fm.urls(for: .documentDirectory, in: .userDomainMask).first!
+                let fileName = "room.usdz"
+                path.appendPathComponent(fileName)
+                print("file name \(path)")
+                
+                do {
+                    try  finalResults.export(to: path.absoluteURL)
+                    print("Berhasil export ")
+                }
+                catch{
+                    print(error)
+                }
+            }
+        }
+    
+        
     
 //    MARK: func for scenekit detect dimension of surface
     func getAllNodes(for surfaces : [CapturedRoom.Surface], contents : Any?) -> [SCNNode] {
@@ -83,6 +105,8 @@ class RoomController : ObservableObject,RoomCaptureViewDelegate, RoomCaptureSess
         return nodes
     }
     
+    
+    
     func onModelReady(model : CapturedRoom) {
         let walls = getAllNodes(for: model.walls , contents:  UIColor.red)
         walls.forEach { sceneView?.scene?.rootNode.addChildNode($0)}
@@ -96,8 +120,12 @@ class RoomController : ObservableObject,RoomCaptureViewDelegate, RoomCaptureSess
         let openings = getAllNodes(for: model.openings , contents:  UIColor.green)
         openings.forEach { sceneView?.scene?.rootNode.addChildNode($0)}
         
-        let floors = getAllNodes(for: model.floors , contents:  UIColor.blue.withAlphaComponent(0.6))
-        floors.forEach { sceneView?.scene?.rootNode.addChildNode($0)}
+        if #available(iOS 17.0, *) {
+            let floors = getAllNodes(for: model.floors , contents:  UIColor.blue.withAlphaComponent(0.6))
+            floors.forEach { sceneView?.scene?.rootNode.addChildNode($0)}
+        } else {
+            // Fallback on earlier versions
+        }
         
 //         looping for object
         for object in model.objects {

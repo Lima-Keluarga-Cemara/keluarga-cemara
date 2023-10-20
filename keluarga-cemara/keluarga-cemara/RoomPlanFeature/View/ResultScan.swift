@@ -6,13 +6,49 @@
 //
 
 import SwiftUI
+ 
 
 struct ResultScan: View {
+    @State private var isLoading : Bool = true
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack{
+            LinearGradient(colors: [Color.firstGradientOrange, Color.secondGradientOrange, Color.thirdGradientOrange], startPoint: .topLeading, endPoint: .bottomTrailing)
+                .ignoresSafeArea()
+
+            
+            VStack(spacing : 50){
+                if isLoading{
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: .greenColor))
+                        .scaleEffect(4)
+                        .frame( height: UIScreen.main.bounds.height / 2 )
+                    
+                } else {
+                    CustomSceneViewRepresentable(isLoading: $isLoading)
+                        .frame( height: UIScreen.main.bounds.height / 2 )
+                }
+                
+                
+                GeneralCostumButton(title: "Start mapping the sun light", action: {
+                    print("Testing")
+                } )
+                
+            }
+        }
+        .onAppear(perform: {
+            DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 2.0, execute: {
+                isLoading = false
+            })
+        })
     }
+    
+    
 }
 
 #Preview {
     ResultScan()
 }
+
+
+
