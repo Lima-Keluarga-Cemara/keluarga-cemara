@@ -14,8 +14,8 @@ struct ExampleRouteView: View {
     var body: some View {
         VStack{
             Text("Hello, \(data ?? "World")")
-            Button("Ar Mode") {
-                goToARView()
+            Button("Scene Mode") {
+                goToSceneView()
             }
         }
     }
@@ -23,6 +23,10 @@ struct ExampleRouteView: View {
     func goToARView(){
         pathStore.navigateToView(.arview)
         print(pathStore.path.count)
+    }
+    
+    func goToSceneView(){
+        pathStore.navigateToView(.sceneview)
     }
 }
 

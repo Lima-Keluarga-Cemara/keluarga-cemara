@@ -15,6 +15,8 @@
 		2345AEA02AE0DEDD00AA9F89 /* ExampleRouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2345AE9F2AE0DEDD00AA9F89 /* ExampleRouteView.swift */; };
 		2345AEA22AE0E3E600AA9F89 /* KeluargaCemara.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2345AEA12AE0E3E600AA9F89 /* KeluargaCemara.swift */; };
 		2345AEA52AE0E4CD00AA9F89 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2345AEA42AE0E4CD00AA9F89 /* MainView.swift */; };
+		23A6A2142AE19D6800AF6F6A /* SceneAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A6A2132AE19D6800AF6F6A /* SceneAreaView.swift */; };
+		23A6A2162AE19DA000AF6F6A /* SceneAreaViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A6A2152AE19DA000AF6F6A /* SceneAreaViewWrapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +29,8 @@
 		2345AE9F2AE0DEDD00AA9F89 /* ExampleRouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleRouteView.swift; sourceTree = "<group>"; };
 		2345AEA12AE0E3E600AA9F89 /* KeluargaCemara.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeluargaCemara.swift; sourceTree = "<group>"; };
 		2345AEA42AE0E4CD00AA9F89 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		23A6A2132AE19D6800AF6F6A /* SceneAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneAreaView.swift; sourceTree = "<group>"; };
+		23A6A2152AE19DA000AF6F6A /* SceneAreaViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneAreaViewWrapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +63,7 @@
 		230B43EC2ADE36A1002E3A56 /* keluarga-cemara */ = {
 			isa = PBXGroup;
 			children = (
+				23A6A2122AE19CE700AF6F6A /* SceneCore */,
 				2345AEA32AE0E3EB00AA9F89 /* Core */,
 				2345AE9A2AE0DE4800AA9F89 /* Routings */,
 				230B43EF2ADE36A1002E3A56 /* ContentView.swift */,
@@ -93,6 +98,15 @@
 				2345AEA12AE0E3E600AA9F89 /* KeluargaCemara.swift */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		23A6A2122AE19CE700AF6F6A /* SceneCore */ = {
+			isa = PBXGroup;
+			children = (
+				23A6A2132AE19D6800AF6F6A /* SceneAreaView.swift */,
+				23A6A2152AE19DA000AF6F6A /* SceneAreaViewWrapper.swift */,
+			);
+			path = SceneCore;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,11 +180,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				2345AE9C2AE0DE5800AA9F89 /* PathStore.swift in Sources */,
+				23A6A2162AE19DA000AF6F6A /* SceneAreaViewWrapper.swift in Sources */,
 				2345AEA52AE0E4CD00AA9F89 /* MainView.swift in Sources */,
 				2345AE9E2AE0DEAA00AA9F89 /* ViewPath.swift in Sources */,
 				2345AEA22AE0E3E600AA9F89 /* KeluargaCemara.swift in Sources */,
 				230B43F02ADE36A1002E3A56 /* ContentView.swift in Sources */,
 				2345AEA02AE0DEDD00AA9F89 /* ExampleRouteView.swift in Sources */,
+				23A6A2142AE19D6800AF6F6A /* SceneAreaView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

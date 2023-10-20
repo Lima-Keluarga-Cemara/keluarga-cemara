@@ -13,6 +13,7 @@ enum ViewPath: Hashable{
     case example
     case exampleWithParam(String)
     case arview
+    case sceneview
     
     
     @ViewBuilder
@@ -24,6 +25,8 @@ enum ViewPath: Hashable{
             ExampleRouteView()
         case.arview:
             ContentView()
+        case.sceneview:
+            SceneAreaView()
         }
     }
 }
