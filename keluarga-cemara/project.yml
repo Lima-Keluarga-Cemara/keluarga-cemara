@@ -1,0 +1,15 @@
+name: keluarga-cemara
+options:
+  bundleIdPrefix: com.cemara
+  settings:
+    iOS:
+      TARGETED_DEVICE_FAMILY: "1"  # 1 for iPhone, 2 for iPad
+targets:
+  keluarga-cemara:
+    type: application
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - keluarga-cemara
+    info:
+      path: keluarga-cemara/Info.plist
