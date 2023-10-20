@@ -9,18 +9,19 @@ import SwiftUI
  
 
 struct ResultScan: View {
+    @EnvironmentObject private var pathStore: PathStore
     @State private var isLoading : Bool = true
     
     var body: some View {
         ZStack{
-            LinearGradient(colors: [Color.firstGradientOrange, Color.secondGradientOrange, Color.thirdGradientOrange], startPoint: .topLeading, endPoint: .bottomTrailing)
+            LinearGradient(colors: [Color(.firstGradientOrange), Color(.secondGradientOrange), Color(.thirdGradientOrange)], startPoint: .topLeading, endPoint: .bottomTrailing)
                 .ignoresSafeArea()
 
             
             VStack(spacing : 50){
                 if isLoading{
                     ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: .greenColor))
+                        .progressViewStyle(CircularProgressViewStyle(tint: Color(.primaryGreen)))
                         .scaleEffect(4)
                         .frame( height: UIScreen.main.bounds.height / 2 )
                     

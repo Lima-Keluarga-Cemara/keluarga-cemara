@@ -17,7 +17,7 @@ struct ButtonStyleRoomPlan : ButtonStyle {
             .padding()
             .foregroundColor(.white)
             .frame(width: widthButton, height: 32)
-            .background(Color.greyColor.opacity(0.4))
+            .background(Color(.customGray).opacity(0.4))
             .cornerRadius(20)
     }
 }

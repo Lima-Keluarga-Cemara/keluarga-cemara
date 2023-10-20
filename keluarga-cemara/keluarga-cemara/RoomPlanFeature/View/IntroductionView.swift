@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct IntroductionView: View {
-    @State private var isActive : Bool = false
+    @EnvironmentObject private var pathStore: PathStore
     @State private var isImageVisible  : Bool = false
     
     var body: some View {
         NavigationStack{
             ZStack{
-                Color.backgroundGreen
+                Color(.backgroundGreen)
                     .ignoresSafeArea()
                 
                 ScrollView(showsIndicators: false){
@@ -49,10 +49,7 @@ struct IntroductionView: View {
                             .animation(.easeIn(duration: 4), value: isImageVisible)
                         
                         GeneralCostumButton(title: "Scan garden area") {
-                            isActive.toggle()
-                        }
-                        .navigationDestination(isPresented: $isActive) {
-                            RoomView()
+                            pathStore.navigateToView(.roomscan)
                         }
                     }
                     .onAppear{

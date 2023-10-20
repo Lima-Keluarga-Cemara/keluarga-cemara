@@ -24,7 +24,6 @@ class RoomController : ObservableObject,RoomCaptureViewDelegate, RoomCaptureSess
 //    MARK: Making properties
     static var instance = RoomController()
     @Published var roomCaptureView : RoomCaptureView
-    @Published var nextScreen : Bool = false
     var sessionConfig : RoomCaptureSession.Configuration
     var finalResults : CapturedRoom?
     

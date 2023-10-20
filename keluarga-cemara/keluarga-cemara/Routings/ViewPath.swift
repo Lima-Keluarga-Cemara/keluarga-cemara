@@ -10,20 +10,26 @@ import SwiftUI
 
 enum ViewPath: Hashable{
     //create your screen in here using enum
-    case example
-    case exampleWithParam(String)
-    case arview
+    case introduction
+    case roomscan
+    case roomscanresult
+    case plantrecomend
+    case plantrecomenddetail
     
     
     @ViewBuilder
     var view: some View{
         switch self{
-        case .example:
-            ExampleRouteView()
-        case .exampleWithParam(_):
-            ExampleRouteView()
-        case.arview:
-            ContentView()
+        case .introduction:
+            IntroductionView()
+        case .roomscan:
+            RoomView()
+        case .roomscanresult:
+            ResultScan()
+        case .plantrecomend:
+            RecommendationPlantView()
+        case .plantrecomenddetail:
+            RecommendationPlantDetailView()
         }
     }
 }
