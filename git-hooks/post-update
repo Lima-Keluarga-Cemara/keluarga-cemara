@@ -1,4 +1,4 @@
 #!/bin/sh
-cd MC3
+cd keluarga-cemara
 xcodegen generate --use-cache
 cd ..
