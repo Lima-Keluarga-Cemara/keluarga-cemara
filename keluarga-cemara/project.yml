@@ -8,7 +8,7 @@ targets:
   keluarga-cemara:
     type: application
     platform: iOS
-    deploymentTarget: "16.0"
+    deploymentTarget: "16.6"
     sources:
       - keluarga-cemara
     info:
@@ -32,3 +32,6 @@ targets:
           - "UIInterfaceOrientationPortraitUpsideDown"
           - "UIInterfaceOrientationLandscapeLeft"
           - "UIInterfaceOrientationLandscapeRight"
+        UIFileSharingEnabled: true
+        LSSupportsOpeningDocumentsInPlace: true
+        NSCameraUsageDescription: "Need for room plan"
