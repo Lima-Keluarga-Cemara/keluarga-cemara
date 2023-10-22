@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SceneAreaView: View {
-    @State private var lightValue: Double = 1
+    @State private var lightValue: Float = 0
     
     var body: some View {
         ZStack{
@@ -17,7 +17,7 @@ struct SceneAreaView: View {
             VStack{
                 Spacer()
                 VStack{
-                    Slider(value: $lightValue, in: 1...10)
+                    Slider(value: $lightValue, in: 0...(2 * Float.pi))
                     Text("\(lightValue, specifier: "%.1f") Point")
                 }
                 .padding(.horizontal, 20)

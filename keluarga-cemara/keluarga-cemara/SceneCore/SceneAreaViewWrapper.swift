@@ -9,7 +9,8 @@ import SwiftUI
 import SceneKit
 
 struct SceneAreaViewWrapper: UIViewRepresentable {
-    var lightValue: Double
+    var lightValue: Float
+    let radius: Float = 15.0
     
     func makeUIView(context: Context) -> SCNView {
         let sceneView = SCNView()
@@ -28,8 +29,8 @@ struct SceneAreaViewWrapper: UIViewRepresentable {
         cameraNode.position = SCNVector3(-2.0, 4.0, 4.0)
         
         // setup camera light
-//        let ambientLight = setupCameraLight()
-//        cameraNode.light = ambientLight
+        let ambientLight = setupCameraLight()
+        cameraNode.light = ambientLight
         
         // setup all
         let lightNode = setupLightCore()
@@ -61,10 +62,14 @@ struct SceneAreaViewWrapper: UIViewRepresentable {
         light.type = SCNLight.LightType.directional
         light.castsShadow = true
         light.shadowMode = .deferred
+        light.intensity = 4000
+        
+        let pos = getXYZPosistion()
         
         let lightNode = SCNNode()
         lightNode.light = light
-        lightNode.position = SCNVector3(10.5, 10.5, 10.5)
+        lightNode.position = SCNVector3(pos.x, pos.y, pos.z)
+        lightNode.rotation = SCNVector4(x: 1, y: 0, z: 0, w: -.pi / 2)
         
         return lightNode
     }
@@ -98,6 +103,19 @@ struct SceneAreaViewWrapper: UIViewRepresentable {
         constraint.isGimbalLockEnabled = true
         
         return constraint
+    }
+    
+    func getXYZPosistion() -> (x: Float, y: Float, z: Float){
+        let angle = lightValue
+        let x = radius * cos(angle)
+        let y: Float = 10.5  // Adjust as needed
+        let z = radius * sin(angle)
+        
+        return (x, y, z)
+    }
+    
+    func loadDragonModel() {
+        
     }
     
 }
