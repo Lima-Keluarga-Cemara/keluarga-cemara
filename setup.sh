@@ -20,18 +20,19 @@ fi
 
 # Step 3: Generate Project
 echo "Generating Xcode project..."
+cd keluarga-cemara
 xcodegen generate --use-cache
+cd ..
 
-
-# Step 5: Setup Git Hooks
+# Step 4: Setup Git Hooks
 echo "Setting up Git hooks..."
 mkdir -p .git/hooks
 
-# Step 6: Make post-checkout script executable
+# Step 5: Make post-checkout script executable
 echo "Making post-checkout hook executable..."
 chmod +x git-hooks/post-checkout
 
-# Step 7: Copy the post-checkout script
+# Step 6: Copy the post-checkout script
 echo "Copying post-checkout hook..."
 cp git-hooks/post-checkout .git/hooks/post-checkout
 
