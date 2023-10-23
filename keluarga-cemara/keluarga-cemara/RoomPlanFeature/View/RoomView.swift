@@ -11,61 +11,58 @@ struct RoomView: View {
     @EnvironmentObject private var pathStore: PathStore
     @StateObject private var roomController = RoomController.instance
     @Environment(\.dismiss) private var dismiss
-
+    
     
     var body: some View {
-        NavigationStack{
-            ZStack{
-                RoomViewRepresentable()
-                    .onAppear(perform: {
-                        roomController.startSession()
-                    })
-                
-                VStack{
-                    ZStack{
-                        Rectangle()
-                            .fill(Color(.blackCamera))
-                            .frame(height: 150)
-                        HStack{
-            //                MARK: Button back
-                            Button(action: {
-                                print("back")
-                                dismiss()
-                                roomController.stopSession()
-                                
-                            }, label: {
-                                Image(systemName: "chevron.backward")
-                            })
-                            .buttonStyle(ButtonStyleRoomPlan(widthButton: 32))
-                           
-                            Spacer()
-            //                MARK: Button done
-                            Button(action: {
+        ZStack{
+            RoomViewRepresentable()
+                .onAppear(perform: {
+                    roomController.startSession()
+                })
+            
+            VStack{
+                ZStack{
+                    Rectangle()
+                        .fill(Color(.blackCamera))
+                        .frame(height: 150)
+                    HStack{
+                        //                MARK: Button back
+                        Button(action: {
+                            print("back")
+                            dismiss()
+                            roomController.stopSession()
+                            
+                        }, label: {
+                            Image(systemName: "chevron.backward")
+                        })
+                        .buttonStyle(ButtonStyleRoomPlan(widthButton: 32))
+                        
+                        Spacer()
+                        //                MARK: Button done
+                        Button(action: {
                             print("done")
                             roomController.stopSession()
                             pathStore.navigateToView(.roomscanresult)
-                            }, label: {
-                                Text("Done")
-                                    .font(.system(size: 16, weight: .medium, design: .rounded))
-                            })
-                            .buttonStyle(ButtonStyleRoomPlan())
-                        }
-                        .padding(.horizontal, 16)
-                        .padding(.top, 60)
+                        }, label: {
+                            Text("Done")
+                                .font(.system(size: 16, weight: .medium, design: .rounded))
+                        })
+                        .buttonStyle(ButtonStyleRoomPlan())
                     }
-                    
-                    Spacer()
-                    
-                    Rectangle()
-                        .fill(Color(.blackCamera))
-                        .frame(height: 220)
-                    
+                    .padding(.horizontal, 16)
+                    .padding(.top, 60)
                 }
+                
+                Spacer()
+                
+                Rectangle()
+                    .fill(Color(.blackCamera))
+                    .frame(height: 220)
+                
             }
-            .navigationBarBackButtonHidden()
-            .ignoresSafeArea()
         }
-       
+        .navigationBarBackButtonHidden()
+        .ignoresSafeArea()
     }
 }
 

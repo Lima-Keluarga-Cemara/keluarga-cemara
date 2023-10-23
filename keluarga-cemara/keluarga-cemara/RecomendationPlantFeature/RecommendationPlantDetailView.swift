@@ -9,29 +9,30 @@ import SwiftUI
 
 struct RecommendationPlantDetailView: View {
     var body: some View {
-        ZStack{
-            VStack{
-                Image(.plant)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 400)
-                Spacer()
-            }
-            
-            VStack{ //handling position on zstack
-                Spacer()
-                VStack{ //create card corner
+        GeometryReader{ geometry in
+            ZStack{
+                VStack{
+                    Image(.plant)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: geometry.size.width)
+                    Spacer()
+                }
+                
+                VStack{ //handling position on zstack
+                    Spacer()
                     ScrollView{
-                        VStack(alignment: .leading){
+                        VStack(alignment: .leading){ //create card corner
                             Text("Pakcoy")
                                 .font(.system(size: 24))
                                 .bold()
-                                .padding(.top, 20)
+                                .padding(.top, 33)
                                 .padding(.bottom, 12)
                             
                             Text("Pakchoi, also known as bok choy or Chinese cabbage, is a popular leafy green vegetable that is not only delicious but also packed with several health benefits such as nutrient rich, low in calories, antioxidant properties, heart health and bone health.")
                                 .font(.system(size: 14))
                                 .fontWeight(.medium)
+                                .foregroundStyle(Color.gray)
                                 .padding(.bottom, 24)
                             
                             HStack{
@@ -43,27 +44,30 @@ struct RecommendationPlantDetailView: View {
                             }
                             .padding(.bottom, 24)
                             
-                            Text("Cara Perawatan")
+                            Text("Plant Care")
                                 .font(.system(size: 16))
                                 .bold()
                                 .padding(.bottom, 13)
                             
                             ForEach(1...4, id: \.self) { _ in
-                                CareInfoView()
+                                CareInfoView(geometry: geometry)
                             }
                         }
+                        .padding(.horizontal, 31)
+                        .background{
+                            UnevenRoundedRectangle(topLeadingRadius: 32, topTrailingRadius: 32)
+                                .foregroundStyle(.white)
+                        }
+                        
                     }
+                    .frame(width: geometry.size.width, height: 568)
                     .scrollIndicators(.hidden)
+                    
                 }
-                .padding(.horizontal, 31)
-                .background{
-                    UnevenRoundedRectangle(topLeadingRadius: 32, topTrailingRadius: 32)
-                        .foregroundStyle(.white)
-                }
-                .frame(width: 390, height: 568)
             }
+            .ignoresSafeArea(.all)
         }
-        .ignoresSafeArea(.all)
+        
     }
 }
 
@@ -72,6 +76,8 @@ struct RecommendationPlantDetailView: View {
 }
 
 struct CareInfoView: View {
+    var geometry: GeometryProxy
+    
     var body: some View {
         HStack{
             RoundedRectangle(cornerRadius: 8)
@@ -86,8 +92,8 @@ struct CareInfoView: View {
                 .font(.system(size: 12))
                 .fontWeight(.medium)
         }
-        .frame(width: 320, height: 46)
-        .padding(.horizontal, 10)
+        .frame(width: geometry.size.width * 0.82) //320
+        .padding(10)
         .background(RoundedRectangle(cornerRadius: 16)
             .foregroundStyle(Color(.backgroundTile)))
         .padding(.bottom, 12)
@@ -121,20 +127,21 @@ struct PlantInfoView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 19.62, height: 19.65)
-                .padding(.vertical, 6)
-            
-            Text(plantData.rawValue)
-                .font(.system(size: 12))
-                .fontWeight(.semibold)
+                .padding(.top, 10)
                 .padding(.bottom, 4)
             
-            Text(number)
+            Text(plantData.rawValue.capitalized)
                 .font(.system(size: 12))
                 .fontWeight(.semibold)
                 .padding(.bottom, 6)
+            
+            Text(number)
+                .font(.system(size: 12))
+                .fontWeight(.medium)
+                .padding(.bottom, 6)
         }
         .foregroundStyle(.white)
-        .frame(width: 79, height: 75)
+        .frame(width: 90, height: 86)
         .background(Color(.bacgroundTilePrimary))
         .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
         .padding(.trailing, 15)
