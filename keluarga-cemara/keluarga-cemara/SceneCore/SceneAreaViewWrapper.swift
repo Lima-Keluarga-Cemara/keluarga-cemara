@@ -29,8 +29,8 @@ struct SceneAreaViewWrapper: UIViewRepresentable {
         cameraNode.position = SCNVector3(-2.0, 4.0, 4.0)
         
         // setup camera light
-        let ambientLight = setupCameraLight()
-        cameraNode.light = ambientLight
+//        let ambientLight = setupCameraLight()
+//        cameraNode.light = ambientLight
         
         // setup all
         let lightNode = setupLightCore()

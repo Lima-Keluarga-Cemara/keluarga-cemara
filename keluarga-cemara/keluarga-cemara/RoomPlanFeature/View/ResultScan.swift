@@ -11,6 +11,7 @@ import SwiftUI
 struct ResultScan: View {
     @EnvironmentObject private var pathStore: PathStore
     @State private var isLoading : Bool = true
+    @State private var lightValue  : Float = 0
     
     var body: some View {
         ZStack{
@@ -26,10 +27,16 @@ struct ResultScan: View {
                         .frame( height: UIScreen.main.bounds.height / 2 )
                     
                 } else {
-                    CustomSceneViewRepresentable(isLoading: $isLoading)
-                        .frame( height: UIScreen.main.bounds.height / 2 )
+                    CustomSceneViewRepresentable(isLoading: $isLoading, lightValue: lightValue)
+//                        .frame( height: UIScreen.main.bounds.height / 2 )
                 }
                 
+                VStack{
+                    Slider(value: $lightValue, in: 0...(2 * Float.pi))
+                    Text("\(lightValue, specifier: "%.1f") Point")
+                }
+                .padding(.horizontal, 20)
+                .frame(width: 400)
                 
                 GeneralCostumButton(title: "Start mapping the sun light", action: {
                     print("Testing")
