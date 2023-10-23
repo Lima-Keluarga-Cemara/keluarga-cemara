@@ -20,6 +20,7 @@ struct RecommendationPlantView: View {
                 pathStore.navigateToView(.plantrecomenddetail)
             }
         }
+        .navigationTitle("Recommendation")
     }
 }
 
