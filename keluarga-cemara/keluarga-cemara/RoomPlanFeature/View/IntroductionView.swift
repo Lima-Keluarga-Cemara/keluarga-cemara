@@ -30,7 +30,6 @@ struct IntroductionView: View {
                         .offset(x: isImageVisible ? 20 : 390, y: -60)
                         .transition(.move(edge: .trailing))
                         .animation(.easeIn(duration: 4), value: isImageVisible)
-
                     
                     Image("ilustrasi_two")
                         .resizable()
@@ -38,7 +37,6 @@ struct IntroductionView: View {
                         .offset(x:isImageVisible ? 80 : 410, y: -30)
                         .transition(.move(edge: .trailing))
                         .animation(.easeIn(duration: 4), value: isImageVisible)
-
                     
                     textExplanation(title: "Build 3D model of your garden area", description: "get the result to help you mapping the\nsunlight in your garden easier ", aligment: .leading)
                         .multilineTextAlignment(.leading)
@@ -54,8 +52,6 @@ struct IntroductionView: View {
                 .onAppear{
                     isImageVisible = true
                 }
-               
-               
             }
         }
        

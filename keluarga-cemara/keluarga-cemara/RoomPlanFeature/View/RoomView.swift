@@ -11,7 +11,7 @@ struct RoomView: View {
     @EnvironmentObject private var pathStore: PathStore
     @StateObject private var roomController = RoomController.instance
     @Environment(\.dismiss) private var dismiss
-
+    
     
     var body: some View {
         ZStack{
