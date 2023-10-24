@@ -26,7 +26,7 @@ struct RoomView: View {
                         .fill(Color(.blackCamera))
                         .frame(height: 150)
                     HStack{
-                        //                MARK: Button back
+        //                MARK: Button back
                         Button(action: {
                             print("back")
                             dismiss()
@@ -36,13 +36,13 @@ struct RoomView: View {
                             Image(systemName: "chevron.backward")
                         })
                         .buttonStyle(ButtonStyleRoomPlan(widthButton: 32))
-                        
+                       
                         Spacer()
-                        //                MARK: Button done
+        //                MARK: Button done
                         Button(action: {
-                            print("done")
-                            roomController.stopSession()
-                            pathStore.navigateToView(.roomscanresult)
+                        print("done")
+                        roomController.stopSession()
+                        pathStore.navigateToView(.roomscanresult)
                         }, label: {
                             Text("Done")
                                 .font(.system(size: 16, weight: .medium, design: .rounded))
