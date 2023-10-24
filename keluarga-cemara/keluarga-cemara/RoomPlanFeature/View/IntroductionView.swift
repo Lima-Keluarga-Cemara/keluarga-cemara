@@ -12,7 +12,6 @@ struct IntroductionView: View {
     @State private var isImageVisible  : Bool = false
     
     var body: some View {
-        NavigationStack{
             ZStack{
                 Color(.backgroundGreen)
                     .ignoresSafeArea()
@@ -60,7 +59,7 @@ struct IntroductionView: View {
                 }
             }
            
-        }
+        
        
        
     }

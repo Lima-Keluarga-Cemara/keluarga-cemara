@@ -14,7 +14,6 @@ struct RoomView: View {
 
     
     var body: some View {
-        NavigationStack{
             ZStack{
                 RoomViewRepresentable()
                     .onAppear(perform: {
@@ -65,8 +64,6 @@ struct RoomView: View {
             .navigationBarBackButtonHidden()
             .ignoresSafeArea()
         }
-       
-    }
 }
 
 #Preview {
