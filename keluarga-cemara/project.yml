@@ -41,3 +41,4 @@ targets:
         UIFileSharingEnabled: true
         LSSupportsOpeningDocumentsInPlace: true
         NSCameraUsageDescription: "Need for room plan"
+        NSLocationAlwaysAndWhenInUseUsageDescription: "Your location is required for know sun exposure"
