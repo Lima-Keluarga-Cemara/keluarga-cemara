@@ -10,14 +10,15 @@ import SwiftUI
 struct RecommendationPlantView: View {
     @EnvironmentObject private var pathStore: PathStore
     private var twoColumnGrid = [GridItem(.flexible()), GridItem(.flexible())]
+    // MARK: This is mock plant data
+    let plantData = RecommendPlantMock.separatePlantsByType()
     
     var body: some View {
         ScrollView{
-            RecommendListCardView(title: "Partial Sun Veggies", columnGrid: twoColumnGrid) {
-                pathStore.navigateToView(.plantrecomenddetail)
-            }
-            RecommendListCardView(title: "Partial Sun Veggies", columnGrid: twoColumnGrid) {
-                pathStore.navigateToView(.plantrecomenddetail)
+            ForEach(typeOfPlant.allCases, id: \.self) { plantType in
+                if let plants = plantData[plantType] {
+                    RecommendListCardView(title: plantType.title, data: plants, columnGrid: twoColumnGrid)
+                }
             }
         }
         .navigationTitle("Recommendation")

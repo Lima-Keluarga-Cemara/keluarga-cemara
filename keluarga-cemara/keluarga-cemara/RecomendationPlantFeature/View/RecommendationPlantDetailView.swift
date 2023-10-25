@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct RecommendationPlantDetailView: View {
+    var plant: RecommendPlantModel
+    
     var body: some View {
         GeometryReader{ geometry in
             ZStack{
                 VStack{
-                    Image(.plant)
+                    Image(plant.image)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: geometry.size.width)
@@ -23,34 +25,25 @@ struct RecommendationPlantDetailView: View {
                     Spacer()
                     ScrollView{
                         VStack(alignment: .leading){ //create card corner
-                            Text("Pakcoy")
+                            Text(plant.title)
                                 .font(.system(size: 24))
                                 .bold()
                                 .padding(.top, 33)
                                 .padding(.bottom, 12)
                             
-                            Text("Pakchoi, also known as bok choy or Chinese cabbage, is a popular leafy green vegetable that is not only delicious but also packed with several health benefits such as nutrient rich, low in calories, antioxidant properties, heart health and bone health.")
+                            Text(plant.description)
                                 .font(.system(size: 14))
                                 .fontWeight(.medium)
                                 .foregroundStyle(Color.gray)
                                 .padding(.bottom, 24)
-                            
-                            HStack{
-                                Spacer()
-                                ForEach(PlantInfo.allCases, id: \.self) { plant in
-                                    PlantInfoView(plantData: plant, number: "4 Hours")
-                                }
-                                Spacer()
-                            }
-                            .padding(.bottom, 24)
                             
                             Text("Plant Care")
                                 .font(.system(size: 16))
                                 .bold()
                                 .padding(.bottom, 13)
                             
-                            ForEach(1...4, id: \.self) { _ in
-                                CareInfoView(geometry: geometry)
+                            ForEach(plant.plantCare, id: \.self) { plantCare in
+                                CareInfoView(geometry: geometry, plantInfo: plantCare)
                             }
                         }
                         .padding(.horizontal, 31)
@@ -72,11 +65,12 @@ struct RecommendationPlantDetailView: View {
 }
 
 #Preview {
-    RecommendationPlantDetailView()
+    RecommendationPlantDetailView(plant: RecommendPlantModel(title: "Pakcoy", description: "deskripsi", image: .pakcoy, type: .fullsun, plantCare: [PlantCareInfo(image: "drop.fill", info: "tester")]))
 }
 
 struct CareInfoView: View {
     var geometry: GeometryProxy
+    let plantInfo: PlantCareInfo
     
     var body: some View {
         HStack{
@@ -84,11 +78,11 @@ struct CareInfoView: View {
                 .foregroundStyle(Color(.iconTile))
                 .frame(width: 37, height: 32)
                 .overlay {
-                    Image(systemName: "drop.fill")
+                    Image(systemName: plantInfo.image)
                         .foregroundStyle(.white)
                 }
             
-            Text("Menanam biji pakcoy dengan jarak yang cukup")
+            Text(plantInfo.info)
                 .font(.system(size: 12))
                 .fontWeight(.medium)
         }
@@ -97,53 +91,5 @@ struct CareInfoView: View {
         .background(RoundedRectangle(cornerRadius: 16)
             .foregroundStyle(Color(.backgroundTile)))
         .padding(.bottom, 12)
-    }
-}
-
-enum PlantInfo: String, CaseIterable{
-    case sunlight
-    case temperature
-    case pot
-    
-    var imageName: String{
-        switch self {
-        case .sunlight:
-            return "sun.max.fill"
-        case .temperature:
-            return "thermometer.sun.fill"
-        case .pot:
-            return "cloud.rain.fill"
-        }
-    }
-}
-
-struct PlantInfoView: View {
-    let plantData: PlantInfo
-    let number: String
-    
-    var body: some View {
-        VStack(alignment: .center){
-            Image(systemName: plantData.imageName)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 19.62, height: 19.65)
-                .padding(.top, 10)
-                .padding(.bottom, 4)
-            
-            Text(plantData.rawValue.capitalized)
-                .font(.system(size: 12))
-                .fontWeight(.semibold)
-                .padding(.bottom, 6)
-            
-            Text(number)
-                .font(.system(size: 12))
-                .fontWeight(.medium)
-                .padding(.bottom, 6)
-        }
-        .foregroundStyle(.white)
-        .frame(width: 90, height: 86)
-        .background(Color(.bacgroundTilePrimary))
-        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-        .padding(.trailing, 15)
     }
 }

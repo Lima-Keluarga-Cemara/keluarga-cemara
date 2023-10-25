@@ -12,7 +12,7 @@ targets:
   keluarga-cemara:
     type: application
     platform: iOS
-    deploymentTarget: "16.6"
+    deploymentTarget: "17.0"
     sources:
       - keluarga-cemara
     dependencies:

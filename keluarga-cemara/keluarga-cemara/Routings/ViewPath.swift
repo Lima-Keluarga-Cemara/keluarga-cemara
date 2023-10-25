@@ -14,7 +14,7 @@ enum ViewPath: Hashable{
     case roomscan
     case roomscanresult
     case plantrecomend
-    case plantrecomenddetail
+    case plantrecomenddetail(RecommendPlantModel)
     case orientationConfirmation
     
     
@@ -29,8 +29,8 @@ enum ViewPath: Hashable{
             ResultScan()
         case .plantrecomend:
             RecommendationPlantView()
-        case .plantrecomenddetail:
-            RecommendationPlantDetailView()
+        case .plantrecomenddetail(let plant):
+            RecommendationPlantDetailView(plant: plant)
         case .orientationConfirmation:
             CardViewOrientation()
         }

@@ -8,10 +8,13 @@
 import SwiftUI
 
 struct RecommendCardView: View {
+    let image: ImageResource
+    let plantName: String
+    
     var body: some View {
         VStack{
             Spacer()
-            Image(.pakcoy)
+            Image(image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 104)
@@ -20,7 +23,7 @@ struct RecommendCardView: View {
                 .frame(height: 40)
                 .foregroundStyle(Color(.cardTitle))
                 .overlay {
-                    Text("Pakcoy")
+                    Text(plantName)
                         .font(.system(size: 16))
                         .fontWeight(.semibold)
                 }
@@ -34,5 +37,5 @@ struct RecommendCardView: View {
 }
 
 #Preview {
-    RecommendCardView()
+    RecommendCardView(image: .pakcoy, plantName: "Pakcoy")
 }

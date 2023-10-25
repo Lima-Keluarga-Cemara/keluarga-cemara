@@ -39,7 +39,7 @@ struct ResultScan: View {
                 .frame(width: 400)
                 
                 GeneralCostumButton(title: "Start mapping the sun light", action: {
-                    print("Testing")
+                    pathStore.navigateToView(.plantrecomend)
                 } )
                 
             }

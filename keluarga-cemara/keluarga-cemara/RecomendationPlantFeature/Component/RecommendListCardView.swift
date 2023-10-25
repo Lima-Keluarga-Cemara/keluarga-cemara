@@ -8,21 +8,23 @@
 import SwiftUI
 
 struct RecommendListCardView: View {
+    @EnvironmentObject private var pathStore: PathStore
+    
     let title: String
+    let data: [RecommendPlantModel]
     let columnGrid: [GridItem]
-    var action: (() -> Void)?
 
     var body: some View {
         VStack(alignment: .leading){
-            Text("Partial Sun Veggies")
+            Text(title)
                 .font(.system(size: 18))
                 .fontWeight(.semibold)
                 .padding(11)
             LazyVGrid(columns: columnGrid){
-                ForEach(1...4, id: \.self) { _ in
-                    RecommendCardView()
+                ForEach(data, id: \.self) { plant in
+                    RecommendCardView(image: plant.image, plantName: plant.title)
                         .onTapGesture {
-                            action?()
+                            pathStore.navigateToView(.plantrecomenddetail(plant))
                         }
                 }
                 
@@ -32,5 +34,5 @@ struct RecommendListCardView: View {
 }
 
 #Preview {
-    RecommendListCardView(title: "Partial Sun", columnGrid: [GridItem(.flexible()), GridItem(.flexible())])
+    RecommendListCardView(title: "Partial Sun", data: [RecommendPlantModel(title: "Pakcoy", description: "deskripsi", image: .pakcoy, type: .fullsun, plantCare: [PlantCareInfo(image: "drop.fill", info: "tester")])], columnGrid: [GridItem(.flexible()), GridItem(.flexible())])
 }
