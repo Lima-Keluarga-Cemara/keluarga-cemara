@@ -82,6 +82,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let locationManager = CLLocationManager()
     @Published var locationStatus: CLAuthorizationStatus?
     @Published var lastLocation: CLLocation?
+//     add this for timeZone
+    @Published var timeZone : TimeZone?
     @Published var sun: Sun?
     var orientationDirection: String = "Unknown"
     @Published var sunExposure: String = "Unknown"
@@ -104,8 +106,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         lastLocation = location
-        let timeZone: TimeZone = .init(identifier: "UTC") ?? .current
-        sun = Sun(location: location, timeZone: timeZone)
+        self.timeZone = .init(identifier: "Asia/Jakarta") ?? .current
+        sun = Sun(location: location, timeZone: timeZone!)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
