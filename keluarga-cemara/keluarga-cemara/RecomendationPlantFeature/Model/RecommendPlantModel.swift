@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-enum typeOfPlant: CaseIterable{
+enum TypeOfPlant: String, CaseIterable{
     case fullsun
     case partialsun
     case partialshade
@@ -32,7 +32,7 @@ struct RecommendPlantModel: Hashable {
     let title: String
     let description: String
     let image: ImageResource
-    let type: typeOfPlant
+    let type: TypeOfPlant
     let plantCare: [PlantCareInfo]
 }
 

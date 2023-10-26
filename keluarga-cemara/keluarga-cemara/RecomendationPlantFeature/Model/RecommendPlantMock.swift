@@ -82,8 +82,8 @@ extension RecommendPlantMock {
         return [RecommendPlantMock().bokcoyPlant, RecommendPlantMock().cabbagePlant, RecommendPlantMock().pepperPlant, RecommendPlantMock().spinachPlant, RecommendPlantMock().tomatoPlant, RecommendPlantMock().celeryPlant]
     }
     
-    static func separatePlantsByType() -> [typeOfPlant: [RecommendPlantModel]] {
-        var separatedPlants: [typeOfPlant: [RecommendPlantModel]] = [:]
+    static func separatePlantsByType() -> [TypeOfPlant: [RecommendPlantModel]] {
+        var separatedPlants: [TypeOfPlant: [RecommendPlantModel]] = [:]
 
         let allPlants = RecommendPlantMock.plantMockData
 
