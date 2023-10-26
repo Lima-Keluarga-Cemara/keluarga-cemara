@@ -34,5 +34,5 @@ struct RecommendListCardView: View {
 }
 
 #Preview {
-    RecommendListCardView(title: "Partial Sun", data: [RecommendPlantModel(title: "Pakcoy", description: "deskripsi", image: .pakcoy, type: .fullsun, plantCare: [PlantCareInfo(image: "drop.fill", info: "tester")])], columnGrid: [GridItem(.flexible()), GridItem(.flexible())])
+    RecommendListCardView(title: "Partial Sun", data: [RecommendPlantModel(title: "Pakcoy", description: "deskripsi", image: .pakcoy, type: .fullsun, plantCare: [PlantCareInfo(typeCareInfo: .sunlight, info: "tester")])], columnGrid: [GridItem(.flexible()), GridItem(.flexible())])
 }

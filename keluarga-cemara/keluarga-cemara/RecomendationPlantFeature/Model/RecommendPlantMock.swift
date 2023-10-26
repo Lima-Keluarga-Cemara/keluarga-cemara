@@ -8,55 +8,78 @@
 import Foundation
 
 struct RecommendPlantMock{
-    let plantOne = RecommendPlantModel(
-        title: "Plant one",
-        description: "This is plant description with benefit that you can try it in home also can detach it to another plant",
-        image: .pakcoy,
-        type: .fullsun,
+    // partial shade plant
+    let bokcoyPlant = RecommendPlantModel(
+        title: "Bokcoy",
+        description: "Bok Choy, also known as Chinese cabbage, is a popular leafy green vegetable that is not only delicious but also packed with several health benefits such as nutrient rich, low in calories, antioxidant properties, heart health and bone health.",
+        image: .bokcoy,
+        type: .partialshade,
         plantCare: [
-            PlantCareInfo(image: "drop.fill", info: "this is info plant that you want to know about"),
-            PlantCareInfo(image: "drop.fill", info: "this is info plant that you want to know about"),
-            PlantCareInfo(image: "drop.fill", info: "this is info plant that you want to know about")
+            PlantCareInfo(typeCareInfo: .sunlight, info: "3-5 hours of sunlight a day."),
+            PlantCareInfo(typeCareInfo: .watering, info: "About one inch of water a week."),
+            PlantCareInfo(typeCareInfo: .fertilization, info: "Needs nitrogen for leaf growth and phosphorus and potassium.")
         ])
-    
-    let plantTwo = RecommendPlantModel(
-        title: "Plant two",
-        description: "This is plant description with benefit that you can try it in home also can detach it to another plant",
-        image: .pakcoy,
-        type: .fullsun,
-        plantCare: [
-            PlantCareInfo(image: "drop.fill", info: "this is info plant that you want to know about"),
-            PlantCareInfo(image: "drop.fill", info: "this is info plant that you want to know about"),
-            PlantCareInfo(image: "drop.fill", info: "this is info plant that you want to know about")
-        ])
-    
-    let plantThree = RecommendPlantModel(
-        title: "Plant three",
-        description: "This is plant description with benefit that you can try it in home also can detach it to another plant",
-        image: .pakcoy,
+    // partial sun plant
+    let cabbagePlant = RecommendPlantModel(
+        title: "Cabbage",
+        description: "Cabbage is rich in vitamin C, fiber, and vitamin K. They may help protect against radiation, prevent cancer, reduce heart disease risk and help with digestive health.",
+        image: .cabbage,
         type: .partialsun,
         plantCare: [
-            PlantCareInfo(image: "drop.fill", info: "this is info plant that you want to know about"),
-            PlantCareInfo(image: "drop.fill", info: "this is info plant that you want to know about"),
-            PlantCareInfo(image: "drop.fill", info: "this is info plant that you want to know about")
+            PlantCareInfo(typeCareInfo: .sunlight, info: "3-5 hours of sunlight a day."),
+            PlantCareInfo(typeCareInfo: .watering, info: "Once a week, applying 1 1/2 inches of water to the soil."),
+            PlantCareInfo(typeCareInfo: .fertilization, info: "Every three to four weeks until heads begin to form.")
         ])
-    
-    let plantFour = RecommendPlantModel(
-        title: "Plant four",
-        description: "This is plant description with benefit that you can try it in home also can detach it to another plant",
-        image: .pakcoy,
+    // partial sun plant
+    let celeryPlant = RecommendPlantModel(
+        title: "Celery",
+        description: "Celery is an aromatic vegetable high in fiber and nutrients and low in calories. It is associated with reduced inflammation and reduced risk of cancer and heart disease, as well as contributing factors to type 2 diabetes.",
+        image: .celery,
         type: .partialsun,
         plantCare: [
-            PlantCareInfo(image: "drop.fill", info: "this is info plant that you want to know about"),
-            PlantCareInfo(image: "drop.fill", info: "this is info plant that you want to know about"),
-            PlantCareInfo(image: "drop.fill", info: "this is info plant that you want to know about")
+            PlantCareInfo(typeCareInfo: .sunlight, info: "8 hours of sunlight per day."),
+            PlantCareInfo(typeCareInfo: .watering, info: "About 1-2 inches of water per week."),
+            PlantCareInfo(typeCareInfo: .fertilization, info: "Every 3‐4 weeks with an all‐purpose granular or liquid fertilizer.")
+        ])
+    // partial shade plant
+    let spinachPlant = RecommendPlantModel(
+        title: "Spinach",
+        description: "Spinach is nutritious leafy that is rich in multiple vitamins and minerals. Benefits of consuming spinach include diabetes and asthma management, promotes digestive regularity, lowering the risk of cancer, lowering blood pressure, and improving bone health.",
+        image: .spinach,
+        type: .partialshade,
+        plantCare: [
+            PlantCareInfo(typeCareInfo: .sunlight, info: "3-5 hours of sunlight a day."),
+            PlantCareInfo(typeCareInfo: .watering, info: "Water several times a week about 1-2 inches."),
+            PlantCareInfo(typeCareInfo: .fertilization, info: "Mix a fertilizer that's high in nitrogen into the soil.")
+        ])
+    // full sun plant
+    let pepperPlant = RecommendPlantModel(
+        title: "Pepper",
+        description: "Pepper is low in calories and loaded with good nutrition. It is an antioxidant that provides anti-inflammatory and antimicrobial effects, among other health benefits. It may also boost brain function and increase levels of good cholesterol.",
+        image: .pepper,
+        type: .fullsun,
+        plantCare: [
+            PlantCareInfo(typeCareInfo: .sunlight, info: "6-8 hours of direct sunlight per day."),
+            PlantCareInfo(typeCareInfo: .watering, info: "Once per week and aim for a total 1-2 inches per week."),
+            PlantCareInfo(typeCareInfo: .fertilization, info: "About 1-2 weeks after the seeds have sprouted.")
+        ])
+    // full sun plant
+    let tomatoPlant = RecommendPlantModel(
+        title: "Tomato",
+        description: "Tomato is a great source of vitamin C, potassium, folate, and vitamin K. Consumption of tomatoes and tomato-based products has been linked to improved skin health and a lower risk of heart disease and cancer.",
+        image: .tomato,
+        type: .fullsun,
+        plantCare: [
+            PlantCareInfo(typeCareInfo: .sunlight, info: "8 hours of sunlight per day."),
+            PlantCareInfo(typeCareInfo: .watering, info: "About 1-2 inches of water per week."),
+            PlantCareInfo(typeCareInfo: .fertilization, info: "Every week or two throughout the flowering an fruiting season.")
         ])
 }
 
 // MARK: static data access to mock data
 extension RecommendPlantMock {
     static var plantMockData: [RecommendPlantModel] {
-        return [RecommendPlantMock().plantOne, RecommendPlantMock().plantTwo, RecommendPlantMock().plantThree, RecommendPlantMock().plantFour]
+        return [RecommendPlantMock().bokcoyPlant, RecommendPlantMock().cabbagePlant, RecommendPlantMock().pepperPlant, RecommendPlantMock().spinachPlant, RecommendPlantMock().tomatoPlant, RecommendPlantMock().celeryPlant]
     }
     
     static func separatePlantsByType() -> [typeOfPlant: [RecommendPlantModel]] {

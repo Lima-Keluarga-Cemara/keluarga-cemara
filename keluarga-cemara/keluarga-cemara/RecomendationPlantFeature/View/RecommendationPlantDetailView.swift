@@ -65,7 +65,7 @@ struct RecommendationPlantDetailView: View {
 }
 
 #Preview {
-    RecommendationPlantDetailView(plant: RecommendPlantModel(title: "Pakcoy", description: "deskripsi", image: .pakcoy, type: .fullsun, plantCare: [PlantCareInfo(image: "drop.fill", info: "tester")]))
+    RecommendationPlantDetailView(plant: RecommendPlantModel(title: "Pakcoy", description: "deskripsi", image: .pakcoy, type: .fullsun, plantCare: [PlantCareInfo(typeCareInfo: .sunlight, info: "tester")]))
 }
 
 struct CareInfoView: View {
@@ -78,7 +78,7 @@ struct CareInfoView: View {
                 .foregroundStyle(Color(.iconTile))
                 .frame(width: 37, height: 32)
                 .overlay {
-                    Image(systemName: plantInfo.image)
+                    Image(systemName: plantInfo.typeCareInfo.image)
                         .foregroundStyle(.white)
                 }
             
