@@ -12,11 +12,15 @@ import SceneKit
 struct ResultScan: View {
     @EnvironmentObject private var pathStore: PathStore
     @State private var isLoading : Bool = true
-    @State private var selectedDate  : TimeInterval  = 0.0
+    @State private var selectedTime  : TimeInterval  = 0.0
     @State private var sceneObject : SCNScene? = .init(named: "scan.usdz")
     @StateObject private var sunManager = LocationManager()
     //    add this for haptip
     @State private var feedbackGenerator : UIImpactFeedbackGenerator? = nil
+    //    try add this variable to set azimut angle and the height of object
+    @State private var azimuthAngle  : Double  = 0.0
+    @State private var objectHeight : Double = 5.0
+    
    
     
     /**
@@ -48,16 +52,14 @@ struct ResultScan: View {
     
     func handleSliderChange(){
         let calender = Calendar.current
-        let previuosTime = Date(timeIntervalSinceNow: selectedDate - 3600)
-        let currentTime = Date(timeIntervalSinceNow: selectedDate)
+        let previuosTime = Date(timeIntervalSinceNow: selectedTime - 3600)
+        let currentTime = Date(timeIntervalSinceNow: selectedTime)
         if calender.component(.hour, from: previuosTime) != calender.component(.hour, from: currentTime) {
             feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
             feedbackGenerator?.impactOccurred()
         }
     }
-    
-    
-    
+  
     var body: some View {
         ZStack{
             LinearGradient(colors: [Color(.firstGradientOrange), Color(.secondGradientOrange), Color(.thirdGradientOrange)], startPoint: .topLeading, endPoint: .bottomTrailing)
@@ -68,24 +70,30 @@ struct ResultScan: View {
                 VStack(alignment: .leading){
                     HStack{
                         Spacer()
-                        Text("\(formattedDate(from: selectedDate))")
+                        Text("\(formattedDate(from: selectedTime))")
                             .font(.title2)
                             .bold()
                         Spacer()
                     }
                     
                     HStack{
-                        Text("\(formattedDate(from: sunRiseTime))")
+                        VStack{
+                            Image(systemName: "sunrise")
+                            Text("\(formattedDate(from: sunRiseTime))")
+                        }
                         Slider(value: Binding(
                             get: {
-                                self.selectedDate
+                                self.selectedTime
                             },
                             set: { value in
-                                self.selectedDate = value
+                                self.selectedTime = value
                                 self.handleSliderChange()
                             }), in: sunRiseTime...sunSetTime)
                         .tint(.yellow)
-                        Text("\(formattedDate(from: sunSetTime))")
+                        VStack{
+                            Image(systemName: "sunset")
+                            Text("\(formattedDate(from: sunSetTime))")
+                        }
                     }
                     
                     
@@ -104,7 +112,10 @@ struct ResultScan: View {
                         .frame( height: UIScreen.main.bounds.height / 2 )
                     
                 } else {
-                    CustomSceneViewRepresentable(isLoading: $isLoading, lightValue: selectedDate, sceneObject: $sceneObject)
+                    CustomSceneViewRepresentable(
+                        isLoading: $isLoading,
+                        sceneObject: $sceneObject,
+                        azimuthAngle: $selectedTime)
                         .frame(height: 500)
                     
                 }

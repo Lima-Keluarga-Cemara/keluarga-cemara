@@ -9,52 +9,54 @@ import SwiftUI
 import SceneKit
 
 struct CustomSceneViewRepresentable : UIViewRepresentable{
+    
     @Binding var isLoading : Bool
-    var lightValue : Double
     let radius : Float = 15.0
     @Binding var sceneObject : SCNScene?
+    //     try to add this with calculate shadow
+    @Binding var azimuthAngle : Double
     
     func makeUIView(context: Context) -> SCNView {
         let view = SCNView(frame: .zero)
         view.allowsCameraControl = true
         view.backgroundColor = .clear
         view.autoenablesDefaultLighting = true
-        let fm = FileManager.default
-        let path = fm.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let fileName = "room.usdz"
-        let modelFilePath  = path.appendingPathComponent(fileName).absoluteString
-        
-        let lightNode = setUpLightShadow()
+                let fm = FileManager.default
+                let path = fm.urls(for: .documentDirectory, in: .userDomainMask).first!
+                let fileName = "room.usdz"
+                let modelFilePath  = path.appendingPathComponent(fileName).absoluteString
         
         DispatchQueue.main.async {
             do {
-//                let scene = try? SCNScene(url: URL(string: "\(modelFilePath)")!)
+                //                let scene = try? SCNScene(url: URL(string: "\(modelFilePath)")!)
+              
+//               try with dummy data first
                 view.scene = sceneObject
                 let sceneNode = SCNNode(geometry: sceneObject?.rootNode.geometry)
+                let lightNode = setUpLightShadow()
+
                 let constraint = SCNLookAtConstraint(target: sceneNode )
                 constraint.isGimbalLockEnabled = true
                 lightNode.constraints = [constraint]
-                sceneObject?.rootNode.addChildNode(lightNode)
+
+                view.scene?.rootNode.addChildNode(lightNode)
+              
                 
             }
         }
-        
+
         return view
         
     }
     
-    func updateUIView(_ uiView: UIViewType, context: Context) {
+    func updateUIView(_ uiView: SCNView, context: Context) {
         
-        let lightNode = setUpLightShadow()
-        let sceneNode = SCNNode(geometry: sceneObject?.rootNode.geometry)
-        let constraint = SCNLookAtConstraint(target: sceneNode)
-        constraint.isGimbalLockEnabled = true
-        lightNode.constraints = [constraint]
-        
-        sceneObject?.rootNode.addChildNode(lightNode)
-    
+        let position = getXYZPosition()
+        uiView.scene?.rootNode.childNode(withName: "lightNode", recursively: false)?.position = SCNVector3(x: Float(position.x), y: Float(position.y), z:Float(position.z))
     }
-        
+    
+
+    
     func setUpLightShadow() -> SCNNode{
         let light = SCNLight()
         light.type = .directional
@@ -65,6 +67,7 @@ struct CustomSceneViewRepresentable : UIViewRepresentable{
         let pos = getXYZPosition()
         
         let lightNode = SCNNode()
+        lightNode.name = "lightNode"
         lightNode.light = light
         lightNode.position = SCNVector3(x: Float(pos.x), y: Float(pos.y), z:Float(pos.z))
         lightNode.rotation = SCNVector4(x: 1, y: 0, z: 0, w: -.pi / 2)
@@ -72,14 +75,16 @@ struct CustomSceneViewRepresentable : UIViewRepresentable{
         return lightNode
     }
     
-//     func for position
+    //     func for position
     func getXYZPosition() -> (x: Double, y : Double, z : Double){
-        let angle = lightValue
-        let x = Double(radius) * cos(angle)
-        let y : Double = 10.5
-        let z = Double(radius) * sin(angle)
+        let azimuthRadians = azimuthAngle
+        let x = Double(radius) * cos(azimuthRadians)
+        let y : Double = 10.0
+        let z = Double(radius) * sin(azimuthRadians)
         
         return (x,y,z)
     }
+    
+    
     
 }
