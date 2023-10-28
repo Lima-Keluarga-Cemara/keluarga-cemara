@@ -10,6 +10,7 @@ import SwiftUI
 struct StandardButton: View {
     var text: String
     var color: Color
+    var colorText: Color?
     var width: CGFloat // Lebar tombol
     var height: CGFloat // Tinggi tombol
     var action: () -> Void
@@ -19,7 +20,7 @@ struct StandardButton: View {
             Text(text)
                 .font(.system(size: 16))
                 .fontWeight(.bold)
-                .foregroundColor(Color.white)
+                .foregroundColor(colorText ?? Color.white)
         }
         .frame(width: width, height: height) // Menggunakan width dan height dari parameter
         .background(color)

@@ -16,6 +16,7 @@ enum ViewPath: Hashable{
     case plantrecomend
     case plantrecomenddetail(RecommendPlantModel)
     case orientationConfirmation
+    case onboarding
     
     
     @ViewBuilder
@@ -33,6 +34,8 @@ enum ViewPath: Hashable{
             RecommendationPlantDetailView(plant: plant)
         case .orientationConfirmation:
             CardViewOrientation()
+        case .onboarding:
+            OnboardingView()
         }
         
     }
