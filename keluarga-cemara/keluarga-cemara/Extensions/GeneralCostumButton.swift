@@ -26,7 +26,7 @@ struct GeneralCostumButton: View {
         })
         .frame(width: 320, height: 56)
         .foregroundColor(.white)
-        .background(Color(.primaryGreen))
+        .background(Color(.bacgroundTilePrimary))
         .cornerRadius(16)
     }
 }

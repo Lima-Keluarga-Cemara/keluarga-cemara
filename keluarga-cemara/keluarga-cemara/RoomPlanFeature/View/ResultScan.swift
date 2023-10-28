@@ -62,10 +62,11 @@ struct ResultScan: View {
   
     var body: some View {
         ZStack{
-            LinearGradient(colors: [Color(.firstGradientOrange), Color(.secondGradientOrange), Color(.thirdGradientOrange)], startPoint: .topLeading, endPoint: .bottomTrailing)
+//            LinearGradient(colors: [Color(.firstGradientOrange), Color(.secondGradientOrange), Color(.thirdGradientOrange)], startPoint: .topLeading, endPoint: .bottomTrailing)
+//                .ignoresSafeArea()
+            
+            Color.green.opacity(0.5)
                 .ignoresSafeArea()
-            
-            
             VStack(spacing: 20){
                 VStack(alignment: .leading){
                     HStack{
@@ -104,10 +105,10 @@ struct ResultScan: View {
                 .cornerRadius(20)
                 .padding(.horizontal,24)
                 
-                
+                Text("The result Direction \(sunManager.resultDirection ?? "Unknown")")
                 if isLoading{
                     ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: Color(.primaryGreen)))
+                        .progressViewStyle(CircularProgressViewStyle(tint: Color(.backgroundGreen)))
                         .scaleEffect(4)
                         .frame( height: UIScreen.main.bounds.height / 2 )
                     
