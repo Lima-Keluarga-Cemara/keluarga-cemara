@@ -74,7 +74,8 @@ struct RoomViewIteration: View {
                         pathStore.navigateToView(.roomscanresult)
                         feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
                         feedbackGenerator?.impactOccurred()
-                        locationManager.resultDirection = locationManager.direction
+                        locationManager.resultOrientationDirection = locationManager.orientationGarden
+                   
                     } else {
                         roomController.startSession()
                         isStartScanning = true

@@ -8,7 +8,6 @@
 import SwiftUI
 import SceneKit
 
-
 struct ResultScan: View {
     @EnvironmentObject private var pathStore: PathStore
     @State private var isLoading : Bool = true
@@ -21,15 +20,7 @@ struct ResultScan: View {
     @State private var azimuthAngle  : Double  = 0.0
     @State private var objectHeight : Double = 5.0
     
-   
-    
-    /**
-     - get data sunrise date nya dulu
-     - get data sunset datenya dulu
-     - buat range waktu antara sunrise dan sunset
-     */
-    
-    
+
     func formattedDate(from timeInterval: TimeInterval) -> String {
         let date = Date(timeIntervalSinceNow: timeInterval)
         let dateFormatter = DateFormatter()
@@ -62,11 +53,9 @@ struct ResultScan: View {
   
     var body: some View {
         ZStack{
-//            LinearGradient(colors: [Color(.firstGradientOrange), Color(.secondGradientOrange), Color(.thirdGradientOrange)], startPoint: .topLeading, endPoint: .bottomTrailing)
-//                .ignoresSafeArea()
-            
-            Color.green.opacity(0.5)
+            Color(.backgroundGray)
                 .ignoresSafeArea()
+            
             VStack(spacing: 20){
                 VStack(alignment: .leading){
                     HStack{
@@ -77,38 +66,28 @@ struct ResultScan: View {
                         Spacer()
                     }
                     
-                    HStack{
-                        VStack{
-                            Image(systemName: "sunrise")
-                            Text("\(formattedDate(from: sunRiseTime))")
-                        }
-                        Slider(value: Binding(
-                            get: {
-                                self.selectedTime
-                            },
-                            set: { value in
-                                self.selectedTime = value
-                                self.handleSliderChange()
-                            }), in: sunRiseTime...sunSetTime)
-                        .tint(.yellow)
-                        VStack{
-                            Image(systemName: "sunset")
-                            Text("\(formattedDate(from: sunSetTime))")
-                        }
-                    }
                     
-                    
+                    CustomSlider(value: Binding(
+                        get: {
+                            self.selectedTime
+                        },
+                        set: { value in
+                            self.selectedTime = value
+                            self.handleSliderChange()
+                        }
+                    ), rangeSlide: sunRiseTime...sunSetTime)
+                        .frame(width: 300, height: 10)
+  
                 }
                 .foregroundColor(.white)
                 .padding()
                 .background(Color.gray.opacity(0.7))
-                .cornerRadius(20)
+                .cornerRadius(16)
                 .padding(.horizontal,24)
-                
-                Text("The result Direction \(sunManager.resultDirection ?? "Unknown")")
+              
                 if isLoading{
                     ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: Color(.backgroundGreen)))
+                        .progressViewStyle(CircularProgressViewStyle(tint: Color.gray))
                         .scaleEffect(4)
                         .frame( height: UIScreen.main.bounds.height / 2 )
                     
@@ -117,16 +96,26 @@ struct ResultScan: View {
                         isLoading: $isLoading,
                         sceneObject: $sceneObject,
                         azimuthAngle: $selectedTime)
-                        .frame(height: 500)
+                        .frame(height: 400)
+                        .padding(.bottom, 20)
+
                     
                 }
                 
-                GeneralCostumButton(title: "Start mapping the sun light", action: {
+                Text("\(sunManager.resultOrientationDirection ?? "Partial Sun")")
+                    .font(.system(size: 14,weight: .medium, design: .rounded))
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.white)
+                    .frame(width: 264, height: 67)
+                    .padding()
+                    .background(Color(.grayTextResultOrientation))
+                    .cornerRadius(14)
+                
+                GeneralCostumButton(title: "See shade result", action: {
                     print("Testing")
                 } )
                 
             }
-            .padding(.top, 20)
         }
         .onAppear(perform: {
             DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 2.0, execute: {
@@ -136,10 +125,6 @@ struct ResultScan: View {
         })
        
     }
-    
-    
-    
-    
 }
 
 #Preview {

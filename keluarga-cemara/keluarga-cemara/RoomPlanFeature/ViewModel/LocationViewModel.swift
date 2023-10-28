@@ -17,11 +17,11 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     //     add this for timeZone
     @Published var timeZone : TimeZone?
     @Published var sun: Sun?
-    var orientationDirection: String = "Unknown"
     @Published var sunExposure: String = "Unknown"
     //    add this for direction
-    @AppStorage("orientationDirection") var resultDirection : String?
+    @AppStorage("orientationDirection") var resultOrientationDirection : String?
     @Published var direction : String = "Unknown"
+    @Published var orientationGarden : String = "Unknown"
     
     
     
@@ -55,41 +55,34 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         
         if trueHeading >= 0 && trueHeading < 22.5 {
             direction = "North"
+            orientationGarden = "You’re orientation facing north means you get the least sunlight they are shaded for most of the day."
         } else if trueHeading >= 337.5 || trueHeading < 22.5 {
             direction = "North"
+            orientationGarden = "You’re orientation facing north means you get the least sunlight they are shaded for most of the day."
         } else if trueHeading >= 22.5 && trueHeading < 67.5 {
             direction = "Northeast"
+            orientationGarden = "You’re orientation facing Northeast means you get the least sunlight they are shaded for most of the day."
         } else if trueHeading >= 67.5 && trueHeading < 112.5 {
             direction = "East"
+            orientationGarden = "You’re orientation facing East means you get the least sunlight they are shaded for most of the day."
         } else if trueHeading >= 112.5 && trueHeading < 157.5 {
             direction = "Southeast"
+            orientationGarden = "You’re orientation facing Southeast means you get the least sunlight they are shaded for most of the day."
         } else if trueHeading >= 157.5 && trueHeading < 202.5 {
             direction = "South"
+            orientationGarden = "You’re orientation facing South means you get the least sunlight they are shaded for most of the day."
         } else if trueHeading >= 202.5 && trueHeading < 247.5 {
             direction = "Southwest"
+            orientationGarden = "You’re orientation facing Southwest means you get the least sunlight they are shaded for most of the day."
         } else if trueHeading >= 247.5 && trueHeading < 292.5 {
             direction = "West"
+            orientationGarden = "You’re orientation facing West means you get the least sunlight they are shaded for most of the day."
         } else if trueHeading >= 292.5 && trueHeading < 337.5 {
             direction = "Northwest"
+            orientationGarden = "You’re orientation facing Northwest means you get the least sunlight they are shaded for most of the day."
         }
-        orientationDirection = direction
-        
-        let isPartialSun = (orientationDirection == "Timur" || orientationDirection == "Barat") &&
-        isSunriseOrSunset()
-        
-        let isFullSun = (orientationDirection == "Timur Laut" || orientationDirection == "Tenggara" || orientationDirection == "Barat Daya" || orientationDirection == "Barat Laut") &&
-        isSunriseOrSunset()
-        
-        if isFullSun {
-            orientationDirection = "Full Sun"
-        } else if isPartialSun {
-            orientationDirection = "Partial Sun"
-        } else {
-            orientationDirection = "Full sun"
-        }
-        
+
         print("Orientation: \(direction)")
-        print("Sun Typical: \(orientationDirection)")
     }
     
     func isSunriseOrSunset() -> Bool {
