@@ -17,8 +17,8 @@ struct RecommendListCardView: View {
     var body: some View {
         VStack(alignment: .leading){
             Text(title)
-                .font(.system(size: 18))
-                .fontWeight(.semibold)
+                .font(.system(size: 22))
+                .fontWeight(.bold)
                 .padding(11)
             LazyVGrid(columns: columnGrid){
                 ForEach(data, id: \.self) { plant in
@@ -28,11 +28,11 @@ struct RecommendListCardView: View {
                         }
                 }
                 
-            }
-        }.padding(.horizontal, 16)
+            }.padding(.horizontal, 24)
+        }.padding(.horizontal, 11)
     }
 }
 
 #Preview {
-    RecommendListCardView(title: "Partial Sun", data: [RecommendPlantModel(title: "Pakcoy", description: "deskripsi", image: .pakcoy, type: .fullsun, plantCare: [PlantCareInfo(typeCareInfo: .sunlight, info: "tester")])], columnGrid: [GridItem(.flexible()), GridItem(.flexible())])
+    RecommendListCardView(title: "Partial Sun", data: [RecommendPlantMock().bokcoyPlant, RecommendPlantMock().cabbagePlant], columnGrid: [GridItem(.flexible()), GridItem(.flexible())])
 }

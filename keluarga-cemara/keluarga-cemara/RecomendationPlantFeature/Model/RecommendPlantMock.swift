@@ -19,6 +19,17 @@ struct RecommendPlantMock{
             PlantCareInfo(typeCareInfo: .watering, info: "About one inch of water a week."),
             PlantCareInfo(typeCareInfo: .fertilization, info: "Needs nitrogen for leaf growth and phosphorus and potassium.")
         ])
+    // partial shade plant
+    let spinachPlant = RecommendPlantModel(
+        title: "Spinach",
+        description: "Spinach is nutritious leafy that is rich in multiple vitamins and minerals. Benefits of consuming spinach include diabetes and asthma management, promotes digestive regularity, lowering the risk of cancer, lowering blood pressure, and improving bone health.",
+        image: .spinach,
+        type: .partialshade,
+        plantCare: [
+            PlantCareInfo(typeCareInfo: .sunlight, info: "3-5 hours of sunlight a day."),
+            PlantCareInfo(typeCareInfo: .watering, info: "Water several times a week about 1-2 inches."),
+            PlantCareInfo(typeCareInfo: .fertilization, info: "Mix a fertilizer that's high in nitrogen into the soil.")
+        ])
     // partial sun plant
     let cabbagePlant = RecommendPlantModel(
         title: "Cabbage",
@@ -40,17 +51,6 @@ struct RecommendPlantMock{
             PlantCareInfo(typeCareInfo: .sunlight, info: "8 hours of sunlight per day."),
             PlantCareInfo(typeCareInfo: .watering, info: "About 1-2 inches of water per week."),
             PlantCareInfo(typeCareInfo: .fertilization, info: "Every 3‐4 weeks with an all‐purpose granular or liquid fertilizer.")
-        ])
-    // partial shade plant
-    let spinachPlant = RecommendPlantModel(
-        title: "Spinach",
-        description: "Spinach is nutritious leafy that is rich in multiple vitamins and minerals. Benefits of consuming spinach include diabetes and asthma management, promotes digestive regularity, lowering the risk of cancer, lowering blood pressure, and improving bone health.",
-        image: .spinach,
-        type: .partialshade,
-        plantCare: [
-            PlantCareInfo(typeCareInfo: .sunlight, info: "3-5 hours of sunlight a day."),
-            PlantCareInfo(typeCareInfo: .watering, info: "Water several times a week about 1-2 inches."),
-            PlantCareInfo(typeCareInfo: .fertilization, info: "Mix a fertilizer that's high in nitrogen into the soil.")
         ])
     // full sun plant
     let pepperPlant = RecommendPlantModel(
@@ -74,12 +74,22 @@ struct RecommendPlantMock{
             PlantCareInfo(typeCareInfo: .watering, info: "About 1-2 inches of water per week."),
             PlantCareInfo(typeCareInfo: .fertilization, info: "Every week or two throughout the flowering an fruiting season.")
         ])
+    let endivePlant = RecommendPlantModel(
+        title: "Endive",
+        description: "Endive can dipanen setelah 40-60 hari setelah penanaman and has benefits such as good source of folate, may help prevent cancer, keeps heart healthy, helps maintain a healthy weight.",
+        image: .endive,
+        type: .fullshade,
+        plantCare: [
+            PlantCareInfo(typeCareInfo: .sunlight, info: "2-3 hours of daily sun."),
+            PlantCareInfo(typeCareInfo: .watering, info: "About 1-1.5 inches of water per week."),
+            PlantCareInfo(typeCareInfo: .fertilization, info: "Equal or near-equal amounts of nitrogen, phosphorus, and potassium.")
+        ])
 }
 
 // MARK: static data access to mock data
 extension RecommendPlantMock {
     static var plantMockData: [RecommendPlantModel] {
-        return [RecommendPlantMock().bokcoyPlant, RecommendPlantMock().cabbagePlant, RecommendPlantMock().pepperPlant, RecommendPlantMock().spinachPlant, RecommendPlantMock().tomatoPlant, RecommendPlantMock().celeryPlant]
+        return [RecommendPlantMock().bokcoyPlant, RecommendPlantMock().cabbagePlant, RecommendPlantMock().pepperPlant, RecommendPlantMock().spinachPlant, RecommendPlantMock().tomatoPlant, RecommendPlantMock().celeryPlant, RecommendPlantMock().endivePlant]
     }
     
     static func separatePlantsByType() -> [TypeOfPlant: [RecommendPlantModel]] {
