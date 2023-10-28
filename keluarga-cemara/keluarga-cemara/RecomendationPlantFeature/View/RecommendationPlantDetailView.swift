@@ -14,16 +14,20 @@ struct RecommendationPlantDetailView: View {
         GeometryReader{ geometry in
             ZStack{
                 VStack{
-                    Image(plant.image)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .overlay(
-                            LinearGradient(gradient: Gradient(colors: [.clear, .black.opacity(0.8)]),
-                                           startPoint: .top,
-                                           endPoint: .bottom)
-                        )
-                        .frame(width: 447, height: 415)
-                    
+                    ZStack{
+                        Image(plant.image)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 447, height: 415)
+                        
+                        //setup linear gradient
+                        LinearGradient(gradient: Gradient(
+                            colors: [.black, .clear]),
+                                       startPoint: .top,
+                                       endPoint: .bottom)
+                        .frame(height: 415)
+                        .offset(y: -415 / 3)
+                    }
                     Spacer()
                 }
                 .frame(width: geometry.size.width)
