@@ -36,7 +36,7 @@ struct RecommendPlantModel: Hashable {
     let plantCare: [PlantCareInfo]
 }
 
-enum typeOfCareInfo{
+enum typeOfCareInfo: String{
     case sunlight
     case watering
     case fertilization

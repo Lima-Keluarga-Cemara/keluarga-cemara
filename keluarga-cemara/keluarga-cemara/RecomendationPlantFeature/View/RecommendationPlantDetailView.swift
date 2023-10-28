@@ -16,10 +16,17 @@ struct RecommendationPlantDetailView: View {
                 VStack{
                     Image(plant.image)
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: geometry.size.width)
+                        .aspectRatio(contentMode: .fill)
+                        .overlay(
+                            LinearGradient(gradient: Gradient(colors: [.clear, .black.opacity(0.8)]),
+                                           startPoint: .top,
+                                           endPoint: .bottom)
+                        )
+                        .frame(width: 447, height: 415)
+                    
                     Spacer()
                 }
+                .frame(width: geometry.size.width)
                 
                 VStack{ //handling position on zstack
                     Spacer()
@@ -34,8 +41,8 @@ struct RecommendationPlantDetailView: View {
                             Text(plant.description)
                                 .font(.system(size: 14))
                                 .fontWeight(.medium)
-                                .foregroundStyle(Color.gray)
-                                .padding(.bottom, 24)
+                                .foregroundStyle(Color(.plantDetailSubText))
+                                .padding(.bottom, 40)
                             
                             Text("Plant Care")
                                 .font(.system(size: 16))
@@ -51,45 +58,19 @@ struct RecommendationPlantDetailView: View {
                             UnevenRoundedRectangle(topLeadingRadius: 32, topTrailingRadius: 32)
                                 .foregroundStyle(.white)
                         }
-                        
                     }
-                    .frame(width: geometry.size.width, height: 568)
+                    .frame(width: geometry.size.width, height: geometry.size.height * 0.68)
                     .scrollIndicators(.hidden)
                     
                 }
             }
             .ignoresSafeArea(.all)
         }
-        
     }
 }
 
 #Preview {
-    RecommendationPlantDetailView(plant: RecommendPlantModel(title: "Pakcoy", description: "deskripsi", image: .pakcoy, type: .fullsun, plantCare: [PlantCareInfo(typeCareInfo: .sunlight, info: "tester")]))
+    RecommendationPlantDetailView(plant: RecommendPlantMock().cabbagePlant)
 }
 
-struct CareInfoView: View {
-    var geometry: GeometryProxy
-    let plantInfo: PlantCareInfo
-    
-    var body: some View {
-        HStack{
-            RoundedRectangle(cornerRadius: 8)
-                .foregroundStyle(Color(.iconTile))
-                .frame(width: 37, height: 32)
-                .overlay {
-                    Image(systemName: plantInfo.typeCareInfo.image)
-                        .foregroundStyle(.white)
-                }
-            
-            Text(plantInfo.info)
-                .font(.system(size: 12))
-                .fontWeight(.medium)
-        }
-        .frame(width: geometry.size.width * 0.82) //320
-        .padding(10)
-        .background(RoundedRectangle(cornerRadius: 16)
-            .foregroundStyle(Color(.backgroundTile)))
-        .padding(.bottom, 12)
-    }
-}
+
