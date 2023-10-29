@@ -30,11 +30,11 @@ struct SheetRoomPlanView: View {
                 }
                 
                 
-                ItemInstruction(image: "first_icon", title: "Bring your phone to the area where you will start gardening")
-                ItemInstruction(image: "second_icon", title: "Face the toward side where sun light come")
-                ItemInstruction(image: "third_icon", title: "Move your phone camera towards every corner of your garden area")
-                ItemInstruction(image: "fourth_icon", title: "After you done scanning your area click done button")
-                ItemInstruction(image: "fifth_icon", title: "Then you will get 3D modeling result of your garden")
+                ItemInstruction(image: .firstIcon, title: "Bring your phone to the area where you will start gardening")
+                ItemInstruction(image: .secondIcon, title: "Face the toward side where sun light come")
+                ItemInstruction(image: .thirdIcon, title: "Move your phone camera towards every corner of your garden area")
+                ItemInstruction(image: .fourthIcon, title: "After you done scanning your area click done button")
+                ItemInstruction(image: .fifthIcon, title: "Then you will get 3D modeling result of your garden")
                 Spacer()
             }
         }
@@ -42,7 +42,7 @@ struct SheetRoomPlanView: View {
 }
 
 struct ItemInstruction : View {
-    let image : String
+    let image : ImageResource
     let title : String
     
     var body: some View {
