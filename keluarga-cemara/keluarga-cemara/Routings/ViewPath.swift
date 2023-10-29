@@ -11,32 +11,32 @@ import SceneKit
 
 enum ViewPath: Hashable{
     //create your screen in here using enum
-    case introduction
     case roomscan
     case roomscanresult
     case plantrecomend
-    case plantrecomenddetail
     case orientationConfirmation
     case resultfeature
+    case plantrecomenddetail(RecommendPlantModel)
+    case onboarding
     
     
     @ViewBuilder
     var view: some View{
         switch self{
-        case .introduction:
-            IntroductionView()
         case .roomscan:
-            RoomView()
+            RoomViewIteration()
         case .roomscanresult:
             ResultScan()
         case .plantrecomend:
             RecommendationPlantView()
-        case .plantrecomenddetail:
-            RecommendationPlantDetailView()
         case .orientationConfirmation:
             CardViewOrientation()
         case .resultfeature:
             SceneKitView(lightPosition: LightPosition(), scene: PhysicallyBasedScene(lightPosition: LightPosition()))
+        case .plantrecomenddetail(let plant):
+            RecommendationPlantDetailView(plant: plant)
+        case .onboarding:
+            OnboardingView()
         }
         
     }

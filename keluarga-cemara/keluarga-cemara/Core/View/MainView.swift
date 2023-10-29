@@ -14,18 +14,13 @@ struct MainView: View {
     
     var body: some View {
         NavigationStack(path: $pathStore.path) {
-            ZStack{
-                SliderEditLight()
-
-                    .ignoresSafeArea()
-                    .navigationDestination(for: ViewPath.self) { viewPath in
-                        withAnimation {
-                            viewPath.view
-                        }.transition(.slide)
-                    }
-                
-            }
-            .environmentObject(pathStore)
+            OnboardingView()
+                .ignoresSafeArea()
+                .navigationDestination(for: ViewPath.self) { viewPath in
+                    withAnimation {
+                        viewPath.view
+                    }.transition(.slide)
+                }
         }
     }
 }

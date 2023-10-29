@@ -23,7 +23,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Need for room plan</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>Your location is required for know sun exposure</string>
 	<key>UIFileSharingEnabled</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

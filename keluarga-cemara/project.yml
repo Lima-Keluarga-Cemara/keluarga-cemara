@@ -12,7 +12,7 @@ targets:
   keluarga-cemara:
     type: application
     platform: iOS
-    deploymentTarget: "16.6"
+    deploymentTarget: "17.0"
     sources:
       - keluarga-cemara
     dependencies:
@@ -41,3 +41,4 @@ targets:
         UIFileSharingEnabled: true
         LSSupportsOpeningDocumentsInPlace: true
         NSCameraUsageDescription: "Need for room plan"
+        NSLocationWhenInUseUsageDescription: "Your location is required for know sun exposure"
