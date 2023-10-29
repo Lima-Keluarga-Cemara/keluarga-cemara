@@ -12,20 +12,24 @@ struct MainView: View {
     /// Create environment object for path view
     @StateObject private var pathStore: PathStore = PathStore()
     
-    @available(iOS 17.0, *)
     var body: some View {
         NavigationStack(path: $pathStore.path) {
-            RoomViewIteration()
-                .ignoresSafeArea()
-                .navigationDestination(for: ViewPath.self) { viewPath in
-                    withAnimation {
-                        viewPath.view
-                    }.transition(.slide)
-                }
+            ZStack{
+                SliderEditLight()
+
+                    .ignoresSafeArea()
+                    .navigationDestination(for: ViewPath.self) { viewPath in
+                        withAnimation {
+                            viewPath.view
+                        }.transition(.slide)
+                    }
+                
+            }
+            .environmentObject(pathStore)
         }
-        .environmentObject(pathStore)
     }
 }
+
 
 #Preview {
     MainView()

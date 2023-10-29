@@ -18,7 +18,9 @@ struct ARViewContainer: UIViewRepresentable {
         return arView
     }
 
-    func updateUIView(_ uiView: ARSCNView, context: Context) {}
+    func updateUIView(_ uiView: ARSCNView, context: Context) {
+        
+    }
 
     func makeCoordinator() -> Coordinator {
         Coordinator()

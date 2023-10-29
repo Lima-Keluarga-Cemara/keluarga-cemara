@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SceneKit
 
 enum ViewPath: Hashable{
     //create your screen in here using enum
@@ -16,6 +17,7 @@ enum ViewPath: Hashable{
     case plantrecomend
     case plantrecomenddetail
     case orientationConfirmation
+    case resultfeature
     
     
     @ViewBuilder
@@ -33,6 +35,8 @@ enum ViewPath: Hashable{
             RecommendationPlantDetailView()
         case .orientationConfirmation:
             CardViewOrientation()
+        case .resultfeature:
+            SceneKitView(lightPosition: LightPosition(), scene: PhysicallyBasedScene(lightPosition: LightPosition()))
         }
         
     }

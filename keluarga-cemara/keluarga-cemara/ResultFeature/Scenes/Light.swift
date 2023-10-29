@@ -22,11 +22,14 @@ class Light {
     
     func createLight() {
         node.light = SCNLight()
+        
     }
     
     private func set(lightFeatures: LightFeatures) {
         node.light?.color = lightFeatures.color
         node.position = lightFeatures.position
+        node.name = "Light"
         node.eulerAngles = lightFeatures.orientation;
+        
     }
 }

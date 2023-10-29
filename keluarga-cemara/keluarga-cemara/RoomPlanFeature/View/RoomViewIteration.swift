@@ -12,7 +12,8 @@ struct RoomViewIteration: View {
     @StateObject private var roomController = RoomController.instance
     @Environment(\.dismiss) private var dismiss
     @State private var isStartScanning : Bool = false
-    
+    @StateObject var locationManager = LocationManager()
+
     var body: some View {
         VStack{
 //            MARK: Navbar instruction nd exit
@@ -40,7 +41,7 @@ struct RoomViewIteration: View {
                 RoomViewRepresentable()
             } else {
                 VStack{
-                    Text("You’re orientation facing north")
+                    Text("\(locationManager.direction)")
                         .font(.system(size: 16, weight: .regular, design: .rounded))
                         .padding()
                         .background(Color.yellow)
@@ -59,6 +60,9 @@ struct RoomViewIteration: View {
                     if isStartScanning{
                         roomController.stopSession()
                         isStartScanning = false
+                        roomController.export()
+                        pathStore.navigateToView(.resultfeature)
+
                     } else {
                         roomController.startSession()
                         isStartScanning = true

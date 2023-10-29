@@ -42,7 +42,7 @@ struct RoomView: View {
                         Button(action: {
                         print("done")
                         roomController.stopSession()
-                        pathStore.navigateToView(.roomscanresult)
+                        pathStore.navigateToView(.resultfeature)
                         }, label: {
                             Text("Done")
                                 .font(.system(size: 16, weight: .medium, design: .rounded))

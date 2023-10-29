@@ -87,6 +87,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var sun: Sun?
     var orientationDirection: String = "Unknown"
     @Published var sunExposure: String = "Unknown"
+    var direction = "Unknown"
+
     
     @Published var region = MKCoordinateRegion()
     
@@ -113,7 +115,6 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         let trueHeading = newHeading.trueHeading
         
-        var direction = "Unknown"
         
         if trueHeading >= 0 && trueHeading < 22.5 {
             direction = "Utara"
@@ -165,7 +166,11 @@ struct StartView:View {
 
     var body: some View {
         ZStack{
-            MapView(userLocation: $locationManager.lastLocation, sunRiseAzimuth: locationManager.sun?.sunriseAzimuth ?? 0.0, sunSetAzimuth: locationManager.sun?.sunsetAzimuth ?? 0.0)
+            if #available(iOS 17.0, *) {
+                MapView(userLocation: $locationManager.lastLocation, sunRiseAzimuth: locationManager.sun?.sunriseAzimuth ?? 0.0, sunSetAzimuth: locationManager.sun?.sunsetAzimuth ?? 0.0)
+            } else {
+                // Fallback on earlier versions
+            }
             VStack{
                 StandardButton(text: "See garden orientation", color: Color("primaryGreen"), width: 320, height: 56) {
                     pathStore.navigateToView(.orientationConfirmation)
