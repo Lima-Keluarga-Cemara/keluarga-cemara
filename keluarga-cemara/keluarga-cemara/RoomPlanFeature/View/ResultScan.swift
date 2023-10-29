@@ -20,7 +20,7 @@ struct ResultScan: View {
     @State private var azimuthAngle  : Double  = 0.0
     @State private var objectHeight : Double = 5.0
     
-
+    
     func formattedDate(from timeInterval: TimeInterval) -> String {
         let date = Date(timeIntervalSinceNow: timeInterval)
         let dateFormatter = DateFormatter()
@@ -50,41 +50,56 @@ struct ResultScan: View {
             feedbackGenerator?.impactOccurred()
         }
     }
-  
+    
     var body: some View {
         ZStack{
             Color(.backgroundGray)
                 .ignoresSafeArea()
             
             VStack(spacing: 20){
-                VStack(alignment: .leading){
-                    HStack{
-                        Spacer()
-                        Text("\(formattedDate(from: selectedTime))")
-                            .font(.title2)
-                            .bold()
-                        Spacer()
-                    }
-                    
-                    
-                    CustomSlider(value: Binding(
-                        get: {
-                            self.selectedTime
-                        },
-                        set: { value in
-                            self.selectedTime = value
-                            self.handleSliderChange()
+                HStack{
+                    VStack(alignment: .leading){
+                        HStack{
+                            Spacer()
+                            Text("\(formattedDate(from: selectedTime))")
+                                .font(.system(size: 16, weight: .semibold, design: .rounded))
+                                .bold()
+                            Spacer()
                         }
-                    ), rangeSlide: sunRiseTime...sunSetTime)
-                        .frame(width: 300, height: 10)
-  
+                        
+//                        Slider(value: Binding(
+//                            get: {
+//                                self.selectedTime
+//                            },
+//                            set: { value in
+//                                self.selectedTime = value
+//                                self.handleSliderChange()
+//                            }), in: sunRiseTime...sunSetTime)
+//                        .colorMultiply(.yellow)
+//                        .tint(.yellow)
+                        
+                                            CustomSlider(value: Binding(
+                                                get: {
+                                                    self.selectedTime
+                                                },
+                                                set: { value in
+                                                    self.selectedTime = value
+                                                    self.handleSliderChange()
+                                                }
+                                            ), rangeSlide: sunRiseTime...sunSetTime)
+                                            .frame(width: 230, height: 10)
+                        
+                    }
+                    .foregroundColor(.white)
+                    .frame(width: 224, height: 53)
+                    .padding()
+                    .background(Color(.colorGraySlider))
+                    .cornerRadius(16)
+                    
+                    Spacer()
                 }
-                .foregroundColor(.white)
-                .padding()
-                .background(Color.gray.opacity(0.7))
-                .cornerRadius(16)
-                .padding(.horizontal,24)
-              
+                .padding(.leading,24)
+                
                 if isLoading{
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle(tint: Color.gray))
@@ -96,9 +111,8 @@ struct ResultScan: View {
                         isLoading: $isLoading,
                         sceneObject: $sceneObject,
                         azimuthAngle: $selectedTime)
-                        .frame(height: 400)
-                        .padding(.bottom, 20)
-
+                    .frame(height: 400)
+                    
                     
                 }
                 
@@ -123,7 +137,7 @@ struct ResultScan: View {
                 print("sunrisetime \(sunRiseTime)")
             })
         })
-       
+        
     }
 }
 
