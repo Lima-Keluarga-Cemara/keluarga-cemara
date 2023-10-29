@@ -67,27 +67,27 @@ struct ResultScan: View {
                             Spacer()
                         }
                         
-//                        Slider(value: Binding(
-//                            get: {
-//                                self.selectedTime
-//                            },
-//                            set: { value in
-//                                self.selectedTime = value
-//                                self.handleSliderChange()
-//                            }), in: sunRiseTime...sunSetTime)
-//                        .colorMultiply(.yellow)
-//                        .tint(.yellow)
+                        //                        Slider(value: Binding(
+                        //                            get: {
+                        //                                self.selectedTime
+                        //                            },
+                        //                            set: { value in
+                        //                                self.selectedTime = value
+                        //                                self.handleSliderChange()
+                        //                            }), in: sunRiseTime...sunSetTime)
+                        //                        .colorMultiply(.yellow)
+                        //                        .tint(.yellow)
                         
-                                            CustomSlider(value: Binding(
-                                                get: {
-                                                    self.selectedTime
-                                                },
-                                                set: { value in
-                                                    self.selectedTime = value
-                                                    self.handleSliderChange()
-                                                }
-                                            ), rangeSlide: sunRiseTime...sunSetTime)
-                                            .frame(width: 230, height: 10)
+                        CustomSlider(value: Binding(
+                            get: {
+                                self.selectedTime
+                            },
+                            set: { value in
+                                self.selectedTime = value
+                                self.handleSliderChange()
+                            }
+                        ), rangeSlide: sunRiseTime...sunSetTime)
+                        .frame(width: 230, height: 10)
                         
                     }
                     .foregroundColor(.white)
@@ -126,7 +126,7 @@ struct ResultScan: View {
                     .cornerRadius(14)
                 
                 GeneralCostumButton(title: "See shade result", action: {
-                    print("Testing")
+                    pathStore.navigateToView(.plantrecomend)
                 } )
                 
             }
