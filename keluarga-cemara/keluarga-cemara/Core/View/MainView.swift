@@ -15,7 +15,7 @@ struct MainView: View {
     @available(iOS 17.0, *)
     var body: some View {
         NavigationStack(path: $pathStore.path) {
-            StartView()
+            ResultScan()
                 .ignoresSafeArea()
                 .navigationDestination(for: ViewPath.self) { viewPath in
                     withAnimation {
