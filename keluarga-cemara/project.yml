@@ -24,7 +24,8 @@ targets:
         CFBundleExecutable: $(EXECUTABLE_NAME)
         CFBundleIdentifier: $(PRODUCT_BUNDLE_IDENTIFIER)
         CFBundleInfoDictionaryVersion: "6.0"
-        CFBundleName: "Sunbloom"
+        CFBundleName: $(PRODUCT_NAME)
+        CFBundleDisplayName: "Sunbloom"
         CFBundlePackageType: "APPL"
         CFBundleShortVersionString: "1.0"
         CFBundleVersion: "0.1.0"
@@ -39,6 +40,7 @@ targets:
           - "UIInterfaceOrientationLandscapeLeft"
           - "UIInterfaceOrientationLandscapeRight"
         UIFileSharingEnabled: true
+        UIRequiresFullScreen: true
         LSSupportsOpeningDocumentsInPlace: true
         NSCameraUsageDescription: "Need for room plan"
         NSLocationWhenInUseUsageDescription: "Your location is required for know sun exposure"
