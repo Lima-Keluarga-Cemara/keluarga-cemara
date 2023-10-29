@@ -9,7 +9,7 @@ packages:
     url: https://github.com/Sunlitt/SunKit
     from: 2.7.0
 targets:
-  keluarga-cemara:
+  sunbloom:
     type: application
     platform: iOS
     deploymentTarget: "17.0"
@@ -27,7 +27,7 @@ targets:
         CFBundleName: $(PRODUCT_NAME)
         CFBundlePackageType: "APPL"
         CFBundleShortVersionString: "1.0"
-        CFBundleVersion: "1.0.0"
+        CFBundleVersion: "0.1.0"
         UILaunchStoryboardName: "LaunchScreen"
         UISupportedInterfaceOrientations:
           - "UIInterfaceOrientationPortrait"
