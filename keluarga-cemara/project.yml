@@ -9,7 +9,7 @@ packages:
     url: https://github.com/Sunlitt/SunKit
     from: 2.7.0
 targets:
-  sunbloom:
+  keluarga-cemara:
     type: application
     platform: iOS
     deploymentTarget: "17.0"
@@ -24,7 +24,7 @@ targets:
         CFBundleExecutable: $(EXECUTABLE_NAME)
         CFBundleIdentifier: $(PRODUCT_BUNDLE_IDENTIFIER)
         CFBundleInfoDictionaryVersion: "6.0"
-        CFBundleName: $(PRODUCT_NAME)
+        CFBundleName: "Sunbloom"
         CFBundlePackageType: "APPL"
         CFBundleShortVersionString: "1.0"
         CFBundleVersion: "0.1.0"
