@@ -18,7 +18,7 @@ struct StandardButton: View {
     var body: some View {
         Button(action: action) {
             Text(text)
-                .font(.system(size: 16))
+                .font(.system(size: 18))
                 .fontWeight(.bold)
                 .foregroundColor(colorText ?? Color.white)
         }
