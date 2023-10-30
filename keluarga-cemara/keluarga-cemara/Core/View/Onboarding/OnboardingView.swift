@@ -45,7 +45,7 @@ struct OnboardingView: View {
                     HStack{
                         Spacer()
                         StandardButton(text: "Start", color: Color(.primary), colorText: .black, width: 96, height: 44) {
-                            pathStore.navigateToView(.roomscan)
+                            pathStore.navigateToView(.instruction)
                         }
                     }
                 }

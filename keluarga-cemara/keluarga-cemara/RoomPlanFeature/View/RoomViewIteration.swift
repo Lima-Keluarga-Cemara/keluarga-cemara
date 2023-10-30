@@ -12,8 +12,7 @@ struct RoomViewIteration: View {
     @StateObject private var roomController = RoomController.instance
     @StateObject private var locationManager = LocationManager()
     @State private var isStartScanning : Bool = false
-
-    @State private var sheetOpening : Bool = false
+    @State private var sheetOpening : Bool = true
     @State private var showingOption : Bool = false
     @State private var feedbackGenerator: UIImpactFeedbackGenerator?
     
@@ -49,20 +48,11 @@ struct RoomViewIteration: View {
             if isStartScanning{
                 RoomViewRepresentable()
             } else {
-
                 ZStack{
-                    Color.clear.blur(radius: /*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
-                    VStack{
-                        Text("You’re orientation facing \(locationManager.direction)")
-                            .font(.system(size: 16, weight: .regular, design: .rounded))
-                            .padding()
-                            .background(Color.yellow)
-                            .cornerRadius(12)
-                            .padding(.top,12)
-                        Spacer()
-                    }
+                    Color(.blackCamera)
                 }
             }
+               
             //            MARK: button start and stop session
             ZStack{
                 Rectangle()
@@ -71,15 +61,15 @@ struct RoomViewIteration: View {
                 
                 Button(action: {
                     if isStartScanning{
-                        roomController.stopSession()
                         isStartScanning = false
+                        roomController.stopSession()
                         pathStore.navigateToView(.roomscanresult)
                         feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
                         feedbackGenerator?.impactOccurred()
                         locationManager.resultOrientationDirection = locationManager.orientationGarden
                     } else {
-                        roomController.startSession()
                         isStartScanning = true
+                        roomController.startSession()
                         feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
                         feedbackGenerator?.impactOccurred()
                     }
@@ -93,6 +83,8 @@ struct RoomViewIteration: View {
         }
         .sheet(isPresented: $sheetOpening, content: {
             SheetRoomPlanView()
+                .presentationDetents([.height(350)])
+                .presentationCornerRadius(16)
         })
         .navigationBarBackButtonHidden()
         .ignoresSafeArea()

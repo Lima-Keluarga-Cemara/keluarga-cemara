@@ -7,10 +7,10 @@
 
 import SceneKit
 
-class ColladaLoader {
-    static func loadFromSCNAssetsAColladaFileWith(name: String) -> SCNScene {
-        let path = "art.scnassets/\(name)"
-        let scene = SCNScene(named: path)!
-        return scene
-    }
-}
+//class ColladaLoader {
+//    static func loadFromSCNAssetsAColladaFileWith(name: String) -> SCNScene {
+//        let path = "art.scnassets/\(name)"
+//        let scene = SCNScene(named: path)!
+//        return scene
+//    }
+//}

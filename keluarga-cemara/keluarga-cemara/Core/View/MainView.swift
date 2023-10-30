@@ -15,14 +15,15 @@ struct MainView: View {
     
     var body: some View {
         NavigationStack(path: $pathStore.path) {
-                ResultScanYogi(lightPosition: lightPosition)
-                    .ignoresSafeArea()
-                    .navigationDestination(for: ViewPath.self) { viewPath in
-                        withAnimation {
-                            viewPath.view
-                        }.transition(.slide)
-                    }
-          
+//                            ResultScanYogi(lightPosition: lightPosition)
+            OnboardingView()
+                .ignoresSafeArea()
+                .navigationDestination(for: ViewPath.self) { viewPath in
+                    withAnimation {
+                        viewPath.view
+                    }.transition(.slide)
+                }
+            
         }  .environmentObject(pathStore)
     }
 }

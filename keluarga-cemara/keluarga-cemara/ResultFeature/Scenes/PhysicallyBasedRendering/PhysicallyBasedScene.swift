@@ -47,14 +47,15 @@ class LightPosition: ObservableObject {
     
      func createLight() {
         rootNode.addChildNode(createPhysicallyBasedLight().node)
-        createPhysicallyLightingEnviroment()
+//        createPhysicallyLightingEnviroment()
     }
    
     private func createPhysicallyBasedLight() -> PhysicallyBasedLight {
         let lightFeatures = LightFeatures(
             position: SCNVector3Make(lightPosition.x, lightPosition.y, lightPosition.z),
             orientation: SCNVector3Make(lightPosition.orientation_x, lightPosition.orientation_y, 0),
-            color: UIColor.white
+//             try to change this color
+            color: UIColor.red
         )
         
         let physicallyBasedLightFeatures = PhysicallyBasedLightFeatures(lumen: 100, temperature: 4000)
@@ -66,14 +67,14 @@ class LightPosition: ObservableObject {
     }
 
     
-    
-    private func createPhysicallyLightingEnviroment() {
-        let enviroment = PhysicallyBasedLightingEnviroment(
-            cubeMap: ["rightPBR.png", "leftPBR.png", "upPBR.png", "downPBR.png", "backPBR.png", "frontPBR.png"],
-            intensity: 1.0
-        )
-        enviroment.setLightingEnviromentFor(scene: self)
-    }
+//    
+//    private func createPhysicallyLightingEnviroment() {
+//        let enviroment = PhysicallyBasedLightingEnviroment(
+//            cubeMap: ["rightPBR.png", "leftPBR.png", "upPBR.png", "downPBR.png", "backPBR.png", "frontPBR.png"],
+//            intensity: 1.0
+//        )
+//        enviroment.setLightingEnviromentFor(scene: self)
+//    }
     
     private func createObjects() {
         addFloor()

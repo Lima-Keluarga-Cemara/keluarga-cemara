@@ -203,7 +203,7 @@ struct ResultScanYogi: View {
 }
 
 #Preview {
-    ResultScan()
+    ResultScanYogi()
 }
 
 
