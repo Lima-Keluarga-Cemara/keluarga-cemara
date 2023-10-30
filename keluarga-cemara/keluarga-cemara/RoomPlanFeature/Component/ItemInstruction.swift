@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ItemInstruction : View {
-    let image : String
+    let image : ImageResource
     let title : String
     let width : CGFloat
     let height : CGFloat
@@ -36,5 +36,5 @@ struct ItemInstruction : View {
     }
 }
 #Preview {
-    ItemInstruction(image: "fifth_icon", title: "Hahaha", width : 44, height : 44 , textSize: 14, textColor: .black)
+    ItemInstruction(image: .fifthIcon, title: "Hahaha", width : 44, height : 44 , textSize: 14, textColor: .black)
 }

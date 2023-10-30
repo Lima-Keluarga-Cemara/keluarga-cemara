@@ -15,7 +15,6 @@ struct MainView: View {
     
     var body: some View {
         NavigationStack(path: $pathStore.path) {
-//                            ResultScanYogi(lightPosition: lightPosition)
             OnboardingView()
                 .ignoresSafeArea()
                 .navigationDestination(for: ViewPath.self) { viewPath in

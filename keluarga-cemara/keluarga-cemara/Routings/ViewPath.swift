@@ -38,6 +38,5 @@ enum ViewPath: Hashable{
         case .instruction:
             InstructionView()
         }
-        
     }
 }

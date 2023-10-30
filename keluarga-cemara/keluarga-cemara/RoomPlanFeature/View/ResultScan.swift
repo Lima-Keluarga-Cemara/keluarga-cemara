@@ -20,9 +20,6 @@ struct ResultScan: View {
     @State private var azimuthAngle  : Double  = 0.0
     @State private var objectHeight : Double = 5.0
     
-
-    
-    
     func formattedDate(from timeInterval: TimeInterval) -> String {
         let date = Date(timeIntervalSinceNow: timeInterval)
         let dateFormatter = DateFormatter()

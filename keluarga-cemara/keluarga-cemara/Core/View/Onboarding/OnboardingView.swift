@@ -29,28 +29,29 @@ struct OnboardingView: View {
                 
                 VStack{
                     TabView(selection: $currentIndex){
-                        HeadlineOnboardingView(geometry: geometry, title: "Understand your gardening area better", subTitle: "Get the garden orientation precisely with stand and face the oping in your area")
+                        HeadlineOnboardingView(geometry: geometry, title: "Harness sunlight to start your vegetable cultivation", subTitle: "Scan the area and map the sunlight to know better your garden orientation")
                             .tag(0)
                         
-                        HeadlineOnboardingView(geometry: geometry, title: "Understand your gardening area better", subTitle: "Get the garden orientation precisely with stand and face the oping in your area")
+                        HeadlineOnboardingView(geometry: geometry, title: "Transform your urban oasis into a thriving vegetables garden", subTitle: "Get veggies recommendations tailored to sunlight and shade in your garden")
                             .tag(1)
                         
                     }
                     .tabViewStyle(PageTabViewStyle())
-                    .padding(.bottom, 73)
+                    .padding(.bottom, 113)
                 }
                 
                 VStack(alignment: .trailing){
                     Spacer()
-                    HStack{
+                    VStack{
                         Spacer()
-                        StandardButton(text: "Start", color: Color(.primary), colorText: .black, width: 96, height: 44) {
+                        StandardButton(text: "Start", color: Color(.primary), colorText: .white, width: geometry.size.width * 0.92, height: 56) {
                             pathStore.navigateToView(.instruction)
                         }
                     }
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 20)
                 }
                 .frame(width: geometry.size.width)
-                .padding(.bottom, 55)
                 .animation(.easeInOut, value: currentIndex == 0 ? true : false)
                 .isHidden(currentIndex == 0 ? true : false, remove: true)
             }
@@ -73,19 +74,22 @@ struct HeadlineOnboardingView: View {
         VStack{
             Spacer()
             Text(title)
-                .font(.title)
+                .font(.system(size: 22))
                 .bold()
                 .multilineTextAlignment(.center)
                 .foregroundStyle(.white)
                 .padding(.bottom, 20)
             
             Text(subTitle)
-                .font(.headline)
+                .font(.system(size: 14))
                 .fontWeight(.semibold)
                 .multilineTextAlignment(.center)
                 .foregroundStyle(Color(.subheadline))
+                .padding(.horizontal, 20)
         }
-        .frame(height: geometry.size.height * 0.58)
+        .frame(height: geometry.size.height * 0.7)
         .padding(16)
     }
 }
+
+

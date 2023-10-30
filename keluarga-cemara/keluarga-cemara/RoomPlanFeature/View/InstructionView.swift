@@ -26,9 +26,9 @@ struct InstructionView: View {
                     .padding(.trailing, 70)
                 
                 VStack(alignment: .leading, spacing: 15){
-                    ItemInstruction(image: "first_icon", title: "1. Bring your phone to the area where you will start gardening", width: 72 , height: 69, textSize: 16, textColor: .white)
+                    ItemInstruction(image: .firstIcon, title: "1. Bring your phone to the area where you will start gardening", width: 72 , height: 69, textSize: 16, textColor: .white)
                     
-                    ItemInstruction(image: "second_icon", title: "2. Direct your phone towards the side where sunlight comes", width: 72 , height: 69, textSize: 16, textColor: .white)
+                    ItemInstruction(image: .secondIcon, title: "2. Direct your phone towards the side where sunlight comes", width: 72 , height: 69, textSize: 16, textColor: .white)
                 }
                 
                 Spacer()

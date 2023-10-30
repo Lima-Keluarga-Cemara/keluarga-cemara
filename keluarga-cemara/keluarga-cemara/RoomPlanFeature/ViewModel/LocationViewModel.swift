@@ -20,8 +20,6 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @AppStorage("orientationDirection") var resultOrientationDirection : String?
     @Published var direction : String = "Unknown"
     @Published var orientationGarden : String = "Unknown"
-    
-    
     @Published var region = MKCoordinateRegion()
     
     override init() {
@@ -84,6 +82,4 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     func isSunriseOrSunset() -> Bool {
         return true
     }
-    
-    
 }
