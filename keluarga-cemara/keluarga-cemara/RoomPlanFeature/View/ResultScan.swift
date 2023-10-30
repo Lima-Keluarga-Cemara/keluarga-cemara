@@ -20,7 +20,6 @@ struct ResultScan: View {
     @State private var azimuthAngle  : Double  = 0.0
     @State private var objectHeight : Double = 5.0
     
-    
     func formattedDate(from timeInterval: TimeInterval) -> String {
         let date = Date(timeIntervalSinceNow: timeInterval)
         let dateFormatter = DateFormatter()
@@ -66,18 +65,6 @@ struct ResultScan: View {
                                 .bold()
                             Spacer()
                         }
-                        
-                        //                        Slider(value: Binding(
-                        //                            get: {
-                        //                                self.selectedTime
-                        //                            },
-                        //                            set: { value in
-                        //                                self.selectedTime = value
-                        //                                self.handleSliderChange()
-                        //                            }), in: sunRiseTime...sunSetTime)
-                        //                        .colorMultiply(.yellow)
-                        //                        .tint(.yellow)
-                        
                         CustomSlider(value: Binding(
                             get: {
                                 self.selectedTime

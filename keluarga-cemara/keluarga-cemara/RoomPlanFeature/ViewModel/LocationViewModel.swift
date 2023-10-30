@@ -14,17 +14,12 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let locationManager = CLLocationManager()
     @Published var locationStatus: CLAuthorizationStatus?
     @Published var lastLocation: CLLocation?
-    //     add this for timeZone
     @Published var timeZone : TimeZone?
     @Published var sun: Sun?
     @Published var sunExposure: String = "Unknown"
-    //    add this for direction
     @AppStorage("orientationDirection") var resultOrientationDirection : String?
     @Published var direction : String = "Unknown"
     @Published var orientationGarden : String = "Unknown"
-    
-    
-    
     @Published var region = MKCoordinateRegion()
     
     override init() {
@@ -49,45 +44,42 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         let trueHeading = newHeading.trueHeading
-       
         
         self.direction = "Unknown"
         
         if trueHeading >= 0 && trueHeading < 22.5 {
             direction = "North"
-            orientationGarden = "You’re orientation facing north means you get the least sunlight they are shaded for most of the day."
+            orientationGarden = "A north-facing garden typically doesn’t receive much sunlight and tend to be in the shade"
         } else if trueHeading >= 337.5 || trueHeading < 22.5 {
             direction = "North"
-            orientationGarden = "You’re orientation facing north means you get the least sunlight they are shaded for most of the day."
+            orientationGarden = "A north-facing garden typically doesn’t receive much sunlight and tend to be in the shade"
         } else if trueHeading >= 22.5 && trueHeading < 67.5 {
             direction = "Northeast"
-            orientationGarden = "You’re orientation facing Northeast means you get the least sunlight they are shaded for most of the day."
+            orientationGarden = "Northeast"
         } else if trueHeading >= 67.5 && trueHeading < 112.5 {
             direction = "East"
-            orientationGarden = "You’re orientation facing East means you get the least sunlight they are shaded for most of the day."
+            orientationGarden = "An east-facing garden will experience sunlight during morning and shade in the afternoon or evening"
         } else if trueHeading >= 112.5 && trueHeading < 157.5 {
             direction = "Southeast"
-            orientationGarden = "You’re orientation facing Southeast means you get the least sunlight they are shaded for most of the day."
+            orientationGarden = "Southeast"
         } else if trueHeading >= 157.5 && trueHeading < 202.5 {
             direction = "South"
-            orientationGarden = "You’re orientation facing South means you get the least sunlight they are shaded for most of the day."
+            orientationGarden = "A south-facing garden tends to see very little shade, as they see sunlight for most hours of the day including evening"
         } else if trueHeading >= 202.5 && trueHeading < 247.5 {
             direction = "Southwest"
-            orientationGarden = "You’re orientation facing Southwest means you get the least sunlight they are shaded for most of the day."
+            orientationGarden = "Southwest"
         } else if trueHeading >= 247.5 && trueHeading < 292.5 {
             direction = "West"
-            orientationGarden = "You’re orientation facing West means you get the least sunlight they are shaded for most of the day."
+            orientationGarden = "A west-facing garden gets ample afternoon and evening sunlight despite morning shade"
         } else if trueHeading >= 292.5 && trueHeading < 337.5 {
             direction = "Northwest"
-            orientationGarden = "You’re orientation facing Northwest means you get the least sunlight they are shaded for most of the day."
+            orientationGarden = "Northwest"
         }
 
         print("Orientation: \(direction)")
     }
     
     func isSunriseOrSunset() -> Bool {
-        return true // Gantilah dengan logika perhitungan waktu sesuai lokasi Anda
+        return true
     }
-    
-    
 }
