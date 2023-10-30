@@ -19,7 +19,6 @@ struct RecommendPlantMock{
             PlantCareInfo(typeCareInfo: .watering, info: "About one inch of water a week."),
             PlantCareInfo(typeCareInfo: .fertilization, info: "Needs nitrogen for leaf growth and phosphorus and potassium.")
         ])
-    // partial shade plant
     let spinachPlant = RecommendPlantModel(
         title: "Spinach",
         description: "Spinach is nutritious leafy that is rich in multiple vitamins and minerals. Benefits of consuming spinach include diabetes and asthma management, promotes digestive regularity, lowering the risk of cancer, lowering blood pressure, and improving bone health.",
@@ -89,7 +88,15 @@ struct RecommendPlantMock{
 // MARK: static data access to mock data
 extension RecommendPlantMock {
     static var plantMockData: [RecommendPlantModel] {
-        return [RecommendPlantMock().bokcoyPlant, RecommendPlantMock().cabbagePlant, RecommendPlantMock().pepperPlant, RecommendPlantMock().spinachPlant, RecommendPlantMock().tomatoPlant, RecommendPlantMock().celeryPlant, RecommendPlantMock().endivePlant]
+        return [
+            RecommendPlantMock().bokcoyPlant,
+            RecommendPlantMock().cabbagePlant,
+//            RecommendPlantMock().pepperPlant,
+            RecommendPlantMock().spinachPlant,
+//            RecommendPlantMock().tomatoPlant,
+            RecommendPlantMock().celeryPlant,
+//            RecommendPlantMock().endivePlant
+        ]
     }
     
     static func separatePlantsByType() -> [TypeOfPlant: [RecommendPlantModel]] {
