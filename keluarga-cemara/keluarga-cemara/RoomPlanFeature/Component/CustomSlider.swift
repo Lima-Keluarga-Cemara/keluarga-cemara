@@ -21,8 +21,10 @@ struct CustomSlider: View {
             let maxValue = (geo.size.width * 0.98) - thumbSize
             
             let scaleFactor = (maxValue - minValue) / (rangeSlide.upperBound - rangeSlide.lowerBound)
+            
             let lower = rangeSlide.lowerBound
             let sliderVal = (self.value - lower) * scaleFactor + minValue
+            
             
             
             ZStack {
@@ -47,6 +49,9 @@ struct CustomSlider: View {
                                         let nextCoordinateValue = max(minValue, self.lastCoordinateValue + v.translation.width)
                                         self.value = ((nextCoordinateValue - minValue) / scaleFactor) + lower
                                     }
+                                    
+                                    print(rangeSlide)
+
                                     
                                 }
                         )

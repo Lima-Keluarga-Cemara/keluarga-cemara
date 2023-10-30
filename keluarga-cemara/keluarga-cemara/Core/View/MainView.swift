@@ -11,6 +11,7 @@ struct MainView: View {
     /// Create environment object for pass all data needed
     /// Create environment object for path view
     @StateObject private var pathStore: PathStore = PathStore()
+    @StateObject var lightPosition = LightPosition()
     
     var body: some View {
         NavigationStack(path: $pathStore.path) {
@@ -21,10 +22,11 @@ struct MainView: View {
                         viewPath.view
                     }.transition(.slide)
                 }
-        }
-        .environmentObject(pathStore)
+            
+        }  .environmentObject(pathStore)
     }
 }
+
 
 #Preview {
     MainView()
