@@ -49,7 +49,7 @@ struct OnboardingView: View {
                         }
                     }
                     .padding(.horizontal, 16)
-                    .padding(.bottom, 18)
+                    .padding(.bottom, 20)
                 }
                 .frame(width: geometry.size.width)
                 .animation(.easeInOut, value: currentIndex == 0 ? true : false)

@@ -21,10 +21,10 @@ struct StandardButton: View {
                 .font(.system(size: 18))
                 .fontWeight(.bold)
                 .foregroundColor(colorText ?? Color.white)
+                .frame(width: width, height: height) // Move frame to inside the label
+                .background(color)
+                .cornerRadius(16)
         }
-        .frame(width: width, height: height) // Menggunakan width dan height dari parameter
-        .background(color)
-        .cornerRadius(16)
         .padding()
     }
 }

@@ -19,24 +19,21 @@ struct RecommendCardView: View {
                 .frame(width: 146, height: 114)
                 .clipShape(UnevenRoundedRectangle(topLeadingRadius: 12, topTrailingRadius: 12))
             
-            VStack(alignment: .leading){
+            HStack{
                 Text(plantName)
                     .font(.system(size: 16))
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.black)
                     .fontWeight(.semibold)
-                
-                Text("Bisa dipanen 120 hari setelah penanaman")
-                    .font(.system(size: 11))
-                    .foregroundStyle(Color(.cardSubText))
-                    .fontWeight(.regular)
+                    .padding(.vertical, 12)
+                    .padding(.horizontal, 16)
+                Spacer()
             }
-            .frame(width: 146, height: 72)
-            .background(Color(.card))
+            .frame(width: 146, height: 42)
+            .background(Color(.iconTile))
             .clipShape(
                 UnevenRoundedRectangle(bottomLeadingRadius: 12, bottomTrailingRadius: 12)
             )
         }
-        .frame(width: 146, height: 186)
         .shadow(radius: 5, x: 1, y: 6)
         .padding(.horizontal, 8)
         .padding(.bottom, 17)
