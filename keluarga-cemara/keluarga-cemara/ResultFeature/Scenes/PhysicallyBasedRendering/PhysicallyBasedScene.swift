@@ -5,12 +5,13 @@ import GLKit
 import SwiftUI
 
 class LightPosition: ObservableObject {
-    @Published var x: Float = -2.0
-    @Published var y: Float = 5.0
-    @Published var z: Float = 4.0
-    @Published var orientation_x: Float = 0
-    @Published var orientation_y: Float = -90
+    @Published var x: Float = 0.0
+    @Published var y: Float = 0.0
+    @Published var z: Float = 0.0
+    @Published var orientation_x: Float = -20.93
+    @Published var orientation_y: Float = -53.33
 }
+
 
 
 @objc class PhysicallyBasedScene: SCNScene, Scenee {
@@ -48,31 +49,23 @@ class LightPosition: ObservableObject {
         rootNode.addChildNode(createPhysicallyBasedLight().node)
         createPhysicallyLightingEnviroment()
     }
-
-    
-     func createPhysicallyBasedLight() -> PhysicallyBasedLight {
-         let lightFeatures = LightFeatures(
+   
+    private func createPhysicallyBasedLight() -> PhysicallyBasedLight {
+        let lightFeatures = LightFeatures(
             position: SCNVector3Make(lightPosition.x, lightPosition.y, lightPosition.z),
-            orientation: SCNVector3Make(
-                GLKMathDegreesToRadians(lightPosition.orientation_x),
-                GLKMathDegreesToRadians(lightPosition.orientation_y),
-                0
-            ),
-            
+            orientation: SCNVector3Make(lightPosition.orientation_x, lightPosition.orientation_y, 0),
             color: UIColor.white
         )
-        self.lightFeatures = lightFeatures
-
         
         let physicallyBasedLightFeatures = PhysicallyBasedLightFeatures(lumen: 100, temperature: 4000)
-         
         
         return PhysicallyBasedLight(
             lightFeatures: lightFeatures,
             physicallyBasedLightFeatures: physicallyBasedLightFeatures
         )
-      
     }
+
+    
     
     private func createPhysicallyLightingEnviroment() {
         let enviroment = PhysicallyBasedLightingEnviroment(
@@ -83,7 +76,7 @@ class LightPosition: ObservableObject {
     }
     
     private func createObjects() {
-//        addFloor()
+        addFloor()
         addRoom()
     }
     
@@ -98,7 +91,7 @@ class LightPosition: ObservableObject {
                 normal: "floor-normal.png",
                 ambientOcclusion: "floor-ambient-occlusion.png"
             ),
-            position: SCNVector3Make(0, 0, 0),
+            position: SCNVector3Make(0, -1.8, 0),
             rotation: SCNVector4Make(0, 0, 0, 0)
         )
         rootNode.addChildNode(floor.node)
@@ -110,18 +103,16 @@ class LightPosition: ObservableObject {
             mesh: MeshLoader.loadMeshWith(name: "room", ofType: "usdz"),
             material: PhysicallyBasedMaterial(
                 diffuse: "cement-diffuse.png",
-                roughness: NSNumber(value: 0.8),
+                roughness: NSNumber(value: 0.1),
                 metalness: "cement-metalness.png",
                 normal: "cement-normal.png",
                 ambientOcclusion: "cement-ambient-occlusion.png"
             ),
-            position: SCNVector3Make(-0.5, 0, 0),
+            position: SCNVector3Make(0, 0, 0),
             rotation: SCNVector4Make(0, 0, 0, 0)
         )
         rootNode.addChildNode(room.node)
     }
     
-    
-
 }
 

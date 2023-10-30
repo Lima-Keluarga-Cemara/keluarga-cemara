@@ -8,31 +8,41 @@
 import SwiftUI
 
 struct RecommendCardView: View {
+    let image: ImageResource
+    let plantName: String
+    
     var body: some View {
-        VStack{
-            Spacer()
-            Image(.pakcoy)
+        VStack(spacing: 0){
+            Image(image)
                 .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 104)
-            Spacer()
-            UnevenRoundedRectangle(bottomLeadingRadius: 12, bottomTrailingRadius: 12)
-                .frame(height: 40)
-                .foregroundStyle(Color(.cardTitle))
-                .overlay {
-                    Text("Pakcoy")
-                        .font(.system(size: 16))
-                        .fontWeight(.semibold)
-                }
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 146, height: 114)
+                .clipShape(UnevenRoundedRectangle(topLeadingRadius: 12, topTrailingRadius: 12))
+            
+            VStack(alignment: .leading){
+                Text(plantName)
+                    .font(.system(size: 16))
+                    .foregroundStyle(.white)
+                    .fontWeight(.semibold)
+                
+                Text("Bisa dipanen 120 hari setelah penanaman")
+                    .font(.system(size: 11))
+                    .foregroundStyle(Color(.cardSubText))
+                    .fontWeight(.regular)
+            }
+            .frame(width: 146, height: 72)
+            .background(Color(.card))
+            .clipShape(
+                UnevenRoundedRectangle(bottomLeadingRadius: 12, bottomTrailingRadius: 12)
+            )
         }
-        .frame(width: 145, height: 156)
-        .background(Color(.card))
-        .clipShape(RoundedRectangle(cornerRadius: 12, style: /*@START_MENU_TOKEN@*/.continuous/*@END_MENU_TOKEN@*/))
+        .frame(width: 146, height: 186)
         .shadow(radius: 5, x: 1, y: 6)
+        .padding(.horizontal, 8)
         .padding(.bottom, 17)
     }
 }
 
 #Preview {
-    RecommendCardView()
+    RecommendCardView(image: .bokcoy, plantName: "Pakcoy")
 }

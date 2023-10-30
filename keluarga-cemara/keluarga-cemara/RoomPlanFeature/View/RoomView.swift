@@ -35,7 +35,7 @@ struct RoomView: View {
                         }, label: {
                             Image(systemName: "chevron.backward")
                         })
-                        .buttonStyle(ButtonStyleRoomPlan(widthButton: 32))
+                        .buttonStyle(.plain)
                        
                         Spacer()
         //                MARK: Button done
@@ -47,7 +47,7 @@ struct RoomView: View {
                             Text("Done")
                                 .font(.system(size: 16, weight: .medium, design: .rounded))
                         })
-                        .buttonStyle(ButtonStyleRoomPlan())
+                        .buttonStyle(.plain)
                     }
                     .padding(.horizontal, 16)
                     .padding(.top, 60)

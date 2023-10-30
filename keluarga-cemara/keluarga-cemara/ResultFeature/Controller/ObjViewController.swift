@@ -25,33 +25,38 @@ import SceneKit
 //
 
 
+import SwiftUI
+import SceneKit
+
 struct SceneKitView: UIViewRepresentable {
     @ObservedObject var lightPosition: LightPosition
     var scene: PhysicallyBasedScene
+    
     func makeUIView(context: Context) -> SCNView {
         let sceneView = SCNView()
         sceneView.scene = scene
         sceneView.autoenablesDefaultLighting = true
         sceneView.allowsCameraControl = true
-        sceneView.isPlaying = true
-        sceneView.loops = true
-        sceneView.antialiasingMode = .multisampling4X
         return sceneView
     }
 
-   //create updateUIView to update change of light orientation
     func updateUIView(_ uiView: SCNView, context: Context) {
         let orientation = getXYZOrientation()
-        uiView.scene?.rootNode.childNode(withName: "Light", recursively: true)?.eulerAngles = SCNVector3(orientation.x,orientation.y,orientation.z)
+           
+           UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
+               uiView.scene?.rootNode.childNode(withName: "Light", recursively: false)?.eulerAngles = SCNVector3(orientation.x, orientation.y, orientation.z)
+           }
+           
+           uiView.antialiasingMode = .multisampling4X
+           uiView.autoenablesDefaultLighting = true
+           uiView.allowsCameraControl = true
+ 
+
     }
 
-   func getXYZOrientation() -> (x: Float, y: Float, z: Float){
-        let x = lightPosition.orientation_x
-        let y = lightPosition.orientation_y
-        let z = Float(0)
-        return (x,y,z)
+    func getXYZOrientation() -> SCNVector3 {
+        return SCNVector3(lightPosition.orientation_x, lightPosition.orientation_y, 0.0)
     }
-
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
@@ -63,69 +68,144 @@ struct SceneKitView: UIViewRepresentable {
         init(_ parent: SceneKitView) {
             self.parent = parent
         }
-        
-        @objc func handleSliderChange() {
-        }
-        
     }
-    
-    
 }
-struct SliderEditLight: View {
+
+
+
+//struct SliderEditLight: View {
+//    @ObservedObject var lightPosition = LightPosition()
+//    @EnvironmentObject private var pathStore: PathStore
+//    @StateObject private var roomController = RoomController.instance
+//    @StateObject private var locationManager = LocationManager()
+//    @State private var isStartScanning : Bool = false
+//
+//    @State private var sheetOpening : Bool = false
+//    @State private var showingOption : Bool = false
+//    @State private var feedbackGenerator: UIImpactFeedbackGenerator?
+//    
+//    
+//    var body: some View {
+//        VStack{
+//            
+//            
+//            
+//            ZStack{
+//                Rectangle()
+//                    .fill(Color.black)
+//                    .frame(height: 150)
+//                
+//                
+//                Button(action: {
+//                    if isStartScanning{
+//                        roomController.stopSession()
+//                        isStartScanning = false
+//                        pathStore.navigateToView(.roomscanresult)
+//                        feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+//                        feedbackGenerator?.impactOccurred()
+//                        locationManager.resultOrientationDirection = locationManager.orientationGarden
+//                    } else {
+//                        roomController.startSession()
+//                        isStartScanning = true
+//                        feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
+//                        feedbackGenerator?.impactOccurred()
+//                    }
+//                }, label: {
+//                    Image(systemName: isStartScanning ? "stop.circle" : "circle.inset.filled")
+//                        .foregroundColor( isStartScanning ? .red : .white )
+//                        .font(.system(size: 64))
+//                })
+//                
+//            }
+//        }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+//                ZStack {
+//                    SceneKitView(lightPosition: lightPosition, scene: PhysicallyBasedScene(lightPosition: lightPosition))
+//                    VStack {
+//                        Spacer()
+//                        Spacer()
+//                        CustomSlider(value: Binding(
+//                            get: {
+//                                if let azimuthInRadians = locationManager.sun?.azimuth.radians,
+//                                   let elevationInRadians = locationManager.sun?.altitude.radians {
+//                                    // Convert azimuth and elevation from radians to degrees
+//                                    let azimuth = azimuthInRadians * 180 / .pi
+//                                    let elevation = elevationInRadians * 180 / .pi
+//                                    
+//                                    // Return the combined value (azimuth + elevation)
+//                                    return Double(azimuth + elevation)
+//                                }
+//                                
+//                                return 0 // Handle a default case when data is not available
+//                            },
+//                            set: { newValue in
+//                                // Separate the value into azimuth and elevation components
+//                                let azimuth = newValue / 2 // Half of the value (you can adjust this as needed)
+//                                let elevation = newValue / 2 // Half of the value (you can adjust this as needed)
+//
+//                                // Update the orientation_x and orientation_y with new values
+//                                lightPosition.orientation_x = Float(azimuth)
+//                                lightPosition.orientation_y = Float(elevation)
+//                            }
+//                        ), rangeSlide: 1.0...100.0)
+//                        Spacer()
+//                    }
+//                }
+//    }
+//}
+//
+
+struct ResultScanYogi: View {
+    @EnvironmentObject private var pathStore: PathStore
+    @State private var isLoading : Bool = true
+    @State private var selectedTime  : TimeInterval  = 0.0
+    @StateObject private var sunManager = LocationManager()
+    @StateObject private var locationManager = LocationManager()
     @ObservedObject var lightPosition = LightPosition()
-    let sunManager = LocationManager()
-    @State var selectedTime: TimeInterval = 0.0
-    
+
+
     var body: some View {
-        ZStack {
-            SceneKitView(lightPosition: lightPosition, scene: PhysicallyBasedScene(lightPosition: lightPosition))
-            Text("\(sunManager.sun?.azimuth.radians ?? 0.0)")
-            VStack {
-                Spacer()
-                Spacer()
-                Slider(value: Binding(
-                    get: {
-                        if let azimuthInRadians = sunManager.sun?.azimuth.radians,
-                           let elevationInRadians = sunManager.sun?.altitude.radians {
-                            // Convert azimuth and elevation from radians to degrees
-                            let azimuth = azimuthInRadians * 180 / .pi
-                            let elevation = elevationInRadians * 180 / .pi
-                            
-                            // Return the combined value (azimuth + elevation)
-                            return Double(azimuth + elevation)
-                        }
-                        return 0.0
-                    },
-                    set: { newValue in
-                        //convert timeinterval to date
-                        let currentTime = Date(timeIntervalSinceNow: newValue)
-                        
-                        //setup sun to the date
-                        sunManager.sun?.setDate(currentTime)
-                        
-                        // Separate the value into azimuth and elevation components
-                        let azimuth = newValue/2 // Half of the value (you can adjust this as needed)
-                        let elevation = newValue/2 // Half of the value (you can adjust this as needed)
-                        
-                        // Update the orientation_x and orientation_y with new values
-                        lightPosition.orientation_x = convertRadToDeg(from: azimuth )
-                        lightPosition.orientation_y = convertRadToDeg(from: elevation )
+        SceneKitView(lightPosition: lightPosition, scene: PhysicallyBasedScene(lightPosition: lightPosition))
+        Text("\(locationManager.sun?.altitude.radians ?? 0.0)")
+        
+        ZStack{
+            Slider(value: Binding(
+                get: {
+                    if let azimuthInRadians = locationManager.sun?.azimuth.radians,
+                       let elevationInRadians = locationManager.sun?.altitude.radians {
+                        // Convert azimuth and elevation from radians to degrees
+                        let azimuth = azimuthInRadians * 180 / .pi
+                        _ = elevationInRadians * 180 / .pi
+
+                        // Calculate X orientation with 0 at the rightmost position (east)
+                        let orientation_x = (180 - azimuth) // Adjust for the orientation
+
+                        // Return the X orientation
+                        return Double(orientation_x)
                     }
-                ), in: -180...45, step: 1.0)
-                Spacer()
-            }
+
+                    return 0 // Handle a default case when data is not available
+                },
+                set: { newValue in
+                    // Update the orientation_x with the new X orientation
+                    let animator = UIViewPropertyAnimator(duration: 0.5, curve: .easeInOut) {
+                              // Update the orientation_x with the new X orientation
+                              let azimuth = newValue / 12 // Adjust for the orientation
+                              lightPosition.orientation_x = Float(azimuth)
+                          }
+                          animator.startAnimation()
+                }
+            ), in: -45...0, step: 0.0000000001)// Range from east (0) to west (360)
+            .frame(width: 230, height: 10)
+
         }
-    }
-    
-    var sunRiseTime : TimeInterval {
-        return sunManager.sun?.sunrise.timeIntervalSinceNow ?? 0.0
-    }
-    
-    var sunSetTime : TimeInterval {
-        return sunManager.sun?.sunset.timeIntervalSinceNow ?? 0.0
-    }
-    
-    func convertRadToDeg(from rad: Double) -> Float {
-        return Float(rad * 180 / .pi)
+     
     }
 }
+
+#Preview {
+    ResultScan()
+}
+
+
+
+
