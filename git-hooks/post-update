@@ -1,4 +1,0 @@
-#!/bin/sh
-cd keluarga-cemara
-xcodegen generate --use-cache
-cd ..
