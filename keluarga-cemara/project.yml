@@ -1,0 +1,46 @@
+name: keluarga-cemara
+options:
+  bundleIdPrefix: com.cemara
+  settings:
+    iOS:
+      TARGETED_DEVICE_FAMILY: "1"  # 1 for iPhone, 2 for iPad
+packages:
+  SunKit:
+    url: https://github.com/Sunlitt/SunKit
+    from: 2.7.0
+targets:
+  keluarga-cemara:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - keluarga-cemara
+    dependencies:
+      - package: SunKit
+    info:
+      path: keluarga-cemara/Info.plist
+      properties:
+        CFBundleDevelopmentRegion: $(DEVELOPMENT_LANGUAGE)
+        CFBundleExecutable: $(EXECUTABLE_NAME)
+        CFBundleIdentifier: $(PRODUCT_BUNDLE_IDENTIFIER)
+        CFBundleInfoDictionaryVersion: "6.0"
+        CFBundleName: $(PRODUCT_NAME)
+        CFBundleDisplayName: "Sunbloom"
+        CFBundlePackageType: "APPL"
+        CFBundleShortVersionString: "2.0"
+        CFBundleVersion: "0.1.0"
+        UILaunchStoryboardName: "LaunchScreen"
+        UISupportedInterfaceOrientations:
+          - "UIInterfaceOrientationPortrait"
+          - "UIInterfaceOrientationLandscapeLeft"
+          - "UIInterfaceOrientationLandscapeRight"
+        UISupportedInterfaceOrientations~ipad:
+          - "UIInterfaceOrientationPortrait"
+          - "UIInterfaceOrientationPortraitUpsideDown"
+          - "UIInterfaceOrientationLandscapeLeft"
+          - "UIInterfaceOrientationLandscapeRight"
+        UIFileSharingEnabled: true
+        UIRequiresFullScreen: true
+        LSSupportsOpeningDocumentsInPlace: true
+        NSCameraUsageDescription: "Need for room plan"
+        NSLocationWhenInUseUsageDescription: "Your location is required for know sun exposure"
