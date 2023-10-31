@@ -10,6 +10,7 @@ import MapKit
 import CoreLocation
 import SunKit
 
+//TODO: fixing sun position data
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let locationManager = CLLocationManager()
     @Published var locationStatus: CLAuthorizationStatus?
