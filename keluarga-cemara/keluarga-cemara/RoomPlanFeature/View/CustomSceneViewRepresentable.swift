@@ -35,7 +35,6 @@ struct CustomSceneViewRepresentable : UIViewRepresentable{
                 view.scene = sceneObject
                 let sceneNode = SCNNode(geometry: sceneObject?.rootNode.geometry)
                 let lightNode = setUpLightShadow()
-                sceneNode.geometry?.materials
                 
                 let constraint = SCNLookAtConstraint(target: sceneNode )
                 constraint.isGimbalLockEnabled = true

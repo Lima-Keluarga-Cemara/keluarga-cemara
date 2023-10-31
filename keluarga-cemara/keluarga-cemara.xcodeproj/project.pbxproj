@@ -15,6 +15,7 @@
 		14B694B715DF2CC6E6D7D375 /* PhysicallyBasedMaterial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026307A45329955EA38D5230 /* PhysicallyBasedMaterial.swift */; };
 		18EB10FDDBACD1B772ECEA07 /* Light.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C12F34E7039A586262B39F /* Light.swift */; };
 		1E22080596F2D62F52F9552F /* marble3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6CDBA62C4FAA55A4ADAF69A6 /* marble3.jpg */; };
+		1E4FA505A84E73239E43C44A /* ARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C56239B35F22CD97C40D51 /* ARView.swift */; };
 		24CA336A5BBC6BE9D28E5EB6 /* room.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 3329213169562DF49F3EFFC2 /* room.usdz */; };
 		259296D9108C41856E8ECD45 /* ARViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31E0E542D2C505BBE607611 /* ARViewContainer.swift */; };
 		27A0EFEE1DFA2C7D5FDA6314 /* CustomSceneViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC50E77EDD87C48AD1CA488B /* CustomSceneViewRepresentable.swift */; };
@@ -32,6 +33,7 @@
 		4BDEE100496918A8432DB72E /* MeshLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FD5E9AFD7CAEF55DA2E194 /* MeshLoader.swift */; };
 		4CD32B709687C583390CF161 /* PhysicallyBasedLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC234A4402A50E4CEB41A2 /* PhysicallyBasedLight.swift */; };
 		4E28BB512A20C266F90DD0C1 /* leftPBR.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A3A5B85B6793334342F07BD /* leftPBR.png */; };
+		51BA75D8AE37FEA22F218C6B /* DashedLineVertical.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F4C7AF960C3DA51928AAAC /* DashedLineVertical.swift */; };
 		51F0F8FC17D39B6744C197FF /* cement-diffuse.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FE60050B80A5A9DF9386969 /* cement-diffuse.png */; };
 		5C9F9D12632A5E6A33D93D64 /* pool.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 52D1D2930C098F294C1593EF /* pool.jpg */; };
 		5CE2E149D7C437419786800C /* front.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D69312619798D0CB6B82C9D /* front.png */; };
@@ -49,6 +51,7 @@
 		8ECA4E20204A975B7FA1FA69 /* rustediron-normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B65B179AF915ED71A26A3F6 /* rustediron-normal.png */; };
 		8ED5DC2BF0D4BF42AC5882F1 /* floor-metalness.png in Resources */ = {isa = PBXBuildFile; fileRef = 29CFB1F56E1A9C6F9EBADDE8 /* floor-metalness.png */; };
 		8F316AD0D93B9996ED2E51C2 /* scan.usdz in Resources */ = {isa = PBXBuildFile; fileRef = D8DD4724C36C3E92495BC153 /* scan.usdz */; };
+		90C8BB6F3A0202E66719253D /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3050D60B60090F947C39747E /* SliderView.swift */; };
 		91B59C13C8DF1030DB966AB9 /* rightPBR.png in Resources */ = {isa = PBXBuildFile; fileRef = F20EC2AE6AA21ADDD22BFE7C /* rightPBR.png */; };
 		9701624221807436EB67072A /* RoomViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C3990A20AE9AE6C68AEC57 /* RoomViewRepresentable.swift */; };
 		98EB4F77612094997BA2C32E /* Floor.obj in Resources */ = {isa = PBXBuildFile; fileRef = 2FDB23D21585BAB32F61096B /* Floor.obj */; };
@@ -59,6 +62,7 @@
 		A5FC4C2CD85CDC9AF02C4B63 /* backPBR.png in Resources */ = {isa = PBXBuildFile; fileRef = D80E44B9B64308818A4F0D47 /* backPBR.png */; };
 		A7E36F74517FA9931D52713E /* RecommendationPlantDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A95884DCA8A3753EC21FEC7 /* RecommendationPlantDetailView.swift */; };
 		AA1389033CFFCE65EFABCC6F /* SheetRoomPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9896FF93B09C7A9841E37BCE /* SheetRoomPlanView.swift */; };
+		ADFFA2EB815E20E7545283A4 /* ButtonMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F887A03FC8DA63E39CD685B /* ButtonMenu.swift */; };
 		AE96CCBCBF60B869F4639F6E /* PhysicallyBasedLightingEnviroment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CE5A1D622B0EB195ED8010 /* PhysicallyBasedLightingEnviroment.swift */; };
 		B4FA4EB0595EAC3E7047DB92 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5DA2531686C21F022FD24 /* MainView.swift */; };
 		B57DCF8620EFEBE77560EF89 /* left.png in Resources */ = {isa = PBXBuildFile; fileRef = A95EF128D0C4BC0B275722D2 /* left.png */; };
@@ -116,11 +120,13 @@
 		2ED22F10AD56806CB62B9903 /* CGFloat+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Random.swift"; sourceTree = "<group>"; };
 		2FDB23D21585BAB32F61096B /* Floor.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = Floor.obj; sourceTree = "<group>"; };
 		2FE60050B80A5A9DF9386969 /* cement-diffuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cement-diffuse.png"; sourceTree = "<group>"; };
+		3050D60B60090F947C39747E /* SliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
 		32C12F34E7039A586262B39F /* Light.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Light.swift; sourceTree = "<group>"; };
 		3329213169562DF49F3EFFC2 /* room.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = room.usdz; sourceTree = "<group>"; };
 		393829AA8642A32B92FE025E /* checked2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = checked2.jpg; sourceTree = "<group>"; };
 		3A1207CFDD418945D8B12551 /* ColladaLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColladaLoader.swift; sourceTree = "<group>"; };
 		3A9A4873EF8AAE7C10AE5BAE /* floor-normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "floor-normal.png"; sourceTree = "<group>"; };
+		3F887A03FC8DA63E39CD685B /* ButtonMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonMenu.swift; sourceTree = "<group>"; };
 		404A38E9BC6EF2E1892D41A9 /* LightFeatures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightFeatures.swift; sourceTree = "<group>"; };
 		405A255E9F3241D40071DB3C /* frontPBR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = frontPBR.png; sourceTree = "<group>"; };
 		41802F3ECE01A08CBFC1FBD3 /* marble2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = marble2.jpg; sourceTree = "<group>"; };
@@ -132,8 +138,9 @@
 		4E085D86E5D4840F16E51BD1 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
 		4F59FAB510B7E58BDDA917A1 /* floor.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = floor.jpg; sourceTree = "<group>"; };
 		52D1D2930C098F294C1593EF /* pool.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pool.jpg; sourceTree = "<group>"; };
+		57F4C7AF960C3DA51928AAAC /* DashedLineVertical.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashedLineVertical.swift; sourceTree = "<group>"; };
 		59FD5E9AFD7CAEF55DA2E194 /* MeshLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshLoader.swift; sourceTree = "<group>"; };
-		5B98BDF580CF2C693CB986DE /* Sunbloom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sunbloom.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B98BDF580CF2C693CB986DE /* keluarga-cemara.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "keluarga-cemara.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		60325ADE8BBE90F6C7235FCA /* PhysicallyBasedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicallyBasedObject.swift; sourceTree = "<group>"; };
 		69F1746C102DEACC42D53C13 /* KeluargaCemara.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeluargaCemara.swift; sourceTree = "<group>"; };
 		6CDBA62C4FAA55A4ADAF69A6 /* marble3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = marble3.jpg; sourceTree = "<group>"; };
@@ -171,6 +178,7 @@
 		DDA365E84E3CE01FDFD14F58 /* cement-metalness.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cement-metalness.png"; sourceTree = "<group>"; };
 		DDD5DA2531686C21F022FD24 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		DDEBE5096AEB827E9C00FC57 /* cement-ambient-occlusion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cement-ambient-occlusion.png"; sourceTree = "<group>"; };
+		E1C56239B35F22CD97C40D51 /* ARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARView.swift; sourceTree = "<group>"; };
 		E31E0E542D2C505BBE607611 /* ARViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewContainer.swift; sourceTree = "<group>"; };
 		E48BDD2DD952F0EA64081C97 /* RecommendPlantModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendPlantModel.swift; sourceTree = "<group>"; };
 		E530D9B58D16A69EBDDE6ED0 /* ViewPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPath.swift; sourceTree = "<group>"; };
@@ -209,7 +217,7 @@
 		15E6FAC4C1E602B9EBF23012 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5B98BDF580CF2C693CB986DE /* Sunbloom.app */,
+				5B98BDF580CF2C693CB986DE /* keluarga-cemara.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -288,6 +296,14 @@
 				5FC0EB54DA1137FF07CBF416 /* Scenes */,
 			);
 			path = ResultFeature;
+			sourceTree = "<group>";
+		};
+		467F133BCDC89CCBEAD1A7D9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E1C56239B35F22CD97C40D51 /* ARView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		50D5B1F7E3264102DA6F1F10 /* Onboarding */ = {
@@ -388,6 +404,15 @@
 			path = RoomPlanFeature;
 			sourceTree = "<group>";
 		};
+		87DF3E87687274397984EF42 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				3F887A03FC8DA63E39CD685B /* ButtonMenu.swift */,
+				57F4C7AF960C3DA51928AAAC /* DashedLineVertical.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
 		89564EF2F00DC18D0DE48B2E /* skybox */ = {
 			isa = PBXGroup;
 			children = (
@@ -416,6 +441,7 @@
 				2AE02A5ACD59288154403B03 /* CustomSlider.swift */,
 				71CDB316551EE65EA2BDD602 /* ItemInstruction.swift */,
 				9896FF93B09C7A9841E37BCE /* SheetRoomPlanView.swift */,
+				3050D60B60090F947C39747E /* SliderView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -441,6 +467,8 @@
 			isa = PBXGroup;
 			children = (
 				E31E0E542D2C505BBE607611 /* ARViewContainer.swift */,
+				87DF3E87687274397984EF42 /* Component */,
+				467F133BCDC89CCBEAD1A7D9 /* View */,
 			);
 			path = ARFeature;
 			sourceTree = "<group>";
@@ -485,9 +513,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2DA4549E1D2FD20002362EE4 /* Sunbloom */ = {
+		2DA4549E1D2FD20002362EE4 /* keluarga-cemara */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8572FA1B77566D1C97E3222F /* Build configuration list for PBXNativeTarget "Sunbloom" */;
+			buildConfigurationList = 8572FA1B77566D1C97E3222F /* Build configuration list for PBXNativeTarget "keluarga-cemara" */;
 			buildPhases = (
 				03083704FD1E1C3281424D1C /* Sources */,
 				1D30A655599490395F66AA86 /* Resources */,
@@ -497,12 +525,12 @@
 			);
 			dependencies = (
 			);
-			name = Sunbloom;
+			name = "keluarga-cemara";
 			packageProductDependencies = (
 				BC0073A8DB5365695E9C4A71 /* SunKit */,
 			);
 			productName = "keluarga-cemara";
-			productReference = 5B98BDF580CF2C693CB986DE /* Sunbloom.app */;
+			productReference = 5B98BDF580CF2C693CB986DE /* keluarga-cemara.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -529,7 +557,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2DA4549E1D2FD20002362EE4 /* Sunbloom */,
+				2DA4549E1D2FD20002362EE4 /* keluarga-cemara */,
 			);
 		};
 /* End PBXProject section */
@@ -589,13 +617,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E4FA505A84E73239E43C44A /* ARView.swift in Sources */,
 				259296D9108C41856E8ECD45 /* ARViewContainer.swift in Sources */,
+				ADFFA2EB815E20E7545283A4 /* ButtonMenu.swift in Sources */,
 				B621E6706DB8C482282F0F1A /* CGFloat+Random.swift in Sources */,
 				D636C4A54CB41575985466C4 /* Camera.swift in Sources */,
 				35EDEBEF3181FD17A35BD071 /* CareInfoView.swift in Sources */,
 				397D7627DA4850A2155E0795 /* ColladaLoader.swift in Sources */,
 				27A0EFEE1DFA2C7D5FDA6314 /* CustomSceneViewRepresentable.swift in Sources */,
 				DDAE302237246A907B9B0A95 /* CustomSlider.swift in Sources */,
+				51BA75D8AE37FEA22F218C6B /* DashedLineVertical.swift in Sources */,
 				A268E63A64BD098D11F0B005 /* GeneralCostumButton.swift in Sources */,
 				048D97906A8735FFAF6E370E /* InstructionView.swift in Sources */,
 				5D6CFDD3A2A0C5FFC4B89F23 /* Int+Random.swift in Sources */,
@@ -629,6 +660,7 @@
 				9701624221807436EB67072A /* RoomViewRepresentable.swift in Sources */,
 				ED26751B8D1F1234ABE2E88E /* Scene.swift in Sources */,
 				AA1389033CFFCE65EFABCC6F /* SheetRoomPlanView.swift in Sources */,
+				90C8BB6F3A0202E66719253D /* SliderView.swift in Sources */,
 				E2E625D9D5982410E764D358 /* StandardButton.swift in Sources */,
 				EAE819586D7FF68D25941949 /* Sun.swift in Sources */,
 				068849DD4ABF062B2222EFE6 /* View+Extension.swift in Sources */,
@@ -709,6 +741,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 7FUC59ZN7P;
 				INFOPLIST_FILE = "keluarga-cemara/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Sunbloom;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -727,6 +760,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 7FUC59ZN7P;
 				INFOPLIST_FILE = "keluarga-cemara/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Sunbloom;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -805,7 +839,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		8572FA1B77566D1C97E3222F /* Build configuration list for PBXNativeTarget "Sunbloom" */ = {
+		8572FA1B77566D1C97E3222F /* Build configuration list for PBXNativeTarget "keluarga-cemara" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8343FE919173428B2B66B560 /* Debug */,
