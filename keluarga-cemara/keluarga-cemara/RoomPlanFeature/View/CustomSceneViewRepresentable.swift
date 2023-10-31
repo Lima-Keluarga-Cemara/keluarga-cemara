@@ -21,30 +21,32 @@ struct CustomSceneViewRepresentable : UIViewRepresentable{
         view.allowsCameraControl = true
         view.backgroundColor = .clear
         view.autoenablesDefaultLighting = true
-                let fm = FileManager.default
-                let path = fm.urls(for: .documentDirectory, in: .userDomainMask).first!
-                let fileName = "room.usdz"
-                let modelFilePath  = path.appendingPathComponent(fileName).absoluteString
+        let fm = FileManager.default
+        let path = fm.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let fileName = "room.usdz"
+        //        let modelFilePath  = path.appendingPathComponent(fileName).absoluteString
+        _  = path.appendingPathComponent(fileName).absoluteString
         
         DispatchQueue.main.async {
             do {
                 //                let scene = try? SCNScene(url: URL(string: "\(modelFilePath)")!)
-              
-//               try with dummy data first
+                
+                //               try with dummy data first
                 view.scene = sceneObject
                 let sceneNode = SCNNode(geometry: sceneObject?.rootNode.geometry)
                 let lightNode = setUpLightShadow()
-
+                sceneNode.geometry?.materials
+                
                 let constraint = SCNLookAtConstraint(target: sceneNode )
                 constraint.isGimbalLockEnabled = true
                 lightNode.constraints = [constraint]
-
+                
                 view.scene?.rootNode.addChildNode(lightNode)
-              
+                
                 
             }
         }
-
+        
         return view
         
     }
@@ -55,7 +57,7 @@ struct CustomSceneViewRepresentable : UIViewRepresentable{
         uiView.scene?.rootNode.childNode(withName: "lightNode", recursively: false)?.position = SCNVector3(x: Float(position.x), y: Float(position.y), z:Float(position.z))
     }
     
-
+    
     
     func setUpLightShadow() -> SCNNode{
         let light = SCNLight()
