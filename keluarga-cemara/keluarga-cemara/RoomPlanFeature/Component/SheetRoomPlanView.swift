@@ -30,11 +30,11 @@ struct SheetRoomPlanView: View {
                     .padding(.leading, 22)
                   
                 
-                ItemInstruction(image: .thirdIcon, title: "1. Tap the ‘Record button’ to start scanning every corner of your garden area", width: 72, height: 69, textSize: 14, textColor: .black)
+                ItemInstruction(image: .thirdIcon, title: "1. Tap the ‘Record button’ to start scanning every corner of your garden area",subTitle: "", width: 72, height: 69, textSize: 16, textColor: .black)
                 
-                ItemInstruction(image: .fourthIcon, title: "2. After you have done scanning, tap the ‘Record button’ to stop scanning", width: 72, height: 69, textSize: 14, textColor: .black)
+                ItemInstruction(image: .fourthIcon, title: "2. After you have done scanning, tap the ‘Record button’ to stop scanning", subTitle: "" , width: 72, height: 69, textSize: 16, textColor: .black)
                 
-                ItemInstruction(image: .fifthIcon, title: "3. Then, you will receive a 3D modeling result of your garden", width: 72, height: 69, textSize: 14, textColor: .black)
+                ItemInstruction(image: .fifthIcon, title: "3. Then, you will receive a 3D modeling result of your garden",subTitle: "", width: 72, height: 69, textSize: 16, textColor: .black)
             })
           
         }

@@ -56,36 +56,42 @@ struct ResultScan: View {
                 .ignoresSafeArea()
             
             VStack(spacing: 20){
-                HStack{
-                    VStack(alignment: .leading){
-                        HStack{
-                            Spacer()
-                            Text("\(formattedDate(from: selectedTime))")
-                                .font(.system(size: 16, weight: .semibold, design: .rounded))
-                                .bold()
-                            Spacer()
-                        }
-                        CustomSlider(value: Binding(
-                            get: {
-                                self.selectedTime
-                            },
-                            set: { value in
-                                self.selectedTime = value
-                                self.handleSliderChange()
-                            }
-                        ), rangeSlide: sunRiseTime...sunSetTime)
-                        .frame(width: 230, height: 10)
-                        
+                
+                VStack(alignment: .leading){
+                    HStack{
+                        Spacer()
+                        Text("\(formattedDate(from: selectedTime))")
+                            .font(.system(size: 16, weight: .semibold, design: .rounded))
+                            .bold()
+                        Spacer()
                     }
-                    .foregroundColor(.white)
-                    .frame(width: 224, height: 53)
-                    .padding()
-                    .background(Color(.colorGraySlider))
-                    .cornerRadius(16)
+                    //                    CustomSlider(value: Binding(
+                    //                        get: {
+                    //                            self.selectedTime
+                    //                        },
+                    //                        set: { value in
+                    //                            self.selectedTime = value
+                    //                            self.handleSliderChange()
+                    //                        }
+                    //                    ), rangeSlide: sunRiseTime...sunSetTime)
+                    //                    .frame(width: 300, height: 10)
+                    Slider(value: Binding(
+                        get: {
+                            self.selectedTime
+                        },
+                        set: { value in
+                            self.selectedTime = value
+                            self.handleSliderChange()
+                        }), in: sunRiseTime...sunSetTime)
+                    .tint(.yellow)
                     
-                    Spacer()
                 }
-                .padding(.leading,24)
+                .foregroundColor(.white)
+                .frame(height: 53)
+                .padding()
+                .background(Color(.colorGraySlider))
+                .cornerRadius(16)
+                .padding(.horizontal,30)
                 
                 if isLoading{
                     ProgressView()
@@ -113,7 +119,7 @@ struct ResultScan: View {
                     .cornerRadius(14)
                 
                 GeneralCostumButton(title: "See shade result", action: {
-                    pathStore.navigateToView(.plantrecomend)
+                    pathStore.navigateToView(.arview)
                 } )
                 
             }

@@ -14,31 +14,39 @@ struct InstructionView: View {
 
     var body: some View {
         ZStack{
-            Image("instruction_image")
+            Image(.bgInstruction)
                 .resizable()
                 .ignoresSafeArea()
             
-            VStack{
+            
+            VStack(alignment: .leading){
                 Text("To start your gardening \njourney, you need to:")
                     .font(.system(size: 24, weight: .bold, design: .rounded))
                     .foregroundColor(.white)
-                    .padding(.bottom, 26)
-                    .padding(.trailing, 70)
+                    .padding(.bottom, 25)
+                    .padding(.leading, 30)
                 
-                VStack(alignment: .leading, spacing: 15){
-                    ItemInstruction(image: .firstIcon, title: "1. Bring your phone to the area where you will start gardening", width: 72 , height: 69, textSize: 16, textColor: .white)
+                VStack(alignment: .leading, spacing: 14){
+                    ItemInstruction(image: .firstIcon, title: "1. Be on your area.",subTitle: "Bring your phone to the area where you will start gardening.", width: 72 , height: 69, textSize: 16, textColor: .white)
                     
-                    ItemInstruction(image: .secondIcon, title: "2. Direct your phone towards the side where sunlight comes", width: 72 , height: 69, textSize: 16, textColor: .white)
+                    ItemInstruction(image: .secondIcon, title: "2. Facing sunlight come.", subTitle: "Hold your phone and stand facing the side where sunlight comes in your garden area.", width: 72 , height: 69, textSize: 16, textColor: .white)
+                    
+                    ItemInstruction(image: .fourthIcon, title: "3. Start Scaning", subTitle: "When you sure of the direction where sunlight comes, start scanning.", width: 72 , height: 69, textSize: 16, textColor: .white)
+                    
                 }
                 
                 Spacer()
                 
-                GeneralCostumButton(title: "Scan garden area") {
-                    feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
-                    feedbackGenerator?.impactOccurred()
-                    pathStore.navigateToView(.roomscan)
-                    locationManager.resultOrientationDirection = locationManager.orientationGarden
-                  
+                HStack{
+                    Spacer()
+                    GeneralCostumButton(title: "Scan garden area") {
+                        feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+                        feedbackGenerator?.impactOccurred()
+                        pathStore.navigateToView(.roomscan)
+                        locationManager.resultOrientationDirection = locationManager.orientationGarden
+                      
+                    }
+                    Spacer()
                 }
                 
             }

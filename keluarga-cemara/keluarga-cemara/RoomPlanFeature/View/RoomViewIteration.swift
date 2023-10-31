@@ -31,15 +31,20 @@ struct RoomViewIteration: View {
                     
                     Spacer()
                     
-                    Button("Exit") {
+                    
+                    Button(action: {
                         showingOption.toggle()
-                    }
-                    .confirmationDialog("These scanned area will be gone and you can start scanning again from the beginning", isPresented: $showingOption, titleVisibility: .visible) {
+                    }, label: {
+                        Text("Exit")
+                            .foregroundColor( isStartScanning ? .blue : .gray)
+                    })
+                    .confirmationDialog("Clicking ‘Exit’ will reset your progress and you need to start the scanning process again", isPresented: $showingOption, titleVisibility: .visible) {
                         Button("Exit", role: .destructive) {
-                            isStartScanning = false
                             roomController.stopSession()
+                            isStartScanning = false
                         }
                     }
+                    .disabled(!isStartScanning)
                 }
                 .padding(.horizontal, 16)
                 .padding(.top, 20)
@@ -61,15 +66,15 @@ struct RoomViewIteration: View {
                 
                 Button(action: {
                     if isStartScanning{
-                        isStartScanning = false
                         roomController.stopSession()
+                        isStartScanning = false
                         pathStore.navigateToView(.roomscanresult)
                         feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
                         feedbackGenerator?.impactOccurred()
                         locationManager.resultOrientationDirection = locationManager.orientationGarden
                     } else {
-                        isStartScanning = true
                         roomController.startSession()
+                        isStartScanning = true
                         feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
                         feedbackGenerator?.impactOccurred()
                     }
@@ -83,7 +88,7 @@ struct RoomViewIteration: View {
         }
         .sheet(isPresented: $sheetOpening, content: {
             SheetRoomPlanView()
-                .presentationDetents([.height(350)])
+                .presentationDetents([.height(380)])
                 .presentationCornerRadius(16)
         })
         .navigationBarBackButtonHidden()
