@@ -65,25 +65,25 @@ struct ResultScan: View {
                             .bold()
                         Spacer()
                     }
-                    //                    CustomSlider(value: Binding(
-                    //                        get: {
-                    //                            self.selectedTime
-                    //                        },
-                    //                        set: { value in
-                    //                            self.selectedTime = value
-                    //                            self.handleSliderChange()
-                    //                        }
-                    //                    ), rangeSlide: sunRiseTime...sunSetTime)
-                    //                    .frame(width: 300, height: 10)
-                    Slider(value: Binding(
-                        get: {
-                            self.selectedTime
-                        },
-                        set: { value in
-                            self.selectedTime = value
-                            self.handleSliderChange()
-                        }), in: sunRiseTime...sunSetTime)
-                    .tint(.yellow)
+                                        CustomSlider(value: Binding(
+                                            get: {
+                                                self.selectedTime
+                                            },
+                                            set: { value in
+                                                self.selectedTime = value
+                                                self.handleSliderChange()
+                                            }
+                                        ), rangeSlide: sunRiseTime...sunSetTime)
+                                        .frame(width: 300, height: 10)
+//                    Slider(value: Binding(
+//                        get: {
+//                            self.selectedTime
+//                        },
+//                        set: { value in
+//                            self.selectedTime = value
+//                            self.handleSliderChange()
+//                        }), in: sunRiseTime...sunSetTime)
+//                    .tint(.yellow)
                     
                 }
                 .foregroundColor(.white)

@@ -739,9 +739,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 7FUC59ZN7P;
+				DEVELOPMENT_TEAM = 5DW5L865S3;
 				INFOPLIST_FILE = "keluarga-cemara/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = Sunbloom;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -758,9 +757,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 7FUC59ZN7P;
+				DEVELOPMENT_TEAM = 5DW5L865S3;
 				INFOPLIST_FILE = "keluarga-cemara/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = Sunbloom;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
