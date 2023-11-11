@@ -12,64 +12,40 @@ struct RecommendationPlantDetailView: View {
     
     var body: some View {
         GeometryReader{ geometry in
-            ZStack{
-                VStack{
-                    ZStack{
-                        Image(plant.image)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 447, height: 415)
-                        
-                        //setup linear gradient
-                        LinearGradient(gradient: Gradient(
-                            colors: [.black, .clear]),
-                                       startPoint: .top,
-                                       endPoint: .bottom)
-                        .frame(height: 415)
-                        .offset(y: -415 / 3)
-                    }
-                    Spacer()
-                }
-                .frame(width: geometry.size.width)
+            VStack{
+                Image(plant.image)
+                    .resizable()
+                    .frame(width: geometry.size.width, height: 182)
+                    .cornerRadius(16)
+                    .padding(.top,27)
                 
-                VStack{ //handling position on zstack
-                    Spacer()
-                    ScrollView{
-                        VStack(alignment: .leading){ //create card corner
-                            Text(plant.title)
-                                .font(.system(size: 24))
-                                .bold()
-                                .padding(.top, 33)
-                                .padding(.bottom, 12)
+                VStack(alignment: .leading, spacing: 24){ //create card corner
+                    VStack(alignment: .leading){
+                        Text(plant.title)
+                            .title1()
+                            .padding(.top,16)
+                            .padding(.bottom,2)
+                        
+                        Text(plant.description)
+                            .callout()
+                    }
+                    
+                    VStack(alignment : .leading){
+                        Text("Plant Care")
+                            .title2()
+                            .padding(.bottom,16)
                             
-                            Text(plant.description)
-                                .font(.system(size: 14))
-                                .fontWeight(.medium)
-                                .foregroundStyle(Color(.plantDetailSubText))
-                                .padding(.bottom, 40)
-                            
-                            Text("Plant Care")
-                                .font(.system(size: 16))
-                                .bold()
-                                .padding(.bottom, 13)
-                            
-                            ForEach(plant.plantCare, id: \.self) { plantCare in
-                                CareInfoView(geometry: geometry, plantInfo: plantCare)
-                            }
-                        }
-                        .padding(.horizontal, 31)
-                        .background{
-                            UnevenRoundedRectangle(topLeadingRadius: 32, topTrailingRadius: 32)
-                                .foregroundStyle(.white)
+                        
+                        ForEach(plant.plantCare, id: \.self) { plantCare in
+                            CareInfoView(geometry: geometry, plantInfo: plantCare)
                         }
                     }
-                    .frame(width: geometry.size.width, height: geometry.size.height * 0.68)
-                    .scrollIndicators(.hidden)
-                    
                 }
             }
-            .ignoresSafeArea(.all)
+            
         }
+        .ignoresSafeArea()
+        .padding(.horizontal,16)
     }
 }
 

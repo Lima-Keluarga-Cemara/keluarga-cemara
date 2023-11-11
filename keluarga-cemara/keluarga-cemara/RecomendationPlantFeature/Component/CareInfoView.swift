@@ -15,7 +15,7 @@ struct CareInfoView: View {
         HStack{
             RoundedRectangle(cornerRadius: 8)
                 .foregroundStyle(Color(.iconTile))
-                .frame(width: 52, height: 45)
+                .frame(width: 56, height: 44)
                 .overlay {
                     Image(systemName: plantInfo.typeCareInfo.image)
                         .resizable()
@@ -26,17 +26,14 @@ struct CareInfoView: View {
             
             VStack(alignment: .leading){
                 Text(plantInfo.typeCareInfo.rawValue.capitalized)
-                    .font(.headline)
-                    .fontWeight(.semibold)
+                    .titleCapt()
                 Text(plantInfo.info)
-                    .font(.subheadline)
-                    .fontWeight(.regular)
+                    .descCapt()
             }
-            .foregroundStyle(Color(.plantCareInfoText))
             
             Spacer()
         }
-        .frame(width: geometry.size.width * 0.82) //320
+        .frame(width: geometry.size.width * 0.90) //320
         .padding(10)
         .background(RoundedRectangle(cornerRadius: 16)
             .foregroundStyle(Color(.backgroundTile)))

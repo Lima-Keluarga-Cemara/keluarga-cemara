@@ -51,16 +51,15 @@ struct SliderView: View {
                     .bold()
                 Spacer()
             }
-            CustomSlider(value: Binding(
+            Slider(value: Binding(
                 get: {
                     self.selectedTime
                 },
                 set: { value in
                     self.selectedTime = value
                     self.handleSliderChange()
-                }
-            ), rangeSlide: sunRiseTime...sunSetTime)
-            .frame(width: 300, height: 10)
+                }), in: sunRiseTime...sunSetTime)
+            .tint(.yellow)
             
         }
         .foregroundColor(.white)

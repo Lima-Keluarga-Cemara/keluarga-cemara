@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		048D97906A8735FFAF6E370E /* InstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCE1A4FDD94AADE007731D5 /* InstructionView.swift */; };
 		068849DD4ABF062B2222EFE6 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2385DC6889989D0DEE7CE85B /* View+Extension.swift */; };
 		07133D90265CA39F5EE29AD8 /* LightFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404A38E9BC6EF2E1892D41A9 /* LightFeatures.swift */; };
 		07E9BEF2737660EFECD7DF13 /* KeluargaCemara.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F1746C102DEACC42D53C13 /* KeluargaCemara.swift */; };
@@ -15,9 +14,7 @@
 		14B694B715DF2CC6E6D7D375 /* PhysicallyBasedMaterial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026307A45329955EA38D5230 /* PhysicallyBasedMaterial.swift */; };
 		18EB10FDDBACD1B772ECEA07 /* Light.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C12F34E7039A586262B39F /* Light.swift */; };
 		1E22080596F2D62F52F9552F /* marble3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6CDBA62C4FAA55A4ADAF69A6 /* marble3.jpg */; };
-		1E4FA505A84E73239E43C44A /* ARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C56239B35F22CD97C40D51 /* ARView.swift */; };
 		24CA336A5BBC6BE9D28E5EB6 /* room.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 3329213169562DF49F3EFFC2 /* room.usdz */; };
-		259296D9108C41856E8ECD45 /* ARViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31E0E542D2C505BBE607611 /* ARViewContainer.swift */; };
 		27A0EFEE1DFA2C7D5FDA6314 /* CustomSceneViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC50E77EDD87C48AD1CA488B /* CustomSceneViewRepresentable.swift */; };
 		2A855B7F3AD438C9ED566AB7 /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = C337683773D84A6EBC30C0F9 /* Object.swift */; };
 		2D7F3D3A775751D89C5089D7 /* marble2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 41802F3ECE01A08CBFC1FBD3 /* marble2.jpg */; };
@@ -33,8 +30,19 @@
 		4BDEE100496918A8432DB72E /* MeshLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FD5E9AFD7CAEF55DA2E194 /* MeshLoader.swift */; };
 		4CD32B709687C583390CF161 /* PhysicallyBasedLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC234A4402A50E4CEB41A2 /* PhysicallyBasedLight.swift */; };
 		4E28BB512A20C266F90DD0C1 /* leftPBR.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A3A5B85B6793334342F07BD /* leftPBR.png */; };
-		51BA75D8AE37FEA22F218C6B /* DashedLineVertical.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F4C7AF960C3DA51928AAAC /* DashedLineVertical.swift */; };
+		51BA75D8AE37FEA22F218C6B /* InformationShade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F4C7AF960C3DA51928AAAC /* InformationShade.swift */; };
 		51F0F8FC17D39B6744C197FF /* cement-diffuse.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FE60050B80A5A9DF9386969 /* cement-diffuse.png */; };
+		57667E112AFE150300E63791 /* instruksi-opening.json in Resources */ = {isa = PBXBuildFile; fileRef = 57667E0E2AFE150300E63791 /* instruksi-opening.json */; };
+		57667E132AFE150300E63791 /* leaf.json in Resources */ = {isa = PBXBuildFile; fileRef = 57667E102AFE150300E63791 /* leaf.json */; };
+		57667E162AFE154000E63791 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 57667E152AFE154000E63791 /* Lottie */; };
+		57667E182AFE164000E63791 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57667E172AFE164000E63791 /* LottieView.swift */; };
+		57667E1A2AFE201600E63791 /* Text+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57667E192AFE201600E63791 /* Text+Extension.swift */; };
+		57667E1E2AFE2F7A00E63791 /* sun.json in Resources */ = {isa = PBXBuildFile; fileRef = 57667E1D2AFE2F7A00E63791 /* sun.json */; };
+		57D68C832AFE8E020045CCC5 /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D68C822AFE8E020045CCC5 /* CameraViewModel.swift */; };
+		57D68C852AFE8E7E0045CCC5 /* InstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D68C842AFE8E7E0045CCC5 /* InstructionView.swift */; };
+		57D68C892AFEE18D0045CCC5 /* RoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D68C882AFEE18D0045CCC5 /* RoomViewModel.swift */; };
+		57D68C8F2AFF55F60045CCC5 /* ARContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D68C8E2AFF55F60045CCC5 /* ARContainerView.swift */; };
+		57D68C912AFF5F770045CCC5 /* ARViewContainerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D68C902AFF5F770045CCC5 /* ARViewContainerRepresentable.swift */; };
 		5C9F9D12632A5E6A33D93D64 /* pool.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 52D1D2930C098F294C1593EF /* pool.jpg */; };
 		5CE2E149D7C437419786800C /* front.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D69312619798D0CB6B82C9D /* front.png */; };
 		5D6CFDD3A2A0C5FFC4B89F23 /* Int+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6B8ECEBCA33F5FDBD2CF22 /* Int+Random.swift */; };
@@ -78,10 +86,8 @@
 		D636C4A54CB41575985466C4 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749E205A220D45C09CDA00B9 /* Camera.swift */; };
 		DBECCEF1170381E8189C43BF /* cement-ambient-occlusion.png in Resources */ = {isa = PBXBuildFile; fileRef = DDEBE5096AEB827E9C00FC57 /* cement-ambient-occlusion.png */; };
 		DD01991B528B847403D84F5E /* PhysicallyBasedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60325ADE8BBE90F6C7235FCA /* PhysicallyBasedObject.swift */; };
-		DDAE302237246A907B9B0A95 /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE02A5ACD59288154403B03 /* CustomSlider.swift */; };
 		DDE6932AD0A4AFCC8D2268D7 /* ViewPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = E530D9B58D16A69EBDDE6ED0 /* ViewPath.swift */; };
 		DFF95AFAC4E690A72A1CA87C /* RoomController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274343A1FEBD56918F49FDB7 /* RoomController.swift */; };
-		E2E625D9D5982410E764D358 /* StandardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425A44796A30D8B99D8B0378 /* StandardButton.swift */; };
 		E75D0687ED650E52818A6D85 /* PathStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5FAFF174BDF2961A501488 /* PathStore.swift */; };
 		E803958ADD1D96CC8D9109A7 /* RecommendPlantMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC316A6DD69158048E354C3B /* RecommendPlantMock.swift */; };
 		E8D1357715B93578DAF127DF /* rustediron-metalness.png in Resources */ = {isa = PBXBuildFile; fileRef = B648C8AFF1A52B06E1100821 /* rustediron-metalness.png */; };
@@ -92,7 +98,6 @@
 		EAE819586D7FF68D25941949 /* Sun.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24090B8B051826AE9DF6393 /* Sun.swift */; };
 		ED26751B8D1F1234ABE2E88E /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBE5C1ECAFD28CE1A6EB444 /* Scene.swift */; };
 		ED2CE51331E9D023F4F9CACC /* RoomViewIteration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB863EB59CFE19E4CFCCD32 /* RoomViewIteration.swift */; };
-		ED9A07AB8CFB12733C3B09F4 /* ResultIteration.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5F63832E3681AF01335039 /* ResultIteration.swift */; };
 		F1406865A22DDFB8289A1DFD /* PhysicallyBasedScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF03AD95FDE23518ED5D0E34 /* PhysicallyBasedScene.swift */; };
 		FA3110C24FA17C2589D845BF /* RecommendationPlantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8321FF97A59B3B3D632C9993 /* RecommendationPlantView.swift */; };
 		FAB09288C8A0DBAF027CDC2B /* ObjViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C08F9243F42AE7A53EE6BD /* ObjViewController.swift */; };
@@ -114,7 +119,6 @@
 		29CFB1F56E1A9C6F9EBADDE8 /* floor-metalness.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "floor-metalness.png"; sourceTree = "<group>"; };
 		2AB863EB59CFE19E4CFCCD32 /* RoomViewIteration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewIteration.swift; sourceTree = "<group>"; };
 		2AD0D0F67B9BA54AAD7DB0CC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		2AE02A5ACD59288154403B03 /* CustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
 		2D55FCAB25AF00C757C482D3 /* copper-metalness.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "copper-metalness.png"; sourceTree = "<group>"; };
 		2DBE5C1ECAFD28CE1A6EB444 /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
 		2ED22F10AD56806CB62B9903 /* CGFloat+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Random.swift"; sourceTree = "<group>"; };
@@ -130,7 +134,6 @@
 		404A38E9BC6EF2E1892D41A9 /* LightFeatures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightFeatures.swift; sourceTree = "<group>"; };
 		405A255E9F3241D40071DB3C /* frontPBR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = frontPBR.png; sourceTree = "<group>"; };
 		41802F3ECE01A08CBFC1FBD3 /* marble2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = marble2.jpg; sourceTree = "<group>"; };
-		425A44796A30D8B99D8B0378 /* StandardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardButton.swift; sourceTree = "<group>"; };
 		4428DFD21D316E8610A4EAFE /* bgPBR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bgPBR.png; sourceTree = "<group>"; };
 		4A95884DCA8A3753EC21FEC7 /* RecommendationPlantDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationPlantDetailView.swift; sourceTree = "<group>"; };
 		4B65B179AF915ED71A26A3F6 /* rustediron-normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rustediron-normal.png"; sourceTree = "<group>"; };
@@ -138,7 +141,17 @@
 		4E085D86E5D4840F16E51BD1 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
 		4F59FAB510B7E58BDDA917A1 /* floor.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = floor.jpg; sourceTree = "<group>"; };
 		52D1D2930C098F294C1593EF /* pool.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pool.jpg; sourceTree = "<group>"; };
-		57F4C7AF960C3DA51928AAAC /* DashedLineVertical.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashedLineVertical.swift; sourceTree = "<group>"; };
+		57667E0E2AFE150300E63791 /* instruksi-opening.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "instruksi-opening.json"; sourceTree = "<group>"; };
+		57667E102AFE150300E63791 /* leaf.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = leaf.json; sourceTree = "<group>"; };
+		57667E172AFE164000E63791 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		57667E192AFE201600E63791 /* Text+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Extension.swift"; sourceTree = "<group>"; };
+		57667E1D2AFE2F7A00E63791 /* sun.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sun.json; sourceTree = "<group>"; };
+		57D68C822AFE8E020045CCC5 /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
+		57D68C842AFE8E7E0045CCC5 /* InstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionView.swift; sourceTree = "<group>"; };
+		57D68C882AFEE18D0045CCC5 /* RoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewModel.swift; sourceTree = "<group>"; };
+		57D68C8E2AFF55F60045CCC5 /* ARContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARContainerView.swift; sourceTree = "<group>"; };
+		57D68C902AFF5F770045CCC5 /* ARViewContainerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewContainerRepresentable.swift; sourceTree = "<group>"; };
+		57F4C7AF960C3DA51928AAAC /* InformationShade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationShade.swift; sourceTree = "<group>"; };
 		59FD5E9AFD7CAEF55DA2E194 /* MeshLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshLoader.swift; sourceTree = "<group>"; };
 		5B98BDF580CF2C693CB986DE /* keluarga-cemara.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "keluarga-cemara.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		60325ADE8BBE90F6C7235FCA /* PhysicallyBasedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicallyBasedObject.swift; sourceTree = "<group>"; };
@@ -150,7 +163,6 @@
 		749E205A220D45C09CDA00B9 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		763E0A1EF587A3E7AD7E3A6F /* floor-ambient-occlusion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "floor-ambient-occlusion.png"; sourceTree = "<group>"; };
 		7A3A5B85B6793334342F07BD /* leftPBR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftPBR.png; sourceTree = "<group>"; };
-		7CCE1A4FDD94AADE007731D5 /* InstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionView.swift; sourceTree = "<group>"; };
 		7F6B8ECEBCA33F5FDBD2CF22 /* Int+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Random.swift"; sourceTree = "<group>"; };
 		8321FF97A59B3B3D632C9993 /* RecommendationPlantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationPlantView.swift; sourceTree = "<group>"; };
 		8F295173AA9091D32B9C5051 /* copper-normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "copper-normal.png"; sourceTree = "<group>"; };
@@ -163,7 +175,6 @@
 		999B900DDFB19795DFD0DBB3 /* RecommendCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendCardView.swift; sourceTree = "<group>"; };
 		A6714B95BCBD81F6FEB01B34 /* ResultScan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultScan.swift; sourceTree = "<group>"; };
 		A95EF128D0C4BC0B275722D2 /* left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = left.png; sourceTree = "<group>"; };
-		AB5F63832E3681AF01335039 /* ResultIteration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultIteration.swift; sourceTree = "<group>"; };
 		AB5FAFF174BDF2961A501488 /* PathStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathStore.swift; sourceTree = "<group>"; };
 		AC316A6DD69158048E354C3B /* RecommendPlantMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendPlantMock.swift; sourceTree = "<group>"; };
 		B1D009A76156643ED0A9AF7D /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = up.png; sourceTree = "<group>"; };
@@ -178,8 +189,6 @@
 		DDA365E84E3CE01FDFD14F58 /* cement-metalness.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cement-metalness.png"; sourceTree = "<group>"; };
 		DDD5DA2531686C21F022FD24 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		DDEBE5096AEB827E9C00FC57 /* cement-ambient-occlusion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cement-ambient-occlusion.png"; sourceTree = "<group>"; };
-		E1C56239B35F22CD97C40D51 /* ARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARView.swift; sourceTree = "<group>"; };
-		E31E0E542D2C505BBE607611 /* ARViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewContainer.swift; sourceTree = "<group>"; };
 		E48BDD2DD952F0EA64081C97 /* RecommendPlantModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendPlantModel.swift; sourceTree = "<group>"; };
 		E530D9B58D16A69EBDDE6ED0 /* ViewPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPath.swift; sourceTree = "<group>"; };
 		E573429C0B88D007B05E313D /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
@@ -199,6 +208,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C888F45ED4F926D2EA5FEFD1 /* SunKit in Frameworks */,
+				57667E162AFE154000E63791 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,6 +272,7 @@
 				69F1746C102DEACC42D53C13 /* KeluargaCemara.swift */,
 				E573429C0B88D007B05E313D /* Localizable.strings */,
 				D8DD4724C36C3E92495BC153 /* scan.usdz */,
+				57667E0D2AFE14CB00E63791 /* Resource */,
 				C81CCCB5A258069005864254 /* ARFeature */,
 				264D2FB37A0B7665041B6669 /* Core */,
 				D1E0039F13C8DF17D5917A4E /* Extensions */,
@@ -301,7 +312,8 @@
 		467F133BCDC89CCBEAD1A7D9 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E1C56239B35F22CD97C40D51 /* ARView.swift */,
+				57D68C8E2AFF55F60045CCC5 /* ARContainerView.swift */,
+				57D68C902AFF5F770045CCC5 /* ARViewContainerRepresentable.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -310,6 +322,7 @@
 			isa = PBXGroup;
 			children = (
 				1A008FBE0223F35612A812B3 /* OnboardingView.swift */,
+				57667E172AFE164000E63791 /* LottieView.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -323,15 +336,24 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		57667E0D2AFE14CB00E63791 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				57667E0E2AFE150300E63791 /* instruksi-opening.json */,
+				57667E1D2AFE2F7A00E63791 /* sun.json */,
+				57667E102AFE150300E63791 /* leaf.json */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		58146BA1479745946190077F /* View */ = {
 			isa = PBXGroup;
 			children = (
 				BC50E77EDD87C48AD1CA488B /* CustomSceneViewRepresentable.swift */,
-				7CCE1A4FDD94AADE007731D5 /* InstructionView.swift */,
-				AB5F63832E3681AF01335039 /* ResultIteration.swift */,
 				A6714B95BCBD81F6FEB01B34 /* ResultScan.swift */,
 				2AB863EB59CFE19E4CFCCD32 /* RoomViewIteration.swift */,
 				19C3990A20AE9AE6C68AEC57 /* RoomViewRepresentable.swift */,
+				57D68C842AFE8E7E0045CCC5 /* InstructionView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -408,7 +430,7 @@
 			isa = PBXGroup;
 			children = (
 				3F887A03FC8DA63E39CD685B /* ButtonMenu.swift */,
-				57F4C7AF960C3DA51928AAAC /* DashedLineVertical.swift */,
+				57F4C7AF960C3DA51928AAAC /* InformationShade.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -438,7 +460,6 @@
 		8F438E14D0D04C1636565E4B /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				2AE02A5ACD59288154403B03 /* CustomSlider.swift */,
 				71CDB316551EE65EA2BDD602 /* ItemInstruction.swift */,
 				9896FF93B09C7A9841E37BCE /* SheetRoomPlanView.swift */,
 				3050D60B60090F947C39747E /* SliderView.swift */,
@@ -466,7 +487,6 @@
 		C81CCCB5A258069005864254 /* ARFeature */ = {
 			isa = PBXGroup;
 			children = (
-				E31E0E542D2C505BBE607611 /* ARViewContainer.swift */,
 				87DF3E87687274397984EF42 /* Component */,
 				467F133BCDC89CCBEAD1A7D9 /* View */,
 			);
@@ -477,7 +497,9 @@
 			isa = PBXGroup;
 			children = (
 				925D064A25F82AE2D0D6ACB7 /* LocationViewModel.swift */,
+				57D68C882AFEE18D0045CCC5 /* RoomViewModel.swift */,
 				274343A1FEBD56918F49FDB7 /* RoomController.swift */,
+				57D68C822AFE8E020045CCC5 /* CameraViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -486,7 +508,7 @@
 			isa = PBXGroup;
 			children = (
 				0B5CB4CA7189A491CE8B9EDB /* GeneralCostumButton.swift */,
-				425A44796A30D8B99D8B0378 /* StandardButton.swift */,
+				57667E192AFE201600E63791 /* Text+Extension.swift */,
 				2385DC6889989D0DEE7CE85B /* View+Extension.swift */,
 			);
 			path = Extensions;
@@ -528,6 +550,7 @@
 			name = "keluarga-cemara";
 			packageProductDependencies = (
 				BC0073A8DB5365695E9C4A71 /* SunKit */,
+				57667E152AFE154000E63791 /* Lottie */,
 			);
 			productName = "keluarga-cemara";
 			productReference = 5B98BDF580CF2C693CB986DE /* keluarga-cemara.app */;
@@ -553,6 +576,7 @@
 			mainGroup = B88A8A856A81FB5DACB27189;
 			packageReferences = (
 				82D61DC32D51A2B17F65EF62 /* XCRemoteSwiftPackageReference "SunKit" */,
+				57667E142AFE154000E63791 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			projectDirPath = "";
 			projectRoot = "";
@@ -585,9 +609,11 @@
 				87B27447215B5910DD852F9F /* copper-normal.png in Resources */,
 				C325A25015CD91A64AAEB90B /* down.png in Resources */,
 				66B7198226F8937D0077FB73 /* downPBR.png in Resources */,
+				57667E1E2AFE2F7A00E63791 /* sun.json in Resources */,
 				D5BC1ADB3851A5A3C353792A /* floor-ambient-occlusion.png in Resources */,
 				74A63A7A0E07651D4E9FF5FF /* floor-diffuse.png in Resources */,
 				8ED5DC2BF0D4BF42AC5882F1 /* floor-metalness.png in Resources */,
+				57667E132AFE150300E63791 /* leaf.json in Resources */,
 				2F94DC10698EEC45A00D2ACF /* floor-normal.png in Resources */,
 				3B358BCE67C8B6F8D157DE33 /* floor.jpg in Resources */,
 				5CE2E149D7C437419786800C /* front.png in Resources */,
@@ -603,6 +629,7 @@
 				24CA336A5BBC6BE9D28E5EB6 /* room.usdz in Resources */,
 				5D74B71062891EE1EEEB6685 /* rustediron-diffuse.png in Resources */,
 				E8D1357715B93578DAF127DF /* rustediron-metalness.png in Resources */,
+				57667E112AFE150300E63791 /* instruksi-opening.json in Resources */,
 				8ECA4E20204A975B7FA1FA69 /* rustediron-normal.png in Resources */,
 				8F316AD0D93B9996ED2E51C2 /* scan.usdz in Resources */,
 				A2073C61444C56A6D18FBFC7 /* up.png in Resources */,
@@ -617,18 +644,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E4FA505A84E73239E43C44A /* ARView.swift in Sources */,
-				259296D9108C41856E8ECD45 /* ARViewContainer.swift in Sources */,
+				57667E1A2AFE201600E63791 /* Text+Extension.swift in Sources */,
 				ADFFA2EB815E20E7545283A4 /* ButtonMenu.swift in Sources */,
 				B621E6706DB8C482282F0F1A /* CGFloat+Random.swift in Sources */,
 				D636C4A54CB41575985466C4 /* Camera.swift in Sources */,
 				35EDEBEF3181FD17A35BD071 /* CareInfoView.swift in Sources */,
 				397D7627DA4850A2155E0795 /* ColladaLoader.swift in Sources */,
 				27A0EFEE1DFA2C7D5FDA6314 /* CustomSceneViewRepresentable.swift in Sources */,
-				DDAE302237246A907B9B0A95 /* CustomSlider.swift in Sources */,
-				51BA75D8AE37FEA22F218C6B /* DashedLineVertical.swift in Sources */,
+				51BA75D8AE37FEA22F218C6B /* InformationShade.swift in Sources */,
 				A268E63A64BD098D11F0B005 /* GeneralCostumButton.swift in Sources */,
-				048D97906A8735FFAF6E370E /* InstructionView.swift in Sources */,
 				5D6CFDD3A2A0C5FFC4B89F23 /* Int+Random.swift in Sources */,
 				359E3DE025DB61C7276D42AE /* ItemInstruction.swift in Sources */,
 				07E9BEF2737660EFECD7DF13 /* KeluargaCemara.swift in Sources */,
@@ -636,7 +660,9 @@
 				07133D90265CA39F5EE29AD8 /* LightFeatures.swift in Sources */,
 				C7F6E6C64077BE2F4D71FB8B /* LocationViewModel.swift in Sources */,
 				B4FA4EB0595EAC3E7047DB92 /* MainView.swift in Sources */,
+				57D68C852AFE8E7E0045CCC5 /* InstructionView.swift in Sources */,
 				4BDEE100496918A8432DB72E /* MeshLoader.swift in Sources */,
+				57D68C912AFF5F770045CCC5 /* ARViewContainerRepresentable.swift in Sources */,
 				FAB09288C8A0DBAF027CDC2B /* ObjViewController.swift in Sources */,
 				2A855B7F3AD438C9ED566AB7 /* Object.swift in Sources */,
 				8D314ABFD76FC234111BAC03 /* OnboardingView.swift in Sources */,
@@ -644,16 +670,18 @@
 				4CD32B709687C583390CF161 /* PhysicallyBasedLight.swift in Sources */,
 				E9944CB8005C7373CAF9CDA2 /* PhysicallyBasedLightFeatures.swift in Sources */,
 				AE96CCBCBF60B869F4639F6E /* PhysicallyBasedLightingEnviroment.swift in Sources */,
+				57667E182AFE164000E63791 /* LottieView.swift in Sources */,
 				14B694B715DF2CC6E6D7D375 /* PhysicallyBasedMaterial.swift in Sources */,
 				DD01991B528B847403D84F5E /* PhysicallyBasedObject.swift in Sources */,
 				F1406865A22DDFB8289A1DFD /* PhysicallyBasedScene.swift in Sources */,
 				742CFA8A8CF20A4B5DB2514D /* RecommendCardView.swift in Sources */,
 				1302FF9CBF0BEA265525C1F0 /* RecommendListCardView.swift in Sources */,
+				57D68C892AFEE18D0045CCC5 /* RoomViewModel.swift in Sources */,
 				E803958ADD1D96CC8D9109A7 /* RecommendPlantMock.swift in Sources */,
 				4A9C0653DB37B3A02AD1B01A /* RecommendPlantModel.swift in Sources */,
 				A7E36F74517FA9931D52713E /* RecommendationPlantDetailView.swift in Sources */,
+				57D68C8F2AFF55F60045CCC5 /* ARContainerView.swift in Sources */,
 				FA3110C24FA17C2589D845BF /* RecommendationPlantView.swift in Sources */,
-				ED9A07AB8CFB12733C3B09F4 /* ResultIteration.swift in Sources */,
 				422CD04809F179F338C46823 /* ResultScan.swift in Sources */,
 				DFF95AFAC4E690A72A1CA87C /* RoomController.swift in Sources */,
 				ED2CE51331E9D023F4F9CACC /* RoomViewIteration.swift in Sources */,
@@ -661,9 +689,9 @@
 				ED26751B8D1F1234ABE2E88E /* Scene.swift in Sources */,
 				AA1389033CFFCE65EFABCC6F /* SheetRoomPlanView.swift in Sources */,
 				90C8BB6F3A0202E66719253D /* SliderView.swift in Sources */,
-				E2E625D9D5982410E764D358 /* StandardButton.swift in Sources */,
 				EAE819586D7FF68D25941949 /* Sun.swift in Sources */,
 				068849DD4ABF062B2222EFE6 /* View+Extension.swift in Sources */,
+				57D68C832AFE8E020045CCC5 /* CameraViewModel.swift in Sources */,
 				B70C6587C43F110B9441E143 /* ViewController.swift in Sources */,
 				DDE6932AD0A4AFCC8D2268D7 /* ViewPath.swift in Sources */,
 			);
@@ -849,6 +877,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		57667E142AFE154000E63791 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.3.3;
+			};
+		};
 		82D61DC32D51A2B17F65EF62 /* XCRemoteSwiftPackageReference "SunKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Sunlitt/SunKit";
@@ -860,6 +896,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		57667E152AFE154000E63791 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 57667E142AFE154000E63791 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
 		BC0073A8DB5365695E9C4A71 /* SunKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 82D61DC32D51A2B17F65EF62 /* XCRemoteSwiftPackageReference "SunKit" */;

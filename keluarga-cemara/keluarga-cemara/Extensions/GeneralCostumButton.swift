@@ -10,6 +10,7 @@ import SwiftUI
 struct GeneralCostumButton: View {
     var title : String
     let action : () -> Void
+    var isShowIcon : Bool = false
     
     var body: some View {
         Button(action: {
@@ -18,18 +19,24 @@ struct GeneralCostumButton: View {
             HStack{
                 Spacer()
                 Text(title)
-                    .font(.system(size: 18, weight: .semibold, design: .rounded))
+                    .titleButton()
+                
                 Spacer()
-                Image(systemName: "chevron.forward.circle.fill")
+                if isShowIcon{
+                    Image(systemName: "chevron.forward.circle.fill")
                     .font(.system(size: 24))
                     .foregroundColor(Color(.primaryButton))
                     .padding(.trailing,20)
+                }
+                   
             }
         })
-        .frame(width: 358, height: 56)
+       
+        .frame(width: 361, height: 58)
         .foregroundColor(.white)
         .background(Color(.black))
-        .cornerRadius(16)
+        .cornerRadius(12)
+        .shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: 5)
     }
 }
 

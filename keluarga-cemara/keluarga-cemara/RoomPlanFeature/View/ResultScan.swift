@@ -52,9 +52,7 @@ struct ResultScan: View {
     
     var body: some View {
         ZStack{
-            Color(.backgroundGray)
-                .ignoresSafeArea()
-            
+
             VStack(spacing: 20){
                 
                 VStack(alignment: .leading){
@@ -65,25 +63,16 @@ struct ResultScan: View {
                             .bold()
                         Spacer()
                     }
-                                        CustomSlider(value: Binding(
-                                            get: {
-                                                self.selectedTime
-                                            },
-                                            set: { value in
-                                                self.selectedTime = value
-                                                self.handleSliderChange()
-                                            }
-                                        ), rangeSlide: sunRiseTime...sunSetTime)
-                                        .frame(width: 300, height: 10)
-//                    Slider(value: Binding(
-//                        get: {
-//                            self.selectedTime
-//                        },
-//                        set: { value in
-//                            self.selectedTime = value
-//                            self.handleSliderChange()
-//                        }), in: sunRiseTime...sunSetTime)
-//                    .tint(.yellow)
+                                    
+                    Slider(value: Binding(
+                        get: {
+                            self.selectedTime
+                        },
+                        set: { value in
+                            self.selectedTime = value
+                            self.handleSliderChange()
+                        }), in: sunRiseTime...sunSetTime)
+                    .tint(.yellow)
                     
                 }
                 .foregroundColor(.white)
@@ -110,10 +99,9 @@ struct ResultScan: View {
                 }
                 
                 Text("\(sunManager.resultOrientationDirection ?? "Partial Sun")")
-                    .font(.system(size: 14,weight: .medium, design: .rounded))
+                    .calloutWhite()
                     .multilineTextAlignment(.center)
-                    .foregroundColor(.white)
-                    .frame(width: 264, height: 67)
+                    .frame(width: 239, height: 67)
                     .padding()
                     .background(Color(.grayTextResultOrientation))
                     .cornerRadius(14)

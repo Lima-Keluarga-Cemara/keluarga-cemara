@@ -10,20 +10,19 @@ import SwiftUI
 struct RecommendCardView: View {
     let image: ImageResource
     let plantName: String
+
     
     var body: some View {
         VStack(spacing: 0){
             Image(image)
                 .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 146, height: 114)
+                .frame(width: 146, height: 156)
+                .aspectRatio(contentMode: .fit)
                 .clipShape(UnevenRoundedRectangle(topLeadingRadius: 12, topTrailingRadius: 12))
             
             HStack{
                 Text(plantName)
-                    .font(.system(size: 16))
-                    .foregroundStyle(.black)
-                    .fontWeight(.semibold)
+                    .callout()
                     .padding(.vertical, 12)
                     .padding(.horizontal, 16)
                 Spacer()
@@ -34,9 +33,10 @@ struct RecommendCardView: View {
                 UnevenRoundedRectangle(bottomLeadingRadius: 12, bottomTrailingRadius: 12)
             )
         }
-        .shadow(radius: 5, x: 1, y: 6)
+        .shadow(color : Color.black.opacity(0.2), radius: 6, x: 1, y: 6)
         .padding(.horizontal, 8)
         .padding(.bottom, 17)
+        
     }
 }
 

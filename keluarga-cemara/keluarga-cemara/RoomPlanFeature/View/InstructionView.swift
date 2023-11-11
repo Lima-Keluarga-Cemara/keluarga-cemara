@@ -2,56 +2,86 @@
 //  InstructionView.swift
 //  keluarga-cemara
 //
-//  Created by tiyas aria on 30/10/23.
+//  Created by tiyas aria on 10/11/23.
 //
 
 import SwiftUI
 
 struct InstructionView: View {
-    @StateObject private var locationManager = LocationManager()
+    private var cameraModel = CameraModel()
+    @StateObject private var sunManager = LocationManager()
     @EnvironmentObject private var pathStore: PathStore
-    @State private var feedbackGenerator: UIImpactFeedbackGenerator?
 
     var body: some View {
-        ZStack{
-            Image(.bgInstruction)
-                .resizable()
-                .ignoresSafeArea()
-            
-            
-            VStack(alignment: .leading){
-                Text("To start your gardening \njourney, you need to:")
-                    .font(.system(size: 24, weight: .bold, design: .rounded))
-                    .foregroundColor(.white)
-                    .padding(.bottom, 25)
-                    .padding(.leading, 30)
-                
-                VStack(alignment: .leading, spacing: 14){
-                    ItemInstruction(image: .firstIcon, title: "1. Be on your area.",subTitle: "Bring your phone to the area where you will start gardening.", width: 72 , height: 69, textSize: 16, textColor: .white)
-                    
-                    ItemInstruction(image: .secondIcon, title: "2. Facing sunlight come.", subTitle: "Hold your phone and stand facing the side where sunlight comes in your garden area.", width: 72 , height: 69, textSize: 16, textColor: .white)
-                    
-                    ItemInstruction(image: .fourthIcon, title: "3. Start Scaning", subTitle: "When you sure of the direction where sunlight comes, start scanning.", width: 72 , height: 69, textSize: 16, textColor: .white)
-                    
-                }
-                
-                Spacer()
+        VStack(spacing : 0){
+//            MARK: Header
+            ZStack{
+                Rectangle()
+                    .fill(Color.black)
+                    .frame(height: 100)
                 
                 HStack{
                     Spacer()
-                    GeneralCostumButton(title: "Scan garden area") {
-                        feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
-                        feedbackGenerator?.impactOccurred()
-                        pathStore.navigateToView(.roomscan)
-                        locationManager.resultOrientationDirection = locationManager.orientationGarden
-                      
+                    Button("Next") {
+                        DispatchQueue.main.async {
+                            pathStore.navigateToView(.roomscan)
+                            sunManager.resultOrientationDirection = sunManager.orientationGarden
+                        }
                     }
+                }
+                .padding(.horizontal, 21)
+                .padding(.top, 20)
+            }
+//            MARK: Content
+            ZStack{
+                CameraRepresentable(cameraModel: cameraModel)
+                    .ignoresSafeArea()
+                
+                VStack{
+                    Text("Facing \(sunManager.direction) side")
+                        .callout()
+                        .padding(.vertical, 10)
+                        .padding(.horizontal, 20)
+                        .background(Color(.primaryButton))  
+                        .cornerRadius(12)
+                        .padding(.top,13)
+                    
+                    Spacer()
+                    VStack(alignment : .center , content: {
+                        LottieView(loopMode: .loop, resource: "instruksi-opening.json")
+                            .frame(width: 100, height: 100)
+                            .padding(.bottom, 32)
+                        
+                        Text("Bring phone to garden area and face \nit to the side where sunlight comes in")
+                            .textInstruction()
+                            .multilineTextAlignment(.center)
+                            
+                    })
                     Spacer()
                 }
+            }
+            
+
+//            MARK: Button Disabled
+            ZStack{
+                Rectangle()
+                    .fill(Color.black)
+                    .frame(height: 150)
+                
+                Button(action: {
+                    
+                }, label: {
+                    Image(.disableButtonRecord)
+                        .font(.system(size: 63))
+                        .padding(.bottom,30)
+                })
                 
             }
         }
         .navigationBarBackButtonHidden(true)
+        .ignoresSafeArea()
+        
+        
     }
 }
 
