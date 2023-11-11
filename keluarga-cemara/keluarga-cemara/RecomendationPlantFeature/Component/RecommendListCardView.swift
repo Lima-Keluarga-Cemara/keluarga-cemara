@@ -10,14 +10,12 @@ import SwiftUI
 struct RecommendListCardView: View {
     @EnvironmentObject private var pathStore: PathStore
     @Environment(\.presentationMode) var presentationMode
-    @State private var isDetailSheetPresented = false // Add a state variable to control the presentation of the detail sheet
-
     
     let title: String
     let data: [RecommendPlantModel]
     let columnGrid: [GridItem]
     @State var selectedVeggie : RecommendPlantModel?
-
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 8){
             HStack{
@@ -41,16 +39,13 @@ struct RecommendListCardView: View {
                 .padding(.bottom,4)
             
             LazyVGrid(columns: columnGrid){
-                ForEach(data, id: \.self) { plant in
+                ForEach(data, id: \.self.id) { plant in
                     RecommendCardView(image: plant.image, plantName: plant.title)
                         .onTapGesture {
-                           selectedVeggie = plant
-                            isDetailSheetPresented.toggle()
+                            selectedVeggie = plant
                         }
-                        .sheet(isPresented: $isDetailSheetPresented) {
-                            if let plant  = selectedVeggie {
-                                RecommendationPlantDetailView(plant: plant)
-                            }
+                        .sheet(item: $selectedVeggie) { veggie in
+                            RecommendationPlantDetailView(plant: veggie)
                         }
                 }
                 

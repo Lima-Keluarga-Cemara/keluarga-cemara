@@ -13,9 +13,7 @@ enum ViewPath: Hashable{
     //create your screen in here using enum
     case roomscan
     case roomscanresult
-//    case plantrecomend
     case resultfeature
-//    case plantrecomenddetail(RecommendPlantModel)
     case onboarding
     case arview
     case instruction
@@ -28,12 +26,8 @@ enum ViewPath: Hashable{
             RoomViewIteration()
         case .roomscanresult:
             ResultScan()
-//        case .plantrecomend:
-//            RecommendationPlantView()
         case .resultfeature:
             SceneKitView(lightPosition: LightPosition(), scene: PhysicallyBasedScene(lightPosition: LightPosition()))
-//        case .plantrecomenddetail(let plant):
-//            RecommendationPlantDetailView(plant: plant)
         case .onboarding:
             OnboardingView()
         case .instruction:

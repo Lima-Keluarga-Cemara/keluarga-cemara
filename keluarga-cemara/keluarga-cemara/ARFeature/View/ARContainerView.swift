@@ -12,6 +12,7 @@ struct ARContainerView: View {
     @State private var showShadePattern : Bool = false 
     @State private var sliderValue: Double = 0
     @StateObject private var sunManager  = LocationManager()
+    @EnvironmentObject private var pathStore: PathStore
 
     
     var body: some View {
@@ -79,7 +80,7 @@ struct ARContainerView: View {
         .toolbar{
             ToolbarItem(placement: .topBarTrailing) {
                 Button("Done") {
-                    
+                    pathStore.popToRoot()
                 }
             }
         }
