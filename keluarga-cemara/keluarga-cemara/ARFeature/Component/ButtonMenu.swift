@@ -17,12 +17,11 @@ struct ButtonMenu: View {
         }, label: {
             HStack{
                 Text(title)
-                    .font(.system(size: 12, weight: .semibold, design: .rounded))
-                    .foregroundColor(.white)
+                    .callout()
                 
                 Image(systemName: action ? "checkmark.circle.fill" : "circle")
                     .foregroundColor(action ? .blue : .white)
-                    .font(.system(size: 20))
+                    .font(.system(size: 22))
             }
         })
     }

@@ -8,14 +8,9 @@
 import SwiftUI
 
 struct RoomViewIteration: View {
-    @EnvironmentObject private var pathStore: PathStore
-    @StateObject private var roomController = RoomController.instance
-    @StateObject private var locationManager = LocationManager()
-    @State private var isStartScanning : Bool = false
-    @State private var sheetOpening : Bool = true
-    @State private var showingOption : Bool = false
-    @State private var feedbackGenerator: UIImpactFeedbackGenerator?
-    
+    @StateObject private var roomVm = RoomViewModel()
+    @EnvironmentObject  var pathStore: PathStore
+
     var body: some View {
         VStack(spacing : 0){
             //            MARK: Navbar instruction nd exit
@@ -26,38 +21,32 @@ struct RoomViewIteration: View {
                 
                 HStack{
                     Button("Instruction") {
-                        sheetOpening.toggle()
+                        roomVm.sheetOpening.toggle()
                     }
                     
                     Spacer()
                     
-                    
                     Button(action: {
-                        showingOption.toggle()
+                        roomVm.showingOption.toggle()
                     }, label: {
-                        Text("Exit")
-                            .foregroundColor( isStartScanning ? .blue : .gray)
+                        Text("Rescan")
+                            .foregroundColor( roomVm.isStartScanning ? .blue : .gray)
                     })
-                    .confirmationDialog("Clicking ‘Exit’ will reset your progress and you need to start the scanning process again", isPresented: $showingOption, titleVisibility: .visible) {
-                        Button("Exit", role: .destructive) {
-                            roomController.stopSession()
-                            isStartScanning = false
+                    .confirmationDialog("Clicking ‘Rescan’ will reset your progress and you need to start the scanning process again", isPresented: $roomVm.showingOption, titleVisibility: .visible) {
+                        Button("Rescan", role: .destructive) {
+                            roomVm.roomController.stopSession()
+                            roomVm.isStartScanning = false
                         }
                     }
-                    .disabled(!isStartScanning)
+                    .disabled(!roomVm.isStartScanning)
+                    
+                   
                 }
-                .padding(.horizontal, 16)
+                .padding(.horizontal, 21)
                 .padding(.top, 20)
             }
             //            MARK: camera of roomplan
-            if isStartScanning{
-                RoomViewRepresentable()
-            } else {
-                ZStack{
-                    Color(.blackCamera)
-                }
-            }
-               
+            roomVm.startingScan()
             //            MARK: button start and stop session
             ZStack{
                 Rectangle()
@@ -65,36 +54,28 @@ struct RoomViewIteration: View {
                     .frame(height: 150)
                 
                 Button(action: {
-                    if isStartScanning{
-                        roomController.stopSession()
-                        isStartScanning = false
-                        pathStore.navigateToView(.roomscanresult)
-                        feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
-                        feedbackGenerator?.impactOccurred()
-                        locationManager.resultOrientationDirection = locationManager.orientationGarden
-                    } else {
-                        roomController.startSession()
-                        isStartScanning = true
-                        feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
-                        feedbackGenerator?.impactOccurred()
+                    DispatchQueue.main.async {
+                        if roomVm.isStartScanning {
+                            pathStore.navigateToView(.roomscanresult)
+                        }
+                        roomVm.buttonAction()
                     }
                 }, label: {
-                    Image(systemName: isStartScanning ? "stop.circle" : "circle.inset.filled")
-                        .foregroundColor( isStartScanning ? .red : .white )
-                        .font(.system(size: 64))
+                    Image(roomVm.isStartScanning ? .stopButtonRecord : .enableButtonRecord)
                 })
+                .font(.system(size: 63))
+                .padding(.bottom,30)
                 
             }
         }
-        .sheet(isPresented: $sheetOpening, content: {
+        .sheet(isPresented: $roomVm.sheetOpening, content: {
             SheetRoomPlanView()
-                .presentationDetents([.height(380)])
+                .presentationDetents([.height(340)])
                 .presentationCornerRadius(16)
         })
         .navigationBarBackButtonHidden()
         .ignoresSafeArea()
     }
-    
 }
 
 #Preview {
