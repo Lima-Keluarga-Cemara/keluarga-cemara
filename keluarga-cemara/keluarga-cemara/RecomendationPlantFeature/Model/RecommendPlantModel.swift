@@ -28,7 +28,8 @@ enum TypeOfPlant: String, CaseIterable{
     }
 }
 
-struct RecommendPlantModel: Hashable {
+struct RecommendPlantModel: Hashable, Identifiable {
+    let id: UUID = UUID()
     let title: String
     let description: String
     let image: ImageResource

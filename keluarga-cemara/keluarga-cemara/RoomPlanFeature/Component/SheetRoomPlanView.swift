@@ -20,24 +20,26 @@ struct SheetRoomPlanView: View {
                     Image(systemName: "xmark.circle.fill")
                         .foregroundColor(.black)
                         .font(.system(size: 28))
-                        .padding(.trailing)
                 })
             }
             
-            VStack(alignment : .leading , spacing: 14, content: {
-                Text("Please take note of the \nfollowing steps:")
-                    .font(.system(size: 22, weight: .bold, design: .rounded))
-                    .padding(.leading, 22)
-                  
+            VStack(alignment : .leading , spacing: 16, content: {
+                Text("Follow steps as instruction below:")
+                    .titleInstruction()
                 
-                ItemInstruction(image: .thirdIcon, title: "1. Tap the ‘Record button’ to start scanning every corner of your garden area", width: 44, height: 44, textSize: 14, textColor: .black)
+                ItemInstruction(image: .firstIcon, title: "1. Tap ‘Record button’ to start scanning every corner of your garden area.")
                 
-                ItemInstruction(image: .fourthIcon, title: "2. After you have done scanning, tap the ‘Record button’ to stop scanning", width: 44, height: 44, textSize: 14, textColor: .black)
+                ItemInstruction(image: .secondIcon, title: "2. After done scanning, tap ‘Record button’ again to stop scanning.")
                 
-                ItemInstruction(image: .fifthIcon, title: "3. Then, you will receive a 3D modeling result of your garden", width: 44, height: 44, textSize: 14, textColor: .black)
+                ItemInstruction(image: .thirdIcon, title: "3. Then, you will receive a 3D modeling result of your garden.")
+                
+             
+                
+               
             })
           
         }
+        .padding(.horizontal, 16)
     }
 }
 

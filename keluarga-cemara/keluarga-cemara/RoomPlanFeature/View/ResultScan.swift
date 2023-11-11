@@ -52,40 +52,35 @@ struct ResultScan: View {
     
     var body: some View {
         ZStack{
-            Color(.backgroundGray)
-                .ignoresSafeArea()
-            
+
             VStack(spacing: 20){
-                HStack{
-                    VStack(alignment: .leading){
-                        HStack{
-                            Spacer()
-                            Text("\(formattedDate(from: selectedTime))")
-                                .font(.system(size: 16, weight: .semibold, design: .rounded))
-                                .bold()
-                            Spacer()
-                        }
-                        CustomSlider(value: Binding(
-                            get: {
-                                self.selectedTime
-                            },
-                            set: { value in
-                                self.selectedTime = value
-                                self.handleSliderChange()
-                            }
-                        ), rangeSlide: sunRiseTime...sunSetTime)
-                        .frame(width: 230, height: 10)
-                        
+                
+                VStack(alignment: .leading){
+                    HStack{
+                        Spacer()
+                        Text("\(formattedDate(from: selectedTime))")
+                            .font(.system(size: 16, weight: .semibold, design: .rounded))
+                            .bold()
+                        Spacer()
                     }
-                    .foregroundColor(.white)
-                    .frame(width: 224, height: 53)
-                    .padding()
-                    .background(Color(.colorGraySlider))
-                    .cornerRadius(16)
+                                    
+                    Slider(value: Binding(
+                        get: {
+                            self.selectedTime
+                        },
+                        set: { value in
+                            self.selectedTime = value
+                            self.handleSliderChange()
+                        }), in: sunRiseTime...sunSetTime)
+                    .tint(.yellow)
                     
-                    Spacer()
                 }
-                .padding(.leading,24)
+                .foregroundColor(.white)
+                .frame(height: 53)
+                .padding()
+                .background(Color(.colorGraySlider))
+                .cornerRadius(16)
+                .padding(.horizontal,30)
                 
                 if isLoading{
                     ProgressView()
@@ -104,16 +99,15 @@ struct ResultScan: View {
                 }
                 
                 Text("\(sunManager.resultOrientationDirection ?? "Partial Sun")")
-                    .font(.system(size: 14,weight: .medium, design: .rounded))
+                    .calloutWhite()
                     .multilineTextAlignment(.center)
-                    .foregroundColor(.white)
-                    .frame(width: 264, height: 67)
+                    .frame(width: 239, height: 67)
                     .padding()
                     .background(Color(.grayTextResultOrientation))
                     .cornerRadius(14)
                 
                 GeneralCostumButton(title: "See shade result", action: {
-                    pathStore.navigateToView(.plantrecomend)
+                    pathStore.navigateToView(.arview)
                 } )
                 
             }

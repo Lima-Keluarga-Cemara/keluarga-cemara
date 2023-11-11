@@ -10,31 +10,24 @@ import SwiftUI
 struct ItemInstruction : View {
     let image : ImageResource
     let title : String
-    let width : CGFloat
-    let height : CGFloat
-    let textSize : CGFloat
-    let textColor : Color
+   
     
     var body: some View {
         HStack(spacing: 14){
             ZStack{
                 RoundedRectangle(cornerRadius: 12)
-                    .fill(Color(.iconTile))
-                    .frame(width: width, height: height)
-
-                           
+                    .fill(Color(.primaryButton))
                 Image(image)
                     
             }
+            .frame(width: 82, height: 69)
+
             
             Text(title)
-                .font(.system(size: textSize, weight: .semibold, design: .rounded))
-                .foregroundColor(textColor)
+                .bodyInstruction()
         }
-        .padding(.bottom,12)
-        .padding(.horizontal, 22)
     }
 }
 #Preview {
-    ItemInstruction(image: .fifthIcon, title: "Hahaha", width : 44, height : 44 , textSize: 14, textColor: .black)
+    ItemInstruction(image: .firstIcon, title: "1. Tap ‘Record button’ to start scanning every corner of your garden area.")
 }

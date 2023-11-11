@@ -10,6 +10,7 @@ import MapKit
 import CoreLocation
 import SunKit
 
+//TODO: fixing sun position data
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let locationManager = CLLocationManager()
     @Published var locationStatus: CLAuthorizationStatus?
@@ -46,40 +47,25 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         let trueHeading = newHeading.trueHeading
         
         self.direction = "Unknown"
-        
-        if trueHeading >= 0 && trueHeading < 22.5 {
+       
+        if trueHeading >= 0 && trueHeading < 45{
             direction = "North"
-            orientationGarden = "A north-facing garden typically doesn’t receive much sunlight and tend to be in the shade"
-        } else if trueHeading >= 337.5 || trueHeading < 22.5 {
-            direction = "North"
-            orientationGarden = "A north-facing garden typically doesn’t receive much sunlight and tend to be in the shade"
-        } else if trueHeading >= 22.5 && trueHeading < 67.5 {
-            direction = "Northeast"
-            orientationGarden = "Northeast"
-        } else if trueHeading >= 67.5 && trueHeading < 112.5 {
+            orientationGarden = "North-facing garden doesn’t receive much sunlight and tend to be in the shade."
+        } else if trueHeading >= 45 && trueHeading < 135 {
             direction = "East"
-            orientationGarden = "An east-facing garden will experience sunlight during morning and shade in the afternoon or evening"
-        } else if trueHeading >= 112.5 && trueHeading < 157.5 {
-            direction = "Southeast"
-            orientationGarden = "Southeast"
-        } else if trueHeading >= 157.5 && trueHeading < 202.5 {
+            orientationGarden = "East-facing garden experience sunlight during morning and shade in the afternoon or evening."
+        } else if trueHeading >= 135 && trueHeading < 225 {
             direction = "South"
-            orientationGarden = "A south-facing garden tends to see very little shade, as they see sunlight for most hours of the day including evening"
-        } else if trueHeading >= 202.5 && trueHeading < 247.5 {
-            direction = "Southwest"
-            orientationGarden = "Southwest"
-        } else if trueHeading >= 247.5 && trueHeading < 292.5 {
+            orientationGarden = "South-facing garden tends to little shade and have sunlight for most hours of the day."
+        } else if trueHeading >= 225 && trueHeading < 315 {
             direction = "West"
-            orientationGarden = "A west-facing garden gets ample afternoon and evening sunlight despite morning shade"
-        } else if trueHeading >= 292.5 && trueHeading < 337.5 {
-            direction = "Northwest"
-            orientationGarden = "Northwest"
+            orientationGarden = "West-facing garden gets ample afternoon and evening sunlight despite morning shade."
+        } else if trueHeading >= 315 && trueHeading < 360 {
+            direction = "North"
+            orientationGarden = "North-facing garden doesn’t receive much sunlight and tend to be in the shade."
         }
-
-        print("Orientation: \(direction)")
+        
+//        print("Orientation: \(direction)")
     }
     
-    func isSunriseOrSunset() -> Bool {
-        return true
-    }
 }
