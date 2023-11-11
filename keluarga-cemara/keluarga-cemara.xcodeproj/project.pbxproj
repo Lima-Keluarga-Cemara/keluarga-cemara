@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -118,7 +118,7 @@
 		2D55FCAB25AF00C757C482D3 /* copper-metalness.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "copper-metalness.png"; sourceTree = "<group>"; };
 		2DBE5C1ECAFD28CE1A6EB444 /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
 		2ED22F10AD56806CB62B9903 /* CGFloat+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Random.swift"; sourceTree = "<group>"; };
-		2FDB23D21585BAB32F61096B /* Floor.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = Floor.obj; sourceTree = "<group>"; };
+		2FDB23D21585BAB32F61096B /* Floor.obj */ = {isa = PBXFileReference; path = Floor.obj; sourceTree = "<group>"; };
 		2FE60050B80A5A9DF9386969 /* cement-diffuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cement-diffuse.png"; sourceTree = "<group>"; };
 		3050D60B60090F947C39747E /* SliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
 		32C12F34E7039A586262B39F /* Light.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Light.swift; sourceTree = "<group>"; };
@@ -140,7 +140,7 @@
 		52D1D2930C098F294C1593EF /* pool.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pool.jpg; sourceTree = "<group>"; };
 		57F4C7AF960C3DA51928AAAC /* DashedLineVertical.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashedLineVertical.swift; sourceTree = "<group>"; };
 		59FD5E9AFD7CAEF55DA2E194 /* MeshLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshLoader.swift; sourceTree = "<group>"; };
-		5B98BDF580CF2C693CB986DE /* keluarga-cemara.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "keluarga-cemara.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B98BDF580CF2C693CB986DE /* keluarga-cemara.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "keluarga-cemara.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		60325ADE8BBE90F6C7235FCA /* PhysicallyBasedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicallyBasedObject.swift; sourceTree = "<group>"; };
 		69F1746C102DEACC42D53C13 /* KeluargaCemara.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeluargaCemara.swift; sourceTree = "<group>"; };
 		6CDBA62C4FAA55A4ADAF69A6 /* marble3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = marble3.jpg; sourceTree = "<group>"; };
@@ -541,6 +541,8 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = 5E372D79759C333F5982CE6D /* Build configuration list for PBXProject "keluarga-cemara" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -739,7 +741,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 5DW5L865S3;
 				INFOPLIST_FILE = "keluarga-cemara/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -757,7 +758,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 5DW5L865S3;
 				INFOPLIST_FILE = "keluarga-cemara/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
