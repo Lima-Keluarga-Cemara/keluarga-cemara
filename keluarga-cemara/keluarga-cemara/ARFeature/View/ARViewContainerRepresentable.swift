@@ -8,6 +8,10 @@
 import SwiftUI
 import SceneKit
 import ARKit
+import FocusNode
+import SmartHitTest
+
+extension ARSCNView: ARSmartHitTest {}
 
 struct ARViewContainerRepresentable: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) ->  ViewController {
@@ -25,26 +29,63 @@ struct ARViewContainerRepresentable: UIViewControllerRepresentable {
 
 class ViewController:UIViewController, ARSCNViewDelegate{
     
-    var sceneView: ARSCNView?
-
+    var sceneView = ARSCNView(frame: .zero)
+    let focusNode = FocusSquare()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let sceneView = ARSCNView(frame: .zero)
-        self.sceneView = sceneView
+        //        self.sceneView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         // Set the view's delegate
         sceneView.delegate = self
+        // Setup Focus Node
+        self.focusNode.viewDelegate = sceneView
+        sceneView.scene.rootNode.addChildNode(self.focusNode)
+        // Setup Coaching Overlay
+        sceneView.addCoaching()
         
-        //        AR Config
-        let configuration = ARWorldTrackingConfiguration()
-        configuration.planeDetection = .horizontal
-        // Run the view's session
-        sceneView.session.run(configuration)
-
         self.view = sceneView
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // AR Config
+        let configuration = ARWorldTrackingConfiguration()
+        configuration.planeDetection = .horizontal
+        configuration.environmentTexturing = .automatic
+        
+        if ARWorldTrackingConfiguration.supportsSceneReconstruction(.meshWithClassification) {
+            configuration.sceneReconstruction = .meshWithClassification
+        }
+        
+        // Run the view's session
+        sceneView.session.run(configuration)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        sceneView.session.pause()
+    }
+    
+    func placeModel(){
+        guard self.focusNode.onPlane else {
+            print("Debut[FocusNode] on plane error")
+            return
+        }
+        
+        guard let urlPath = Bundle.main.url(forResource: "scan", withExtension: "usdz") else {
+            return
+        }
+        
+        guard let modelScene: SCNScene = try? SCNScene(url: urlPath, options: [.checkConsistency: true]), let node = modelScene.rootNode.childNode(withName: "scan", recursively: true) else { fatalError("unable to load model")}
+        
+        node.position = focusNode.position
+        
+        sceneView.scene.rootNode.addChildNode(node)
+    }
+    
     // MARK: - ARSCNViewDelegate
-
+    
     //Override to create and configure nodes for anchors added to the view's session.
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         let node = SCNNode()
@@ -58,7 +99,7 @@ class ViewController:UIViewController, ARSCNViewDelegate{
             }
             print("On Trackingg...")
         }
-
+        
         return node
     }
     

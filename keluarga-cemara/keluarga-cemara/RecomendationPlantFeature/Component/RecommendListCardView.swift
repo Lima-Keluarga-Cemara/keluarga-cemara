@@ -44,14 +44,14 @@ struct RecommendListCardView: View {
                         .onTapGesture {
                             selectedVeggie = plant
                         }
-                        .sheet(item: $selectedVeggie) { veggie in
-                            RecommendationPlantDetailView(plant: veggie)
-                        }
                 }
                 
             }.padding(.horizontal,10)
         }
         .padding(.horizontal,18)
+        .sheet(item: $selectedVeggie) { veggie in
+            RecommendationPlantDetailView(plant: veggie)
+        }
         
     }
 }

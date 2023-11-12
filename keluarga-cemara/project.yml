@@ -11,6 +11,9 @@ packages:
   Lottie:
     url: https://github.com/airbnb/lottie-ios
     from: 4.3.3
+  FocusNode:
+    url: https://github.com/maxxfrazer/ARKit-FocusNode
+    from: 2.0.2
 targets:
   keluarga-cemara:
     type: application
@@ -21,6 +24,7 @@ targets:
     dependencies:
       - package: SunKit
       - package: Lottie
+      - package: FocusNode
     info:
       path: keluarga-cemara/Info.plist
       properties:
