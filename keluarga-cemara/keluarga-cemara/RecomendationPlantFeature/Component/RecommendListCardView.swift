@@ -46,7 +46,9 @@ struct RecommendListCardView: View {
                         }
                         .sheet(item: $selectedVeggie) { veggie in
                             RecommendationPlantDetailView(plant: veggie)
+                                .presentationDetents([.height(700)])
                         }
+                       
                 }
                 
             }.padding(.horizontal,10)
