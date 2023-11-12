@@ -11,7 +11,6 @@ import SwiftUI
 class RoomViewModel : ObservableObject{
      var roomController = RoomController.instance
      var cameraModel = CameraModel()
-     var locationManager = LocationManager()
     @Published  var isStartScanning : Bool = false
     @Published  var sheetOpening : Bool = false
     @Published  var showingOption : Bool = false
@@ -38,7 +37,7 @@ class RoomViewModel : ObservableObject{
         }
     }
     
-    
+   
     
     func buttonAction() {
         if isStartScanning{
