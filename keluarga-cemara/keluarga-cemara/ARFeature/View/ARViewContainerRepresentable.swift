@@ -42,7 +42,8 @@ class ViewController:UIViewController, ARSCNViewDelegate{
         sceneView.scene.rootNode.addChildNode(self.focusNode)
         // Setup Coaching Overlay
         sceneView.addCoaching()
-        
+        sceneView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapped)))
+
         self.view = sceneView
     }
     
@@ -85,7 +86,25 @@ class ViewController:UIViewController, ARSCNViewDelegate{
     }
     
     // MARK: - ARSCNViewDelegate
+    @objc func tapped(recognizer: UITapGestureRecognizer){
+        let tappedLocation = recognizer.location(in: self.sceneView)
+        let hitResult = sceneView.session.raycast(sceneView.raycastQuery(from: tappedLocation, allowing: .estimatedPlane, alignment: .horizontal)!)
+        if !hitResult.isEmpty{
+            self.addRoom(result: hitResult.first!)
+        }
+    }
     
+    func addRoom(result: ARRaycastResult){
+        print("ke tapppp ")
+
+        guard let roomScene = SCNScene(named: "scan.scn"),
+              let roomNode = roomScene.rootNode.childNode(withName: "scan", recursively: false)
+        else {return print("Item nill") }
+
+        roomNode.position = SCNVector3(x: result.worldTransform.columns.3.x, y: result.worldTransform.columns.3.y, z: result.worldTransform.columns.3.z)
+//        roomNode.scale = SCNVector3(x: 0.005, y: 0.005, z: 0.005)
+        sceneView.scene.rootNode.addChildNode(roomNode)
+    }
     //Override to create and configure nodes for anchors added to the view's session.
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         let node = SCNNode()
