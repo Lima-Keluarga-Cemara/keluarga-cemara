@@ -48,10 +48,6 @@ struct RecommendListCardView: View {
                             RecommendationPlantDetailView(plant: veggie)
                                 .presentationDetents([.height(700)])
                         }
-<<<<<<< HEAD
-                       
-=======
->>>>>>> 4813993 (done pull)
                 }
                 
             }.padding(.horizontal,10)
