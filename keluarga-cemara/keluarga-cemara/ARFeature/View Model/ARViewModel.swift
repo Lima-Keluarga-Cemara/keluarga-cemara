@@ -14,6 +14,7 @@ class ARViewModel: ObservableObject{
         self.viewController = viewController
     }
     
+    
     func placeModel() {
         viewController?.placeModel()
     }
