@@ -83,16 +83,16 @@ class ViewController:UIViewController, ARSCNViewDelegate{
             return
         }
         
-        guard let urlPath = Bundle.main.url(forResource: "scan", withExtension: "usdz") else {
-            return
-        }
-        //         let result = ResultFilePath()
+        //        guard let urlPath = Bundle.main.url(forResource: "scan", withExtension: "usdz") else {
+        //            return
+        //        }
+        let result = ResultFilePath()
         
-        //        let scene = try? SCNScene(url: URL(string: "\(result.fileName())")!, options: [.checkConsistency : true])
-        let scene = try? SCNScene(url: urlPath, options: [.checkConsistency : true])
+        let scene = try? SCNScene(url: URL(string: "\(result.fileName())")!, options: [.checkConsistency : true])
+        //        let scene = try? SCNScene(url: urlPath, options: [.checkConsistency : true])
         //                let node  = SCNNode(geometry: scene?.rootNode.geometry)
-        //        guard  let node = scene?.rootNode.childNode(withName: "room", recursively: true) else { return print("print data nill ")}
-        guard  let node = scene?.rootNode.childNode(withName: "scan", recursively: true) else { return print("print data nill ")}
+        guard  let node = scene?.rootNode.childNode(withName: "room", recursively: true) else { return print("print data nill ")}
+        //        guard  let node = scene?.rootNode.childNode(withName: "scan", recursively: true) else { return print("print data nill ")}
         
         //SETUP LIGHT
         let light = SCNLight()
@@ -104,12 +104,11 @@ class ViewController:UIViewController, ARSCNViewDelegate{
         node.light = light
         
         node.position = focusNode.position
-        //        print("screen ar with object \(result.fileName())")
         sceneView.scene.rootNode.addChildNode(node)
     }
     
     @objc func didPan(_ gesture: UIPanGestureRecognizer) {
-        guard let node = sceneView.scene.rootNode.childNode(withName:"scan", recursively: false) else { return }
+        guard let node = sceneView.scene.rootNode.childNode(withName:"room", recursively: false) else { return }
         
         let location = gesture.location(in: sceneView)
         var newPosition = SIMD3<Float>()
@@ -126,15 +125,13 @@ class ViewController:UIViewController, ARSCNViewDelegate{
             newPosition = SIMD3<Float>(transform.columns.3.x,transform.columns.3.y,transform.columns.3.z)
             node.simdPosition = newPosition
             break
-        case .ended:
-            node.simdPosition = newPosition
         default:
             break
         }
     }
     
     @objc func didRotate(_ gesture: UIRotationGestureRecognizer) {
-        guard let node = sceneView.scene.rootNode.childNode(withName:"scan", recursively: true) else { return }
+        guard let node = sceneView.scene.rootNode.childNode(withName:"room", recursively: true) else { return }
         
         node.eulerAngles.y -= Float(gesture.rotation)
         gesture.rotation = 0

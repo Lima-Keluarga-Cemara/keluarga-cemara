@@ -59,36 +59,36 @@ class LightPosition: ObservableObject {
     
     func createLight() {
         rootNode.addChildNode(createPhysicallyBasedLight().node)
-        createPhysicallyLightingEnviroment()
+//        createPhysicallyLightingEnviroment()
     }
     
     func createLight1() {
         rootNode.addChildNode(createPhysicallyBasedLight1().node)
-        createPhysicallyLightingEnviroment()
+//        createPhysicallyLightingEnviroment()
     }
     
     func createLight2() {
         rootNode.addChildNode(createPhysicallyBasedLight2().node)
-        createPhysicallyLightingEnviroment()
+//        createPhysicallyLightingEnviroment()
     }
     
     func createLight3() {
         rootNode.addChildNode(createPhysicallyBasedLight3().node)
-        createPhysicallyLightingEnviroment()
+//        createPhysicallyLightingEnviroment()
     }
     func createLight4() {
         rootNode.addChildNode(createPhysicallyBasedLight4().node)
-        createPhysicallyLightingEnviroment()
+//        createPhysicallyLightingEnviroment()
     }
     
     func createLight5() {
         rootNode.addChildNode(createPhysicallyBasedLight5().node)
-        createPhysicallyLightingEnviroment()
+//        createPhysicallyLightingEnviroment()
     }
     
     func createLight6() {
         rootNode.addChildNode(createPhysicallyBasedLight6().node)
-        createPhysicallyLightingEnviroment()
+//        createPhysicallyLightingEnviroment()
     }
     
     private func createPhysicallyBasedLight() -> PhysicallyBasedLight {
@@ -196,23 +196,6 @@ class LightPosition: ObservableObject {
         )
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     private func createPhysicallyLightingEnviroment() {
         let enviroment = PhysicallyBasedLightingEnviroment(
             cubeMap: ["bg_orange.png", "bg_orange.png", "bg_orange.png", "bg_orange.png", "bg_orange.png", "bg_orange.png"],
@@ -248,26 +231,32 @@ class LightPosition: ObservableObject {
     
     
     private func addRoom(rotation: SCNVector4) {
-        let meshLoader = MeshLoader()
-        
-        if let meshObject = MeshLoader.loadMeshWith(filePath: meshLoader.fileName()) {
-            print("[DEBUG][MeshLoader]", meshObject)
-            let room = PhysicallyBasedObject(
-                mesh: meshObject,
-                material: PhysicallyBasedMaterial(
-                    diffuse: "cement-diffuse.png",
-                    roughness: NSNumber(value: 0.1),
-                    metalness: "cement-metalness.png",
-                    normal: "cement-normal.png",
-                    ambientOcclusion: "cement-ambient-occlusion.png"
-                ),
-                position: SCNVector3Make(0, 0, 0),
-                rotation: rotation
-            )
-            rootNode.addChildNode(room.node)
-        } else {
-            print("Failed to load mesh.")
+        DispatchQueue.main.async {
+            do {
+                let meshLoader = MeshLoader()
+                
+                if let meshObject = MeshLoader.loadMeshWith(filePath: meshLoader.fileName()) {
+                    print("[DEBUG][MeshLoader]", meshObject)
+                    let room = PhysicallyBasedObject(
+                        mesh: meshObject,
+                        material: PhysicallyBasedMaterial(
+                            diffuse: "cement-diffuse.png",
+                            roughness: NSNumber(value: 0.1),
+                            metalness: "cement-metalness.png",
+                            normal: "cement-normal.png",
+                            ambientOcclusion: "cement-ambient-occlusion.png"
+                        ),
+                        position: SCNVector3Make(0, 0, 0),
+                        rotation: rotation
+                    )
+                    self.rootNode.addChildNode(room.node)
+                    self.rootNode.name = "room"
+                } else {
+                    print("Failed to load mesh.")
+                }
+            }
         }
+        
     }
 }
 
