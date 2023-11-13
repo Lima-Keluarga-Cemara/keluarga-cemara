@@ -13,7 +13,11 @@ class LightPosition: ObservableObject {
     @Published var orientation_y: [Float] =  [0.3, 0.60, 0.64, 0.67, -0.40, -0.18, -0.65]
     @Published var orientation_z: [Float] = [0.94, 0.83, 0.68, 0.50, -0.35, -56.10, -0.46]
     
-    @Published var orientation = -0.1
+    @Published var orientationx: [Float] = []
+    @Published var orientationy: [Float] = []
+    @Published var orientationz: [Float] = []
+
+
 
 
 }
@@ -47,7 +51,7 @@ class LightPosition: ObservableObject {
     }
     
     
-    private func createCamera() {
+     func createCamera() {
         camera = Camera(
             position: SCNVector3Make(0, 10, 0),
             rotation: SCNVector4Make(1, 0, 0, GLKMathDegreesToRadians(-90)),

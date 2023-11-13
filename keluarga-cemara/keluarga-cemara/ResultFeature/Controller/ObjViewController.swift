@@ -45,15 +45,13 @@ struct SceneKitViewAll: UIViewRepresentable {
     
     func getXYZOrientation() -> [SCNVector3] {
         var orientations: [SCNVector3] = []
-        
-        for i in 0..<6 {
-            let x = lightPosition.orientation_x[i]
-            let y = lightPosition.orientation_y[i]
-            let z = lightPosition.orientation_z[i]
+            let x = lightPosition.orientation_x[0]
+            let y = lightPosition.orientation_y[0]
+            let z = lightPosition.orientation_z[0]
             let orientation = SCNVector3(x, y, z)
             orientations.append(orientation)
             print(orientation)
-        }
+        
         
         return orientations
     }
@@ -84,7 +82,12 @@ struct SceneKitView: UIViewRepresentable {
         let sceneView = SCNView()
         sceneView.scene = scene
         sceneView.autoenablesDefaultLighting = true
-        sceneView.allowsCameraControl = true
+        sceneView.allowsCameraControl = false
+        if let recognizers = sceneView.gestureRecognizers {
+                for recognizer in recognizers {
+                    recognizer.isEnabled = false
+                }
+            }
         return sceneView
     }
     
@@ -92,8 +95,6 @@ struct SceneKitView: UIViewRepresentable {
     func updateUIView(_ uiView: SCNView, context: Context) {
         let orientations = getXYZOrientation()
         let firstOrientation = orientations[0]
-        let secondOrientation = orientations[1]
-        
         
         
         
@@ -104,7 +105,12 @@ struct SceneKitView: UIViewRepresentable {
         
         uiView.antialiasingMode = .multisampling4X
         uiView.autoenablesDefaultLighting = true
-        uiView.allowsCameraControl = true
+        uiView.allowsCameraControl = false
+        if let recognizers = uiView.gestureRecognizers {
+                for recognizer in recognizers {
+                    recognizer.isEnabled = false
+                }
+            }
         
         
     }
@@ -179,12 +185,12 @@ struct ResultScanYogi: View {
             
             VStack{
                 Text("\(sunManager.resultOrientationDirection ?? "Partial Sun")")
-                                 .calloutWhite()
-                                 .multilineTextAlignment(.center)
-                                 .frame(width: 239, height: 67)
-                                 .padding()
-                                 .background(Color(.black).opacity(0.7))
-                                 .cornerRadius(14)
+                    .calloutWhite()
+                    .multilineTextAlignment(.center)
+                    .frame(width: 239, height: 67)
+                    .padding()
+                    .background(Color(.black).opacity(0.7))
+                    .cornerRadius(14)
                 
                 if isLoading{
                     ProgressView()
@@ -192,7 +198,7 @@ struct ResultScanYogi: View {
                         .scaleEffect(4)
                         .frame( height: UIScreen.main.bounds.height / 2 )
                 } else {
-                    SceneKitView(lightPosition: lightPosition, scene: PhysicallyBasedScene(lightPosition: lightPosition))
+                    SceneKitViewAll(lightPosition: lightPosition, scene: PhysicallyBasedScene(lightPosition: lightPosition))
                 }
                 //        if sliderValue == 16.00{
                 //            SceneKitViewAll(lightPosition: lightPosition, scene: PhysicallyBasedScene(lightPosition: lightPosition))
@@ -202,7 +208,7 @@ struct ResultScanYogi: View {
                 HStack{
                     Spacer()
                     Button {
-    //                    MARK: ka yogiee , taruh function yang kalau button ini di clik balek ke posisi awal
+                        PhysicallyBasedScene(lightPosition: lightPosition).createCamera()
                     } label: {
                         Image(systemName: "goforward")
                             .font(.system(size: 32))
@@ -213,31 +219,58 @@ struct ResultScanYogi: View {
                     }
                     .padding(.trailing, 23)
                 }
-
+                
                 //                MARK: Change slidernya yaa ka yogiix,
+                
+                ZStack{
+                    Rectangle()
+                        .frame(width: 356, height: 92)
+                        .foregroundColor(.gray)
+                        .cornerRadius(10)
+                    
+                    VStack{
+                        if let selectedDate = selectedDate {
+                            let selectedDatePlus30Minutes = calendar.date(byAdding: .minute, value: 0, to: selectedDate)
+                        Slider(value: $sliderValue, in: 05.00...17.00)
+                           .accentColor(.white)
+                           .padding(.horizontal, 25)
+                           .onChange(of: sliderValue) { newValue in
 
-                if let selectedDate = selectedDate {
-                    let selectedDatePlus30Minutes = calendar.date(byAdding: .minute, value: 0, to: selectedDate)
-                    Slider(value: $sliderValue, in: 7.00...16.00, step: 1)
-                        .padding()
-                        .onChange(of: sliderValue) { newValue in
-                            let sunPosition = locationManager.sun?.getSunHorizonCoordinatesFrom(date: selectedDatePlus30Minutes ?? Date())
-                            let sunAltitude = sunPosition?.altitude
-                            let sunAzimuth = sunPosition?.azimuth
-                            
-                            let r: Double = 1.0
-                            let theta: Double = sunAltitude?.radians ?? 0.0
-                            let phi: Double = sunAzimuth?.radians ?? 0.0
-                            
-                            let x = r * sin(theta) * cos(phi)
-                            let y = r * sin(theta) * sin(phi)
-                            let z = r * cos(theta)
-                            
-                            lightPosition.orientation_x[0] = Float(x)
-                            lightPosition.orientation_y[0] = Float(y)
-                            lightPosition.orientation_z[0] = Float(z)
-                            
+                                           let sunPosition = locationManager.sun?.getSunHorizonCoordinatesFrom(date: selectedDatePlus30Minutes ?? Date())
+                                           let sunAltitude = sunPosition?.altitude
+                                           let sunAzimuth = sunPosition?.azimuth
+                                           
+                                           let r: Double = 1.0
+                                           let theta: Double = sunAltitude?.radians ?? 0.0
+                                           let phi: Double = sunAzimuth?.radians ?? 0.0
+                                           
+                                           let x = r * sin(theta) * cos(phi)
+                                           let y = r * sin(theta) * sin(phi)
+                                           let z = r * cos(theta)
+                                           
+                                           lightPosition.orientation_x[0] = Float(x)
+                                           lightPosition.orientation_y[0] = Float(y)
+                                           lightPosition.orientation_z[0] = Float(z)
+                               print(newValue)
+                                           
+                                       
+                               }
+                           }
+                        HStack {
+                           Text("All")
+                               .font(.system(size: 16))
+                               .foregroundColor(.white)
+                            ForEach(timeValue, id: \.self) { value in
+                               Text("\(Int(value))")
+                                   .font(.system(size: 16))
+                                   .foregroundColor(.white)
+                                   .padding(.horizontal, 11)
+                            }
+
+
                         }
+
+                    }
                 }
                 
                 GeneralCostumButton(title: "See shade result", action: {
@@ -261,6 +294,117 @@ struct ResultScanYogi: View {
 
 
 
+//costum slider for time with time indicator
+struct TimeSlider: View {
+   @Binding var sliderValue: Double
+   @State private var timeValue: [Double] = [06.00, 08.00, 10.00, 12.00, 13.00, 15.00, 17.00]
+   @State private var coordinates: [Coordinate] = []
+    @StateObject private var locationManager = LocationManager()
+    @StateObject var lightPosition = LightPosition()
+    
+    let date = Date()
+    var calendar = Calendar.current
+    
+    var selectedDate: Date? {
+        var dateComponents = calendar.dateComponents([.year, .month, .day], from: date)
+        dateComponents.hour = Int(sliderValue) // format 24 hours
+        return calendar.date(from: dateComponents)
+    }
+    
+   
+   var body: some View {
+       ZStack{
+           Rectangle()
+               .frame(width: 356, height: 92)
+               .foregroundColor(.gray)
+               .cornerRadius(10)
+           
+           VStack{
+               if let selectedDate = selectedDate {
+                   let selectedDatePlus30Minutes = calendar.date(byAdding: .minute, value: 0, to: selectedDate)
+               Slider(value: $sliderValue, in: 05.00...17.00)
+                  .accentColor(.white)
+                  .padding(.horizontal, 25)
+                  .onChange(of: sliderValue) { newValue in
+
+                                  let sunPosition = locationManager.sun?.getSunHorizonCoordinatesFrom(date: selectedDatePlus30Minutes ?? Date())
+                                  let sunAltitude = sunPosition?.altitude
+                                  let sunAzimuth = sunPosition?.azimuth
+                                  
+                                  let r: Double = 1.0
+                                  let theta: Double = sunAltitude?.radians ?? 0.0
+                                  let phi: Double = sunAzimuth?.radians ?? 0.0
+                                  
+                                  let x = r * sin(theta) * cos(phi)
+                                  let y = r * sin(theta) * sin(phi)
+                                  let z = r * cos(theta)
+                                  
+                                  lightPosition.orientation_x[0] = Float(x)
+                                  lightPosition.orientation_y[0] = Float(y)
+                                  lightPosition.orientation_z[0] = Float(z)
+                      print(newValue)
+                                  
+                              
+                      }
+                  }
+               HStack {
+                  Text("All")
+                      .font(.system(size: 16))
+                      .foregroundColor(.white)
+                   ForEach(timeValue, id: \.self) { value in
+                      Text("\(Int(value))")
+                          .font(.system(size: 16))
+                          .foregroundColor(.white)
+                          .padding(.horizontal, 11)
+                   }
+
+
+               }
+
+           }
+       }
+   }
+}
+
+
+//VStack{
+//    Slider(value: $sliderValue, in: 6.00...17.00, step: 1)
+//        .padding()
+//        .onChange(of: sliderValue) { newValue in
+//            print(newValue)
+//        }
+//    GeometryReader { geometry in
+//        ZStack{
+//            ForEach(0..<timeValue.count){ i in
+//                Text("\(timeValue[i], specifier: "%.2f")")
+//                    .font(.system(size: 12))
+//                    .foregroundColor(.white)
+//                    .offset(x: CGFloat(i) * geometry.size.width / CGFloat(timeValue.count - 1) - geometry.size.width / CGFloat(timeValue.count - 1) / 2, y: 0)
+//            }
+//            Circle()
+//                .foregroundColor(.white)
+//                .frame(width: 10, height: 10)
+//                .offset(x: CGFloat(sliderValue) * geometry.size.width / CGFloat(timeValue.count - 1) - geometry.size.width / CGFloat(timeValue.count - 1) / 2, y: 0)
+//        }
+//    }
+//    .frame(height: 20)
+//    .background(Color.black.opacity(0.7))
+//    .padding(.horizontal, 20)
+//
+//
+//}
+
+
+
+#Preview{
+    TimeSlider(sliderValue: .constant(10.00))
+        .previewLayout(.sizeThatFits)
+        .padding()
+}
+
+
+
+
 
 
 
@@ -277,7 +421,7 @@ struct ResultScanYogi: View {
 //            SceneKitView(lightPosition: lightPosition, scene: PhysicallyBasedScene(lightPosition: lightPosition))
 
 
-
+//
 //            Slider(value: $sliderValue, in: 7.00...16.00, step: 1)
 //                .padding()
 //                .onChange(of: sliderValue) { newValue in

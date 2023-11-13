@@ -28,6 +28,6 @@ struct ItemInstruction : View {
         }
     }
 }
-#Preview {
-    ItemInstruction(image: .firstIcon, title: "1. Tap ‘Record button’ to start scanning every corner of your garden area.")
-}
+//#Preview {
+//    ItemInstruction(image: .firstIcon, title: "1. Tap ‘Record button’ to start scanning every corner of your garden area.")
+//}
