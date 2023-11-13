@@ -124,7 +124,9 @@ class ViewController:UIViewController, ARSCNViewDelegate{
         guard self.focusNode.onPlane else {
             print("Debut[FocusNode] on plane error")
             return
+            
         }
+        
         
         //        guard let urlPath = Bundle.main.url(forResource: "scan", withExtension: "usdz") else {
         //            return
@@ -140,6 +142,26 @@ class ViewController:UIViewController, ARSCNViewDelegate{
         sceneViewBaseModel?.rootNode.position = focusNode.position
         sceneView.scene = sceneViewBaseModel!
         
+        //        MARK: try using node for annotation
+        //        var anchor : ARAnchor?
+        //        if let planeAnchor = anchor as? ARPlaneAnchor {
+        //            if planeAnchor.alignment == .horizontal{
+        //                let annotation = SCNPlane(width: CGFloat(planeAnchor.planeExtent.width), height: CGFloat(planeAnchor.planeExtent.height))
+        //                let annotationNode = SCNNode(geometry: annotation)
+        //                createHostingController(for: annotationNode)
+        ////                annotationNode.position = SCNVector3(x: 0, y:0.5, z: 0.5)
+        //                node.addChildNode(annotationNode)
+        //            }
+        //        }
+        
+        //        if let planeAnchor = focusNode.currentPlaneAnchor?.alignment == .horizontal{
+        //
+        //        }
+        
+        //        let annotationNode = node
+        //        createHostingController(for: annotationNode)
+        //        annotationNode.position = SCNVector3(x: 0, y: 0.3, z: 0)
+        //        node.addChildNode(annotationNode)
     }
     
     @objc func didPan(_ gesture: UIPanGestureRecognizer) {

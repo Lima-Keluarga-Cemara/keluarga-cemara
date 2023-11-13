@@ -190,9 +190,10 @@ struct ResultScanYogi: View {
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle(tint: Color.brown))
                         .scaleEffect(4)
-                        .frame( height: UIScreen.main.bounds.height / 2 )
+                        .frame(height: 400)
                 } else {
                     SceneKitView(lightPosition: lightPosition, scene: PhysicallyBasedScene(lightPosition: lightPosition))
+                        .frame(height: 400)
                 }
                 //        if sliderValue == 16.00{
                 //            SceneKitViewAll(lightPosition: lightPosition, scene: PhysicallyBasedScene(lightPosition: lightPosition))
