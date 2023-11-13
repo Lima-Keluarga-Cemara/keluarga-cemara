@@ -19,7 +19,9 @@ struct ARContainerView: View {
     var body: some View {
         ZStack{
             ARViewContainerRepresentable(viewModel: viewModel)
+                .ignoresSafeArea(.all)
             
+            //VSTACK Button place and lock
             VStack{
                 Spacer()
                 Button {
@@ -27,8 +29,12 @@ struct ARContainerView: View {
                 } label: {
                     Text("Place 3d model")
                 }
-
+                .buttonStyle(.borderedProminent)
+                .foregroundStyle(.white)
+                .tint(.black)
             }
+            
+            //VSTACK menu button
             VStack{
                 HStack{
                     Spacer()

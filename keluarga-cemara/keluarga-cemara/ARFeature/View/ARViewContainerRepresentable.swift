@@ -34,9 +34,7 @@ struct ARViewContainerRepresentable: UIViewControllerRepresentable {
 class ViewController:UIViewController, ARSCNViewDelegate{
     var sceneView = ARSCNView(frame: .zero)
     let focusNode = FocusSquare()
-//    try add this for rotation
-    
-    
+    var previousTranslation = SIMD3<Float>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,14 +83,16 @@ class ViewController:UIViewController, ARSCNViewDelegate{
             return
         }
         
-//        guard let urlPath = Bundle.main.url(forResource: "scan", withExtension: "usdz") else {
-//            return
-//        }
-         let result = ResultFilePath()
+        guard let urlPath = Bundle.main.url(forResource: "scan", withExtension: "usdz") else {
+            return
+        }
+        //         let result = ResultFilePath()
         
-        let scene = try? SCNScene(url: URL(string: "\(result.fileName())")!, options: [.checkConsistency : true])
-//                let node  = SCNNode(geometry: scene?.rootNode.geometry)
-        guard  let node = scene?.rootNode.childNode(withName: "room", recursively: true) else { return print("print data nill ")}
+        //        let scene = try? SCNScene(url: URL(string: "\(result.fileName())")!, options: [.checkConsistency : true])
+        let scene = try? SCNScene(url: urlPath, options: [.checkConsistency : true])
+        //                let node  = SCNNode(geometry: scene?.rootNode.geometry)
+        //        guard  let node = scene?.rootNode.childNode(withName: "room", recursively: true) else { return print("print data nill ")}
+        guard  let node = scene?.rootNode.childNode(withName: "scan", recursively: true) else { return print("print data nill ")}
         
         //SETUP LIGHT
         let light = SCNLight()
@@ -102,23 +102,31 @@ class ViewController:UIViewController, ARSCNViewDelegate{
         light.shadowMode = .modulated
         light.intensity = 4000
         node.light = light
-         
+        
         node.position = focusNode.position
-        print("screen ar with object \(result.fileName())")
+        //        print("screen ar with object \(result.fileName())")
         sceneView.scene.rootNode.addChildNode(node)
     }
     
     @objc func didPan(_ gesture: UIPanGestureRecognizer) {
-        guard let node = sceneView.scene.rootNode.childNode(withName:"scan", recursively: true) else { return }
+        guard let node = sceneView.scene.rootNode.childNode(withName:"scan", recursively: false) else { return }
         
-        let location = gesture.location(in: self.sceneView)
+        let location = gesture.location(in: sceneView)
+        var newPosition = SIMD3<Float>()
         
         switch gesture.state {
         case .changed:
-            guard let result = self.sceneView.hitTest(location, types: .existingPlane).first
-            else { return }
+            let raycastQuery: ARRaycastQuery? = sceneView.raycastQuery(from: location,allowing: .estimatedPlane, alignment: .horizontal)
+            
+            let results: [ARRaycastResult] = sceneView.session.raycast(raycastQuery!)
+            
+            guard let result = results.first else { return }
             let transform = result.worldTransform
-            let newPosition = SIMD3<Float>(transform.columns.3.x,transform.columns.3.y,transform.columns.3.z)
+            
+            newPosition = SIMD3<Float>(transform.columns.3.x,transform.columns.3.y,transform.columns.3.z)
+            node.simdPosition = newPosition
+            break
+        case .ended:
             node.simdPosition = newPosition
         default:
             break
