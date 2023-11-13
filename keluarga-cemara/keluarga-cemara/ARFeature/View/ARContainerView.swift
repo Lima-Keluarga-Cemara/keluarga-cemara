@@ -70,49 +70,11 @@ struct ARContainerView: View {
                     
                     Spacer()
                     if showShadePattern{
-                        VStack(alignment: .leading){
-                            HStack{
-                                Spacer()
-                                Text("10 AM")
-                                    .font(.system(size: 16, weight: .semibold, design: .rounded))
-                                    .bold()
-                                Spacer()
-                            }
-                            
-                            if let selectedDate = selectedDate {
-                                let selectedDatePlus30Minutes = calendar.date(byAdding: .minute, value: 0, to: selectedDate)
-                                Slider(value: $sliderValue, in: 7.00...16.00, step: 1)
-                                    .padding()
-                                    .onChange(of: sliderValue) { newValue in
-                                        print("[DEBUG][VALUE]", newValue)
-                                        let sunPosition = sunManager.sun?.getSunHorizonCoordinatesFrom(date: selectedDatePlus30Minutes ?? Date())
-                                        let sunAltitude = sunPosition?.altitude
-                                        let sunAzimuth = sunPosition?.azimuth
-                                        
-                                        let r: Double = 1.0
-                                        let theta: Double = sunAltitude?.radians ?? 0.0
-                                        let phi: Double = sunAzimuth?.radians ?? 0.0
-                                        
-                                        let x = r * sin(theta) * cos(phi)
-                                        let y = r * sin(theta) * sin(phi)
-                                        let z = r * cos(theta)
-                                        
-                                        lightPosition.orientation_x[0] = Float(x)
-                                        lightPosition.orientation_y[0] = Float(y)
-                                        lightPosition.orientation_z[0] = Float(z)
-                                        
-                                        print("[DEBUG][lightPosition]", lightPosition.orientation_x)
-                                    }
-                            }
-                            
-                        }
-                        .foregroundColor(.white)
-                        .frame(height: 53)
-                        .padding()
-                        .background(Color(.colorGraySlider))
-                        .cornerRadius(16)
-                        .padding(.horizontal,30)
-                        .padding(.bottom,20 )
+                        TimeSlider(
+                            sliderValue: $sliderValue,
+                            locationManager: sunManager,
+                            lightPosition: lightPosition
+                        )
                     }
                 } else {
                     VStack{
@@ -142,9 +104,6 @@ struct ARContainerView: View {
                             .background(Color(.black))
                             .cornerRadius(12)
                             .disabled(isAlreadyPlace)
-                            
-                            
-                            
                             
                             Button {
                                 isAlreadyLock.toggle()
