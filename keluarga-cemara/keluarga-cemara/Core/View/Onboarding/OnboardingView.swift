@@ -42,7 +42,7 @@ struct OnboardingView: View {
                         if currentIndex == 0 {
                             currentIndex += 1
                         } else {
-                            pathStore.navigateToView(.instruction)
+                            pathStore.navigateToView(.arview)
                         }
                         
                     }

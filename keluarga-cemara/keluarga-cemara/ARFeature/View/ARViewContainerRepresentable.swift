@@ -14,8 +14,12 @@ import SmartHitTest
 extension ARSCNView: ARSmartHitTest {}
 
 struct ARViewContainerRepresentable: UIViewControllerRepresentable {
+    @ObservedObject var viewModel: ARViewModel
+    
     func makeUIViewController(context: Context) ->  ViewController {
-        ViewController()
+        let viewController = ViewController()
+        viewModel.setViewController(viewController)
+        return viewController
     }
     
     func updateUIViewController(_ uiViewController: ViewController, context: Context) {
@@ -24,22 +28,29 @@ struct ARViewContainerRepresentable: UIViewControllerRepresentable {
 }
 
 #Preview {
-    ARViewContainerRepresentable()
+    ARViewContainerRepresentable(viewModel: ARViewModel())
 }
 
 class ViewController:UIViewController, ARSCNViewDelegate{
-    
     var sceneView = ARSCNView(frame: .zero)
     let focusNode = FocusSquare()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        self.sceneView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.sceneView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         // Set the view's delegate
         sceneView.delegate = self
         // Setup Focus Node
         self.focusNode.viewDelegate = sceneView
         sceneView.scene.rootNode.addChildNode(self.focusNode)
+        // Setup Gesture
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(didPan(_:)))
+        sceneView.addGestureRecognizer(panGesture)
+        let rotateGesture = UIRotationGestureRecognizer(target: self, action: #selector(didRotate(_:)))
+        sceneView.addGestureRecognizer(rotateGesture)
+        
+        
         // Setup Coaching Overlay
         sceneView.addCoaching()
         
@@ -80,8 +91,33 @@ class ViewController:UIViewController, ARSCNViewDelegate{
         guard let modelScene: SCNScene = try? SCNScene(url: urlPath, options: [.checkConsistency: true]), let node = modelScene.rootNode.childNode(withName: "scan", recursively: true) else { fatalError("unable to load model")}
         
         node.position = focusNode.position
+        node.name = "scan"
         
         sceneView.scene.rootNode.addChildNode(node)
+    }
+    
+    @objc func didPan(_ gesture: UIPanGestureRecognizer) {
+        guard let node = sceneView.scene.rootNode.childNode(withName:"scan", recursively: true) else { return }
+        
+        let location = gesture.location(in: self.sceneView)
+        
+        switch gesture.state {
+        case .changed:
+            guard let result = self.sceneView.hitTest(location, types: .existingPlane).first
+            else { return }
+            let transform = result.worldTransform
+            let newPosition = SIMD3<Float>(transform.columns.3.x,transform.columns.3.y,transform.columns.3.z)
+            node.simdPosition = newPosition
+        default:
+            break
+        }
+    }
+    
+    @objc func didRotate(_ gesture: UIRotationGestureRecognizer) {
+        guard let node = sceneView.scene.rootNode.childNode(withName:"scan", recursively: true) else { return }
+        
+        node.eulerAngles.y -= Float(gesture.rotation)
+        gesture.rotation = 0
     }
     
     // MARK: - ARSCNViewDelegate
