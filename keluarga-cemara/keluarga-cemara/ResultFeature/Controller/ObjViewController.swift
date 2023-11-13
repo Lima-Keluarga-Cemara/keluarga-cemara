@@ -175,7 +175,7 @@ struct ResultScanYogi: View {
     
     var body: some View {
         ZStack{
-            Color.gray.ignoresSafeArea()
+            Color(.graybg).ignoresSafeArea()
             
             VStack{
                 Text("\(sunManager.resultOrientationDirection ?? "Partial Sun")")
@@ -199,7 +199,23 @@ struct ResultScanYogi: View {
                 //
                 //        }
                 
-//                MARK: Change slidernya yaa ka yogiix, tambahin buuton buat refresh ke posisi awal juga
+                HStack{
+                    Spacer()
+                    Button {
+    //                    MARK: ka yogiee , taruh function yang kalau button ini di clik balek ke posisi awal
+                    } label: {
+                        Image(systemName: "goforward")
+                            .font(.system(size: 32))
+                            .padding(.all,5)
+                            .foregroundStyle(Color.white)
+                            .background(Color.black.opacity(0.7))
+                            .cornerRadius(40)
+                    }
+                    .padding(.trailing, 23)
+                }
+
+                //                MARK: Change slidernya yaa ka yogiix,
+
                 if let selectedDate = selectedDate {
                     let selectedDatePlus30Minutes = calendar.date(byAdding: .minute, value: 0, to: selectedDate)
                     Slider(value: $sliderValue, in: 7.00...16.00, step: 1)
