@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ARContainerView: View {
     @State private var showOrientation : Bool = false
-    @State private var showShadePattern : Bool = false 
+    @State private var showShadePattern : Bool = false
     @State private var sliderValue: Double = 0
     @StateObject private var sunManager  = LocationManager()
     @EnvironmentObject private var pathStore: PathStore

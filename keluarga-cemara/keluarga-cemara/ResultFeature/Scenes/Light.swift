@@ -1,9 +1,3 @@
-//
-//  Light.swift
-//  ExploringSceneKit
-//
-//  Created by Fabrizio Duroni on 26.08.17.
-//
 
 import SceneKit
 
@@ -17,10 +11,36 @@ class Light {
     init(lightFeatures: LightFeatures) {
         node = SCNNode()
         createLight()
+        createLight1()
         set(lightFeatures: lightFeatures)
     }
     
     func createLight() {
+        node.light = SCNLight()
+        
+    }
+    
+    func createLight1() {
+        node.light = SCNLight()
+        
+    }
+    
+    func createLight2() {
+        node.light = SCNLight()
+        
+    }
+    
+    func createLight3() {
+        node.light = SCNLight()
+        
+    }
+    
+    func createLight4() {
+        node.light = SCNLight()
+        
+    }
+    
+    func createLight5() {
         node.light = SCNLight()
         
     }

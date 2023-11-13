@@ -12,28 +12,25 @@ struct CustomSceneViewRepresentable : UIViewRepresentable{
     
     @Binding var isLoading : Bool
     let radius : Float = 15.0
-    @Binding var sceneObject : SCNScene?
+//    @Binding var sceneObject : SCNScene?
     //     try to add this with calculate shadow
     @Binding var azimuthAngle : Double
+    var result = ResultFilePath()
     
     func makeUIView(context: Context) -> SCNView {
         let view = SCNView(frame: .zero)
         view.allowsCameraControl = true
         view.backgroundColor = .clear
         view.autoenablesDefaultLighting = true
-        let fm = FileManager.default
-        let path = fm.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let fileName = "room.usdz"
-        //        let modelFilePath  = path.appendingPathComponent(fileName).absoluteString
-        _  = path.appendingPathComponent(fileName).absoluteString
-        
+      
         DispatchQueue.main.async {
             do {
-                //                let scene = try? SCNScene(url: URL(string: "\(modelFilePath)")!)
+                let scene = try? SCNScene(url: URL(string: "\(result.fileName())")!)
                 
                 //               try with dummy data first
-                view.scene = sceneObject
-                let sceneNode = SCNNode(geometry: sceneObject?.rootNode.geometry)
+                view.scene = scene
+                scene?.rootNode.name = "room"
+                let sceneNode = SCNNode(geometry: scene?.rootNode.geometry)
                 let lightNode = setUpLightShadow()
                 
                 let constraint = SCNLookAtConstraint(target: sceneNode )
@@ -85,7 +82,16 @@ struct CustomSceneViewRepresentable : UIViewRepresentable{
         
         return (x,y,z)
     }
-    
-    
-    
 }
+
+
+class ResultFilePath{
+    func fileName() -> String {
+        let fm = FileManager.default
+        let path = fm.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let fileName = "room.usdz"
+        let modelFilePath  = path.appendingPathComponent(fileName).absoluteString
+        return modelFilePath
+    }
+}
+

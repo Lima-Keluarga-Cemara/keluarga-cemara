@@ -52,7 +52,7 @@ struct ResultScan: View {
     
     var body: some View {
         ZStack{
-
+            Color(.primaryButton).ignoresSafeArea()
             VStack(spacing: 20){
                 
                 VStack(alignment: .leading){
@@ -91,7 +91,6 @@ struct ResultScan: View {
                 } else {
                     CustomSceneViewRepresentable(
                         isLoading: $isLoading,
-                        sceneObject: $sceneObject,
                         azimuthAngle: $selectedTime)
                     .frame(height: 400)
                     

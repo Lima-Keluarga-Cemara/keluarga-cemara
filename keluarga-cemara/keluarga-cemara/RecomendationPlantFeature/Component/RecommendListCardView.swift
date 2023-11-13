@@ -44,6 +44,10 @@ struct RecommendListCardView: View {
                         .onTapGesture {
                             selectedVeggie = plant
                         }
+                        .sheet(item: $selectedVeggie) { veggie in
+                            RecommendationPlantDetailView(plant: veggie)
+                                .presentationDetents([.height(700)])
+                        }
                 }
                 
             }.padding(.horizontal,10)

@@ -11,11 +11,10 @@ struct MainView: View {
     /// Create environment object for pass all data needed
     /// Create environment object for path view
     @StateObject private var pathStore: PathStore = PathStore()
-    @StateObject var lightPosition = LightPosition()
     
     var body: some View {
         NavigationStack(path: $pathStore.path) {
-            OnboardingView()
+            ResultScanYogi()
                 .navigationDestination(for: ViewPath.self) { viewPath in
                     withAnimation {
                         viewPath.view

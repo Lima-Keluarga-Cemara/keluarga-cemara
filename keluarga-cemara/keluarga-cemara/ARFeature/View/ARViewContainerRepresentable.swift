@@ -34,6 +34,8 @@ struct ARViewContainerRepresentable: UIViewControllerRepresentable {
 class ViewController:UIViewController, ARSCNViewDelegate{
     var sceneView = ARSCNView(frame: .zero)
     let focusNode = FocusSquare()
+//    try add this for rotation
+    
     
     
     override func viewDidLoad() {
@@ -49,7 +51,6 @@ class ViewController:UIViewController, ARSCNViewDelegate{
         sceneView.addGestureRecognizer(panGesture)
         let rotateGesture = UIRotationGestureRecognizer(target: self, action: #selector(didRotate(_:)))
         sceneView.addGestureRecognizer(rotateGesture)
-        
         
         // Setup Coaching Overlay
         sceneView.addCoaching()
@@ -84,15 +85,26 @@ class ViewController:UIViewController, ARSCNViewDelegate{
             return
         }
         
-        guard let urlPath = Bundle.main.url(forResource: "scan", withExtension: "usdz") else {
-            return
-        }
+//        guard let urlPath = Bundle.main.url(forResource: "scan", withExtension: "usdz") else {
+//            return
+//        }
+         let result = ResultFilePath()
         
-        guard let modelScene: SCNScene = try? SCNScene(url: urlPath, options: [.checkConsistency: true]), let node = modelScene.rootNode.childNode(withName: "scan", recursively: true) else { fatalError("unable to load model")}
+        let scene = try? SCNScene(url: URL(string: "\(result.fileName())")!, options: [.checkConsistency : true])
+//                let node  = SCNNode(geometry: scene?.rootNode.geometry)
+        guard  let node = scene?.rootNode.childNode(withName: "room", recursively: true) else { return print("print data nill ")}
         
+        //SETUP LIGHT
+        let light = SCNLight()
+        light.type = .directional
+        light.color = UIColor(.red)
+        light.castsShadow = true
+        light.shadowMode = .modulated
+        light.intensity = 4000
+        node.light = light
+         
         node.position = focusNode.position
-        node.name = "scan"
-        
+        print("screen ar with object \(result.fileName())")
         sceneView.scene.rootNode.addChildNode(node)
     }
     
@@ -119,46 +131,5 @@ class ViewController:UIViewController, ARSCNViewDelegate{
         node.eulerAngles.y -= Float(gesture.rotation)
         gesture.rotation = 0
     }
-    
-    // MARK: - ARSCNViewDelegate
-    
-    //Override to create and configure nodes for anchors added to the view's session.
-    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        let node = SCNNode()
-        if let planeAnchor = anchor as? ARPlaneAnchor {
-            
-            if planeAnchor.alignment == .horizontal {
-                let plane = SCNPlane(width: CGFloat(planeAnchor.planeExtent.width), height: CGFloat(planeAnchor.planeExtent.height))
-                let planeNode = SCNNode(geometry: plane)
-                createHostingController(for: planeNode)
-                node.addChildNode(planeNode)
-            }
-            print("On Trackingg...")
-        }
-        
-        return node
-    }
-    
-    func createHostingController(for node: SCNNode) {
-        
-        DispatchQueue.main.async {
-            let arVC = UIHostingController(rootView: InformationShadeView())
-            
-            arVC.willMove(toParent: self)
-            self.addChild(arVC)
-            arVC.view.frame = CGRect(x: 0, y: 0, width: 500, height: 500)
-            self.view.addSubview(arVC.view)
-            self.show(hostingVC: arVC, on: node)
-        }
-    }
-    
-    func show(hostingVC: UIHostingController<InformationShadeView>, on node: SCNNode) {
-        let material = SCNMaterial()
-        hostingVC.view.isOpaque = false
-        material.diffuse.contents = hostingVC.view
-        node.geometry?.materials = [material]
-        hostingVC.view.backgroundColor = UIColor.clear
-    }
-    
 }
 
