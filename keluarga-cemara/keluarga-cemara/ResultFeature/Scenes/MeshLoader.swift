@@ -14,7 +14,6 @@ import SceneKit.ModelIO
 class MeshLoader {
     static func loadMeshWith(filePath: String) -> MDLObject? {
         let fileURL = URL(string: filePath)!
-        print("[DEBUG][FileURL]", fileURL)
         do {
             let asset = try MDLAsset(url: fileURL)
             return asset.object(at: 0)

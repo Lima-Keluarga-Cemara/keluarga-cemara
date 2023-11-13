@@ -236,7 +236,6 @@ class LightPosition: ObservableObject {
                 let meshLoader = MeshLoader()
                 
                 if let meshObject = MeshLoader.loadMeshWith(filePath: meshLoader.fileName()) {
-                    print("[DEBUG][MeshLoader]", meshObject)
                     let room = PhysicallyBasedObject(
                         mesh: meshObject,
                         material: PhysicallyBasedMaterial(
