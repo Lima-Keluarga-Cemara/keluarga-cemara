@@ -12,7 +12,7 @@ import SceneKit
 enum ViewPath: Hashable{
     //create your screen in here using enum
     case roomscan
-    case roomscanresult
+//    case roomscanresult
     case resultfeature
     case onboarding
     case arview
@@ -24,10 +24,10 @@ enum ViewPath: Hashable{
         switch self{
         case .roomscan:
             RoomViewIteration()
-        case .roomscanresult:
-            ResultScan()
+//        case .roomscanresult:
+//            ResultScan()
         case .resultfeature:
-            SceneKitView(lightPosition: LightPosition(), scene: PhysicallyBasedScene(lightPosition: LightPosition()))
+            ResultScanYogi()
         case .onboarding:
             OnboardingView()
         case .instruction:

@@ -14,8 +14,12 @@ import SmartHitTest
 extension ARSCNView: ARSmartHitTest {}
 
 struct ARViewContainerRepresentable: UIViewControllerRepresentable {
+    @ObservedObject var viewModel: ARViewModel
+    
     func makeUIViewController(context: Context) ->  ViewController {
-        ViewController()
+        let viewController = ViewController()
+        viewModel.setViewController(viewController)
+        return viewController
     }
     
     func updateUIViewController(_ uiViewController: ViewController, context: Context) {
@@ -24,17 +28,19 @@ struct ARViewContainerRepresentable: UIViewControllerRepresentable {
 }
 
 #Preview {
-    ARViewContainerRepresentable()
+    ARViewContainerRepresentable(viewModel: ARViewModel())
 }
 
 class ViewController:UIViewController, ARSCNViewDelegate{
     
     var sceneView = ARSCNView(frame: .zero)
     let focusNode = FocusSquare()
+//    try add this for rotation
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        self.sceneView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.sceneView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         // Set the view's delegate
         sceneView.delegate = self
         // Setup Focus Node
@@ -42,8 +48,11 @@ class ViewController:UIViewController, ARSCNViewDelegate{
         sceneView.scene.rootNode.addChildNode(self.focusNode)
         // Setup Coaching Overlay
         sceneView.addCoaching()
-        sceneView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapped)))
-
+        
+//        try to rotate and scale
+        let rotateGesture = UIRotationGestureRecognizer(target: self, action: #selector(handleRotation))
+        sceneView.addGestureRecognizer(rotateGesture)
+        
         self.view = sceneView
     }
     
@@ -74,74 +83,39 @@ class ViewController:UIViewController, ARSCNViewDelegate{
             return
         }
         
-        guard let urlPath = Bundle.main.url(forResource: "scan", withExtension: "usdz") else {
-            return
-        }
+//        guard let urlPath = Bundle.main.url(forResource: "scan", withExtension: "usdz") else {
+//            return
+//        }
+         let result = ResultFilePath()
         
-        guard let modelScene: SCNScene = try? SCNScene(url: urlPath, options: [.checkConsistency: true]), let node = modelScene.rootNode.childNode(withName: "scan", recursively: true) else { fatalError("unable to load model")}
+        let scene = try? SCNScene(url: URL(string: "\(result.fileName())")!, options: [.checkConsistency : true])
+//                let node  = SCNNode(geometry: scene?.rootNode.geometry)
+        guard  let node = scene?.rootNode.childNode(withName: "room", recursively: true) else { return print("print data nill ")}
         
-        node.position = focusNode.position
-        
-        sceneView.scene.rootNode.addChildNode(node)
-    }
-    
-    // MARK: - ARSCNViewDelegate
-    @objc func tapped(recognizer: UITapGestureRecognizer){
-        let tappedLocation = recognizer.location(in: self.sceneView)
-        let hitResult = sceneView.session.raycast(sceneView.raycastQuery(from: tappedLocation, allowing: .estimatedPlane, alignment: .horizontal)!)
-        if !hitResult.isEmpty{
-            self.addRoom(result: hitResult.first!)
-        }
-    }
-    
-    func addRoom(result: ARRaycastResult){
-        print("ke tapppp ")
+        let light = SCNLight()
+        light.type = .directional
+        light.color = UIColor(.red)
+        light.castsShadow = true
+        light.shadowMode = .modulated
+        light.intensity = 4000
+       node.light = light
+         
+        node.position = self.focusNode.position
+        print("screen ar with object \(result.fileName())")
+        self.sceneView.scene.rootNode.addChildNode(node)
 
-        guard let roomScene = SCNScene(named: "scan.scn"),
-              let roomNode = roomScene.rootNode.childNode(withName: "scan", recursively: false)
-        else {return print("Item nill") }
-
-        roomNode.position = SCNVector3(x: result.worldTransform.columns.3.x, y: result.worldTransform.columns.3.y, z: result.worldTransform.columns.3.z)
-//        roomNode.scale = SCNVector3(x: 0.005, y: 0.005, z: 0.005)
-        sceneView.scene.rootNode.addChildNode(roomNode)
-    }
-    //Override to create and configure nodes for anchors added to the view's session.
-    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        let node = SCNNode()
-        if let planeAnchor = anchor as? ARPlaneAnchor {
-            
-            if planeAnchor.alignment == .horizontal {
-                let plane = SCNPlane(width: CGFloat(planeAnchor.planeExtent.width), height: CGFloat(planeAnchor.planeExtent.height))
-                let planeNode = SCNNode(geometry: plane)
-                createHostingController(for: planeNode)
-                node.addChildNode(planeNode)
-            }
-            print("On Trackingg...")
-        }
-        
-        return node
     }
     
-    func createHostingController(for node: SCNNode) {
-        
-        DispatchQueue.main.async {
-            let arVC = UIHostingController(rootView: InformationShadeView())
-            
-            arVC.willMove(toParent: self)
-            self.addChild(arVC)
-            arVC.view.frame = CGRect(x: 0, y: 0, width: 500, height: 500)
-            self.view.addSubview(arVC.view)
-            self.show(hostingVC: arVC, on: node)
-        }
+    // MARK: - TRY rotate and scale
+    
+  
+    @objc func handleRotation(_ gesture : UIRotationGestureRecognizer){
+        guard let node = sceneView.scene.rootNode.childNode(withName: "scan", recursively: true) else {return}
+        node.eulerAngles.y = Float(gesture.rotation)
+        gesture.rotation = 0
     }
     
-    func show(hostingVC: UIHostingController<InformationShadeView>, on node: SCNNode) {
-        let material = SCNMaterial()
-        hostingVC.view.isOpaque = false
-        material.diffuse.contents = hostingVC.view
-        node.geometry?.materials = [material]
-        hostingVC.view.backgroundColor = UIColor.clear
-    }
+   
     
 }
 

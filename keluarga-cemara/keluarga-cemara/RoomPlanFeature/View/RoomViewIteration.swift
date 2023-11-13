@@ -105,7 +105,7 @@ struct RoomViewIteration: View {
                 Button(action: {
                     DispatchQueue.main.async {
                         if roomVm.isStartScanning {
-                            pathStore.navigateToView(.roomscanresult)
+                            pathStore.navigateToView(.resultfeature)
                         }
                         roomVm.buttonAction()
                     }

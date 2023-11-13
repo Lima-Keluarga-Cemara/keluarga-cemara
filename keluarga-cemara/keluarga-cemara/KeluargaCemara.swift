@@ -12,7 +12,7 @@ struct KeluargaCemara: App {
     var body: some Scene {
         WindowGroup {
           MainView()
-                .preferredColorScheme(.light)
+//                .preferredColorScheme(.light)
         }
     }
 }
