@@ -158,10 +158,10 @@ class ViewController:UIViewController, ARSCNViewDelegate{
         //
         //        }
         
-        //        let annotationNode = node
-        //        createHostingController(for: annotationNode)
-        //        annotationNode.position = SCNVector3(x: 0, y: 0.3, z: 0)
-        //        node.addChildNode(annotationNode)
+//        let annotationNode = sceneViewBaseModel?.rootNode.childNode(withName: "room", recursively: false )
+//        createHostingController(for: annotationNode)
+//                annotationNode.position = SCNVector3(x: 0, y: 0.3, z: 0)
+//                node.addChildNode(annotationNode)
     }
     
     @objc func didPan(_ gesture: UIPanGestureRecognizer) {

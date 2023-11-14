@@ -172,7 +172,7 @@ struct ResultScanYogi: View {
         ZStack{
             Color(.graybg).ignoresSafeArea()
             
-            VStack{
+            VStack(spacing: 10){
                 Text("\(sunManager.resultOrientationDirection ?? "Partial Sun")")
                     .calloutWhite()
                     .multilineTextAlignment(.center)
@@ -180,15 +180,17 @@ struct ResultScanYogi: View {
                     .padding()
                     .background(Color(.black).opacity(0.7))
                     .cornerRadius(14)
+                    .padding(.top, 10)
+
                 
                 if isLoading{
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle(tint: Color.brown))
                         .scaleEffect(4)
-                        .frame(height: 400)
+                        .frame(height: 350)
                 } else {
                     SceneKitView(lightPosition: lightPosition, scene: PhysicallyBasedScene(lightPosition: lightPosition))
-                        .frame(height: 400)
+                        .frame(height: 350)
                 }
                 //        if sliderValue == 16.00{
                 //            SceneKitViewAll(lightPosition: lightPosition, scene: PhysicallyBasedScene(lightPosition: lightPosition))
@@ -302,7 +304,8 @@ struct TimeSlider: View {
 }
 
 #Preview{
-    TimeSlider(sliderValue: .constant(10.00))
-        .previewLayout(.sizeThatFits)
-        .padding()
+    ResultScanYogi()
+//    TimeSlider(sliderValue: .constant(10.00))
+//        .previewLayout(.sizeThatFits)
+//        .padding()
 }

@@ -72,6 +72,7 @@ struct RoomViewIteration: View {
                     if isFacingDirection{
                         Button("Next") {
                             isFacingDirection.toggle()
+                            locationManager.resultOrientationDirection = locationManager.orientationGarden
                         }
                     } else {
                         Button(action: {
