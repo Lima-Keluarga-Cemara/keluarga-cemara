@@ -13,6 +13,7 @@ class PathStore: ObservableObject{
     
     func popToRoot(){
         path = NavigationPath()
+        path.append(ViewPath.roomscan)
     }
     
     func navigateToView(_ viewPath: ViewPath){

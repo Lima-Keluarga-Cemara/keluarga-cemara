@@ -8,80 +8,190 @@
 import SwiftUI
 import SceneKit
 import ARKit
+import FocusNode
+import SmartHitTest
+
+extension ARSCNView: ARSmartHitTest {}
 
 struct ARViewContainerRepresentable: UIViewControllerRepresentable {
+    @ObservedObject var viewModel: ARViewModel
+    @ObservedObject var lightPosition: LightPosition
+    var scene: PhysicallyBasedScene
+    
     func makeUIViewController(context: Context) ->  ViewController {
-        ViewController()
+        let viewController = ViewController(sceneViewBaseModel: scene, lightPosition: lightPosition)
+        viewModel.setViewController(viewController)
+        return viewController
     }
     
     func updateUIViewController(_ uiViewController: ViewController, context: Context) {
+        let orientations = getXYZOrientation()
+        let firstOrientation = orientations[0]
         
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
+            uiViewController.sceneView.scene.rootNode.childNode(withName: "Light", recursively: false)?.eulerAngles = SCNVector3(firstOrientation.x, firstOrientation.y, firstOrientation.z)
+            
+        }
+        
+        uiViewController.sceneView.antialiasingMode = .multisampling4X
+        uiViewController.sceneView.autoenablesDefaultLighting = true
+        uiViewController.sceneView.allowsCameraControl = true
+    }
+    
+    func getXYZOrientation() -> [SCNVector3] {
+        var orientations: [SCNVector3] = []
+        
+        for i in 0..<6 {
+            let x = lightPosition.orientation_x[i]
+            let y = lightPosition.orientation_y[i]
+            let z = lightPosition.orientation_z[i]
+            let orientation = SCNVector3(x, y, z)
+            orientations.append(orientation)
+            print(orientation)
+        }
+        
+        return orientations
     }
 }
 
 #Preview {
-    ARViewContainerRepresentable()
+    ARViewContainerRepresentable(viewModel: ARViewModel(), lightPosition: LightPosition(), scene: PhysicallyBasedScene(lightPosition: LightPosition()))
 }
 
 class ViewController:UIViewController, ARSCNViewDelegate{
+    var sceneViewBaseModel : PhysicallyBasedScene?
+    var lightPosition: LightPosition?
+    var sceneView = ARSCNView(frame: .zero)
+    let focusNode = FocusSquare()
+    var previousTranslation = SIMD3<Float>()
     
-    var sceneView: ARSCNView?
-
+    init(sceneViewBaseModel: PhysicallyBasedScene, lightPosition: LightPosition) {
+        super.init(nibName: nil, bundle: nil)
+        self.sceneViewBaseModel = sceneViewBaseModel
+        self.lightPosition = lightPosition
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let sceneView = ARSCNView(frame: .zero)
-        self.sceneView = sceneView
+        self.sceneView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.sceneView.autoenablesDefaultLighting = true
+        
         // Set the view's delegate
         sceneView.delegate = self
         
-        //        AR Config
-        let configuration = ARWorldTrackingConfiguration()
-        configuration.planeDetection = .horizontal
-        // Run the view's session
-        sceneView.session.run(configuration)
-
+        // Setup Focus Node
+        self.focusNode.viewDelegate = sceneView
+        sceneView.scene.rootNode.addChildNode(self.focusNode)
+        
+        // Setup Gesture
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(didPan(_:)))
+        sceneView.addGestureRecognizer(panGesture)
+        let rotateGesture = UIRotationGestureRecognizer(target: self, action: #selector(didRotate(_:)))
+        sceneView.addGestureRecognizer(rotateGesture)
+        
+        // Setup Coaching Overlay
+        sceneView.addCoaching()
+        
         self.view = sceneView
     }
     
-    // MARK: - ARSCNViewDelegate
-
-    //Override to create and configure nodes for anchors added to the view's session.
-    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        let node = SCNNode()
-        if let planeAnchor = anchor as? ARPlaneAnchor {
-            
-            if planeAnchor.alignment == .horizontal {
-                let plane = SCNPlane(width: CGFloat(planeAnchor.planeExtent.width), height: CGFloat(planeAnchor.planeExtent.height))
-                let planeNode = SCNNode(geometry: plane)
-                createHostingController(for: planeNode)
-                node.addChildNode(planeNode)
-            }
-            print("On Trackingg...")
-        }
-
-        return node
-    }
-    
-    func createHostingController(for node: SCNNode) {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // AR Config
+        let configuration = ARWorldTrackingConfiguration()
+        configuration.planeDetection = .horizontal
+        configuration.environmentTexturing = .automatic
         
-        DispatchQueue.main.async {
-            let arVC = UIHostingController(rootView: InformationShadeView())
+        if ARWorldTrackingConfiguration.supportsSceneReconstruction(.meshWithClassification) {
+            configuration.sceneReconstruction = .meshWithClassification
+        }
+        
+        // Run the view's session
+        sceneView.session.run(configuration)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        sceneView.session.pause()
+    }
+    
+    func placeModel(){
+        guard self.focusNode.onPlane else {
+            print("Debut[FocusNode] on plane error")
+            return
             
-            arVC.willMove(toParent: self)
-            self.addChild(arVC)
-            arVC.view.frame = CGRect(x: 0, y: 0, width: 500, height: 500)
-            self.view.addSubview(arVC.view)
-            self.show(hostingVC: arVC, on: node)
+        }
+        
+        
+        //        guard let urlPath = Bundle.main.url(forResource: "scan", withExtension: "usdz") else {
+        //            return
+        //        }
+        //                let result = ResultFilePath()
+        
+        //        let scene = try? SCNScene(url: URL(string: "\(result.fileName())")!, options: [.checkConsistency : true])
+        //        let scene = try? SCNScene(url: urlPath, options: [.checkConsistency : true])
+        //                let node  = SCNNode(geometry: scene?.rootNode.geometry)
+        //        guard  let node = scene?.rootNode.childNode(withName: "room", recursively: true) else { return print("print data nill ")}
+        //        guard  let node = scene?.rootNode.childNode(withName: "scan", recursively: true) else { return print("print data nill ")}
+        // Setup scene 3d model from scenekit
+        sceneViewBaseModel?.rootNode.position = focusNode.position
+        sceneView.scene = sceneViewBaseModel!
+        
+        //        MARK: try using node for annotation
+        //        var anchor : ARAnchor?
+        //        if let planeAnchor = anchor as? ARPlaneAnchor {
+        //            if planeAnchor.alignment == .horizontal{
+        //                let annotation = SCNPlane(width: CGFloat(planeAnchor.planeExtent.width), height: CGFloat(planeAnchor.planeExtent.height))
+        //                let annotationNode = SCNNode(geometry: annotation)
+        //                createHostingController(for: annotationNode)
+        ////                annotationNode.position = SCNVector3(x: 0, y:0.5, z: 0.5)
+        //                node.addChildNode(annotationNode)
+        //            }
+        //        }
+        
+        //        if let planeAnchor = focusNode.currentPlaneAnchor?.alignment == .horizontal{
+        //
+        //        }
+        
+//        let annotationNode = sceneViewBaseModel?.rootNode.childNode(withName: "room", recursively: false )
+//        createHostingController(for: annotationNode)
+//                annotationNode.position = SCNVector3(x: 0, y: 0.3, z: 0)
+//                node.addChildNode(annotationNode)
+    }
+    
+    @objc func didPan(_ gesture: UIPanGestureRecognizer) {
+        guard let node = sceneView.scene.rootNode.childNode(withName:"room", recursively: false) else { return }
+        
+        let location = gesture.location(in: sceneView)
+        var newPosition = SIMD3<Float>()
+        
+        switch gesture.state {
+        case .changed:
+            let raycastQuery: ARRaycastQuery? = sceneView.raycastQuery(from: location,allowing: .estimatedPlane, alignment: .horizontal)
+            
+            let results: [ARRaycastResult] = sceneView.session.raycast(raycastQuery!)
+            
+            guard let result = results.first else { return }
+            let transform = result.worldTransform
+            
+            newPosition = SIMD3<Float>(transform.columns.3.x,transform.columns.3.y,transform.columns.3.z)
+            node.simdPosition = newPosition
+            break
+        default:
+            break
         }
     }
     
-    func show(hostingVC: UIHostingController<InformationShadeView>, on node: SCNNode) {
-        let material = SCNMaterial()
-        hostingVC.view.isOpaque = false
-        material.diffuse.contents = hostingVC.view
-        node.geometry?.materials = [material]
-        hostingVC.view.backgroundColor = UIColor.clear
+    @objc func didRotate(_ gesture: UIRotationGestureRecognizer) {
+        guard let node = sceneView.scene.rootNode.childNode(withName:"room", recursively: false) else { return }
+        
+        node.eulerAngles.y -= Float(gesture.rotation)
+        gesture.rotation = 0
     }
-    
 }
 
