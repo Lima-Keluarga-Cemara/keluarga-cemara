@@ -7,16 +7,14 @@
 
 import Foundation
 import SwiftUI
-import SceneKit
 
 enum ViewPath: Hashable{
     //create your screen in here using enum
     case roomscan
-//    case roomscanresult
     case resultfeature
     case onboarding
-    case arview
     case instruction
+    case recomendationplant
     
     
     @ViewBuilder
@@ -24,16 +22,14 @@ enum ViewPath: Hashable{
         switch self{
         case .roomscan:
             RoomViewIteration()
-//        case .roomscanresult:
-//            ResultScan()
         case .resultfeature:
             ResultScanYogi()
         case .onboarding:
             OnboardingView()
         case .instruction:
             InstructionView()
-        case .arview:
-            ARContainerView()
+        case .recomendationplant:
+            RecommendationPlantView()
         }
     }
 }

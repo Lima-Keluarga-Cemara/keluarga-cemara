@@ -216,7 +216,7 @@ struct ResultScanYogi: View {
                 TimeSlider(sliderValue: $sliderValue, locationManager: sunManager, lightPosition: lightPosition)
                 
                 GeneralCostumButton(title: "See shade result", action: {
-                    pathStore.navigateToView(.arview)
+//                    pathStore.navigateToView(.arview)
                 }, isShowIcon: true)
             }
             

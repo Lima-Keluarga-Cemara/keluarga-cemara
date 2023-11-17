@@ -11,9 +11,6 @@ packages:
   Lottie:
     url: https://github.com/airbnb/lottie-ios
     from: 4.3.3
-  FocusNode:
-    url: https://github.com/maxxfrazer/ARKit-FocusNode
-    from: 2.0.2
 targets:
   keluarga-cemara:
     type: application
@@ -24,31 +21,3 @@ targets:
     dependencies:
       - package: SunKit
       - package: Lottie
-      - package: FocusNode
-    info:
-      path: keluarga-cemara/Info.plist
-      properties:
-        CFBundleDevelopmentRegion: $(DEVELOPMENT_LANGUAGE)
-        CFBundleExecutable: $(EXECUTABLE_NAME)
-        CFBundleIdentifier: $(PRODUCT_BUNDLE_IDENTIFIER)
-        CFBundleInfoDictionaryVersion: "6.0"
-        CFBundleName: $(PRODUCT_NAME)
-        CFBundleDisplayName: "Sunbloom"
-        CFBundlePackageType: "APPL"
-        CFBundleShortVersionString: "3.0"
-        CFBundleVersion: "0.1.0"
-        UILaunchStoryboardName: "LaunchScreen"
-        UISupportedInterfaceOrientations:
-          - "UIInterfaceOrientationPortrait"
-          - "UIInterfaceOrientationLandscapeLeft"
-          - "UIInterfaceOrientationLandscapeRight"
-        UISupportedInterfaceOrientations~ipad:
-          - "UIInterfaceOrientationPortrait"
-          - "UIInterfaceOrientationPortraitUpsideDown"
-          - "UIInterfaceOrientationLandscapeLeft"
-          - "UIInterfaceOrientationLandscapeRight"
-        UIFileSharingEnabled: true
-        UIRequiresFullScreen: true
-        LSSupportsOpeningDocumentsInPlace: true
-        NSCameraUsageDescription: "Need for room plan"
-        NSLocationWhenInUseUsageDescription: "Your location is required for know sun exposure"

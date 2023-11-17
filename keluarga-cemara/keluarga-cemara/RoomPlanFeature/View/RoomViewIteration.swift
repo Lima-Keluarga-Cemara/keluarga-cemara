@@ -11,45 +11,45 @@ struct RoomViewIteration: View {
     @StateObject private var roomVm = RoomViewModel()
     @StateObject var locationManager = LocationManager()
     @State private  var isFacingDirection : Bool = true
-
+    
     @EnvironmentObject  var pathStore: PathStore
     
     @ViewBuilder
     func detectOpening() -> some View{
-       if  isFacingDirection {
-           ZStack{
-               CameraRepresentable(cameraModel: roomVm.cameraModel)
-                   .ignoresSafeArea()
-               
-               VStack{
-                   Text("Facing \(locationManager.direction) side")
-                       .callout()
-                       .padding(.vertical, 10)
-                       .padding(.horizontal, 20)
-                       .background(Color(.primaryButton))
-                       .cornerRadius(12)
-                       .padding(.top,13)
-                   
-                   Spacer()
-                   VStack(alignment : .center , content: {
-                       LottieView(loopMode: .loop, resource: "instruksi-opening.json")
-                           .frame(width: 100, height: 100)
-                           .padding(.bottom, 32)
-                       
-                       Text("Bring phone to garden area and face \nit to the side where sunlight comes in")
-                           .textInstruction()
-                           .multilineTextAlignment(.center)
-                           
-                   })
-                   Spacer()
-               }
-           }
-       } else {
-           roomVm.startingScan()
-       }
+        if  isFacingDirection {
+            ZStack{
+                CameraRepresentable(cameraModel: roomVm.cameraModel)
+                    .ignoresSafeArea()
+                
+                VStack{
+                    Text("Facing \(locationManager.direction) side")
+                        .callout()
+                        .padding(.vertical, 10)
+                        .padding(.horizontal, 20)
+                        .background(Color(.primaryButton))
+                        .cornerRadius(12)
+                        .padding(.top,13)
+                    
+                    Spacer()
+                    VStack(alignment : .center , content: {
+                        LottieView(loopMode: .loop, resource: "instruksi-opening.json")
+                            .frame(width: 100, height: 100)
+                            .padding(.bottom, 32)
+                        
+                        Text("Bring phone to garden area and face \nit to the side where sunlight comes in")
+                            .textInstruction()
+                            .multilineTextAlignment(.center)
+                        
+                    })
+                    Spacer()
+                }
+            }
+        } else {
+            roomVm.startingScan()
+        }
     }
     
-
+    
     var body: some View {
         VStack(spacing : 0){
             //            MARK: Navbar instruction nd exit
@@ -90,13 +90,13 @@ struct RoomViewIteration: View {
                         .disabled(!roomVm.isStartScanning)
                     }
                     
-                   
+                    
                 }
                 .padding(.horizontal, 21)
                 .padding(.top, 20)
             }
             //            MARK: camera of roomplan
-           detectOpening()
+            detectOpening()
             //            MARK: button start and stop session
             ZStack{
                 Rectangle()
@@ -116,12 +116,12 @@ struct RoomViewIteration: View {
                     } else {
                         Image(roomVm.isStartScanning ? .stopButtonRecord : .enableButtonRecord)
                     }
-                   
+                    
                 })
                 .font(.system(size: 63))
                 .padding(.bottom,30)
                 .disabled(isFacingDirection)
-
+                
                 
             }
         }

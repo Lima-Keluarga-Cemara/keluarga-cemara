@@ -106,7 +106,7 @@ struct ResultScan: View {
                     .cornerRadius(14)
                 
                 GeneralCostumButton(title: "See shade result", action: {
-                    pathStore.navigateToView(.arview)
+                    pathStore.navigateToView(.recomendationplant)
                 } )
                 
             }
