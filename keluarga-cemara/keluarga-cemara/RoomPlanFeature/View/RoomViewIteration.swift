@@ -10,7 +10,7 @@ import SwiftUI
 struct RoomViewIteration: View {
     @StateObject private var roomVm = RoomViewModel()
     @StateObject var locationManager = LocationManager()
-    @State private  var isFacingDirection : Bool = true 
+    @State private  var isFacingDirection : Bool = true
     @EnvironmentObject  var pathStore: PathStore
     
     var body: some View {
@@ -75,8 +75,12 @@ struct RoomViewIteration: View {
                 ZStack{
                     roomVm.backgroundCamera()
 
+
                     if isFacingDirection {
-                        VStack(alignment : .center , content: {
+                        VStack{
+                            
+                            Spacer()
+                            
                             LottieView(loopMode: .loop, resource: "instruksi-opening.json")
                                 .frame(width: 100, height: 100)
                                 .padding(.bottom, 32)
@@ -91,8 +95,8 @@ struct RoomViewIteration: View {
                                 locationManager.resultOrientationDirection = locationManager.orientationGarden
                             }, width: 116, height: 44)
                             
-                            
-                        })
+                            Spacer()
+                        }
                     } else {
                         VStack{
                             Spacer()
