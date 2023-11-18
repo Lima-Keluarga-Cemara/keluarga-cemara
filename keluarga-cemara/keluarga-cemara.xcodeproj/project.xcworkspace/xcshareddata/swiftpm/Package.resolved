@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "lottie-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/airbnb/lottie-ios",
+      "state" : {
+        "revision" : "45517c3cfec9469bbdd4f86e32393c28ae9df0bc",
+        "version" : "4.3.3"
+      }
+    },
+    {
+      "identity" : "sunkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Sunlitt/SunKit",
+      "state" : {
+        "revision" : "1e2325dd0a9c98a1fd836bed605502b6390efc74",
+        "version" : "2.7.0"
+      }
+    }
+  ],
+  "version" : 2
+}
