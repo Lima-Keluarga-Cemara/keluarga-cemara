@@ -91,24 +91,23 @@ extension RecommendPlantMock {
         return [
             RecommendPlantMock().bokcoyPlant,
             RecommendPlantMock().cabbagePlant,
-//            RecommendPlantMock().pepperPlant,
+            RecommendPlantMock().pepperPlant,
             RecommendPlantMock().spinachPlant,
-//            RecommendPlantMock().tomatoPlant,
+            RecommendPlantMock().tomatoPlant,
             RecommendPlantMock().celeryPlant,
-//            RecommendPlantMock().endivePlant
+            RecommendPlantMock().endivePlant
         ]
     }
     
-    static func separatePlantsByType() -> [TypeOfPlant: [RecommendPlantModel]] {
-        var separatedPlants: [TypeOfPlant: [RecommendPlantModel]] = [:]
+    static func separatePlantsByType(_ type: TypeOfPlant = .partialsun) -> [RecommendPlantModel] {
+        var separatedPlants: [RecommendPlantModel] = []
 
         let allPlants = RecommendPlantMock.plantMockData
 
         for plant in allPlants {
-            if separatedPlants[plant.type] == nil {
-                separatedPlants[plant.type] = []
+            if plant.type == type{
+                separatedPlants.append(plant)
             }
-            separatedPlants[plant.type]?.append(plant)
         }
 
         return separatedPlants

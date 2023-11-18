@@ -61,5 +61,5 @@ struct RecommendListCardView: View {
 }
 
 #Preview {
-    RecommendListCardView(title: "Partial Sun", data: [RecommendPlantMock().celeryPlant, RecommendPlantMock().cabbagePlant], columnGrid: [GridItem(.flexible()), GridItem(.flexible())])
+    RecommendListCardView(title: "Partial Sun", data: RecommendPlantMock.separatePlantsByType(.partialshade), columnGrid: [GridItem(.flexible()), GridItem(.flexible())])
 }
