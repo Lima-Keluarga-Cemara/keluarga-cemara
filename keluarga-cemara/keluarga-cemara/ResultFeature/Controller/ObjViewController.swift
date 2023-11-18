@@ -75,7 +75,7 @@ struct SceneKitView: UIViewRepresentable {
     
     
     func makeUIView(context: Context) -> SCNView {
-        let sceneView = SCNView()
+        let sceneView = SCNView(frame: .zero)
         sceneView.scene = scene
         sceneView.autoenablesDefaultLighting = true
         sceneView.allowsCameraControl = true
@@ -92,7 +92,15 @@ struct SceneKitView: UIViewRepresentable {
         let orientations = getXYZOrientation()
         let firstOrientation = orientations[0]
         
-        
+        let startPoint = SCNVector3(0, 0, 0)
+                let endPoint = SCNVector3(1, 1, 1)
+                
+                let distance = startPoint.distance(to: endPoint)
+                print("Distance between points: \(distance)")
+                
+                let line = linefrom(vector: startPoint, toVector: endPoint)
+                let lineNode = SCNNode(geometry: line)
+                scene.rootNode.addChildNode(lineNode)
         
         UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
             uiView.scene?.rootNode.childNode(withName: "Light", recursively: false)?.eulerAngles = SCNVector3(firstOrientation.x, firstOrientation.y, firstOrientation.z)
@@ -126,6 +134,14 @@ struct SceneKitView: UIViewRepresentable {
         return orientations
     }
     
+//    trying add
+    func linefrom(vector vector1 : SCNVector3, toVector vector2 : SCNVector3) -> SCNGeometry{
+        let indices : [Int32] = [0,1]
+        let source = SCNGeometrySource(vertices: [vector1, vector2])
+        let element = SCNGeometryElement(indices: indices, primitiveType: .line)
+               return SCNGeometry(sources: [source], elements: [element])
+    }
+    
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
@@ -138,6 +154,13 @@ struct SceneKitView: UIViewRepresentable {
         }
     }
     
+}
+
+// tryin add this
+extension SCNVector3{
+    func distance(to vector : SCNVector3) -> Float {
+        return simd_distance(simd_float3(self), simd_float3(vector))
+    }
 }
 
 struct Coordinate: Hashable {
@@ -216,7 +239,7 @@ struct ResultScanYogi: View {
                 TimeSlider(sliderValue: $sliderValue, locationManager: sunManager, lightPosition: lightPosition)
                 
                 GeneralCostumButton(title: "See shade result", action: {
-                    pathStore.navigateToView(.arview)
+//                    pathStore.navigateToView(.arview)
                 }, isShowIcon: true)
             }
             

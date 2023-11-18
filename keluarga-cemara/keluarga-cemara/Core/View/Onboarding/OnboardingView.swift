@@ -11,6 +11,10 @@ struct OnboardingView: View {
     @EnvironmentObject private var pathStore: PathStore
     @State private var currentIndex = 0
     
+    init() {
+           UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(resource: .black)
+           UIPageControl.appearance().pageIndicatorTintColor = .gray
+       }
 
     var body: some View {
         GeometryReader{ geometry in
@@ -36,7 +40,7 @@ struct OnboardingView: View {
                         .tag(1)
                         
                     }
-                    .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                    .tabViewStyle(PageTabViewStyle())
                     
                     GeneralCostumButton(title: currentIndex == 0 ? "Next" : "Get Started") {
                         if currentIndex == 0 {
