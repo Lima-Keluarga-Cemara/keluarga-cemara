@@ -26,6 +26,12 @@ extension Text {
             .foregroundColor(.white)
     }
     
+    func titleButtonBlack() -> some View {
+        self
+            .font(.system(size: 17, weight: .semibold, design: .rounded))
+            .foregroundColor(Color(.black))
+    }
+    
     func textInstruction() -> some View {
         self
             .font(.system(size: 16, weight: .semibold, design: .rounded))

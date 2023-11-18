@@ -17,27 +17,14 @@ class RoomViewModel : ObservableObject{
     @Published  var feedbackGenerator: UIImpactFeedbackGenerator?
     
     @ViewBuilder
-    func startingScan() -> some View {
+    func backgroundCamera() ->  some View {
         if isStartScanning{
             RoomViewRepresentable()
         } else {
-            ZStack{
-                CameraRepresentable(cameraModel: cameraModel)
-                VStack{
-                    Spacer()
-                    Text("Tap ‘Record button’ to start scanning")
-                        .textInstruction()
-                        .padding(.vertical, 10)
-                        .padding(.horizontal, 20)
-                        .background(Color(.black).opacity(0.7))
-                        .cornerRadius(12)
-                        .padding(.bottom,27)
-                }
-            }
+            CameraRepresentable(cameraModel: cameraModel)
         }
     }
     
-   
     
     func buttonAction() {
         if isStartScanning{
