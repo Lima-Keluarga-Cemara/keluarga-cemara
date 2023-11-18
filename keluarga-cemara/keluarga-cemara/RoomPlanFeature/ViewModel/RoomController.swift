@@ -19,9 +19,9 @@ class RoomController : ObservableObject,RoomCaptureViewDelegate, RoomCaptureSess
     required dynamic init?(coder: NSCoder) {
         fatalError("Not Needed")
     }
-
     
-//    MARK: Making properties
+    
+    //    MARK: Making properties
     static var instance = RoomController()
     @Published var roomCaptureView : RoomCaptureView
     var sessionConfig : RoomCaptureSession.Configuration
@@ -36,68 +36,68 @@ class RoomController : ObservableObject,RoomCaptureViewDelegate, RoomCaptureSess
         roomCaptureView.delegate = self
     }
     
-//    MARK: func to start and stop scanning
+    //    MARK: func to start and stop scanning
     
     func startSession() {
         roomCaptureView.captureSession.run(configuration: sessionConfig)
         UIApplication.shared.isIdleTimerDisabled = true
-
+        
     }
     
     func stopSession() {
         roomCaptureView.captureSession.stop()
         UIApplication.shared.isIdleTimerDisabled = false
-
+        
     }
     
     
-//    MARK: func captureview (post-processing scan result)
+    //    MARK: func captureview (post-processing scan result)
     
     func captureView(shouldPresent roomDataForProcessing: CapturedRoomData, error: (Error)?) -> Bool {
         return true
     }
     
     func captureView(didPresent processedResult: CapturedRoom, error: (Error)?) {
-                if let error = error as? RoomCaptureSession.CaptureError, error == .worldTrackingFailure {
-                    let alert = UIAlertController(title: "World Tracking Failure", message: "An unexpected error occurred during world tracking.Please click re-scan to start scan again", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    UIApplication.shared.windows.first?.rootViewController?.present(alert, animated: true, completion: nil)
-                    return
-                }
-                guard error == nil else {
-                    print("Error when capturing room: \(error!.localizedDescription)")
-                    return
-                }
+        if let error = error as? RoomCaptureSession.CaptureError, error == .worldTrackingFailure {
+            let alert = UIAlertController(title: "World Tracking Failure", message: "An unexpected error occurred during world tracking.Please click re-scan to start scan again", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            UIApplication.shared.windows.first?.rootViewController?.present(alert, animated: true, completion: nil)
+            return
+        }
+        guard error == nil else {
+            print("Error when capturing room: \(error!.localizedDescription)")
+            return
+        }
         Task{
             finalResults = processedResult
             export()
         }
-       
+        
     }
     
     //    MARK: func for export file
-        
-        func export(){
-            if let finalResults {
-                let fm = FileManager.default
-                var path = fm.urls(for: .documentDirectory, in: .userDomainMask).first!
-                let fileName = "room.usdz"
-                path.appendPathComponent(fileName)
-                print("file name \(path)")
-                
-                do {
-                    try  finalResults.export(to: path.absoluteURL)
-                    print("Berhasil export ")
-                }
-                catch{
-                    print(error)
-                }
+    
+    func export(){
+        if let finalResults {
+            let fm = FileManager.default
+            var path = fm.urls(for: .documentDirectory, in: .userDomainMask).first!
+            let fileName = "room.usdz"
+            path.appendPathComponent(fileName)
+            print("file name \(path)")
+            
+            do {
+                try  finalResults.export(to: path.absoluteURL)
+                print("Berhasil export ")
+            }
+            catch{
+                print(error)
             }
         }
+    }
     
-        
     
-//    MARK: func for scenekit detect dimension of surface
+    
+    //    MARK: func for scenekit detect dimension of surface
     func getAllNodes(for surfaces : [CapturedRoom.Surface], contents : Any?) -> [SCNNode] {
         var nodes : [SCNNode] = []
         
@@ -140,7 +140,7 @@ class RoomController : ObservableObject,RoomCaptureViewDelegate, RoomCaptureSess
             // Fallback on earlier versions
         }
         
-//         looping for object
+        //         looping for object
         for object in model.objects {
             let uuidString = object.identifier.uuidString
             let category = object.category
