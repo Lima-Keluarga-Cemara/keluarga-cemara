@@ -40,10 +40,14 @@ class RoomController : ObservableObject,RoomCaptureViewDelegate, RoomCaptureSess
     
     func startSession() {
         roomCaptureView.captureSession.run(configuration: sessionConfig)
+        UIApplication.shared.isIdleTimerDisabled = true
+
     }
     
     func stopSession() {
         roomCaptureView.captureSession.stop()
+        UIApplication.shared.isIdleTimerDisabled = false
+
     }
     
     
@@ -54,11 +58,21 @@ class RoomController : ObservableObject,RoomCaptureViewDelegate, RoomCaptureSess
     }
     
     func captureView(didPresent processedResult: CapturedRoom, error: (Error)?) {
-        if let error {
-            print("Error when capture room \(error.localizedDescription)")
+                if let error = error as? RoomCaptureSession.CaptureError, error == .worldTrackingFailure {
+                    let alert = UIAlertController(title: "World Tracking Failure", message: "An unexpected error occurred during world tracking.Please click re-scan to start scan again", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    UIApplication.shared.windows.first?.rootViewController?.present(alert, animated: true, completion: nil)
+                    return
+                }
+                guard error == nil else {
+                    print("Error when capturing room: \(error!.localizedDescription)")
+                    return
+                }
+        Task{
+            finalResults = processedResult
+            export()
         }
-        finalResults = processedResult
-        export()
+       
     }
     
     //    MARK: func for export file

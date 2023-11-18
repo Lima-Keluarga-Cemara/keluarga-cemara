@@ -33,9 +33,6 @@ struct SheetRoomPlanView: View {
                 
                 ItemInstruction(image: .thirdIcon, title: "3. Then, you will receive a 3D modeling result of your garden.")
                 
-             
-                
-               
             })
           
         }

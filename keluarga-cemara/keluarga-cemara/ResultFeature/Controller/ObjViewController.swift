@@ -79,11 +79,11 @@ struct SceneKitView: UIViewRepresentable {
         sceneView.scene = scene
         sceneView.autoenablesDefaultLighting = true
         sceneView.allowsCameraControl = true
-//        if let recognizers = sceneView.gestureRecognizers {
-//            for recognizer in recognizers {
-//                recognizer.isEnabled = false
-//            }
-//        }
+        //        if let recognizers = sceneView.gestureRecognizers {
+        //            for recognizer in recognizers {
+        //                recognizer.isEnabled = false
+        //            }
+        //        }
         return sceneView
     }
     
@@ -102,11 +102,11 @@ struct SceneKitView: UIViewRepresentable {
         uiView.antialiasingMode = .multisampling4X
         uiView.autoenablesDefaultLighting = true
         uiView.allowsCameraControl = true
-//        if let recognizers = uiView.gestureRecognizers {
-//            for recognizer in recognizers {
-//                recognizer.isEnabled = false
-//            }
-//        }
+        //        if let recognizers = uiView.gestureRecognizers {
+        //            for recognizer in recognizers {
+        //                recognizer.isEnabled = false
+        //            }
+        //        }
         
         
     }
@@ -147,165 +147,142 @@ struct Coordinate: Hashable {
 }
 
 struct ResultScanYogi: View {
+    
     @EnvironmentObject private var pathStore: PathStore
     @State private var isLoading : Bool = true
-    @State private var selectedTime : TimeInterval = 0.0
-    @StateObject private var sunManager = LocationManager()
     @StateObject var lightPosition = LightPosition()
-    @State private var sliderValue: Double = 0.0
-    @State private var timer: Timer? = nil
-    
-    
-    @State private var timeValue: [Double] = [06.00, 08.00, 10.00, 12.00, 13.00, 15.00, 17.00]
-    @State private var coordinates: [Coordinate] = []
-    
-    let date = Date()
-    var calendar = Calendar.current
-    
-    var selectedDate: Date? {
-        var dateComponents = calendar.dateComponents([.year, .month, .day], from: date)
-        dateComponents.hour = Int(sliderValue) // format 24 hours
-        return calendar.date(from: dateComponents)
-    }
+    @State var selectedPlantModel : TypeOfPlant? = nil
+    @State var isSheetOpen : Bool = true
     
     var body: some View {
         ZStack{
             Color(.graybg).ignoresSafeArea()
             
-            VStack(spacing: 10){
-                Text("\(sunManager.resultOrientationDirection ?? "Partial Sun")")
-                    .calloutWhite()
-                    .multilineTextAlignment(.center)
-                    .frame(width: 239, height: 67)
+            VStack{
+                HStack{
+                    
+                    Button(action: {
+                        
+                    }, label: {
+                        Image(systemName: "arrow.uturn.left")
+                            .font(.system(size: 25))
+                            .foregroundStyle(Color(.black).opacity(0.5))
+                    })
                     .padding()
-                    .background(Color(.black).opacity(0.7))
-                    .cornerRadius(14)
-                    .padding(.top, 10)
-
+                    .frame(width: 52, height: 48)
+                    .background(Color(.whiteButton))
+                    .cornerRadius(12)
+                    .shadow(color: Color.black.opacity(0.25), radius: 4, x: 0, y: 4)
+                    
+                    Spacer()
+                    
+                    
+                    ButtonCustom(title: "Done", action: {
+                        
+                    }, width: 80, height: 48)
+                    
+                }
+                .padding(16)
+                
+               
                 
                 if isLoading{
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle(tint: Color.brown))
                         .scaleEffect(4)
-                        .frame(height: 350)
+                        .frame(height: 700)
+
                 } else {
                     SceneKitView(lightPosition: lightPosition, scene: PhysicallyBasedScene(lightPosition: lightPosition))
-                        .frame(height: 350)
+                        .frame(height: 700)
                 }
-                //        if sliderValue == 16.00{
-                //            SceneKitViewAll(lightPosition: lightPosition, scene: PhysicallyBasedScene(lightPosition: lightPosition))
-                //
-                //        }
-                
-                HStack{
-                    Spacer()
-                    Button {
-                        print(sunManager.resultOrientationDirection ?? "No shade")
-                        PhysicallyBasedScene(lightPosition: lightPosition).createCamera()
-                    } label: {
-                        Image(systemName: "goforward")
-                            .font(.system(size: 32))
-                            .padding(.all,5)
-                            .foregroundStyle(Color.white)
-                            .background(Color.black.opacity(0.7))
-                            .cornerRadius(40)
-                    }
-                    .padding(.trailing, 23)
-                }
-                
-                TimeSlider(sliderValue: $sliderValue, locationManager: sunManager, lightPosition: lightPosition)
-                
-                GeneralCostumButton(title: "See shade result", action: {
-                    pathStore.navigateToView(.arview)
-                }, isShowIcon: true)
             }
-            
         }
-        .toolbarBackground(.black, for: .navigationBar)
-        .toolbarBackground(.visible, for: .navigationBar)
+        .sheet(isPresented: $isSheetOpen, content: {
+            ModalSheetColor()
+                .presentationDetents([.height(80), .height(240)])
+        })
+
+        .navigationBarBackButtonHidden()
         .onAppear {
             DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 2, execute: {
                 isLoading = false
             })
         }
+        
     }
+    
     
 }
 
-//costum slider for time with time indicator
-struct TimeSlider: View {
-    @Binding var sliderValue: Double
-    @ObservedObject var locationManager = LocationManager()
-    @ObservedObject var lightPosition = LightPosition()
-    
-    let date = Date()
-    var calendar = Calendar.current
-    let timeValue: [Double] = [06.00, 08.00, 10.00, 12.00, 13.00, 15.00, 17.00]
-    
-    var selectedDate: Date? {
-        var dateComponents = calendar.dateComponents([.year, .month, .day], from: date)
-        dateComponents.hour = Int(sliderValue) // format 24 hours
-        return calendar.date(from: dateComponents)
+
+struct ModalSheetColor : View {
+    var body: some View {
+        VStack(alignment : .leading){
+            Text("Shadow indicator")
+                .titleInstruction()
+                .padding(.bottom,18)
+            
+            HStack{
+                ButtonShadow(action: {
+                    
+                }, title: "0-2 hours", typePlant: .fullshade, firstColor: .firtsShadow, secondColor: .secondShadow)
+                
+                ButtonShadow(action: {
+                    
+                }, title: "2-4 hours", typePlant: .fullshade, firstColor: .secondShadow, secondColor: .thirdShadow)
+                
+                ButtonShadow(action: {
+                    
+                }, title: "4-6 hours", typePlant: .fullshade, firstColor: .thirdShadow, secondColor: .fourthShadow)
+                
+                ButtonShadow(action: {
+                    
+                }, title: "6+ hours", typePlant: .fullshade, firstColor: .fourthShadow, secondColor: .seventhShadow)
+            }
+            
+        }
+        .padding(.horizontal,16)
     }
+}
+
+struct ButtonShadow : View {
+    let action : () -> Void
+    let title : String
+    let typePlant : TypeOfPlant
+    let firstColor : ColorResource
+    let secondColor  : ColorResource
+   
     
     
     var body: some View {
-        ZStack{
-            Rectangle()
-                .frame(width: 356, height: 92)
-                .foregroundColor(.gray)
-                .cornerRadius(10)
-            
-            VStack{
-                if let selectedDate = selectedDate {
-                    let selectedDatePlus30Minutes = calendar.date(byAdding: .minute, value: 0, to: selectedDate)
-                    Slider(value: $sliderValue, in: 05.00...17.00)
-                        .accentColor(.white)
-                        .padding(.horizontal, 25)
-                        .onChange(of: sliderValue) { newValue in
-                            
-                            let sunPosition = locationManager.sun?.getSunHorizonCoordinatesFrom(date: selectedDatePlus30Minutes ?? Date())
-                            let sunAltitude = sunPosition?.altitude
-                            let sunAzimuth = sunPosition?.azimuth
-                            
-                            let r: Double = 1.0
-                            let theta: Double = sunAltitude?.radians ?? 0.0
-                            let phi: Double = sunAzimuth?.radians ?? 0.0
-                            
-                            let x = r * sin(theta) * cos(phi)
-                            let y = r * sin(theta) * sin(phi)
-                            let z = r * cos(theta)
-                            
-                            lightPosition.orientation_x[0] = Float(x)
-                            lightPosition.orientation_y[0] = Float(y)
-                            lightPosition.orientation_z[0] = Float(z)
-                            print(newValue)
-                            
-                            
-                        }
-                }
-                HStack {
-                    Text("All")
-                        .font(.system(size: 16))
-                        .foregroundColor(.white)
-                    ForEach(timeValue, id: \.self) { value in
-                        Text("\(Int(value))")
-                            .font(.system(size: 16))
-                            .foregroundColor(.white)
-                            .padding(.horizontal, 11)
-                    }
+        Button(action: {
+            action()
+        }, label: {
+            Text(title)
+                .font(.system(size: 12, weight: .regular, design: .rounded))
+                .foregroundStyle(Color(.white))
+                .frame(width: 77, height: 77)
+                .background(
+                    LinearGradient(gradient: Gradient(colors: [Color(firstColor), Color(secondColor)]), startPoint: .leading, endPoint: .trailing)
                     
-                    
-                }
-                
-            }
-        }
+                )
+                .cornerRadius(9)
+                .overlay(
+                       RoundedRectangle(cornerRadius: 9)
+                           .stroke(Color.white, lineWidth: 1)
+                   )
+        })
     }
 }
 
+
+
 #Preview{
-    ResultScanYogi()
-//    TimeSlider(sliderValue: .constant(10.00))
-//        .previewLayout(.sizeThatFits)
-//        .padding()
+   ResultScanYogi()
 }
+
+
+
+
+
