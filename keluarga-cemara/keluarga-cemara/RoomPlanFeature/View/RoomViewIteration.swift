@@ -75,7 +75,6 @@ struct RoomViewIteration: View {
                 ZStack{
                     roomVm.backgroundCamera()
 
-
                     if isFacingDirection {
                         VStack{
                             
@@ -121,12 +120,10 @@ struct RoomViewIteration: View {
                             .frame(height: 179)
                         
                         Button(action: {
-                            DispatchQueue.main.async {
-                                if roomVm.isStartScanning {
-                                    pathStore.navigateToView(.resultfeature)
-                                }
-                                roomVm.buttonAction()
+                            if roomVm.isStartScanning {
+                                pathStore.navigateToView(.resultfeature)
                             }
+                            roomVm.buttonAction()
                         }, label: {
                             Image(roomVm.isStartScanning ? .stopButtonRecord : .enableButtonRecord)
                         })

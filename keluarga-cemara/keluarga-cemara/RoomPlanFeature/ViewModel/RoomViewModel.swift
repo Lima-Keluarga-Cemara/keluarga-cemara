@@ -20,6 +20,9 @@ class RoomViewModel : ObservableObject{
     func backgroundCamera() ->  some View {
         if isStartScanning{
             RoomViewRepresentable()
+                .onAppear{
+                    self.roomController.startSession()
+                }
         } else {
             CameraRepresentable(cameraModel: cameraModel)
         }
@@ -29,11 +32,12 @@ class RoomViewModel : ObservableObject{
     func buttonAction() {
         if isStartScanning{
             roomController.stopSession()
+//            UIApplication.shared.isIdleTimerDisabled = false
             isStartScanning = false
             feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
             feedbackGenerator?.impactOccurred()
         } else {
-            roomController.startSession()
+//            UIApplication.shared.isIdleTimerDisabled = true
             isStartScanning = true
             feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
             feedbackGenerator?.impactOccurred()

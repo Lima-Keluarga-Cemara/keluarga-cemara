@@ -40,13 +40,11 @@ class RoomController : ObservableObject,RoomCaptureViewDelegate, RoomCaptureSess
     
     func startSession() {
         roomCaptureView.captureSession.run(configuration: sessionConfig)
-        UIApplication.shared.isIdleTimerDisabled = true
         
     }
     
     func stopSession() {
         roomCaptureView.captureSession.stop()
-        UIApplication.shared.isIdleTimerDisabled = false
         
     }
     

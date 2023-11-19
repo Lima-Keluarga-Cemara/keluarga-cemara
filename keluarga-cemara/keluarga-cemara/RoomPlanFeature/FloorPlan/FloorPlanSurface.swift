@@ -10,6 +10,7 @@ import Foundation
 import RoomPlan
 import SceneKit
 
+
 class FloorPlanSurface: SCNNode {
     
     private let capturedSurface: CapturedRoom.Surface

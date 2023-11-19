@@ -11,7 +11,7 @@ import SwiftUI
 let scalingFactor: CGFloat = 200
 
 // Colors
-let floorPlanBackgroundColor = Color(.backgroundTile)
+let floorPlanBackgroundColor = UIColor(resource: .iconTile)
 let floorPlanSurfaceColor = Color(.black)
 
 // Line widths

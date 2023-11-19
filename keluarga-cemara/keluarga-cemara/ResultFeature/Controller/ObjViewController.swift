@@ -7,64 +7,65 @@
 
 import SwiftUI
 import SceneKit
+import _SceneKit_SwiftUI
 
-struct SceneKitViewAll: UIViewRepresentable {
-    @ObservedObject var lightPosition: LightPosition
-    var scene: PhysicallyBasedScene
-    
-    func makeUIView(context: Context) -> SCNView {
-        let sceneView = SCNView()
-        sceneView.scene = scene
-        sceneView.autoenablesDefaultLighting = true
-        sceneView.allowsCameraControl = true
-        return sceneView
-    }
-    
-    
-    func updateUIView(_ uiView: SCNView, context: Context) {
-        let orientations = getXYZOrientation()
-        let firstOrientation = orientations[0]
-        
-        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
-            uiView.scene?.rootNode.childNode(withName: "Light", recursively: false)?.eulerAngles = SCNVector3(firstOrientation.x, firstOrientation.y, firstOrientation.z)
-            
-        }
-        
-        uiView.antialiasingMode = .multisampling4X
-        uiView.autoenablesDefaultLighting = true
-        uiView.allowsCameraControl = true
-        
-        
-    }
-    
-    
-    
-    func getXYZOrientation() -> [SCNVector3] {
-        var orientations: [SCNVector3] = []
-        let x = lightPosition.orientation_x[0]
-        let y = lightPosition.orientation_y[0]
-        let z = lightPosition.orientation_z[0]
-        let orientation = SCNVector3(x, y, z)
-        orientations.append(orientation)
-        print(orientation)
-        
-        
-        return orientations
-    }
-    
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
-    }
-    
-    class Coordinator: NSObject {
-        var parent: SceneKitViewAll
-        
-        init(_ parent: SceneKitViewAll) {
-            self.parent = parent
-        }
-    }
-    
-}
+//struct SceneKitViewAll: UIViewRepresentable {
+//    @ObservedObject var lightPosition: LightPosition
+//    var scene: PhysicallyBasedScene
+//    
+//    func makeUIView(context: Context) -> SCNView {
+//        let sceneView = SCNView(frame: .zero)
+//        sceneView.scene = scene
+//        sceneView.autoenablesDefaultLighting = true
+//        sceneView.allowsCameraControl = true
+//        return sceneView
+//    }
+//    
+//    
+//    func updateUIView(_ uiView: SCNView, context: Context) {
+//        let orientations = getXYZOrientation()
+//        let firstOrientation = orientations[0]
+//        
+//        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
+//            uiView.scene?.rootNode.childNode(withName: "Light", recursively: false)?.eulerAngles = SCNVector3(firstOrientation.x, firstOrientation.y, firstOrientation.z)
+//            
+//        }
+//        
+//        uiView.antialiasingMode = .multisampling4X
+//        uiView.autoenablesDefaultLighting = true
+//        uiView.allowsCameraControl = true
+//        
+//        
+//    }
+//    
+//    
+//    
+//    func getXYZOrientation() -> [SCNVector3] {
+//        var orientations: [SCNVector3] = []
+//        let x = lightPosition.orientation_x[0]
+//        let y = lightPosition.orientation_y[0]
+//        let z = lightPosition.orientation_z[0]
+//        let orientation = SCNVector3(x, y, z)
+//        orientations.append(orientation)
+//        print(orientation)
+//        
+//        
+//        return orientations
+//    }
+//    
+//    func makeCoordinator() -> Coordinator {
+//        Coordinator(self)
+//    }
+//    
+//    class Coordinator: NSObject {
+//        var parent: SceneKitViewAll
+//        
+//        init(_ parent: SceneKitViewAll) {
+//            self.parent = parent
+//        }
+//    }
+//    
+//}
 
 
 
@@ -75,10 +76,11 @@ struct SceneKitView: UIViewRepresentable {
     
     
     func makeUIView(context: Context) -> SCNView {
-        let sceneView = SCNView()
+        let sceneView = SCNView(frame: .zero)
         sceneView.scene = scene
         sceneView.autoenablesDefaultLighting = true
         sceneView.allowsCameraControl = true
+        
         //        if let recognizers = sceneView.gestureRecognizers {
         //            for recognizer in recognizers {
         //                recognizer.isEnabled = false
@@ -93,7 +95,7 @@ struct SceneKitView: UIViewRepresentable {
         let firstOrientation = orientations[0]
         
         
-        
+                       
         UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
             uiView.scene?.rootNode.childNode(withName: "Light", recursively: false)?.eulerAngles = SCNVector3(firstOrientation.x, firstOrientation.y, firstOrientation.z)
             
@@ -152,7 +154,13 @@ struct ResultScanYogi: View {
     @State private var isLoading : Bool = true
     @StateObject var lightPosition = LightPosition()
     @State var selectedPlantModel : TypeOfPlant? = nil
-    @State var isSheetOpen : Bool = true
+    @State var offsetPositionY : CGFloat = UIScreen.main.bounds.height * 0.5
+    @State var currentPositionY : CGFloat = 0
+    @State private var isShowingFloorPlan = false
+    @Environment(\.presentationMode) var presentationMode
+
+
+
     
     var body: some View {
         ZStack{
@@ -178,36 +186,74 @@ struct ResultScanYogi: View {
                     
                     
                     ButtonCustom(title: "Done", action: {
-                        
+                      
                     }, width: 80, height: 48)
                     
                 }
                 .padding(16)
                 
-               
+                ButtonCustom(title: "See measure", action: {
+                    isShowingFloorPlan = true
+                }, width: 300, height: 48)
                 
+                .padding(.bottom)
                 if isLoading{
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle(tint: Color.brown))
                         .scaleEffect(4)
-                        .frame(height: 700)
+                        .frame(height: 500)
 
                 } else {
                     SceneKitView(lightPosition: lightPosition, scene: PhysicallyBasedScene(lightPosition: lightPosition))
-                        .frame(height: 700)
+                        .frame(height: 500)
                 }
-            }
-        }
-        .sheet(isPresented: $isSheetOpen, content: {
-            ModalSheetColor()
-                .presentationDetents([.height(80), .height(240)])
-        })
+                Spacer()
 
+            }
+            
+            
+            ModalSheetColor()
+                .offset(y:offsetPositionY)
+                .offset(y: currentPositionY)
+                .gesture(
+                    DragGesture()
+                        .onChanged{ item in
+                            withAnimation(.spring()){
+                                currentPositionY = item.translation.height
+                            }
+                        }
+                        .onEnded{ item in
+                            withAnimation(.spring()){
+                               
+                                currentPositionY = -135
+                            }
+                        }
+                )
+
+            
+        }
+       
         .navigationBarBackButtonHidden()
         .onAppear {
             DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 2, execute: {
                 isLoading = false
             })
+        }
+        .fullScreenCover(isPresented: $isShowingFloorPlan) {
+            VStack{
+                HStack{
+                    Spacer()
+                    Button(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }, label: {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundColor(.black)
+                            .font(.system(size: 28))
+                    })
+                }
+                
+                SceneView(scene: FloorPlanScene(capturedRoom: RoomController.instance.finalResults!), options: [.allowsCameraControl])
+            }
         }
         
     }
@@ -219,9 +265,18 @@ struct ResultScanYogi: View {
 struct ModalSheetColor : View {
     var body: some View {
         VStack(alignment : .leading){
+            HStack{
+                Spacer()
+                Image(systemName: "chevron.up")
+                    .font(.system(size: 24))
+                    .padding()
+                Spacer()
+
+            }
+            
             Text("Shadow indicator")
                 .titleInstruction()
-                .padding(.bottom,18)
+                .padding(.bottom,12)
             
             HStack{
                 ButtonShadow(action: {
@@ -240,9 +295,14 @@ struct ModalSheetColor : View {
                     
                 }, title: "6+ hours", typePlant: .fullshade, firstColor: .fourthShadow, secondColor: .seventhShadow)
             }
+            .padding()
+            .background(Color.gray.opacity(0.2))
+            .cornerRadius(12)
             
         }
         .padding(.horizontal,16)
+        .padding(.bottom)
+        .background(Color.white)
     }
 }
 
