@@ -149,7 +149,6 @@ struct Coordinate: Hashable {
 }
 
 struct ResultScanYogi: View {
-    
     @EnvironmentObject private var pathStore: PathStore
     @State private var isLoading : Bool = true
     @StateObject var lightPosition = LightPosition()
@@ -263,7 +262,17 @@ struct ResultScanYogi: View {
 
 
 struct ModalSheetColor : View {
+    @State private var isRecommendationPlantPartialSunSheetPresented: Bool = false
+    @State private var isRecommendationPlantPartialShadeSheetPresented: Bool = false
+    @State private var isRecommendationPlantFullSunSheetPresented: Bool = false
+    @State private var isRecommendationPlantFullShadeSheetPresented: Bool = false
+
+
+    
+    @EnvironmentObject private var pathStore: PathStore
+
     var body: some View {
+        
         VStack(alignment : .leading){
             HStack{
                 Spacer()
@@ -284,16 +293,53 @@ struct ModalSheetColor : View {
                 }, title: "0-2 hours", typePlant: .fullshade, firstColor: .firtsShadow, secondColor: .secondShadow)
                 
                 ButtonShadow(action: {
+                    isRecommendationPlantPartialSunSheetPresented.toggle()
+                }, title: "0-2 hours", typePlant: .partialsun, firstColor: .firtsShadow, secondColor: .secondShadow)
+                .sheet(isPresented: $isRecommendationPlantPartialSunSheetPresented) {
+                    RecommendListCardView(
+                        title: "Partian Sun",
+                        data: RecommendPlantMock.separatePlantsByType(.partialsun),
+                        columnGrid: [GridItem(.flexible()), GridItem(.flexible())]
+                    )
                     
+                }
+                
+                ButtonShadow(action: {
+                    isRecommendationPlantPartialShadeSheetPresented = true
                 }, title: "2-4 hours", typePlant: .fullshade, firstColor: .secondShadow, secondColor: .thirdShadow)
+                .sheet(isPresented: $isRecommendationPlantPartialShadeSheetPresented){
+                    RecommendListCardView(
+                        title: "Partial Sun",
+                        data: RecommendPlantMock.separatePlantsByType(.partialshade),
+                        columnGrid: [GridItem(.flexible()), GridItem(.flexible())]
+                    )
+
+                }
+                    
+            
                 
                 ButtonShadow(action: {
-                    
+                    isRecommendationPlantFullSunSheetPresented = true
                 }, title: "4-6 hours", typePlant: .fullshade, firstColor: .thirdShadow, secondColor: .fourthShadow)
+                .sheet(isPresented: $isRecommendationPlantFullSunSheetPresented) {
+                    RecommendListCardView(
+                        title: "Full Sun Boy",
+                        data: RecommendPlantMock.separatePlantsByType(.fullsun),
+                        columnGrid: [GridItem(.flexible()), GridItem(.flexible())]
+                    )
+                }
                 
                 ButtonShadow(action: {
-                    
+                    isRecommendationPlantFullShadeSheetPresented = true
                 }, title: "6+ hours", typePlant: .fullshade, firstColor: .fourthShadow, secondColor: .seventhShadow)
+                .sheet(isPresented: $isRecommendationPlantFullShadeSheetPresented) {
+                    RecommendListCardView(
+                        title: "Full Sun",
+                        data: RecommendPlantMock.separatePlantsByType(.fullshade),
+                        columnGrid: [GridItem(.flexible()), GridItem(.flexible())]
+                    )
+                    
+                }
             }
             .padding()
             .background(Color.gray.opacity(0.2))
@@ -334,6 +380,20 @@ struct ButtonShadow : View {
                    )
         })
     }
+}
+
+struct testviewrecomend:View {
+    var body: some View {
+        RecommendListCardView(
+               title: "Full shade",
+               data: RecommendPlantMock.separatePlantsByType(.partialsun),
+               columnGrid: [GridItem(.flexible()), GridItem(.flexible())]
+           )
+    }
+}
+
+#Preview{
+   testviewrecomend()
 }
 
 
