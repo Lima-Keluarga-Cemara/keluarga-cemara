@@ -11,6 +11,8 @@ import SceneKit
 struct SceneKitView: UIViewRepresentable {
     @ObservedObject var lightPosition: LightPosition
     var scene: PhysicallyBasedScene
+    @Binding var isTapped : Bool
+
     var sceneView = SCNView(frame: .zero)
     
     func makeUIView(context: Context) -> SCNView {
@@ -55,7 +57,7 @@ struct SceneKitView: UIViewRepresentable {
     }
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(sceneView)
+        Coordinator(sceneView, isButtonTapped: $isTapped)
     }
     
 }

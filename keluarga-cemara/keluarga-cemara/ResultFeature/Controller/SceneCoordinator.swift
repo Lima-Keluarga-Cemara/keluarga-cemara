@@ -7,46 +7,61 @@
 
 import Foundation
 import SceneKit
+import SwiftUI
 
 class Coordinator: NSObject {
     var parent: SCNView
+//    try add this
+    @Binding var isButtonTapped: Bool
+
     private var placedNodes: [SCNNode] = []
     
-    init(_ parent: SCNView) {
+    init(_ parent: SCNView, isButtonTapped: Binding<Bool>) {
         self.parent = parent
+        self._isButtonTapped = isButtonTapped
     }
     
     @objc func handleTap(_ gestureRecognize: UIGestureRecognizer) {
-        let currentTapLocation = gestureRecognize.location(in: self.parent)
-        guard let hitTest = self.parent.hitTest(currentTapLocation, options: nil).first else { return }
-        
-        // Check if the hit test result has a SCNNode associated with it
-        let parentNode = hitTest.node
-        // Check if parent child node more than two
-        let isParentChildNodeMoreThanTwo: () -> Bool = {
-            return parentNode.childNodes.count >= 2
-        }
-        
-        if isParentChildNodeMoreThanTwo() {
-            // If there are 2 or more child nodes, remove all existing nodes
-            removeAllExistingNode(parentNode)
-        }
-        let dotNode = createDotGeometry(hitTest)
-        
-        // Add the sphere node to the parent node or the scene as needed
-        parentNode.addChildNode(dotNode)
-        placedNodes.append(dotNode)
-        
-        // Create a line geometry between two child nodes
-        if isParentChildNodeMoreThanTwo() {
-            let (lineNode, textNode) = createLineAndTextNode(parentNode)
-            // Add the line node to the parent node or the scene as needed
-            parentNode.addChildNode(lineNode)
-            parentNode.addChildNode(textNode)
+        if isButtonTapped{
+            let currentTapLocation = gestureRecognize.location(in: self.parent)
+            guard let hitTest = self.parent.hitTest(currentTapLocation, options: nil).first else { return }
             
-            // Apply billboard constraint to the text node
-            let billboardConstraint = SCNBillboardConstraint()
-            textNode.constraints = [billboardConstraint]
+            // Check if the hit test result has a SCNNode associated with it
+            let parentNode = hitTest.node
+            // Check if parent child node more than two
+            let isParentChildNodeMoreThanTwo: () -> Bool = {
+                return parentNode.childNodes.count >= 2
+            }
+            
+            if isParentChildNodeMoreThanTwo() {
+                // If there are 2 or more child nodes, remove all existing nodes
+                removeAllExistingNode(parentNode)
+            }
+            let dotNode = createDotGeometry(hitTest)
+            
+            // Add the sphere node to the parent node or the scene as needed
+            parentNode.addChildNode(dotNode)
+            placedNodes.append(dotNode)
+            
+            // Create a line geometry between two child nodes
+            if isParentChildNodeMoreThanTwo() {
+                let (lineNode, textNode) = createLineAndTextNode(parentNode)
+                // Add the line node to the parent node or the scene as needed
+                parentNode.addChildNode(lineNode)
+                parentNode.addChildNode(textNode)
+                
+                // Apply billboard constraint to the text node
+                let billboardConstraint = SCNBillboardConstraint()
+                textNode.constraints = [billboardConstraint]
+            }
+        } else {
+//          MARK:  Taruh function untuk remove seluruh nodenya kalau button nya di toggle click , ini coba2 dulu ya
+            let currentTapLocation = gestureRecognize.location(in: self.parent)
+            guard let hitTest = self.parent.hitTest(currentTapLocation, options: nil).first else { return }
+            
+            // Check if the hit test result has a SCNNode associated with it
+            let parentNode = hitTest.node
+            removeLastPlacedNode(parentNode)
         }
     }
     
