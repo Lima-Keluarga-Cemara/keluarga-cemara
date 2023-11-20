@@ -10,21 +10,19 @@ import SceneKit
 
 struct SceneKitView: UIViewRepresentable {
     @ObservedObject var lightPosition: LightPosition
+    @ObservedObject var resultVM: SceneKitViewModel
     var scene: PhysicallyBasedScene
-    @Binding var isTapped : Bool
-
-    var sceneView = SCNView(frame: .zero)
     
     func makeUIView(context: Context) -> SCNView {
-        sceneView.scene = scene
-        sceneView.autoenablesDefaultLighting = true
-        sceneView.allowsCameraControl = true
+        resultVM.sceneView.scene = scene
+        resultVM.sceneView.autoenablesDefaultLighting = true
+        resultVM.sceneView.allowsCameraControl = true
         
         /// Setup Tap Recognizer
         let tapGesture = UITapGestureRecognizer(target: context.coordinator, action: #selector(context.coordinator.handleTap(_:)))
-        sceneView.addGestureRecognizer(tapGesture)
+        resultVM.sceneView.addGestureRecognizer(tapGesture)
         
-        return sceneView
+        return resultVM.sceneView
     }
     
     
@@ -57,7 +55,7 @@ struct SceneKitView: UIViewRepresentable {
     }
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(sceneView, isButtonTapped: $isTapped)
+        Coordinator(resultVM)
     }
     
 }

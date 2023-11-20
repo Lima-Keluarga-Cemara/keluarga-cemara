@@ -12,9 +12,9 @@ struct ResultScan: View {
     @EnvironmentObject private var pathStore: PathStore
     @State private var isLoading : Bool = true
     @StateObject var lightPosition = LightPosition()
+    @StateObject var resultVM = SceneKitViewModel()
     @State var selectedPlantModel : TypeOfPlant? = nil
     @State private var isShowingSheet = true
-    @State private var isTapped = false
     @Environment(\.presentationMode) var presentationMode
     
     
@@ -29,7 +29,10 @@ struct ResultScan: View {
                     .frame(height: 500)
                 
             } else {
-                SceneKitView(lightPosition: lightPosition, scene: PhysicallyBasedScene(lightPosition: lightPosition), isTapped: $isTapped)
+                SceneKitView(lightPosition: lightPosition, 
+                             resultVM: resultVM,
+                             scene: PhysicallyBasedScene(lightPosition: lightPosition)
+                )
                     .ignoresSafeArea()
             }
             
@@ -37,15 +40,15 @@ struct ResultScan: View {
                 HStack{
                     
                     Button(action: {
-                        isTapped.toggle()
+                        resultVM.changeActiveMesureGesture()
                     }, label: {
                         Image(systemName: "ruler")
                             .font(.system(size: 40))
-                            .foregroundStyle(Color( isTapped ? .white : .black))
+                            .foregroundStyle(Color( resultVM.isActiveGesture ? .white : .black))
                     })
                     .padding()
                     .frame(width: 72, height: 48)
-                    .background(Color(isTapped ? .black : .whiteButton))
+                    .background(Color(resultVM.isActiveGesture ? .black : .whiteButton))
                     .cornerRadius(12)
                     .shadow(color: Color.black.opacity(0.25), radius: 4, x: 0, y: 4)
                     
