@@ -13,9 +13,6 @@ enum ViewPath: Hashable{
     case roomscan
     case resultfeature
     case onboarding
-    case instruction
-    case recomendationplant
-    
     
     @ViewBuilder
     var view: some View{
@@ -23,13 +20,9 @@ enum ViewPath: Hashable{
         case .roomscan:
             RoomViewIteration()
         case .resultfeature:
-            ResultScanYogi()
+            ResultScan()
         case .onboarding:
             OnboardingView()
-        case .instruction:
-            InstructionView()
-        case .recomendationplant:
-            RecommendationPlantView()
         }
     }
 }

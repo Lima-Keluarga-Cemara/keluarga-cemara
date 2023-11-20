@@ -10,8 +10,8 @@ import Foundation
 struct RecommendPlantMock{
     // partial shade plant
     let bokcoyPlant = RecommendPlantModel(
-        title: "Bokcoy",
-        description: "Bok Choy, also known as Chinese cabbage, is a popular leafy green vegetable that is not only delicious but also packed with several health benefits such as nutrient rich, low in calories, antioxidant properties, heart health and bone health.",
+        title: "Bok Choy",
+        description: "Bok Choy is a popular leafy green vegetable that offers several health benefits, including being nutrient-rich, low in calories, possessing antioxidant properties, and promoting heart and bone health. It can be harvested 120 days after planting.",
         image: .bokcoy,
         type: .partialshade,
         plantCare: [
@@ -21,7 +21,7 @@ struct RecommendPlantMock{
         ])
     let spinachPlant = RecommendPlantModel(
         title: "Spinach",
-        description: "Spinach is nutritious leafy that is rich in multiple vitamins and minerals. Benefits of consuming spinach include diabetes and asthma management, promotes digestive regularity, lowering the risk of cancer, lowering blood pressure, and improving bone health.",
+        description: "Spinach is rich in multiple vitamins and minerals. It offers many benefits for diabetes and asthma management, reduces the risk of cancer, lowers blood pressure, and improves bone health. It can be harvested 120 days after planting.",
         image: .spinach,
         type: .partialshade,
         plantCare: [
@@ -32,18 +32,18 @@ struct RecommendPlantMock{
     // partial sun plant
     let cabbagePlant = RecommendPlantModel(
         title: "Cabbage",
-        description: "Cabbage is rich in vitamin C, fiber, and vitamin K. They may help protect against radiation, prevent cancer, reduce heart disease risk and help with digestive health.",
+        description: "Cabbage is rich in vitamin C, fiber, and vitamin K. It may help protect against radiation, prevent cancer, reduce heart disease risk and help with digestive health. It can be harvested 65 days after planting.",
         image: .cabbage,
         type: .partialsun,
         plantCare: [
             PlantCareInfo(typeCareInfo: .sunlight, info: "3-5 hours of sunlight a day."),
             PlantCareInfo(typeCareInfo: .watering, info: "Once a week, applying 1 1/2 inches of water to the soil."),
-            PlantCareInfo(typeCareInfo: .fertilization, info: "Every three to four weeks until heads begin to form.")
+            PlantCareInfo(typeCareInfo: .fertilization, info: "Every 3 to 4 weeks until heads begin to form.")
         ])
     // partial sun plant
     let celeryPlant = RecommendPlantModel(
         title: "Celery",
-        description: "Celery is an aromatic vegetable high in fiber and nutrients and low in calories. It is associated with reduced inflammation and reduced risk of cancer and heart disease, as well as contributing factors to type 2 diabetes.",
+        description: "Celery is an aromatic vegetable that is high in fiber and nutrients while being low in calories. It can reduce inflammation, lower the risk of cancer and heart disease, as well as address contributing factors to type 2 diabetes. It can be harvested 120 days after planting.",
         image: .celery,
         type: .partialsun,
         plantCare: [
@@ -54,7 +54,7 @@ struct RecommendPlantMock{
     // full sun plant
     let pepperPlant = RecommendPlantModel(
         title: "Pepper",
-        description: "Pepper is low in calories and loaded with good nutrition. It is an antioxidant that provides anti-inflammatory and antimicrobial effects, among other health benefits. It may also boost brain function and increase levels of good cholesterol.",
+        description: "Pepper is an antioxidant that provides anti-inflammatory and antimicrobial effects, among other health benefits. It may also boost brain function and increase levels of good cholesterol. It can be harvested 120 days after planting.",
         image: .pepper,
         type: .fullsun,
         plantCare: [
@@ -65,7 +65,7 @@ struct RecommendPlantMock{
     // full sun plant
     let tomatoPlant = RecommendPlantModel(
         title: "Tomato",
-        description: "Tomato is a great source of vitamin C, potassium, folate, and vitamin K. Consumption of tomatoes and tomato-based products has been linked to improved skin health and a lower risk of heart disease and cancer.",
+        description: "Tomato is a great source of vitamin C, potassium, folate, and vitamin K. Consuming tomatoes can improve skin health and lower the risk of heart disease and cancer. It can be harvested 90-120 days after planting.",
         image: .tomato,
         type: .fullsun,
         plantCare: [
@@ -75,7 +75,7 @@ struct RecommendPlantMock{
         ])
     let endivePlant = RecommendPlantModel(
         title: "Endive",
-        description: "Endive can dipanen setelah 40-60 hari setelah penanaman and has benefits such as good source of folate, may help prevent cancer, keeps heart healthy, helps maintain a healthy weight.",
+        description: "Endive offers various health benefits, including being a good source of folate, potential cancer prevention, heart health support, weight management, and many more. It can be harvested after 40-60 days of planting.",
         image: .endive,
         type: .fullshade,
         plantCare: [
@@ -91,24 +91,23 @@ extension RecommendPlantMock {
         return [
             RecommendPlantMock().bokcoyPlant,
             RecommendPlantMock().cabbagePlant,
-//            RecommendPlantMock().pepperPlant,
+            RecommendPlantMock().pepperPlant,
             RecommendPlantMock().spinachPlant,
-//            RecommendPlantMock().tomatoPlant,
+            RecommendPlantMock().tomatoPlant,
             RecommendPlantMock().celeryPlant,
-//            RecommendPlantMock().endivePlant
+            RecommendPlantMock().endivePlant
         ]
     }
     
-    static func separatePlantsByType() -> [TypeOfPlant: [RecommendPlantModel]] {
-        var separatedPlants: [TypeOfPlant: [RecommendPlantModel]] = [:]
+    static func separatePlantsByType(_ type: TypeOfPlant = .partialsun) -> [RecommendPlantModel] {
+        var separatedPlants: [RecommendPlantModel] = []
 
         let allPlants = RecommendPlantMock.plantMockData
 
         for plant in allPlants {
-            if separatedPlants[plant.type] == nil {
-                separatedPlants[plant.type] = []
+            if plant.type == type{
+                separatedPlants.append(plant)
             }
-            separatedPlants[plant.type]?.append(plant)
         }
 
         return separatedPlants
