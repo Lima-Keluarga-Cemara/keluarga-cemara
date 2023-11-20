@@ -13,29 +13,28 @@ struct RecommendCardView: View {
 
     
     var body: some View {
-        VStack(spacing: 0){
-            Image(image)
-                .resizable()
-                .frame(width: 146, height: 156)
-                .aspectRatio(contentMode: .fit)
-                .clipShape(UnevenRoundedRectangle(topLeadingRadius: 12, topTrailingRadius: 12))
-            
-            HStack{
-                Text(plantName)
-                    .callout()
-                    .padding(.vertical, 12)
-                    .padding(.horizontal, 16)
-                Spacer()
+        Image(image)
+            .resizable()
+            .frame(width: 146, height: 156)
+            .aspectRatio(contentMode: .fit)
+            .overlay {
+                VStack{
+                    Spacer()
+                    HStack{
+                        Text(plantName)
+                            .callout()
+                            .padding(.vertical, 12)
+                            .padding(.horizontal, 16)
+                        Spacer()
+                    }
+                    .background(Color(.iconTile))
+                }
             }
-            .frame(width: 146, height: 42)
-            .background(Color(.iconTile))
-            .clipShape(
-                UnevenRoundedRectangle(bottomLeadingRadius: 12, bottomTrailingRadius: 12)
-            )
-        }
-        .shadow(color : Color.black.opacity(0.2), radius: 6, x: 1, y: 6)
-        .padding(.horizontal, 8)
-        .padding(.bottom, 17)
+            .cornerRadius(12)
+            .shadow(color : Color.black.opacity(0.2), radius: 6, x: 1, y: 6)
+            .padding(.horizontal, 8)
+            .padding(.bottom, 17)
+      
         
     }
 }

@@ -80,6 +80,7 @@ struct SceneKitView: UIViewRepresentable {
         sceneView.scene = scene
         sceneView.autoenablesDefaultLighting = true
         sceneView.allowsCameraControl = true
+    
         
         //        if let recognizers = sceneView.gestureRecognizers {
         //            for recognizer in recognizers {
@@ -156,6 +157,7 @@ struct ResultScanYogi: View {
     @State var offsetPositionY : CGFloat = UIScreen.main.bounds.height * 0.5
     @State var currentPositionY : CGFloat = 0
     @State private var isShowingFloorPlan = false
+    @State private var isShowingSheet = true
     @Environment(\.presentationMode) var presentationMode
 
 
@@ -164,6 +166,18 @@ struct ResultScanYogi: View {
     var body: some View {
         ZStack{
             Color(.graybg).ignoresSafeArea()
+            
+            if isLoading{
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: Color.brown))
+                    .scaleEffect(4)
+                    .frame(height: 500)
+
+            } else {
+                SceneKitView(lightPosition: lightPosition, scene: PhysicallyBasedScene(lightPosition: lightPosition))
+                    .ignoresSafeArea()
+//                        .frame(height: 500)
+            }
             
             VStack{
                 HStack{
@@ -190,211 +204,30 @@ struct ResultScanYogi: View {
                     
                 }
                 .padding(16)
-                
-                ButtonCustom(title: "See measure", action: {
-                    isShowingFloorPlan = true
-                }, width: 300, height: 48)
-                
                 .padding(.bottom)
-                if isLoading{
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: Color.brown))
-                        .scaleEffect(4)
-                        .frame(height: 500)
-
-                } else {
-                    SceneKitView(lightPosition: lightPosition, scene: PhysicallyBasedScene(lightPosition: lightPosition))
-                        .frame(height: 500)
-                }
+             
                 Spacer()
 
             }
-            
-            
-            ModalSheetColor()
-                .offset(y:offsetPositionY)
-                .offset(y: currentPositionY)
-                .gesture(
-                    DragGesture()
-                        .onChanged{ item in
-                            withAnimation(.spring()){
-                                currentPositionY = item.translation.height
-                            }
-                        }
-                        .onEnded{ item in
-                            withAnimation(.spring()){
-                               
-                                currentPositionY = -135
-                            }
-                        }
-                )
-
-            
+               
         }
-       
+        .sheet(isPresented: $isShowingSheet, content: {
+            ModalSheetColor()
+                .presentationDetents([.height(120), .height(249)])
+                .presentationBackgroundInteraction(.enabled(upThrough: .height(249)))
+                .interactiveDismissDisabled()
+        })
         .navigationBarBackButtonHidden()
         .onAppear {
             DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 2, execute: {
                 isLoading = false
             })
         }
-        .fullScreenCover(isPresented: $isShowingFloorPlan) {
-            VStack{
-                HStack{
-                    Spacer()
-                    Button(action: {
-                        presentationMode.wrappedValue.dismiss()
-                    }, label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(.black)
-                            .font(.system(size: 28))
-                    })
-                }
-                
-                SceneView(scene: FloorPlanScene(capturedRoom: RoomController.instance.finalResults!), options: [.allowsCameraControl])
-            }
-        }
-        
     }
     
     
 }
 
-
-struct ModalSheetColor : View {
-    @State private var isRecommendationPlantPartialSunSheetPresented: Bool = false
-    @State private var isRecommendationPlantPartialShadeSheetPresented: Bool = false
-    @State private var isRecommendationPlantFullSunSheetPresented: Bool = false
-    @State private var isRecommendationPlantFullShadeSheetPresented: Bool = false
-
-
-    
-    @EnvironmentObject private var pathStore: PathStore
-
-    var body: some View {
-        
-        VStack(alignment : .leading){
-            HStack{
-                Spacer()
-                Image(systemName: "chevron.up")
-                    .font(.system(size: 24))
-                    .padding()
-                Spacer()
-
-            }
-            
-            Text("Shadow indicator")
-                .titleInstruction()
-                .padding(.bottom,12)
-            
-            HStack{
-                ButtonShadow(action: {
-                    
-                }, title: "0-2 hours", typePlant: .fullshade, firstColor: .firtsShadow, secondColor: .secondShadow)
-                
-                ButtonShadow(action: {
-                    isRecommendationPlantPartialSunSheetPresented.toggle()
-                }, title: "0-2 hours", typePlant: .partialsun, firstColor: .firtsShadow, secondColor: .secondShadow)
-                .sheet(isPresented: $isRecommendationPlantPartialSunSheetPresented) {
-                    RecommendListCardView(
-                        title: "Partian Sun",
-                        data: RecommendPlantMock.separatePlantsByType(.partialsun),
-                        columnGrid: [GridItem(.flexible()), GridItem(.flexible())]
-                    )
-                    
-                }
-                
-                ButtonShadow(action: {
-                    isRecommendationPlantPartialShadeSheetPresented = true
-                }, title: "2-4 hours", typePlant: .fullshade, firstColor: .secondShadow, secondColor: .thirdShadow)
-                .sheet(isPresented: $isRecommendationPlantPartialShadeSheetPresented){
-                    RecommendListCardView(
-                        title: "Partial Sun",
-                        data: RecommendPlantMock.separatePlantsByType(.partialshade),
-                        columnGrid: [GridItem(.flexible()), GridItem(.flexible())]
-                    )
-
-                }
-                    
-            
-                
-                ButtonShadow(action: {
-                    isRecommendationPlantFullSunSheetPresented = true
-                }, title: "4-6 hours", typePlant: .fullshade, firstColor: .thirdShadow, secondColor: .fourthShadow)
-                .sheet(isPresented: $isRecommendationPlantFullSunSheetPresented) {
-                    RecommendListCardView(
-                        title: "Full Sun Boy",
-                        data: RecommendPlantMock.separatePlantsByType(.fullsun),
-                        columnGrid: [GridItem(.flexible()), GridItem(.flexible())]
-                    )
-                }
-                
-                ButtonShadow(action: {
-                    isRecommendationPlantFullShadeSheetPresented = true
-                }, title: "6+ hours", typePlant: .fullshade, firstColor: .fourthShadow, secondColor: .seventhShadow)
-                .sheet(isPresented: $isRecommendationPlantFullShadeSheetPresented) {
-                    RecommendListCardView(
-                        title: "Full Sun",
-                        data: RecommendPlantMock.separatePlantsByType(.fullshade),
-                        columnGrid: [GridItem(.flexible()), GridItem(.flexible())]
-                    )
-                    
-                }
-            }
-            .padding()
-            .background(Color.gray.opacity(0.2))
-            .cornerRadius(12)
-            
-        }
-        .padding(.horizontal,16)
-        .padding(.bottom)
-        .background(Color.white)
-    }
-}
-
-struct ButtonShadow : View {
-    let action : () -> Void
-    let title : String
-    let typePlant : TypeOfPlant
-    let firstColor : ColorResource
-    let secondColor  : ColorResource
-   
-    
-    
-    var body: some View {
-        Button(action: {
-            action()
-        }, label: {
-            Text(title)
-                .font(.system(size: 12, weight: .regular, design: .rounded))
-                .foregroundStyle(Color(.white))
-                .frame(width: 77, height: 77)
-                .background(
-                    LinearGradient(gradient: Gradient(colors: [Color(firstColor), Color(secondColor)]), startPoint: .leading, endPoint: .trailing)
-                    
-                )
-                .cornerRadius(9)
-                .overlay(
-                       RoundedRectangle(cornerRadius: 9)
-                           .stroke(Color.white, lineWidth: 1)
-                   )
-        })
-    }
-}
-
-struct testviewrecomend:View {
-    var body: some View {
-        RecommendListCardView(
-               title: "Full shade",
-               data: RecommendPlantMock.separatePlantsByType(.partialsun),
-               columnGrid: [GridItem(.flexible()), GridItem(.flexible())]
-           )
-    }
-}
-
-#Preview{
-   testviewrecomend()
-}
 
 
 
