@@ -53,9 +53,6 @@ struct TimeSlider: View {
                             lightPosition.orientation_x[0] = Float(x)
                             lightPosition.orientation_y[0] = Float(y)
                             lightPosition.orientation_z[0] = Float(z)
-                            print(newValue)
-                            
-                            
                         }
                 }
                 HStack {
