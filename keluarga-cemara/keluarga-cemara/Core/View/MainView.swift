@@ -11,10 +11,14 @@ struct MainView: View {
     /// Create environment object for pass all data needed
     /// Create environment object for path view
     @StateObject private var pathStore: PathStore = PathStore()
+    @AppStorage("onboarding") var isOnboardingVisited: Bool = false
     
     var body: some View {
         NavigationStack(path: $pathStore.path) {
-            ResultScan()
+            switchView()
+                .onDisappear{
+                    isOnboardingVisited = true
+                }
                 .navigationDestination(for: ViewPath.self) { viewPath in
                     withAnimation {
                         viewPath.view
@@ -22,6 +26,15 @@ struct MainView: View {
                 }
             
         }  .environmentObject(pathStore)
+    }
+    
+    @ViewBuilder
+    func switchView() ->  some View {
+        if isOnboardingVisited{
+            RoomViewIteration()
+        } else {
+            OnboardingView()
+        }
     }
 }
 
