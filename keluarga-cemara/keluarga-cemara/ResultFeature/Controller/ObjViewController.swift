@@ -185,12 +185,12 @@ struct ResultScanYogi: View {
                     Button(action: {
                         
                     }, label: {
-                        Image(systemName: "arrow.uturn.left")
-                            .font(.system(size: 25))
+                        Image(systemName: "ruler")
+                            .font(.system(size: 40))
                             .foregroundStyle(Color(.black).opacity(0.5))
                     })
                     .padding()
-                    .frame(width: 52, height: 48)
+                    .frame(width: 72, height: 48)
                     .background(Color(.whiteButton))
                     .cornerRadius(12)
                     .shadow(color: Color.black.opacity(0.25), radius: 4, x: 0, y: 4)
