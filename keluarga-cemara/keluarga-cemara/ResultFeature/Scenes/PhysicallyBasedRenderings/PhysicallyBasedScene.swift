@@ -5,21 +5,13 @@ import GLKit
 import SwiftUI
 
 class LightPosition: ObservableObject {
-    @Published var x: Float = 0.0
-    @Published var y: Float = 0.0
-    @Published var z: Float = 0.0
+    var x: Float = 0.0
+    var y: Float = 0.0
+    var z: Float = 0.0
     
     @Published var orientation_x: [Float] = [-0.1, -0.19, -0.33, -0.53, -0.84, -0.60, -0.59]
-    @Published var orientation_y: [Float] =  [0.3, 0.60, 0.64, 0.67, -0.40, -0.18, -0.65]
+    @Published var orientation_y: [Float] = [0.3, 0.60, 0.64, 0.67, -0.40, -0.18, -0.65]
     @Published var orientation_z: [Float] = [0.94, 0.83, 0.68, 0.50, -0.35, -56.10, -0.46]
-    
-    @Published var orientationx: [Float] = []
-    @Published var orientationy: [Float] = []
-    @Published var orientationz: [Float] = []
-
-
-
-
 }
 
 

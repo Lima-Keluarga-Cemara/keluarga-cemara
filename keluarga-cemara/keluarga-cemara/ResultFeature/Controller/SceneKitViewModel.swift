@@ -7,11 +7,50 @@
 
 import SwiftUI
 import SceneKit
+import SunKit
 
 class SceneKitViewModel: ObservableObject{
     @Published var parentNode: SCNNode = SCNNode()
     @Published var isActiveGesture: Bool = false
     @Published var sceneView = SCNView(frame: .zero)
+    @Published var lightPosition = LightPosition()
+    
+    let date = Date()
+    var calendar = Calendar.current
+    let timeValue: [Double] = [06.00, 08.00, 10.00, 12.00, 13.00, 15.00, 17.00]
+    
+    var allTimeValueInCalender: [Date] {
+        var allDates: [Date] = []
+        for time in timeValue{
+            var dateComponents = calendar.dateComponents([.year, .month, .day, .hour], from: date)
+            dateComponents.hour = Int(time)
+            if let newDate = calendar.date(from: dateComponents) {
+                allDates.append(newDate)
+            }
+        }
+        
+        return allDates
+    }
+    
+    func getAllSunPosition(from sun: Sun){
+        for (index, date) in allTimeValueInCalender.enumerated(){
+            let sunPosition = sun.getSunHorizonCoordinatesFrom(date: date)
+            let sunAltitude = sunPosition.altitude
+            let sunAzimuth = sunPosition.azimuth
+            
+            let r: Double = 1.0
+            let theta: Double = sunAltitude.radians 
+            let phi: Double = sunAzimuth.radians 
+            
+            let x = r * sin(theta) * cos(phi)
+            let y = r * sin(theta) * sin(phi)
+            let z = r * cos(theta)
+            
+            lightPosition.orientation_x[index] = Float(x)
+            lightPosition.orientation_y[index] = Float(y)
+            lightPosition.orientation_z[index] = Float(z)
+        }
+    }
     
     func changeActiveMesureGesture(){
         isActiveGesture.toggle()

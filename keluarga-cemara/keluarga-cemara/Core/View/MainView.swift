@@ -11,6 +11,7 @@ struct MainView: View {
     /// Create environment object for pass all data needed
     /// Create environment object for path view
     @StateObject private var pathStore: PathStore = PathStore()
+    @StateObject private var locationManager: LocationManager = LocationManager()
     @AppStorage("onboarding") var isOnboardingVisited: Bool = false
     
     var body: some View {
@@ -25,7 +26,9 @@ struct MainView: View {
                     }.transition(.slide)
                 }
             
-        }  .environmentObject(pathStore)
+        }  
+        .environmentObject(pathStore)
+        .environmentObject(locationManager)
     }
     
     @ViewBuilder
