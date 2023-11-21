@@ -15,10 +15,11 @@ struct MainView: View {
     
     var body: some View {
         NavigationStack(path: $pathStore.path) {
-            switchView()
-                .onDisappear{
-                    isOnboardingVisited = true
-                }
+            ResultScan()
+//            switchView()
+//                .onDisappear{
+//                    isOnboardingVisited = true
+//                }
                 .navigationDestination(for: ViewPath.self) { viewPath in
                     withAnimation {
                         viewPath.view
