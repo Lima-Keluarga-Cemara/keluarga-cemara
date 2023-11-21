@@ -15,15 +15,15 @@ struct ModalSheetColor : View {
         (title: "Full \nshade",
          typePlant: TypeOfPlant.fullshade,
          arrayColor: [Color(.firtsShadow),Color(.secondShadow)],
-         desc: "This area gets less than 2 hours of sunlight per day",
+         desc: "This area gets less than 2 hours of sunlight per day.",
          veggieType: "Shade Veggies", titleModel : "Shade"
          ),
         
-        (title: "Partial \nshade", typePlant: TypeOfPlant.partialshade, arrayColor: [Color(.secondShadow), Color(.thirdShadow)], desc: "This area gets 2-4 hours of direct sunlight per day", veggieType: "Partial Shade Veggies", titleModel : "Partial Shade"),
+        (title: "Partial \nshade", typePlant: TypeOfPlant.partialshade, arrayColor: [Color(.secondShadow), Color(.thirdShadow)], desc: "This area gets 2-4 hours of direct sunlight per day.", veggieType: "Partial Shade Veggies", titleModel : "Partial Shade"),
         
-        (title: "Partial \nsun", typePlant: TypeOfPlant.partialsun, arrayColor: [Color(.thirdShadow), Color(.fourthShadow)], desc: "This area gets 4-6 hours of direct sunlight per day", veggieType: "Partial Sun Veggies",  titleModel : "Partial Sun"),
+        (title: "Partial \nsun", typePlant: TypeOfPlant.partialsun, arrayColor: [Color(.thirdShadow), Color(.fourthShadow)], desc: "This area gets 4-6 hours of direct sunlight per day.", veggieType: "Partial Sun Veggies",  titleModel : "Partial Sun"),
         
-        (title: "Full sun", typePlant: TypeOfPlant.fullsun, arrayColor: [Color(.fourthShadow), Color(.fifthShadow), Color(.sixthShadow), Color(.seventhShadow)], desc: "This area gets 6 or more hours of direct sunlight per day", veggieType: "Full Sun Veggies", titleModel : "Full Sun")
+        (title: "Full sun", typePlant: TypeOfPlant.fullsun, arrayColor: [Color(.fourthShadow), Color(.fifthShadow), Color(.sixthShadow), Color(.seventhShadow)], desc: "This area gets 6 or more hours of direct sunlight per day.", veggieType: "Full Sun Veggies", titleModel : "Full Sun")
     ]
     
     
@@ -96,10 +96,6 @@ struct ButtonShadow : View {
                     
                 )
                 .cornerRadius(9)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 9)
-                        .stroke(Color.white, lineWidth: 1)
-                )
         })
     }
 }

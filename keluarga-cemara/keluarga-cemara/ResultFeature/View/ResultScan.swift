@@ -16,7 +16,8 @@ struct ResultScan: View {
     @State var selectedPlantModel : TypeOfPlant? = nil
     @State private var isShowingSheet = true
     @Environment(\.presentationMode) var presentationMode
-    
+
+   
     
     var body: some View {
         ZStack{
@@ -62,7 +63,6 @@ struct ResultScan: View {
                 }
                 .padding(16)
                 .padding(.bottom)
-                
                 Spacer()
                 
             }
@@ -78,6 +78,7 @@ struct ResultScan: View {
         .onAppear {
             DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 2, execute: {
                 isLoading = false
+              
             })
         }
     }
