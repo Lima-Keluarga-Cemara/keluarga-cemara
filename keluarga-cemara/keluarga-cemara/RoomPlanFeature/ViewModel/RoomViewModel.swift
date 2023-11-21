@@ -17,36 +17,27 @@ class RoomViewModel : ObservableObject{
     @Published  var feedbackGenerator: UIImpactFeedbackGenerator?
     
     @ViewBuilder
-    func startingScan() -> some View {
+    func backgroundCamera() ->  some View {
         if isStartScanning{
             RoomViewRepresentable()
-        } else {
-            ZStack{
-                CameraRepresentable(cameraModel: cameraModel)
-                VStack{
-                    Spacer()
-                    Text("Tap ‘Record button’ to start scanning")
-                        .textInstruction()
-                        .padding(.vertical, 10)
-                        .padding(.horizontal, 20)
-                        .background(Color(.black).opacity(0.7))
-                        .cornerRadius(12)
-                        .padding(.bottom,27)
+                .onAppear{
+                    self.roomController.startSession()
                 }
-            }
+        } else {
+            CameraRepresentable(cameraModel: cameraModel)
         }
     }
     
-   
     
     func buttonAction() {
         if isStartScanning{
             roomController.stopSession()
+//            UIApplication.shared.isIdleTimerDisabled = false
             isStartScanning = false
             feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
             feedbackGenerator?.impactOccurred()
         } else {
-            roomController.startSession()
+//            UIApplication.shared.isIdleTimerDisabled = true
             isStartScanning = true
             feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
             feedbackGenerator?.impactOccurred()

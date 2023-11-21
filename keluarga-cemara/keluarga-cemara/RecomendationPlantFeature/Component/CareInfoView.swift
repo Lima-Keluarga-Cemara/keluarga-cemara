@@ -29,6 +29,8 @@ struct CareInfoView: View {
                     .titleCapt()
                 Text(plantInfo.info)
                     .descCapt()
+                    .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
+                    .fixedSize(horizontal: false, vertical: true) // Allow the text to wrap to the next line
             }
             
             Spacer()
@@ -37,12 +39,12 @@ struct CareInfoView: View {
         .padding(10)
         .background(RoundedRectangle(cornerRadius: 16)
             .foregroundStyle(Color(.backgroundTile)))
-        .padding(.bottom, 12)
+        .padding(.bottom, 10)
     }
 }
 
 #Preview {
     GeometryReader { geometry in
-        CareInfoView(geometry: geometry, plantInfo: RecommendPlantMock().bokcoyPlant.plantCare[0])
+        CareInfoView(geometry: geometry, plantInfo: RecommendPlantMock().endivePlant.plantCare[2])
     }
 }

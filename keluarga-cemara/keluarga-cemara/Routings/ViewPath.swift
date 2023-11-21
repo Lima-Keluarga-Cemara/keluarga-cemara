@@ -12,28 +12,18 @@ import SceneKit
 enum ViewPath: Hashable{
     //create your screen in here using enum
     case roomscan
-//    case roomscanresult
     case resultfeature
     case onboarding
-    case arview
-    case instruction
-    
     
     @ViewBuilder
     var view: some View{
         switch self{
         case .roomscan:
             RoomViewIteration()
-//        case .roomscanresult:
-//            ResultScan()
         case .resultfeature:
-            ResultScanYogi()
+            ResultScan()
         case .onboarding:
             OnboardingView()
-        case .instruction:
-            InstructionView()
-        case .arview:
-            ARContainerView()
         }
     }
 }

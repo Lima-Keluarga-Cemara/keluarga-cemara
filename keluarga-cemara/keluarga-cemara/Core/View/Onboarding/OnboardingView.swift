@@ -11,32 +11,36 @@ struct OnboardingView: View {
     @EnvironmentObject private var pathStore: PathStore
     @State private var currentIndex = 0
     
-
+    init() {
+        UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(resource: .black)
+        UIPageControl.appearance().pageIndicatorTintColor = .gray
+    }
+    
     var body: some View {
         GeometryReader{ geometry in
             ZStack{
                 //image
                 Color(.primaryButton).ignoresSafeArea()
-
+                
                 
                 VStack{
                     TabView(selection: $currentIndex){
-                       HeadlineOnboardingView(
-                        geometry: geometry,
-                        title: "Map the sunlight",
-                        subTitle: "Scan the area and map the sunlight to\nknow better your garden orientation",
-                        lottie: "sun.json", currentIndex: 0)
-                       .tag(0)
+                        HeadlineOnboardingView(
+                            geometry: geometry,
+                            title: "Map the sunlight",
+                            subTitle: "Scan the area and map the sunlight to\nknow better your garden orientation.",
+                            lottie: "sun.json", currentIndex: 0)
+                        .tag(0)
                         
                         HeadlineOnboardingView(
-                         geometry: geometry,
-                         title: "Veggies redomendation",
-                         subTitle: "Get veggies recommendations tailored to sunlight and shade in your garden",
-                         lottie: "leaf.json", currentIndex: 1)
+                            geometry: geometry,
+                            title: "Veggies recommendation",
+                            subTitle: "Get veggies recommendations tailored to sunlight and shade in your garden.",
+                            lottie: "leaf.json", currentIndex: 1)
                         .tag(1)
                         
                     }
-                    .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                    .tabViewStyle(PageTabViewStyle())
                     
                     GeneralCostumButton(title: currentIndex == 0 ? "Next" : "Get Started") {
                         if currentIndex == 0 {
