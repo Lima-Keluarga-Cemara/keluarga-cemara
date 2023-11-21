@@ -39,7 +39,7 @@ struct CareInfoView: View {
         .padding(10)
         .background(RoundedRectangle(cornerRadius: 16)
             .foregroundStyle(Color(.backgroundTile)))
-        .padding(.bottom, 12)
+        .padding(.bottom, 10)
     }
 }
 

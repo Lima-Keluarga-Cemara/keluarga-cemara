@@ -39,7 +39,7 @@ struct RecommendListCardView: View {
                     .callout()
                     .padding(.bottom,10)
                 
-                Text(titleVeggies)
+                Text("Recommended vegetables")
                     .title2()
                     .padding(.bottom,4)
                 
@@ -51,16 +51,13 @@ struct RecommendListCardView: View {
                             }
                             .sheet(item: $selectedVeggie) { veggie in
                                 RecommendationPlantDetailView(plant: veggie)
-                                    .presentationDetents([.large])
+                                    .presentationDetents([ .large])
                             }
                     }
                     
                 }.padding(.horizontal,16)
             }
             .padding(.horizontal,18)
-            .sheet(item: $selectedVeggie) { veggie in
-                RecommendationPlantDetailView(plant: veggie)
-            }
         }
         
     }

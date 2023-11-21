@@ -65,7 +65,7 @@ struct HeaderView: View {
                             .font(.system(size: 25))
                             .foregroundStyle(roomVm.isStartScanning ? .white : .gray)
                     }
-                    .confirmationDialog("Resetting your progress will require starting the scanning process again.", isPresented: $roomVm.showingOption, titleVisibility: .visible) {
+                    .confirmationDialog("Clicking ‘Rescan’ will reset your progress and you need to start the scanning process again.", isPresented: $roomVm.showingOption, titleVisibility: .visible) {
                         Button("Rescan", role: .destructive) {
                             roomVm.roomController.stopSession()
                             roomVm.isStartScanning = false

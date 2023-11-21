@@ -13,15 +13,20 @@ struct RecommendationPlantDetailView: View {
     var body: some View {
         ZStack{
             Color.white.ignoresSafeArea()
-
             GeometryReader{ geometry in
+               
                 VStack{
+                    RoundedRectangle(cornerRadius: 25.0)
+                        .fill(Color(.graybg).opacity(0.6))
+                        .frame(width : 72 , height: 4)
+                        .padding(.bottom,16)
+                        .padding(.top,11)
+                    
                     Image(plant.image)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: geometry.size.width, height: 182)
                         .cornerRadius(16)
-                        .padding(.top,27)
                     
                     VStack(alignment: .leading, spacing: 24){ //create card corner
                         VStack(alignment: .leading){
@@ -46,11 +51,11 @@ struct RecommendationPlantDetailView: View {
                         }
                     }
                 }
-
                 
             }
             .padding(.horizontal,16)
         }
+      
     
     }
 }

@@ -57,7 +57,7 @@ class RoomController : ObservableObject,RoomCaptureViewDelegate, RoomCaptureSess
     
     func captureView(didPresent processedResult: CapturedRoom, error: (Error)?) {
         if let error = error as? RoomCaptureSession.CaptureError, error == .worldTrackingFailure {
-            let alert = UIAlertController(title: "World Tracking Failure", message: "An unexpected error occurred during world tracking.Please click re-scan to start scan again", preferredStyle: .alert)
+            let alert = UIAlertController(title: "World Tracking Failure", message: "An unexpected error occurred during world tracking.Please click rescan to start scan again", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             UIApplication.shared.windows.first?.rootViewController?.present(alert, animated: true, completion: nil)
             return
