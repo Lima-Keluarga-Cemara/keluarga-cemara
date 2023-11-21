@@ -28,6 +28,9 @@ struct RoomViewIteration: View {
             .ignoresSafeArea()
         }
         .navigationBarBackButtonHidden(true)
+        .onAppear{
+            isFacingDirection = true
+        }
     }
 }
 

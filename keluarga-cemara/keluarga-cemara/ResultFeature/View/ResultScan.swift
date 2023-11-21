@@ -55,7 +55,8 @@ struct ResultScan: View {
                     Spacer()
                     
                     ButtonCustom(title: "Done", action: {
-                        
+                        pathStore.popToRoot()
+                        print("[DEBUG][PATH] ", pathStore.path)
                     }, width: 80, height: 48)
                     
                 }
