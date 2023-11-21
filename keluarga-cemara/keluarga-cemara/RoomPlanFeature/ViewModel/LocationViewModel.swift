@@ -12,7 +12,7 @@ import SunKit
 
 //TODO: fixing sun position data
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
-    private let locationManager = CLLocationManager()
+    @Published var locationManager = CLLocationManager()
     @Published var locationStatus: CLAuthorizationStatus?
     @Published var lastLocation: CLLocation?
     @Published var timeZone : TimeZone?
@@ -40,7 +40,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         guard let location = locations.last else { return }
         lastLocation = location
         self.timeZone = .init(identifier: "Asia/Jakarta") ?? .current
-        sun = Sun(location: location, timeZone: timeZone!)
+        self.sun = Sun(location: location, timeZone: timeZone!)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
@@ -64,8 +64,6 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             direction = "North"
             orientationGarden = "North-facing garden doesn’t receive much sunlight and tend to be in the shade."
         }
-        
-//        print("Orientation: \(direction)")
     }
     
 }

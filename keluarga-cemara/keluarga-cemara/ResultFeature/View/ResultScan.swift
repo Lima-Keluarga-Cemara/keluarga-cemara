@@ -11,9 +11,8 @@ import SceneKit
 struct ResultScan: View {
     @EnvironmentObject private var pathStore: PathStore
     @State private var isLoading : Bool = true
-    @StateObject var lightPosition = LightPosition()
+    @EnvironmentObject private var locationManager: LocationManager
     @StateObject var resultVM = SceneKitViewModel()
-    @State var selectedPlantModel : TypeOfPlant? = nil
     @State private var isShowingSheet = true
     @Environment(\.presentationMode) var presentationMode
     
@@ -29,11 +28,12 @@ struct ResultScan: View {
                     .frame(height: 500)
                 
             } else {
-                SceneKitView(lightPosition: lightPosition, 
-                             resultVM: resultVM,
-                             scene: PhysicallyBasedScene(lightPosition: lightPosition)
+                SceneKitView(
+                    lightPosition: resultVM.lightPosition,
+                    resultVM: resultVM,
+                    scene: PhysicallyBasedScene(lightPosition: resultVM.lightPosition)
                 )
-                    .ignoresSafeArea()
+                .ignoresSafeArea()
             }
             
             VStack{
@@ -56,7 +56,6 @@ struct ResultScan: View {
                     
                     ButtonCustom(title: "Done", action: {
                         pathStore.popToRoot()
-                        print("[DEBUG][PATH] ", pathStore.path)
                     }, width: 80, height: 48)
                     
                 }
@@ -75,6 +74,9 @@ struct ResultScan: View {
                 .interactiveDismissDisabled()
         })
         .navigationBarBackButtonHidden()
+        .task {
+            resultVM.getAllSunPosition(from: locationManager.sun!)
+        }
         .onAppear {
             DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 2, execute: {
                 isLoading = false
