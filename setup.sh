@@ -36,4 +36,12 @@ chmod +x git-hooks/post-checkout
 echo "Copying post-checkout hook..."
 cp git-hooks/post-checkout .git/hooks/post-checkout
 
+# Step 7: Make post-pull script executable
+echo "Making post-pull hook executable..."
+chmod +x git-hooks/post-pull
+
+# Step 8: Copy the post-pull script
+echo "Copying post-pull hook..."
+cp git-hooks/post-pull .git/hooks/post-pull
+
 echo "Setup complete!"
