@@ -39,8 +39,8 @@ class SceneKitViewModel: ObservableObject{
             let sunAzimuth = sunPosition.azimuth
             
             let r: Double = 1.0
-            let theta: Double = sunAltitude.radians 
-            let phi: Double = sunAzimuth.radians 
+            let theta: Double = sunAltitude.radians
+            let phi: Double = sunAzimuth.radians
             
             let x = r * sin(theta) * cos(phi)
             let y = r * sin(theta) * sin(phi)
@@ -57,7 +57,7 @@ class SceneKitViewModel: ObservableObject{
         removeAllExistingNode()
     }
     
-    func removeAllExistingNode(){
+    func removeExistingNodeFromParentNode(){
         // Ensure that the parentNode is not nil
         guard parentNode.childNodes.count > 0 else { return }
         
@@ -66,6 +66,29 @@ class SceneKitViewModel: ObservableObject{
         
         print("Removed all existing nodes")
     }
+    
+    func removeAllExistingNode() {
+        // Ensure that the scene is not nil
+        guard let scene = sceneView.scene else { return }
+        
+        // Remove all child nodes from the root node of the scene
+        removeExistingNodeByNameFromScene(scene.rootNode, "dotNode")
+        removeExistingNodeByNameFromScene(scene.rootNode, "lineNode")
+        removeExistingNodeByNameFromScene(scene.rootNode, "textNode")
+        
+        print("Removed all existing nodes from scene")
+    }
+
+    func removeExistingNodeByNameFromScene(_ node: SCNNode, _ name: String) {
+        // Recursively search through all child nodes
+        for childNode in node.childNodes {
+            removeExistingNodeByNameFromScene(childNode, name)
+        }
+
+        // Remove nodes with the specified name
+        node.childNodes.filter { $0.name == name }.forEach { $0.removeFromParentNode() }
+    }
+
     
     func distanceBetween(node1: SCNNode, node2: SCNNode) -> Float {
         let distanceVector = SCNVector3Make(
@@ -111,6 +134,9 @@ class SceneKitViewModel: ObservableObject{
         // Set the position of the sphere node based on the hit test result
         sphereNode.position = hitTest.localCoordinates
         
+        // Set a name for the sphere node
+        sphereNode.name = "dotNode"
+        
         return sphereNode
     }
     
@@ -143,8 +169,10 @@ class SceneKitViewModel: ObservableObject{
         
         // Create a new SCNNode with the line geometry
         let lineNode = SCNNode(geometry: lineGeometry)
+        lineNode.name = "lineNode"
         // Display the distance as text at the midpoint
         let textNode = createTextNode(text: "\(formattedDistance) meters")
+        textNode.name = "textNode"
         textNode.position = midpoint
         
         print("Distance between nodes: \(distance) meters")
