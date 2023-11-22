@@ -78,17 +78,17 @@ class SceneKitViewModel: ObservableObject{
         
         print("Removed all existing nodes from scene")
     }
-
+    
     func removeExistingNodeByNameFromScene(_ node: SCNNode, _ name: String) {
         // Recursively search through all child nodes
         for childNode in node.childNodes {
             removeExistingNodeByNameFromScene(childNode, name)
         }
-
+        
         // Remove nodes with the specified name
         node.childNodes.filter { $0.name == name }.forEach { $0.removeFromParentNode() }
     }
-
+    
     
     func distanceBetween(node1: SCNNode, node2: SCNNode) -> Float {
         let distanceVector = SCNVector3Make(
@@ -99,16 +99,6 @@ class SceneKitViewModel: ObservableObject{
         return sqrtf(distanceVector.x * distanceVector.x + distanceVector.y * distanceVector.y + distanceVector.z * distanceVector.z)
     }
     
-    func createTextNode(text: String) -> SCNNode {
-        let textGeometry = SCNText(string: text, extrusionDepth: 0.1)
-        textGeometry.firstMaterial?.diffuse.contents = UIColor.white
-        
-        let textNode = SCNNode(geometry: textGeometry)
-        textNode.scale = SCNVector3(0.01, 0.01, 0.01) // Adjust the scale as needed
-        
-        return textNode
-    }
-    
     func formatDistanceWithCommas(distance: Float) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
@@ -117,13 +107,54 @@ class SceneKitViewModel: ObservableObject{
         return numberFormatter.string(from: NSNumber(value: distance)) ?? "\(distance)"
     }
     
+    func createTextNode(text: String) -> SCNNode {
+        let textGeometry = SCNText(string: text, extrusionDepth: 0.1)
+        textGeometry.firstMaterial?.diffuse.contents = UIColor.black
+        
+        let textNode = SCNNode(geometry: textGeometry)
+        textNode.scale = SCNVector3(0.1, 0.1, 0.1) // Adjust the scale as needed
+        
+        return textNode
+    }
+    
+    func createCylinderLineNode(distance: CGFloat, startNode firstNode: SCNNode, endNode secondNode: SCNNode, halflength midpoint: SCNVector3) -> SCNNode{
+        // Create a material for the line (you can customize the appearance)
+        let lineMaterial = SCNMaterial()
+        lineMaterial.diffuse.contents = UIColor.brown // Set the color of the line
+        
+        // Create a cylinder geometry
+        let cylinderGeometry = SCNCylinder(radius: 0.02, height: CGFloat(distance))
+        cylinderGeometry.materials = [lineMaterial]
+        
+        // Create a new SCNNode with the line geometry
+        let lineNode = SCNNode(geometry: cylinderGeometry)
+        lineNode.name = "lineNode"
+        lineNode.position = midpoint
+        
+        // Calculate the direction vector between node1 and node2
+        let direction = SCNVector3(secondNode.position.x - firstNode.position.x,
+                                   secondNode.position.y - firstNode.position.y,
+                                   secondNode.position.z - firstNode.position.z)
+        
+        // Calculate the angle between node1 and node2
+        let length = sqrt(direction.x * direction.x + direction.y * direction.y + direction.z * direction.z)
+        let nodeAngleX = acos(direction.y / length) // Assuming Y-axis rotation
+        let nodeAngleZ = atan2(direction.x, direction.z) // Assuming Z-axis rotation
+        
+        // Set the orientation of the lineNode based on node1 and node2 angles
+        lineNode.eulerAngles.x = nodeAngleX
+        lineNode.eulerAngles.y = nodeAngleZ
+        
+        return lineNode
+    }
+    
     func createDotGeometry(_ hitTest: SCNHitTestResult) -> SCNNode {
         // Create a sphere geometry
         let sphereGeometry = SCNSphere(radius: 0.05) // You can adjust the radius as needed
         
         // Create a material for the sphere (you can customize the appearance)
         let material = SCNMaterial()
-        material.diffuse.contents = UIColor.blue // Set the color of the sphere
+        material.diffuse.contents = UIColor.brown // Set the color of the sphere
         
         // Apply the material to the sphere
         sphereGeometry.materials = [material]
@@ -151,25 +182,14 @@ class SceneKitViewModel: ObservableObject{
             (firstNode.position.z + secondNode.position.z) / 2
         )
         
-        // Create a line geometry with the positions of the two nodes
-        let lineGeometry = SCNGeometry.lineFrom(vector: firstNode.position, toVector: secondNode.position)
-        
-        // Create a material for the line (you can customize the appearance)
-        let lineMaterial = SCNMaterial()
-        lineMaterial.diffuse.contents = UIColor.red // Set the color of the line
-        
-        // Apply the material to the line
-        lineGeometry.materials = [lineMaterial]
-        
         // Calculate the distance between the two nodes
         let distance = distanceBetween(node1: firstNode, node2: secondNode)
         
         // Format the distance with commas
         let formattedDistance = formatDistanceWithCommas(distance: distance)
         
-        // Create a new SCNNode with the line geometry
-        let lineNode = SCNNode(geometry: lineGeometry)
-        lineNode.name = "lineNode"
+        let lineNode = createCylinderLineNode(distance: CGFloat(distance), startNode: firstNode, endNode: secondNode, halflength: midpoint)
+        
         // Display the distance as text at the midpoint
         let textNode = createTextNode(text: "\(formattedDistance) meters")
         textNode.name = "textNode"
@@ -179,4 +199,20 @@ class SceneKitViewModel: ObservableObject{
         
         return (lineNode, textNode)
     }
+    
+    func scaleAllTextNodesBasedOnFOV(_ view: SCNView) {
+        guard let fieldOfView = view.pointOfView?.camera?.fieldOfView else {
+            return
+        }
+        
+        let scale = fieldOfView
+        view.scene?.rootNode.enumerateChildNodes { node, _ in
+            if node.name == "textNode" {
+                node.scale = SCNVector3(x: Float(scale), y: Float(scale), z: Float(scale))
+            }
+        }
+    }
 }
+
+/// 60 = 4
+///  0 =
