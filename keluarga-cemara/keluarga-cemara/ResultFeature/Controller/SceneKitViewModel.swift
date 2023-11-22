@@ -112,12 +112,12 @@ class SceneKitViewModel: ObservableObject{
         textGeometry.firstMaterial?.diffuse.contents = UIColor.black
         
         let textNode = SCNNode(geometry: textGeometry)
-        textNode.scale = SCNVector3(0.01, 0.01, 0.01) // Adjust the scale as needed
+        textNode.scale = SCNVector3(0.1, 0.1, 0.1) // Adjust the scale as needed
         
         return textNode
     }
     
-    func createCylinderLineNode(distance: CGFloat, start firstNode: SCNNode, end secondNode: SCNNode, halflength midpoint: SCNVector3) -> SCNNode{
+    func createCylinderLineNode(distance: CGFloat, startNode firstNode: SCNNode, endNode secondNode: SCNNode, halflength midpoint: SCNVector3) -> SCNNode{
         // Create a material for the line (you can customize the appearance)
         let lineMaterial = SCNMaterial()
         lineMaterial.diffuse.contents = UIColor.brown // Set the color of the line
@@ -130,9 +130,6 @@ class SceneKitViewModel: ObservableObject{
         let lineNode = SCNNode(geometry: cylinderGeometry)
         lineNode.name = "lineNode"
         lineNode.position = midpoint
-        
-        // Orient the lineNode to point from node1 to node2
-        lineNode.look(at: secondNode.position)
         
         // Calculate the direction vector between node1 and node2
         let direction = SCNVector3(secondNode.position.x - firstNode.position.x,
@@ -191,7 +188,7 @@ class SceneKitViewModel: ObservableObject{
         // Format the distance with commas
         let formattedDistance = formatDistanceWithCommas(distance: distance)
         
-        let lineNode = createCylinderLineNode(distance: CGFloat(distance), start: firstNode, end: secondNode, halflength: midpoint)
+        let lineNode = createCylinderLineNode(distance: CGFloat(distance), startNode: firstNode, endNode: secondNode, halflength: midpoint)
         
         // Display the distance as text at the midpoint
         let textNode = createTextNode(text: "\(formattedDistance) meters")
@@ -202,4 +199,20 @@ class SceneKitViewModel: ObservableObject{
         
         return (lineNode, textNode)
     }
+    
+    func scaleAllTextNodesBasedOnFOV(_ view: SCNView) {
+        guard let fieldOfView = view.pointOfView?.camera?.fieldOfView else {
+            return
+        }
+        
+        let scale = fieldOfView
+        view.scene?.rootNode.enumerateChildNodes { node, _ in
+            if node.name == "textNode" {
+                node.scale = SCNVector3(x: Float(scale), y: Float(scale), z: Float(scale))
+            }
+        }
+    }
 }
+
+/// 60 = 4
+///  0 =
