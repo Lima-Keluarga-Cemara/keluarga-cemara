@@ -32,12 +32,12 @@ class RoomViewModel : ObservableObject{
     func buttonAction() {
         if isStartScanning{
             roomController.stopSession()
-//            UIApplication.shared.isIdleTimerDisabled = false
+            UIApplication.shared.isIdleTimerDisabled = false
             isStartScanning = false
             feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
             feedbackGenerator?.impactOccurred()
         } else {
-//            UIApplication.shared.isIdleTimerDisabled = true
+            UIApplication.shared.isIdleTimerDisabled = true
             isStartScanning = true
             feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
             feedbackGenerator?.impactOccurred()
