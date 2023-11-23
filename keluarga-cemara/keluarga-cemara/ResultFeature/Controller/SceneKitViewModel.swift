@@ -112,7 +112,7 @@ class SceneKitViewModel: ObservableObject{
         textGeometry.firstMaterial?.diffuse.contents = UIColor.black
         
         let textNode = SCNNode(geometry: textGeometry)
-        textNode.scale = SCNVector3(0.1, 0.1, 0.1) // Adjust the scale as needed
+        textNode.scale = SCNVector3(0.025, 0.025, 0.025) // Adjust the scale as needed
         
         return textNode
     }
@@ -205,7 +205,10 @@ class SceneKitViewModel: ObservableObject{
             return
         }
         
-        let scale = fieldOfView
+        var scale : CGFloat {
+            fieldOfView  == 0 ? 0.01 : fieldOfView / 2400
+        }
+        
         view.scene?.rootNode.enumerateChildNodes { node, _ in
             if node.name == "textNode" {
                 node.scale = SCNVector3(x: Float(scale), y: Float(scale), z: Float(scale))
@@ -214,5 +217,6 @@ class SceneKitViewModel: ObservableObject{
     }
 }
 
-/// 60 = 4
-///  0 =
+///   0 = 1
+///   60 = 0.025
+///   120 = 3
