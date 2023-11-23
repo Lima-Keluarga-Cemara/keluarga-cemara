@@ -38,6 +38,7 @@ struct SceneKitView: UIViewRepresentable {
         uiView.antialiasingMode = .multisampling4X
         uiView.autoenablesDefaultLighting = true
         uiView.allowsCameraControl = true
+        resultVM.scaleAllTextNodesBasedOnFOV(uiView)
     }
     
     func getXYZOrientation() -> [SCNVector3] {

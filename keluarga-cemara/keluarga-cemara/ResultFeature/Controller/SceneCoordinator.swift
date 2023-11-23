@@ -7,9 +7,8 @@
 
 import Foundation
 import SceneKit
-import SwiftUI
 
-class Coordinator: NSObject {
+class Coordinator: NSObject{
     var resultVM: SceneKitViewModel
     
     init(_ resultVM: SceneKitViewModel) {
@@ -31,7 +30,7 @@ class Coordinator: NSObject {
         
         if isParentChildNodeMoreThanTwo() {
             // If there are 2 or more child nodes, remove all existing nodes
-            self.resultVM.removeAllExistingNode()
+            self.resultVM.removeExistingNodeFromParentNode()
         }
         let dotNode = self.resultVM.createDotGeometry(hitTest)
         

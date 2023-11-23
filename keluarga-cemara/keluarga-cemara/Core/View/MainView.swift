@@ -25,8 +25,7 @@ struct MainView: View {
                         viewPath.view
                     }.transition(.slide)
                 }
-            
-        }  
+        }
         .environmentObject(pathStore)
         .environmentObject(locationManager)
     }
