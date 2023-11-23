@@ -10,6 +10,7 @@ import SwiftUI
 struct OnboardingView: View {
     @EnvironmentObject private var pathStore: PathStore
     @State private var currentIndex = 0
+    @AppStorage("onboarding") var isOnboardingVisited: Bool = false
     
     init() {
         UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(resource: .black)
@@ -47,6 +48,7 @@ struct OnboardingView: View {
                             currentIndex += 1
                         } else {
                             pathStore.navigateToView(.roomscan)
+                            isOnboardingVisited = true
                         }
                         
                     }
