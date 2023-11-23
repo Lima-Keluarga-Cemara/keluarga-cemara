@@ -27,5 +27,3 @@ func checkDeciveView() -> some View {
         UnsupportedDeviceView()
     }
 }
-
-
