@@ -71,7 +71,7 @@ struct HeaderView: View {
                             roomVm.isStartScanning = false
                         }
                     }
-                    .buttonStyle(HeaderButtonStyle())
+                    .buttonStyle(HeaderXmarkButtonStyle(roomVm: roomVm))
                     .disabled(!roomVm.isStartScanning)
                 }
                 .padding(.top, 50)
@@ -120,12 +120,10 @@ struct FooterView: View {
                     .frame(height: 179)
   
                 Button(action: {
-                    DispatchQueue.main.async {
-                        if roomVm.isStartScanning {
-                            pathStore.navigateToView(.resultfeature)
-                        }
-                        roomVm.buttonAction()
+                    if roomVm.isStartScanning {
+                        pathStore.navigateToView(.resultfeature)
                     }
+                    roomVm.buttonAction()
                 }) {
                     Image(roomVm.isStartScanning ? .stopButtonRecord : .enableButtonRecord)
                 }
@@ -198,6 +196,21 @@ struct HeaderButtonStyle: ButtonStyle {
             .overlay {
                 RoundedRectangle(cornerRadius: 12)
                     .stroke(Color.white, lineWidth: 2)
+            }
+    }
+}
+
+struct HeaderXmarkButtonStyle: ButtonStyle {
+    @ObservedObject var roomVm: RoomViewModel
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding()
+            .frame(height: 48)
+            .cornerRadius(12)
+            .overlay {
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(roomVm.isStartScanning ? .white : .gray, lineWidth: 2)
             }
     }
 }

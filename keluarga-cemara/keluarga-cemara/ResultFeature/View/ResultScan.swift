@@ -15,8 +15,7 @@ struct ResultScan: View {
     @StateObject var resultVM = SceneKitViewModel()
     @State private var isShowingSheet = true
     @Environment(\.presentationMode) var presentationMode
-
-   
+    @State private var isTextVisible = true
     
     var body: some View {
         ZStack{
@@ -61,8 +60,30 @@ struct ResultScan: View {
                     
                 }
                 .padding(16)
-                .padding(.bottom)
+                
                 Spacer()
+                Spacer()
+                Spacer()
+                
+                if isTextVisible {
+                    Text("Use your 2 fingers to drag the 3D model")
+                        .calloutWhite()
+                        .padding(.vertical, 10)
+                        .padding(.horizontal, 20)
+                        .background(Color.gray)
+                        .cornerRadius(12)
+                        .onAppear {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 7) {
+                                withAnimation {
+                                    isTextVisible = false
+                                }
+                            }
+                        }
+                }
+                
+                
+                Spacer()
+                
                 
             }
             
@@ -77,11 +98,12 @@ struct ResultScan: View {
         .task {
             resultVM.getAllSunPosition(from: locationManager.sun!)
         }
-        .onAppear {
-            DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 2, execute: {
-                isLoading = false
-              
-            })
+        .onAppear{
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                withAnimation {
+                    isLoading = false
+                }
+            }
         }
     }
 }

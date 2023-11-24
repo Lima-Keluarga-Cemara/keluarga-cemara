@@ -17,7 +17,7 @@ struct MainView: View {
     
     var body: some View {
         NavigationStack(path: $pathStore.path) {
-            switchView()
+            ResultScan()
                 .navigationDestination(for: ViewPath.self) { viewPath in
                     withAnimation {
                         viewPath.view
