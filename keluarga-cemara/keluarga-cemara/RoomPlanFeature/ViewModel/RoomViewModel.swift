@@ -70,7 +70,7 @@ class RoomViewModel : ObservableObject, RoomCaptureViewDelegate, RoomCaptureSess
     
     func captureView(didPresent processedResult: CapturedRoom, error: (Error)?) {
         if let error = error as? RoomCaptureSession.CaptureError, error == .worldTrackingFailure {
-            let alert = UIAlertController(title: "World Tracking Failure", message: "Please move your phone from top to bottom slowly to start scanning again", preferredStyle: .alert)
+            let alert = UIAlertController(title: "World Tracking Failure", message: "Try moving your phone slowly from top to bottom to start scanning again.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
                 self.isStartScanning.toggle()
                 self.roomController.stopSession()

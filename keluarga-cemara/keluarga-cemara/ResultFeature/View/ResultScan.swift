@@ -66,12 +66,14 @@ struct ResultScan: View {
                 Spacer()
                 
                 if isTextVisible {
-                    Text("Use your 2 fingers to drag the 3D model")
+                    Text("User two fingers to drag 3d model object to the center of the screen")
                         .calloutWhite()
                         .padding(.vertical, 10)
                         .padding(.horizontal, 20)
+                        .multilineTextAlignment(.center)
                         .background(Color.gray)
                         .cornerRadius(12)
+                        .padding(.horizontal,32)
                         .onAppear {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 7) {
                                 withAnimation {
