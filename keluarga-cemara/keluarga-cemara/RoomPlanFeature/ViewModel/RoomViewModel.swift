@@ -35,9 +35,9 @@ class RoomViewModel : ObservableObject, RoomCaptureViewDelegate, RoomCaptureSess
         if isStartScanning{
             
             RoomViewRepresentable()
-                .onAppear{
-                    self.roomController.startSession()
-                }
+//                .onAppear{
+//                    self.roomController.startSession()
+//                }
         } else {
             CameraRepresentable(cameraModel: cameraModel)
         }
@@ -60,7 +60,7 @@ class RoomViewModel : ObservableObject, RoomCaptureViewDelegate, RoomCaptureSess
             feedbackGenerator?.impactOccurred()
         } else {
             print("---DEBUG--- start scanning ")
-//            roomController.startSession()
+            roomController.startSession()
             UIApplication.shared.isIdleTimerDisabled = true
            isStartScanning = true
             feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
@@ -72,7 +72,7 @@ class RoomViewModel : ObservableObject, RoomCaptureViewDelegate, RoomCaptureSess
         if let error = error as? RoomCaptureSession.CaptureError, error == .worldTrackingFailure {
             let alert = UIAlertController(title: "World Tracking Failure", message: "Try moving your phone slowly from top to bottom to start scanning again.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-                self.isStartScanning.toggle()
+                self.isStartScanning = false
                 self.roomController.stopSession()
             }))
             UIApplication.shared.windows.first?.rootViewController?.present(alert, animated: true, completion: nil)

@@ -24,7 +24,6 @@ class RoomController : ObservableObject,RoomCaptureViewDelegate, RoomCaptureSess
     static var instance = RoomController()
     @Published var roomCaptureView : RoomCaptureView
 //     Try add this var
-    @Published var isStartScanning : Bool = false
     var sessionConfig : RoomCaptureSession.Configuration = RoomCaptureSession.Configuration()
     var finalResults : CapturedRoom?
     
@@ -36,12 +35,10 @@ class RoomController : ObservableObject,RoomCaptureViewDelegate, RoomCaptureSess
     
     func startSession() {
         roomCaptureView.captureSession.run(configuration: sessionConfig)
-        
     }
     
     func stopSession() {
         roomCaptureView.captureSession.stop()
-        
     }
 
     
