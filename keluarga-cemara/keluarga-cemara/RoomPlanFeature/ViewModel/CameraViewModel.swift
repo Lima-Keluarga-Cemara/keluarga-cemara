@@ -24,7 +24,7 @@ class CameraModel {
     private func checkPermission(completion : @escaping (Error?) -> ()){
         switch AVCaptureDevice.authorizationStatus(for: .video){
         case .notDetermined:
-            AVCaptureDevice.requestAccess(for: .video, completionHandler: { [weak self] grandted in
+            AVCaptureDevice.requestAccess(for: .video, completionHandler: {  [weak self] grandted in
                 guard grandted else {return}
                 
                 DispatchQueue.main.async {
@@ -58,11 +58,10 @@ class CameraModel {
                 
                 previewLayer.videoGravity = .resizeAspectFill
                 previewLayer.session = session
-                DispatchQueue.global(qos: .userInitiated).async {
+                DispatchQueue.global(qos: .background).async {
                     session.startRunning()
                 }
                 self.session = session
-                
             } catch {
                 completion(error )
             }

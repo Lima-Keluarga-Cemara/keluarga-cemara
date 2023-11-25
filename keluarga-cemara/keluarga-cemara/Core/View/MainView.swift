@@ -13,13 +13,11 @@ struct MainView: View {
     @StateObject private var pathStore: PathStore = PathStore()
     @StateObject private var locationManager: LocationManager = LocationManager()
     @AppStorage("onboarding") var isOnboardingVisited: Bool = false
+   
     
     var body: some View {
         NavigationStack(path: $pathStore.path) {
             switchView()
-                .onDisappear{
-                    isOnboardingVisited = true
-                }
                 .navigationDestination(for: ViewPath.self) { viewPath in
                     withAnimation {
                         viewPath.view
