@@ -36,7 +36,7 @@ class RoomViewModel : ObservableObject, RoomCaptureViewDelegate, RoomCaptureSess
         case true:
             RoomViewRepresentable(roomController: rc)
                 .onAppear {
-                    DispatchQueue.global(qos: .background).async {
+                    DispatchQueue.main.async {
                         self.rc.startSession()
                         print("---DEBUG--- Camera RoomPlan Active")
                     }
@@ -73,7 +73,10 @@ class RoomViewModel : ObservableObject, RoomCaptureViewDelegate, RoomCaptureSess
             let alert = UIAlertController(title: "World Tracking Failure", message: "Try moving your phone slowly from top to bottom to start scanning again.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
                 print("DEBUG Stop Session Error")
-                self.rc.stopSession()
+//                self.rc.stopSession()
+                self.rc.roomCaptureView = RoomCaptureView(frame: .zero)
+                self.rc.roomCaptureView.delegate = self
+                self.rc.roomCaptureView.captureSession.delegate = self
                 self.isStartScanning = false
             }))
             UIApplication.shared.windows.first?.rootViewController?.present(alert, animated: true, completion: nil)
