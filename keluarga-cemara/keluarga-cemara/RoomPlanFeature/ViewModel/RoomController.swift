@@ -23,11 +23,11 @@ class RoomController {
     //    MARK: func to start and stop scanning
     
     func startSession() {
-        roomCaptureView.captureSession.run(configuration: sessionConfig)
+        self.roomCaptureView.captureSession.run(configuration: sessionConfig)
     }
     
     func stopSession() {
-        roomCaptureView.captureSession.stop()
+        self.roomCaptureView.captureSession.stop()
     }
 
     

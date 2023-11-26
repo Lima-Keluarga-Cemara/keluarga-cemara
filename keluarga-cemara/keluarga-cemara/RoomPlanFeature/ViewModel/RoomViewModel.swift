@@ -63,24 +63,25 @@ class RoomViewModel : ObservableObject, RoomCaptureViewDelegate, RoomCaptureSess
     
     
     init() {
+        print("---DEBUG--- RoomViewModel Init")
         rc.roomCaptureView.delegate = self
         rc.roomCaptureView.captureSession.delegate = self
     }
     
     func captureView(didPresent processedResult: CapturedRoom, error: (Error)?) {
-        Task{
-            finalResults = processedResult
-            export()
-        }
-        
         if let error = error as? RoomCaptureSession.CaptureError, error == .worldTrackingFailure {
             let alert = UIAlertController(title: "World Tracking Failure", message: "Try moving your phone slowly from top to bottom to start scanning again.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-                //                self.roomController.stopSession()
                 print("DEBUG Stop Session Error")
+                self.rc.stopSession()
                 self.isStartScanning = false
             }))
             UIApplication.shared.windows.first?.rootViewController?.present(alert, animated: true, completion: nil)
+        }
+        
+        Task{
+            finalResults = processedResult
+            export()
         }
     }
     
