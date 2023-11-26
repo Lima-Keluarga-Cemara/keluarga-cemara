@@ -31,56 +31,27 @@ class RoomViewModel : ObservableObject, RoomCaptureViewDelegate, RoomCaptureSess
     var finalResults : CapturedRoom?
  
     
-//    @ViewBuilder
-//    func backgroundCamera() ->  some View {
-//        if isStartScanning{
-//            RoomViewRepresentable()
-//                .onAppear{
-//                    self.roomController.startSession()
-//                    print("---DEBUG--- Camera RoomPlan Active")
-//                }
-//                .onDisappear {
-//                    self.roomController.stopSession()
-//                    print("---DEBUG--- Camera RoomPlan Deactive")
-//
-//                }
-//        } else {
-//            CameraViewRepresentable(camera: cameraModel)
-//                .onAppear(perform: {
-//                    DispatchQueue.global(qos: .background).async {
-//                        self.cameraModel.check()
-//                        self.cameraModel.session.startRunning()
-//                        print("Camera ONAPPEAR")
-//
-//                    }
-//                })
-//                .onDisappear(perform: {
-//                    self.cameraModel.session.stopRunning()
-//                    print("Camera ONDISSAPEAR")
-//                })
-//        }
-//    }
-    
     @ViewBuilder
-    func backgroundCamera() -> some View {
-        switch isStartScanning {
-        case true:
+    func backgroundCamera() ->  some View {
+        if isStartScanning{
             RoomViewRepresentable()
-                .onAppear {
+                .onAppear{
                     self.roomController.startSession()
                     print("---DEBUG--- Camera RoomPlan Active")
                 }
                 .onDisappear {
                     self.roomController.stopSession()
                     print("---DEBUG--- Camera RoomPlan Deactive")
+
                 }
-        case false:
+        } else {
             CameraViewRepresentable(camera: cameraModel)
                 .onAppear(perform: {
                     DispatchQueue.global(qos: .background).async {
                         self.cameraModel.check()
                         self.cameraModel.session.startRunning()
                         print("Camera ONAPPEAR")
+
                     }
                 })
                 .onDisappear(perform: {
@@ -124,7 +95,7 @@ class RoomViewModel : ObservableObject, RoomCaptureViewDelegate, RoomCaptureSess
         if let error = error as? RoomCaptureSession.CaptureError, error == .worldTrackingFailure {
             let alert = UIAlertController(title: "World Tracking Failure", message: "Try moving your phone slowly from top to bottom to start scanning again.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-//                self.roomController.stopSession()
+                self.roomController.stopSession()
                 print("DEBUG Stop Session Error")
                 self.isStartScanning = false
             }))
