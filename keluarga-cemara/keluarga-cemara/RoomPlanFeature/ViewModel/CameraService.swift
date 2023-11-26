@@ -8,9 +8,9 @@
 import AVFoundation
 import SwiftUI
 
-class CameraService : ObservableObject{
-      var session = AVCaptureSession()
-      var preview : AVCaptureVideoPreviewLayer!
+class CameraService {
+    var session = AVCaptureSession()
+    var preview : AVCaptureVideoPreviewLayer!
     
     func check(){
         switch AVCaptureDevice.authorizationStatus(for: .video){
@@ -18,7 +18,7 @@ class CameraService : ObservableObject{
             setUp()
             return
         case .notDetermined :
-//            restart with for permission
+            //            restart with for permission
             AVCaptureDevice.requestAccess(for: .video) { (status) in
                 if status{
                     self.setUp()
@@ -32,17 +32,17 @@ class CameraService : ObservableObject{
     }
     
     func setUp() {
-//        setting up camera
+        //        setting up camera
         do {
             self.session.beginConfiguration()
             let device = AVCaptureDevice.default(.builtInDualCamera, for: .video, position: .back)
             let input = try AVCaptureDeviceInput(device: device!)
-//            checking to add the sessin
+            //            checking to add the sessin
             if self.session.canAddInput(input){
                 self.session.addInput(input)
             }
             
-//            MARK: dont useing output
+            //            MARK: dont useing output
             self.session.commitConfiguration()
         } catch{
             print(error.localizedDescription)
@@ -53,7 +53,7 @@ class CameraService : ObservableObject{
 
 
 struct CameraViewRepresentable : UIViewRepresentable {
-    @ObservedObject var camera : CameraService
+    var camera : CameraService
     
     func makeUIView(context: Context) ->  UIView {
         let view = UIView(frame: UIScreen.main.bounds)

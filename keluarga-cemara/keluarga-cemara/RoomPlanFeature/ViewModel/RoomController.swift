@@ -9,23 +9,12 @@ import RoomPlan
 import UIKit
 
 
-class RoomController : ObservableObject,RoomCaptureViewDelegate, RoomCaptureSessionDelegate{
-    func encode(with coder: NSCoder) {
-        fatalError("Not Needed")
-    }
-    
-    
-    required dynamic init?(coder: NSCoder) {
-        fatalError("Not Needed")
-    }
-    
-    
+class RoomController {
     //    MARK: Making properties
-    static var instance = RoomController()
-    @Published var roomCaptureView : RoomCaptureView
+//    static var instance = RoomController()
+    var roomCaptureView : RoomCaptureView
 //     Try add this var
     var sessionConfig : RoomCaptureSession.Configuration = RoomCaptureSession.Configuration()
-    var finalResults : CapturedRoom?
     
     init(){
         roomCaptureView = RoomCaptureView(frame: .zero)
