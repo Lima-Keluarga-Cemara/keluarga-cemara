@@ -17,6 +17,7 @@ class RoomController {
     var sessionConfig : RoomCaptureSession.Configuration = RoomCaptureSession.Configuration()
     
     init(){
+        print("---DEBUG--- ROOMCAPTUREVIEW INIT CALL")
         roomCaptureView = RoomCaptureView(frame: .zero)
     }
     
