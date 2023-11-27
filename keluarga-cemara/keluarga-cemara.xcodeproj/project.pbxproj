@@ -42,7 +42,6 @@
 		74F272FAD6192353EFF4B574 /* PhysicallyBasedLightFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0B411E48ABAFD75D0143DE /* PhysicallyBasedLightFeatures.swift */; };
 		7548F581C358B91DD6B8C815 /* SceneKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC05915AC4705938829E018A /* SceneKitViewController.swift */; };
 		75778607CCF4C6A79DB50D6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A1C7F87205F6EAFF566344D /* Assets.xcassets */; };
-		8CBFAAA68D2D557899B75314 /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E64BEAF7D9502A9E6862F7 /* CameraViewModel.swift */; };
 		8D314ABFD76FC234111BAC03 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A008FBE0223F35612A812B3 /* OnboardingView.swift */; };
 		8F316AD0D93B9996ED2E51C2 /* scan.usdz in Resources */ = {isa = PBXBuildFile; fileRef = D8DD4724C36C3E92495BC153 /* scan.usdz */; };
 		91B59C13C8DF1030DB966AB9 /* rightPBR.png in Resources */ = {isa = PBXBuildFile; fileRef = F20EC2AE6AA21ADDD22BFE7C /* rightPBR.png */; };
@@ -113,7 +112,6 @@
 		5C5E15B1540EDC0169507C36 /* instruksi-opening.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "instruksi-opening.json"; sourceTree = "<group>"; };
 		5E414E3CA12E2FEF82D45C16 /* SceneKitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneKitViewModel.swift; sourceTree = "<group>"; };
 		5F0BF7651BC8EB2BADF1FA7B /* SceneKitViewControllerSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneKitViewControllerSlider.swift; sourceTree = "<group>"; };
-		60E64BEAF7D9502A9E6862F7 /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
 		6525F292368558A3452831FE /* PhysicallyBasedScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicallyBasedScene.swift; sourceTree = "<group>"; };
 		69F1746C102DEACC42D53C13 /* KeluargaCemara.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeluargaCemara.swift; sourceTree = "<group>"; };
 		703D35802032944ADD98502E /* PhysicallyBasedLightingEnviroment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicallyBasedLightingEnviroment.swift; sourceTree = "<group>"; };
@@ -414,7 +412,6 @@
 			isa = PBXGroup;
 			children = (
 				F381CB8C87271D92204DCD19 /* CameraService.swift */,
-				60E64BEAF7D9502A9E6862F7 /* CameraViewModel.swift */,
 				925D064A25F82AE2D0D6ACB7 /* LocationViewModel.swift */,
 				274343A1FEBD56918F49FDB7 /* RoomController.swift */,
 				C4E6D24A456125BC010108C0 /* RoomViewModel.swift */,
@@ -544,7 +541,6 @@
 				B621E6706DB8C482282F0F1A /* CGFloat+Random.swift in Sources */,
 				D636C4A54CB41575985466C4 /* Camera.swift in Sources */,
 				64562A167FE52E42D6FCB5E2 /* CameraService.swift in Sources */,
-				8CBFAAA68D2D557899B75314 /* CameraViewModel.swift in Sources */,
 				35EDEBEF3181FD17A35BD071 /* CareInfoView.swift in Sources */,
 				397D7627DA4850A2155E0795 /* ColladaLoader.swift in Sources */,
 				F402403CFDEB48B4C678DC07 /* Coordinator+Extension.swift in Sources */,

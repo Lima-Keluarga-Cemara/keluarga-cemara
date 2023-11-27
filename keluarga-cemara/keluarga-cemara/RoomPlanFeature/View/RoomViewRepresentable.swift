@@ -9,9 +9,8 @@ import SwiftUI
 import RoomPlan
 
 struct RoomViewRepresentable : UIViewRepresentable {
-    var roomController: RoomController
     func makeUIView(context: Context) -> RoomCaptureView {
-        return roomController.roomCaptureView
+        return RoomController.instance.roomCaptureView
     }
     
     func updateUIView(_ uiView: RoomCaptureView, context: Context) {
