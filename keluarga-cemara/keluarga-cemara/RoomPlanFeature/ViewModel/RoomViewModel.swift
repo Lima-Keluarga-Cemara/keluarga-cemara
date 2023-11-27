@@ -12,71 +12,75 @@ import RoomPlan
 class RoomViewModel : ObservableObject, RoomCaptureViewDelegate, RoomCaptureSessionDelegate {
     func encode(with coder: NSCoder) {
         fatalError("Not Needed")
-
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("Not Needed")
     }
     
-    var roomController = RoomController.instance
-    var cameraModel = CameraModel()
+    var rc = RoomController()
+    var cs = CameraService()
+    
     @Published  var isStartScanning : Bool = false
     @Published  var sheetOpening : Bool = false
     @Published  var showingOption : Bool = false
     @Published  var feedbackGenerator: UIImpactFeedbackGenerator?
     
-//    MARK: For Roomplan
+    //    MARK: For Roomplan
     var finalResults : CapturedRoom?
- 
     
     @ViewBuilder
-    func backgroundCamera() ->  some View {
-        if isStartScanning{
-            
-            RoomViewRepresentable()
-                .onAppear{
-                    self.roomController.startSession()
+    func backgroundCamera() -> some View {
+        switch isStartScanning {
+        case true:
+            RoomViewRepresentable(roomController: rc)
+                .onAppear {
+                    self.rc.startSession()
+                    print("---DEBUG--- Camera RoomPlan Active")
                 }
-        } else {
-            CameraRepresentable(cameraModel: cameraModel)
+                .onDisappear {
+                    self.rc.stopSession()
+                    print("---DEBUG--- Camera RoomPlan Deactive")
+                }
+        case false:
+            CameraViewRepresentable(camera: cs)
+                .onAppear(perform: {
+                    DispatchQueue.global(qos: .background).async {
+                        self.cs.check()
+                        self.cs.session.startRunning()
+                        print("---DEBUG--- Camera ONAPPEAR")
+                    }
+                })
+                .onDisappear{
+                    self.cs.session.stopRunning()
+                    print("---DEBUG--- Camera ONDISSAPEAR")
+                }
         }
     }
     
     
     init() {
-        roomController.roomCaptureView.delegate = self
-        roomController.roomCaptureView.captureSession.delegate = self
-    }
-    
-    
-    func buttonAction() {
-        if isStartScanning{
-            print("---DEBUG--- stop scanning ")
-            roomController.stopSession()
-            UIApplication.shared.isIdleTimerDisabled = false
-            isStartScanning = false
-            feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
-            feedbackGenerator?.impactOccurred()
-        } else {
-            print("---DEBUG--- start scanning ")
-//            roomController.startSession()
-            UIApplication.shared.isIdleTimerDisabled = true
-           isStartScanning = true
-            feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
-            feedbackGenerator?.impactOccurred()
-        }
+        print("---DEBUG--- RoomViewModel Init")
+        rc.roomCaptureView.delegate = self
+        rc.roomCaptureView.captureSession.delegate = self
     }
     
     func captureView(didPresent processedResult: CapturedRoom, error: (Error)?) {
         if let error = error as? RoomCaptureSession.CaptureError, error == .worldTrackingFailure {
             let alert = UIAlertController(title: "World Tracking Failure", message: "Try moving your phone slowly from top to bottom to start scanning again.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-                self.isStartScanning.toggle()
-                self.roomController.stopSession()
+                print("DEBUG Stop Session Error")
+//                self.rc.stopSession()
+                self.rc.roomCaptureView = RoomCaptureView(frame: .zero)
+                self.rc.roomCaptureView.delegate = self
+                self.rc.roomCaptureView.captureSession.delegate = self
+                self.isStartScanning = false
             }))
             UIApplication.shared.windows.first?.rootViewController?.present(alert, animated: true, completion: nil)
-        } else {
+        }
+        
+        Task{
             finalResults = processedResult
             export()
         }
@@ -103,5 +107,5 @@ class RoomViewModel : ObservableObject, RoomCaptureViewDelegate, RoomCaptureSess
             }
         }
     }
-
+    
 }

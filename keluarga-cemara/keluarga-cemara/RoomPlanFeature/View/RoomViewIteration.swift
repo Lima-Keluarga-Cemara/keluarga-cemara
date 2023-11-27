@@ -67,7 +67,7 @@ struct HeaderView: View {
                     }
                     .confirmationDialog("Clicking ‘Rescan’ will reset your progress and you need to start the scanning process again.", isPresented: $roomVm.showingOption, titleVisibility: .visible) {
                         Button("Rescan", role: .destructive) {
-                            roomVm.roomController.stopSession()
+//                            roomVm.roomController.stopSession()
                             roomVm.isStartScanning = false
                         }
                     }
@@ -84,9 +84,6 @@ struct HeaderView: View {
         }
     }
 }
-
-
-
 
 //KAMERA INSTRUKSI
 struct MainContentView: View {
@@ -111,6 +108,7 @@ struct FooterView: View {
     @Binding var isFacingDirection: Bool
     @ObservedObject var roomVm: RoomViewModel
     @EnvironmentObject var pathStore: PathStore
+    @State private var feedbackGenerator: UIImpactFeedbackGenerator?
 
     var body: some View {
         if !isFacingDirection {
@@ -120,10 +118,22 @@ struct FooterView: View {
                     .frame(height: 179)
   
                 Button(action: {
-                    if roomVm.isStartScanning {
+                    if roomVm.isStartScanning{
+                        print("---DEBUG--- stop scanning ")
+            //            roomController.stopSession()
                         pathStore.navigateToView(.resultfeature)
+                        UIApplication.shared.isIdleTimerDisabled = false
+                        roomVm.isStartScanning = false
+                        feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+                        self.feedbackGenerator?.impactOccurred()
+                    } else {
+                        print("---DEBUG--- start scanning ")
+            //            roomController.startSession()
+                        UIApplication.shared.isIdleTimerDisabled = true
+                        roomVm.isStartScanning = true
+                        self.feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
+                        self.feedbackGenerator?.impactOccurred()
                     }
-                    roomVm.buttonAction()
                 }) {
                     Image(roomVm.isStartScanning ? .stopButtonRecord : .enableButtonRecord)
                 }
@@ -136,8 +146,6 @@ struct FooterView: View {
         }
     }
 }
-
-
 
 //KONTEN INSTRUKSI
 struct InstructionViewScanning: View {

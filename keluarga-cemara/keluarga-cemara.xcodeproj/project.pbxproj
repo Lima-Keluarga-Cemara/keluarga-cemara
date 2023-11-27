@@ -34,6 +34,7 @@
 		4EF30C8ABB9928F98BF96E40 /* instruksi-opening.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C5E15B1540EDC0169507C36 /* instruksi-opening.json */; };
 		54668CE8C54ADBEA5A5AB911 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 9A794DBA65CA200EBE2537E3 /* Lottie */; };
 		5D6CFDD3A2A0C5FFC4B89F23 /* Int+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6B8ECEBCA33F5FDBD2CF22 /* Int+Random.swift */; };
+		64562A167FE52E42D6FCB5E2 /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F381CB8C87271D92204DCD19 /* CameraService.swift */; };
 		66B7198226F8937D0077FB73 /* downPBR.png in Resources */ = {isa = PBXBuildFile; fileRef = B24760ED3D7641736C5462E0 /* downPBR.png */; };
 		6D5C46F34CF30C2F5E070A33 /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4293A2353FDB92855D2FA6 /* SliderView.swift */; };
 		704B9C42D5D7D4A01B76EBE1 /* ResultScan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B240BFD33FAE9BCEC0F1C89 /* ResultScan.swift */; };
@@ -154,6 +155,7 @@
 		F1101D9117375361447A124D /* UnsupportedDeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsupportedDeviceView.swift; sourceTree = "<group>"; };
 		F20EC2AE6AA21ADDD22BFE7C /* rightPBR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightPBR.png; sourceTree = "<group>"; };
 		F31808F5AC2EAA3EBCED1F7F /* FloorPlanSurface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloorPlanSurface.swift; sourceTree = "<group>"; };
+		F381CB8C87271D92204DCD19 /* CameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraService.swift; sourceTree = "<group>"; };
 		F3AAA0D6F25BE541FF61958E /* RecommendListCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendListCardView.swift; sourceTree = "<group>"; };
 		F686D1FD3052DC1DFE94D290 /* ParentResultScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentResultScreen.swift; sourceTree = "<group>"; };
 		F6902F3302358E45A5D1FF55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -411,6 +413,7 @@
 		D0C46B91B0BDB80C82ADF5FB /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				F381CB8C87271D92204DCD19 /* CameraService.swift */,
 				60E64BEAF7D9502A9E6862F7 /* CameraViewModel.swift */,
 				925D064A25F82AE2D0D6ACB7 /* LocationViewModel.swift */,
 				274343A1FEBD56918F49FDB7 /* RoomController.swift */,
@@ -540,6 +543,7 @@
 				AA021CD51BFBB913A7DF0757 /* ButtonShadow.swift in Sources */,
 				B621E6706DB8C482282F0F1A /* CGFloat+Random.swift in Sources */,
 				D636C4A54CB41575985466C4 /* Camera.swift in Sources */,
+				64562A167FE52E42D6FCB5E2 /* CameraService.swift in Sources */,
 				8CBFAAA68D2D557899B75314 /* CameraViewModel.swift in Sources */,
 				35EDEBEF3181FD17A35BD071 /* CareInfoView.swift in Sources */,
 				397D7627DA4850A2155E0795 /* ColladaLoader.swift in Sources */,
