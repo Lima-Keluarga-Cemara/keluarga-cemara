@@ -66,7 +66,7 @@ struct ResultScan: View {
                 Spacer()
                 
                 if isTextVisible {
-                    Text("User two fingers to drag 3d model object to the center of the screen")
+                    Text("User two fingers to drag 3D model object to the center of the screen")
                         .calloutWhite()
                         .padding(.vertical, 10)
                         .padding(.horizontal, 20)

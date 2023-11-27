@@ -25,9 +25,9 @@ class RoomController : ObservableObject,RoomCaptureViewDelegate, RoomCaptureSess
     @Published var roomCaptureView : RoomCaptureView
 //     Try add this var
     var sessionConfig : RoomCaptureSession.Configuration = RoomCaptureSession.Configuration()
-    var finalResults : CapturedRoom?
     
     init(){
+        print("---DEBUG--- INIT ROOMCAPTUREVIEW")
         roomCaptureView = RoomCaptureView(frame: .zero)
     }
     
