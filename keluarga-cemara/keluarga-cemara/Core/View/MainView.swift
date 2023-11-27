@@ -13,16 +13,16 @@ struct MainView: View {
     @StateObject private var pathStore: PathStore = PathStore()
     @StateObject private var locationManager: LocationManager = LocationManager()
     @AppStorage("onboarding") var isOnboardingVisited: Bool = false
-   
     
     var body: some View {
         NavigationStack(path: $pathStore.path) {
-            switchView()
+           switchView()
                 .navigationDestination(for: ViewPath.self) { viewPath in
                     withAnimation {
                         viewPath.view
                     }.transition(.slide)
                 }
+            
         }
         .environmentObject(pathStore)
         .environmentObject(locationManager)
@@ -37,6 +37,7 @@ struct MainView: View {
         }
     }
 }
+
 
 
 #Preview {

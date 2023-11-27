@@ -11,7 +11,8 @@ struct OnboardingView: View {
     @EnvironmentObject private var pathStore: PathStore
     @State private var currentIndex = 0
     @AppStorage("onboarding") var isOnboardingVisited: Bool = false
-    
+
+
     init() {
         UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(resource: .black)
         UIPageControl.appearance().pageIndicatorTintColor = .gray
@@ -47,13 +48,9 @@ struct OnboardingView: View {
                         if currentIndex == 0 {
                             currentIndex += 1
                         } else {
-                            pathStore.navigateToView(.roomscan)
+                            isOnboardingVisited = true
                         }
                     }
-                    .onTapGesture {
-                        isOnboardingVisited.toggle()
-                    }
-                    
                 }
             }
         }
