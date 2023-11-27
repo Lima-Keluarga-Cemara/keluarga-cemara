@@ -48,9 +48,10 @@ struct OnboardingView: View {
                             currentIndex += 1
                         } else {
                             pathStore.navigateToView(.roomscan)
-                            isOnboardingVisited = true
                         }
-                        
+                    }
+                    .onTapGesture {
+                        isOnboardingVisited.toggle()
                     }
                     
                 }
