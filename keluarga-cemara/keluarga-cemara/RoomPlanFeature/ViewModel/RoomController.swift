@@ -9,26 +9,36 @@ import RoomPlan
 import UIKit
 
 
-class RoomController {
+class RoomController : ObservableObject,RoomCaptureViewDelegate, RoomCaptureSessionDelegate{
+    func encode(with coder: NSCoder) {
+        fatalError("Not Needed")
+    }
+    
+    
+    required dynamic init?(coder: NSCoder) {
+        fatalError("Not Needed")
+    }
+    
+    
     //    MARK: Making properties
-//    static var instance = RoomController()
-    var roomCaptureView : RoomCaptureView
+    static var instance = RoomController()
+    @Published var roomCaptureView : RoomCaptureView
 //     Try add this var
     var sessionConfig : RoomCaptureSession.Configuration = RoomCaptureSession.Configuration()
     
     init(){
-        print("---DEBUG--- ROOMCAPTUREVIEW INIT CALL")
+        print("---DEBUG--- INIT ROOMCAPTUREVIEW")
         roomCaptureView = RoomCaptureView(frame: .zero)
     }
     
     //    MARK: func to start and stop scanning
     
     func startSession() {
-        self.roomCaptureView.captureSession.run(configuration: sessionConfig)
+        roomCaptureView.captureSession.run(configuration: sessionConfig)
     }
     
     func stopSession() {
-        self.roomCaptureView.captureSession.stop()
+        roomCaptureView.captureSession.stop()
     }
 
     
